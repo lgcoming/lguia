@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, m, type Variants } from "motion/react";
+import { AnimatePresence, type Variants } from "motion/react";
+import * as m from "motion/react-m";
 import { useReducer, type ReactNode } from "react";
 
 import { DiagnosisLeadForm } from "@/features/diagnosis/components/diagnosis-lead-form";

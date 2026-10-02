@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod/mini";
 
 import type { ApiIssue } from "@/lib/api/types";
 import { toApiIssues } from "@/lib/validation";
@@ -26,7 +26,7 @@ export const diagnosisAnswersSchema = z.object({
   visibilityGoal: answer(DIAGNOSIS_OPTIONS.visibilityGoal),
   companySize: answer(DIAGNOSIS_OPTIONS.companySize),
   mainGoal: answer(DIAGNOSIS_OPTIONS.mainGoal),
-}) satisfies z.ZodType<DiagnosisAnswers>;
+}) satisfies z.ZodMiniType<DiagnosisAnswers>;
 
 export type DiagnosisValidationResult =
   { success: true; data: DiagnosisAnswers } | { success: false; issues: ApiIssue[] };

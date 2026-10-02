@@ -1,6 +1,6 @@
 "use client";
 
-import { m } from "motion/react";
+import * as m from "motion/react-m";
 import { Check, CircleAlert, Clock, ListChecks, Lock } from "lucide-react";
 
 import { Button } from "@/components/ui/button";

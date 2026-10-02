@@ -48,7 +48,10 @@ export function PageHero({ title, intro, breadcrumbs, children }: PageHeroProps)
     <div className="border-b border-line bg-mist">
       <Container className="py-14 md:py-20">
         {breadcrumbs ? <Breadcrumbs items={breadcrumbs} /> : null}
-        <h1 className="max-w-3xl text-h1 md:text-[3rem] md:leading-[1.06]">{title}</h1>
+        {/* Long Spanish words ("automatizaciones") need a smaller size and hyphenation on 320px screens. */}
+        <h1 className="max-w-3xl text-[1.875rem] leading-[1.1] max-[399px]:hyphens-auto min-[400px]:text-h1 md:text-[3rem] md:leading-[1.06]">
+          {title}
+        </h1>
         <p className="mt-5 max-w-2xl text-lead text-ink-soft">{intro}</p>
         {children ? <div className="mt-8 flex flex-wrap gap-3">{children}</div> : null}
       </Container>

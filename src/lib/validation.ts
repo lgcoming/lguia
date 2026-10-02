@@ -1,9 +1,12 @@
-import type { z } from "zod";
-
 import type { ApiIssue } from "@/lib/api/types";
 
+/** The part of a Zod error we rely on (works for "zod" and "zod/mini"). */
+interface ValidationError {
+  issues: ReadonlyArray<{ path: ReadonlyArray<PropertyKey>; message: string }>;
+}
+
 /** Flattens Zod issues into the API issue format (`path` joined with "."). */
-export function toApiIssues(error: z.ZodError): ApiIssue[] {
+export function toApiIssues(error: ValidationError): ApiIssue[] {
   return error.issues.map((issue) => ({
     path: issue.path.map(String).join("."),
     message: issue.message,

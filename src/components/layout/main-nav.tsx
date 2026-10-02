@@ -34,7 +34,7 @@ export function MainNav({ items }: { items: NavItem[] }) {
 
   return (
     <>
-      <nav aria-label="Principal" className="hidden md:block">
+      <nav aria-label="Principal" className="hidden lg:block">
         <ul className="flex items-center gap-1">
           {items.map((item) => (
             <li key={item.href}>
@@ -64,7 +64,7 @@ export function MainNav({ items }: { items: NavItem[] }) {
           aria-expanded={isOpen}
           aria-controls="menu-movil"
           onClick={() => setOpenOnPath(isOpen ? null : pathname)}
-          className="inline-flex size-11 items-center justify-center rounded-full border border-line md:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-full border border-line lg:hidden"
         >
           {isOpen ? (
             <X aria-hidden="true" className="size-5" />
@@ -78,7 +78,7 @@ export function MainNav({ items }: { items: NavItem[] }) {
       <div
         id="menu-movil"
         hidden={!isOpen}
-        className="absolute inset-x-0 top-full border-b border-line bg-paper shadow-lift md:hidden"
+        className="absolute inset-x-0 top-full border-b border-line bg-paper shadow-lift lg:hidden"
       >
         <nav aria-label="Principal móvil" className="mx-auto max-w-content px-4 pt-2 pb-6 sm:px-6">
           <ul className="divide-y divide-line">
