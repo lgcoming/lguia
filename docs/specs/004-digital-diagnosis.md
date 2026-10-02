@@ -146,6 +146,16 @@ that category's need (desc), then table order:
 Plan coverage: starter-local, web-pro → web, seo; ia-starter → ai; automation-pack → automation;
 growth-web-ia, custom-enterprise → all.
 
+If only the first reason results (no signal applies, typical of very mature businesses), add the
+fallback reason of the primary category:
+
+| Category   | Fallback reason                                                                          |
+| ---------- | ---------------------------------------------------------------------------------------- |
+| web        | Una web bien mantenida y medida sigue generando resultados con el tiempo.                |
+| automation | Revisar tus procesos con regularidad evita que vuelvan a aparecer tareas manuales.       |
+| ai         | Empezar por un caso acotado permite medir el valor de la IA antes de ampliarla.          |
+| seo        | Cuidar la base técnica y los contenidos mantiene tu visibilidad frente a la competencia. |
+
 ## Recommended services (2–4)
 
 Candidate rules (in order). A candidate is kept only if its category need ≥ 30. Kept candidates are
@@ -193,7 +203,7 @@ interface DiagnosisResult {
     tagline: string;
     pricing: PlanPricing;
     features: string[];
-    href: "/planes";
+    href: string; // "/planes#{planId}"
   };
   recommendedServices: {
     id: string;
@@ -224,8 +234,9 @@ Phases: `intro` → `questions` (step 1–5) → `calculating` → `result` (+ l
   invalid group. Answering a question clears its error.
 - **Focus**: on step change focus moves to the step heading (`tabIndex=-1`); on result, to the
   result heading.
-- **Calculating**: `POST /api/diagnosis`; status message "Analizando tus respuestas…" in a
-  `role="status"` region; minimum display time 900 ms so the transition is perceivable.
+- **Calculating**: `POST /api/diagnosis`; heading "Analizando tus respuestas…" receives focus (the
+  submit button unmounts, so focus must move somewhere meaningful); minimum display time 900 ms so
+  the transition is perceivable.
 - **Error**: message explaining the failure, "Reintentar" (re-sends) and "Revisar respuestas"
   (back to last step). Answers are never lost.
 - **Result**: score ring + level + summary, area bars, recommended plan (with link to `/planes`),
