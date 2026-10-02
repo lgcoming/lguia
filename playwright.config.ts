@@ -2,6 +2,9 @@ import { defineConfig, devices } from "@playwright/test";
 
 const PORT = 3100;
 const baseURL = `http://localhost:${PORT}`;
+// Optional: run against an installed browser (e.g. PLAYWRIGHT_CHANNEL=chrome) instead of the
+// bundled Chromium from `npx playwright install`. CI uses the bundled browser.
+const channel = process.env.PLAYWRIGHT_CHANNEL || undefined;
 
 export default defineConfig({
   testDir: "tests/e2e",
@@ -14,8 +17,8 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   projects: [
-    { name: "desktop", use: { ...devices["Desktop Chrome"] } },
-    { name: "mobile", use: { ...devices["Pixel 7"] } },
+    { name: "desktop", use: { ...devices["Desktop Chrome"], channel } },
+    { name: "mobile", use: { ...devices["Pixel 7"], channel } },
   ],
   // E2E runs against a production build, the same artifact that gets deployed.
   webServer: {
