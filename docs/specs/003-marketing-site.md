@@ -12,15 +12,15 @@ the next step — ideally the digital diagnosis, otherwise the contact form. Con
 
 ## Routes
 
-| Route                         | Purpose                                   | Rendering |
-| ----------------------------- | ----------------------------------------- | --------- |
-| `/`                           | Home                                      | Static    |
-| `/servicios`                  | Overview of the four service categories   | Static    |
-| `/servicios/[slug]`           | Category detail (4 slugs, `dynamicParams = false`) | Static (SSG) |
-| `/planes`                     | All plans + how to choose + FAQ           | Static    |
-| `/diagnostico-digital`        | Digital diagnosis wizard (SPEC-004)       | Static shell + client wizard |
-| `/contacto`                   | Contact form + what happens next          | Static shell + client form |
-| `/admin/leads`                | Internal lead list (SPEC-005)             | Dynamic, gated, `noindex` |
+| Route                  | Purpose                                            | Rendering                    |
+| ---------------------- | -------------------------------------------------- | ---------------------------- |
+| `/`                    | Home                                               | Static                       |
+| `/servicios`           | Overview of the four service categories            | Static                       |
+| `/servicios/[slug]`    | Category detail (4 slugs, `dynamicParams = false`) | Static (SSG)                 |
+| `/planes`              | All plans + how to choose + FAQ                    | Static                       |
+| `/diagnostico-digital` | Digital diagnosis wizard (SPEC-004)                | Static shell + client wizard |
+| `/contacto`            | Contact form + what happens next                   | Static shell + client form   |
+| `/admin/leads`         | Internal lead list (SPEC-005)                      | Dynamic, gated, `noindex`    |
 
 Category slugs: `desarrollo-web`, `automatizaciones`, `chatbots-ia`, `seo-geo`.
 
@@ -78,40 +78,51 @@ Category slugs: `desarrollo-web`, `automatizaciones`, `chatbots-ia`, `seo-geo`.
 type ServiceCategoryId = "desarrollo-web" | "automatizaciones" | "chatbots-ia" | "seo-geo";
 type CategoryIconKey = "web" | "automation" | "ai" | "search";
 
-interface ServiceItem { id: string; name: string; description: string }
-interface Faq { question: string; answer: string }
+interface ServiceItem {
+  id: string;
+  name: string;
+  description: string;
+}
+interface Faq {
+  question: string;
+  answer: string;
+}
 
 interface ServiceCategory {
-  id: ServiceCategoryId;          // also the URL slug
-  name: string;                   // "Desarrollo web"
-  icon: CategoryIconKey;          // mapped to a Lucide icon in the UI
-  headline: string;               // H1 on the detail page
-  summary: string;                // card copy
-  description: string;            // detail intro
+  id: ServiceCategoryId; // also the URL slug
+  name: string; // "Desarrollo web"
+  icon: CategoryIconKey; // mapped to a Lucide icon in the UI
+  headline: string; // H1 on the detail page
+  summary: string; // card copy
+  description: string; // detail intro
   outcomes: string[];
   services: ServiceItem[];
   faqs: Faq[];
   relatedPlanIds: PlanId[];
 }
 
-type PlanId = "starter-local" | "web-pro" | "ia-starter" | "automation-pack"
-  | "growth-web-ia" | "custom-enterprise";
+type PlanId =
+  | "starter-local"
+  | "web-pro"
+  | "ia-starter"
+  | "automation-pack"
+  | "growth-web-ia"
+  | "custom-enterprise";
 
 type PlanPricing =
-  | { kind: "from"; amount: number; currency: "EUR" }
-  | { kind: "custom"; label: string };
+  { kind: "from"; amount: number; currency: "EUR" } | { kind: "custom"; label: string };
 
 interface Plan {
   id: PlanId;
-  name: string;                   // "Starter Local"
-  tagline: string;                // who it is for
+  name: string; // "Starter Local"
+  tagline: string; // who it is for
   idealFor: string;
   pricing: PlanPricing;
-  timeline: string;               // "2–3 semanas"
+  timeline: string; // "2–3 semanas"
   features: string[];
   categories: ServiceCategoryId[];
   featured: boolean;
-  highlight?: string;             // badge, e.g. "Más completo"
+  highlight?: string; // badge, e.g. "Más completo"
 }
 ```
 

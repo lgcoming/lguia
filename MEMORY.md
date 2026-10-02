@@ -47,15 +47,15 @@ top of each section. Keep entries short; link to specs for detail.
 
 ## Dependencies (justification)
 
-| Package | Why |
-| ------- | --- |
-| `motion` | Wizard/result/progress transitions and in-view reveals with reduced-motion support; `LazyMotion` keeps it small. |
-| `lucide-react` | Consistent, tree-shakeable SVG icons. |
-| `zod` | One schema for client + server validation and inferred types. |
-| `vitest`, `@vitejs/plugin-react`, `jsdom`, `@testing-library/*` | Unit, integration and component tests. |
-| `@playwright/test` | The single critical E2E flow. |
-| `prettier`, `prettier-plugin-tailwindcss` | Consistent formatting and class order. |
-| `@types/node@24` | Matches Node 24 LTS runtime; required by Vitest 5 peer range. |
+| Package                                                         | Why                                                                                                              |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `motion`                                                        | Wizard/result/progress transitions and in-view reveals with reduced-motion support; `LazyMotion` keeps it small. |
+| `lucide-react`                                                  | Consistent, tree-shakeable SVG icons.                                                                            |
+| `zod`                                                           | One schema for client + server validation and inferred types.                                                    |
+| `vitest`, `@vitejs/plugin-react`, `jsdom`, `@testing-library/*` | Unit, integration and component tests.                                                                           |
+| `@playwright/test`                                              | The single critical E2E flow.                                                                                    |
+| `prettier`, `prettier-plugin-tailwindcss`                       | Consistent formatting and class order.                                                                           |
+| `@types/node@24`                                                | Matches Node 24 LTS runtime; required by Vitest 5 peer range.                                                    |
 
 ## Tooling notes
 

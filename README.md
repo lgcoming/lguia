@@ -13,9 +13,9 @@ npm install
 npm run dev
 ```
 
-| Script              | Purpose                                 |
-| ------------------- | --------------------------------------- |
-| `npm run dev`       | Development server                      |
-| `npm run build`     | Production build                        |
-| `npm run check`     | Lint + typecheck + unit/integration tests |
-| `npm run test:e2e`  | Playwright end-to-end tests             |
+| Script             | Purpose                                   |
+| ------------------ | ----------------------------------------- |
+| `npm run dev`      | Development server                        |
+| `npm run build`    | Production build                          |
+| `npm run check`    | Lint + typecheck + unit/integration tests |
+| `npm run test:e2e` | Playwright end-to-end tests               |

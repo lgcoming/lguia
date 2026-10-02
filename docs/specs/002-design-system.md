@@ -39,21 +39,21 @@ Defined once in `src/app/globals.css` (`@theme`) and consumed as Tailwind utilit
 
 ### Colour
 
-| Token           | Hex       | Use                                                    | Contrast            |
-| --------------- | --------- | ------------------------------------------------------ | ------------------- |
-| `ink`           | `#16242C` | Body text, dark sections                               | 15.9:1 on white     |
-| `ink-soft`      | `#4A5A62` | Secondary text                                         | 7.2:1 white, 6.5:1 mist |
-| `paper`         | `#FFFFFF` | Default surface                                        |                     |
-| `mist`          | `#F2F5F4` | Alternate section surface, subtle fills                |                     |
-| `line`          | `#DCE3E0` | Decorative borders and dividers (non-essential)        |                     |
-| `control`       | `#788A8E` | Borders that identify form controls                    | 3.6:1 white (≥3:1)  |
-| `pine-700`      | `#0F5C52` | Primary brand colour: buttons, links, focus on light   | 7.9:1 white         |
-| `pine-800`      | `#0B4A42` | Primary hover/active                                   | 10.1:1 white        |
-| `pine-50`/`100` | `#EAF4F1` / `#D3E8E2` | Tints for selected states and badges       | pine-700 7.0:1 on 50 |
-| `signal`        | `#F2B53A` | Route marker, accent on dark surfaces, focus on dark   | 8.7:1 on ink        |
-| `signal-700`    | `#8F5B0A` | Amber text on light surfaces (rare)                    | 5.7:1 white         |
-| `danger`        | `#B42318` | Errors                                                 | 6.6:1 white         |
-| `on-dark-soft`  | `#B9C7C4` | Secondary text on `ink`                                | 9.1:1 on ink        |
+| Token           | Hex                   | Use                                                  | Contrast                |
+| --------------- | --------------------- | ---------------------------------------------------- | ----------------------- |
+| `ink`           | `#16242C`             | Body text, dark sections                             | 15.9:1 on white         |
+| `ink-soft`      | `#4A5A62`             | Secondary text                                       | 7.2:1 white, 6.5:1 mist |
+| `paper`         | `#FFFFFF`             | Default surface                                      |                         |
+| `mist`          | `#F2F5F4`             | Alternate section surface, subtle fills              |                         |
+| `line`          | `#DCE3E0`             | Decorative borders and dividers (non-essential)      |                         |
+| `control`       | `#788A8E`             | Borders that identify form controls                  | 3.6:1 white (≥3:1)      |
+| `pine-700`      | `#0F5C52`             | Primary brand colour: buttons, links, focus on light | 7.9:1 white             |
+| `pine-800`      | `#0B4A42`             | Primary hover/active                                 | 10.1:1 white            |
+| `pine-50`/`100` | `#EAF4F1` / `#D3E8E2` | Tints for selected states and badges                 | pine-700 7.0:1 on 50    |
+| `signal`        | `#F2B53A`             | Route marker, accent on dark surfaces, focus on dark | 8.7:1 on ink            |
+| `signal-700`    | `#8F5B0A`             | Amber text on light surfaces (rare)                  | 5.7:1 white             |
+| `danger`        | `#B42318`             | Errors                                               | 6.6:1 white             |
+| `on-dark-soft`  | `#B9C7C4`             | Secondary text on `ink`                              | 9.1:1 on ink            |
 
 Amber is never used as text on white and never as a large background on light sections.
 
@@ -78,28 +78,28 @@ Amber is never used as text on white and never as a large background on light se
 
 Radius encodes hierarchy instead of one radius everywhere:
 
-| Element                  | Radius           |
-| ------------------------ | ---------------- |
-| Buttons, badges, chips   | full (pill)      |
-| Inputs, option tiles     | 12px (`rounded-xl`) |
-| Cards and panels         | 20px (`rounded-[20px]`) |
-| Large feature surfaces   | 28px             |
+| Element                | Radius                  |
+| ---------------------- | ----------------------- |
+| Buttons, badges, chips | full (pill)             |
+| Inputs, option tiles   | 12px (`rounded-xl`)     |
+| Cards and panels       | 20px (`rounded-[20px]`) |
+| Large feature surfaces | 28px                    |
 
 Elevation is mostly borders (`line`). One shadow token, `shadow-lift`, is used for floating
 surfaces (hero preview, selected plan, mobile menu) — never under every card.
 
 ## Components
 
-| Component        | Location                         | Notes |
-| ---------------- | -------------------------------- | ----- |
-| `Container`      | `components/ui/container.tsx`    | Width + gutters. |
-| `Section`        | `components/ui/section.tsx`      | `tone`: `paper` / `mist` / `ink`; spacing; `aria-labelledby`. |
-| `SectionHeader`  | `components/ui/section-header.tsx` | h2 + optional intro; no eyebrow by default. |
-| `buttonStyles` / `ButtonLink` / `Button` | `components/ui/button.tsx` | Variants `primary`, `secondary`, `on-dark`, `ghost`; sizes `md`, `lg`; min target 44px. |
-| `Badge`          | `components/ui/badge.tsx`        | `neutral`, `brand`, `signal`. |
-| Form controls    | `components/ui/form.tsx`         | `Field` (label, hint, error wiring), `TextInput`, `TextArea`, `Select`, `Checkbox`. |
-| `Logo`           | `components/layout/logo.tsx`     | Route mark + wordmark, SVG, no image request. |
-| `RouteLine`      | `components/ui/route-line.tsx`   | The brand device: stops + marker. |
+| Component                                | Location                           | Notes                                                                                   |
+| ---------------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------- |
+| `Container`                              | `components/ui/container.tsx`      | Width + gutters.                                                                        |
+| `Section`                                | `components/ui/section.tsx`        | `tone`: `paper` / `mist` / `ink`; spacing; `aria-labelledby`.                           |
+| `SectionHeader`                          | `components/ui/section-header.tsx` | h2 + optional intro; no eyebrow by default.                                             |
+| `buttonStyles` / `ButtonLink` / `Button` | `components/ui/button.tsx`         | Variants `primary`, `secondary`, `on-dark`, `ghost`; sizes `md`, `lg`; min target 44px. |
+| `Badge`                                  | `components/ui/badge.tsx`          | `neutral`, `brand`, `signal`.                                                           |
+| Form controls                            | `components/ui/form.tsx`           | `Field` (label, hint, error wiring), `TextInput`, `TextArea`, `Select`, `Checkbox`.     |
+| `Logo`                                   | `components/layout/logo.tsx`       | Route mark + wordmark, SVG, no image request.                                           |
+| `RouteLine`                              | `components/ui/route-line.tsx`     | The brand device: stops + marker.                                                       |
 
 ### States
 
@@ -115,13 +115,13 @@ surfaces (hero preview, selected plan, mobile menu) — never under every card.
 Library: `motion` (`motion/react`) with `LazyMotion` + `domAnimation` to keep the bundle small;
 CSS transitions for hover/focus.
 
-| Where                         | What                                         | Duration |
-| ----------------------------- | -------------------------------------------- | -------- |
-| Section entrance (key grids)  | opacity 0→1, y 16→0, once, staggered 60ms    | 450ms    |
-| Wizard step change            | direction-aware x ±24px + fade               | 250ms    |
-| Wizard progress               | bar `scaleX`, route marker moves to stop     | 300ms    |
-| Diagnosis result              | score counts up, ring draws, bars fill staggered | 900ms |
-| Hero preview                  | single orchestrated reveal of the route      | 1.2s     |
+| Where                        | What                                             | Duration |
+| ---------------------------- | ------------------------------------------------ | -------- |
+| Section entrance (key grids) | opacity 0→1, y 16→0, once, staggered 60ms        | 450ms    |
+| Wizard step change           | direction-aware x ±24px + fade                   | 250ms    |
+| Wizard progress              | bar `scaleX`, route marker moves to stop         | 300ms    |
+| Diagnosis result             | score counts up, ring draws, bars fill staggered | 900ms    |
+| Hero preview                 | single orchestrated reveal of the route          | 1.2s     |
 
 Rules: only `transform` and `opacity`; no scroll listeners (use `whileInView` / IntersectionObserver);
 `MotionConfig reducedMotion="user"` globally plus a CSS `prefers-reduced-motion` reset; content

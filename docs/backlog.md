@@ -6,11 +6,11 @@ is written to be pasted into GitHub Issues as-is (template: `.github/ISSUE_TEMPL
 **Board columns:** Backlog → Ready → In Progress → Review → Done.
 **Definition of Done (all issues):** see [SPEC-008](./specs/008-quality.md#definition-of-done-brief-26).
 
-| Sprint | Goal | Issues |
-| ------ | ---- | ------ |
-| 0 — Foundation | Tooling, docs, design system, layout | #1 #2 #3 #4 |
-| 1 — Marketing website | Home, services, plans, contact | #5 #6 #7 #8 |
-| 2 — Diagnosis + API | Engine, wizard, API, lead flow | #9 #10 #11 #12 |
+| Sprint                           | Goal                                           | Issues              |
+| -------------------------------- | ---------------------------------------------- | ------------------- |
+| 0 — Foundation                   | Tooling, docs, design system, layout           | #1 #2 #3 #4         |
+| 1 — Marketing website            | Home, services, plans, contact                 | #5 #6 #7 #8         |
+| 2 — Diagnosis + API              | Engine, wizard, API, lead flow                 | #9 #10 #11 #12      |
 | 3 — Admin + testing + deployment | Admin view, tests, SEO, a11y, perf, CI, deploy | #13 #14 #15 #16 #17 |
 
 ---

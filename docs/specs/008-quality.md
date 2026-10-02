@@ -8,12 +8,12 @@
 
 Meaningful tests over many tests. Test behaviour, not implementation details.
 
-| Layer | Tool | Location | Scope |
-| ----- | ---- | -------- | ----- |
-| Unit | Vitest (node) | `tests/unit` | Diagnosis validation, scoring, plan rules, service recommendation; lead/email validation; lead service. |
-| Integration | Vitest (node) | `tests/integration` | Route handlers called with real `Request` objects: diagnosis, leads (incl. production gate), catalog. |
-| Component | Vitest + RTL (jsdom) | `tests/components` | Wizard navigation/validation/keyboard; contact form errors and success. |
-| E2E | Playwright | `tests/e2e` | One critical flow: `/diagnostico-digital` → complete → recommendation → lead → success (desktop + mobile). |
+| Layer       | Tool                 | Location            | Scope                                                                                                      |
+| ----------- | -------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Unit        | Vitest (node)        | `tests/unit`        | Diagnosis validation, scoring, plan rules, service recommendation; lead/email validation; lead service.    |
+| Integration | Vitest (node)        | `tests/integration` | Route handlers called with real `Request` objects: diagnosis, leads (incl. production gate), catalog.      |
+| Component   | Vitest + RTL (jsdom) | `tests/components`  | Wizard navigation/validation/keyboard; contact form errors and success.                                    |
+| E2E         | Playwright           | `tests/e2e`         | One critical flow: `/diagnostico-digital` → complete → recommendation → lead → success (desktop + mobile). |
 
 E2E runs against a production build (`next build && next start`).
 

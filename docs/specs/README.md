@@ -19,16 +19,16 @@ implementation changes its behaviour or contracts.
 
 ## Index
 
-| ID  | Spec                                               | Status      | Sprint |
-| --- | -------------------------------------------------- | ----------- | ------ |
-| 001 | [Foundation](./001-foundation.md)                  | Approved    | 0      |
-| 002 | [Design system](./002-design-system.md)            | Approved    | 0      |
-| 003 | [Marketing site](./003-marketing-site.md)          | Approved    | 1      |
-| 004 | [Digital diagnosis](./004-digital-diagnosis.md)    | Approved    | 2      |
-| 005 | [Leads and admin view](./005-leads.md)             | Approved    | 2–3    |
-| 006 | [REST API](./006-api.md)                           | Approved    | 2      |
-| 007 | [SEO](./007-seo.md)                                | Approved    | 3      |
-| 008 | [Quality, testing and delivery](./008-quality.md)  | Approved    | 3      |
+| ID  | Spec                                              | Status   | Sprint |
+| --- | ------------------------------------------------- | -------- | ------ |
+| 001 | [Foundation](./001-foundation.md)                 | Approved | 0      |
+| 002 | [Design system](./002-design-system.md)           | Approved | 0      |
+| 003 | [Marketing site](./003-marketing-site.md)         | Approved | 1      |
+| 004 | [Digital diagnosis](./004-digital-diagnosis.md)   | Approved | 2      |
+| 005 | [Leads and admin view](./005-leads.md)            | Approved | 2–3    |
+| 006 | [REST API](./006-api.md)                          | Approved | 2      |
+| 007 | [SEO](./007-seo.md)                               | Approved | 3      |
+| 008 | [Quality, testing and delivery](./008-quality.md) | Approved | 3      |
 
 ## Template
 

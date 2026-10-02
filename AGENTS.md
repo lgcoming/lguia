@@ -137,15 +137,15 @@ dependency · spec/docs updated · acceptance criteria satisfied.
 Installed at project level in `.claude/skills/` and `.agents/skills/` (lockfile: `skills-lock.json`,
 restore with `npx skills experimental_install`):
 
-| Skill | Use it when |
-| ----- | ----------- |
-| `web-quality-audit` | Auditing a page or the whole site before a release. |
-| `performance`, `core-web-vitals` | Any change to rendering, assets, fonts, scripts or animation. |
-| `accessibility` | Any UI change, especially forms and the wizard. |
-| `seo` | Metadata, routes, structured data, sitemap/robots. |
-| `best-practices` | Security headers, dependencies, console errors. |
-| `frontend-design` | New sections or visual changes (respect SPEC-002 over generic taste). |
-| `vercel-react-best-practices` | Writing or reviewing React/Next.js code. |
+| Skill                            | Use it when                                                           |
+| -------------------------------- | --------------------------------------------------------------------- |
+| `web-quality-audit`              | Auditing a page or the whole site before a release.                   |
+| `performance`, `core-web-vitals` | Any change to rendering, assets, fonts, scripts or animation.         |
+| `accessibility`                  | Any UI change, especially forms and the wizard.                       |
+| `seo`                            | Metadata, routes, structured data, sitemap/robots.                    |
+| `best-practices`                 | Security headers, dependencies, console errors.                       |
+| `frontend-design`                | New sections or visual changes (respect SPEC-002 over generic taste). |
+| `vercel-react-best-practices`    | Writing or reviewing React/Next.js code.                              |
 
 Next.js framework knowledge comes from the bundled docs in `node_modules/next/dist/docs/` (see the
 managed block at the top), not from a skill. Verify UI changes in a real browser (built-in browser

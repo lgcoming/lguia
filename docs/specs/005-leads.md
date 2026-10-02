@@ -12,24 +12,24 @@ replaces it later without touching validation, business logic or UI.
 
 ## Lead sources
 
-| Source      | Where                         | Extra data                         |
-| ----------- | ----------------------------- | ---------------------------------- |
-| `contact`   | `/contacto` → `ContactForm`   | `interest` (category or general), required `message` |
-| `diagnosis` | Diagnosis result → lead form  | Diagnosis `answers` (required), optional `message` |
+| Source      | Where                        | Extra data                                           |
+| ----------- | ---------------------------- | ---------------------------------------------------- |
+| `contact`   | `/contacto` → `ContactForm`  | `interest` (category or general), required `message` |
+| `diagnosis` | Diagnosis result → lead form | Diagnosis `answers` (required), optional `message`   |
 
 ## Validation (`src/features/leads/schema.ts`, shared by client and server)
 
-| Field      | Rule | Message (es) |
-| ---------- | ---- | ------------ |
-| `name`     | trimmed, 2–80 chars | Escribe tu nombre (mínimo 2 caracteres). |
-| `email`    | trimmed, lowercased, valid email, ≤ 254 chars | Introduce un email válido, por ejemplo nombre@empresa.com. |
-| `company`  | optional, trimmed, ≤ 120 chars; empty → undefined | El nombre de la empresa es demasiado largo. |
-| `phone`    | optional; `+`, digits, spaces, `-`, `(`, `)`; 9–15 digits; empty → undefined | Introduce un teléfono válido (mínimo 9 dígitos). |
-| `interest` | contact only: one of the 4 category ids or `general` | Selecciona en qué podemos ayudarte. |
-| `message`  | contact: trimmed, 10–2000 chars · diagnosis: optional, ≤ 2000 | Cuéntanos un poco más (mínimo 10 caracteres). |
-| `consent`  | must be `true` | Necesitamos tu consentimiento para poder responderte. |
-| `answers`  | diagnosis only: valid `DiagnosisAnswers` (SPEC-004) | — |
-| `website`  | honeypot, optional string, must be empty for a real submission | — |
+| Field      | Rule                                                                         | Message (es)                                               |
+| ---------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `name`     | trimmed, 2–80 chars                                                          | Escribe tu nombre (mínimo 2 caracteres).                   |
+| `email`    | trimmed, lowercased, valid email, ≤ 254 chars                                | Introduce un email válido, por ejemplo nombre@empresa.com. |
+| `company`  | optional, trimmed, ≤ 120 chars; empty → undefined                            | El nombre de la empresa es demasiado largo.                |
+| `phone`    | optional; `+`, digits, spaces, `-`, `(`, `)`; 9–15 digits; empty → undefined | Introduce un teléfono válido (mínimo 9 dígitos).           |
+| `interest` | contact only: one of the 4 category ids or `general`                         | Selecciona en qué podemos ayudarte.                        |
+| `message`  | contact: trimmed, 10–2000 chars · diagnosis: optional, ≤ 2000                | Cuéntanos un poco más (mínimo 10 caracteres).              |
+| `consent`  | must be `true`                                                               | Necesitamos tu consentimiento para poder responderte.      |
+| `answers`  | diagnosis only: valid `DiagnosisAnswers` (SPEC-004)                          | —                                                          |
+| `website`  | honeypot, optional string, must be empty for a real submission               | —                                                          |
 
 The payload is a discriminated union on `source`.
 
@@ -41,7 +41,7 @@ The payload is a discriminated union on `source`.
    get no signal).
 2. For `diagnosis` leads, recompute the diagnosis on the server from `answers` (client-provided
    scores are never trusted) and store `{ answers, score, level, recommendedPlanId,
-   recommendedServiceIds }`.
+recommendedServiceIds }`.
 3. Create the `Lead` with `id` (UUID), `createdAt` (ISO), `status: "new"` and persist it.
 
 Dependencies (`repository`, `now`, `createId`) are injectable for tests.
@@ -49,8 +49,8 @@ Dependencies (`repository`, `now`, `createId`) are injectable for tests.
 ```ts
 interface Lead {
   id: string;
-  createdAt: string;            // ISO 8601
-  status: "new";                // "contacted" | "won" | "lost" arrive with PATCH /api/leads/:id
+  createdAt: string; // ISO 8601
+  status: "new"; // "contacted" | "won" | "lost" arrive with PATCH /api/leads/:id
   source: "contact" | "diagnosis";
   name: string;
   email: string;
@@ -69,7 +69,7 @@ interface Lead {
 
 interface LeadRepository {
   create(lead: Lead): Promise<Lead>;
-  list(): Promise<Lead[]>;      // newest first
+  list(): Promise<Lead[]>; // newest first
 }
 ```
 

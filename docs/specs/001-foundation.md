@@ -24,16 +24,16 @@ workflow and agent documentation. Out of scope: features (covered by later specs
   critical E2E flow), Prettier with the Tailwind class-sorting plugin.
 - R4. Folder architecture:
 
-  | Path              | Contents                                                              |
-  | ----------------- | --------------------------------------------------------------------- |
-  | `src/app`         | Routes only: pages, layouts, route handlers, metadata files.          |
-  | `src/components`  | Reusable, feature-agnostic UI (`ui`, `layout`, `marketing`, `motion`, `seo`). |
-  | `src/features`    | Feature modules with business logic and feature UI (`catalog`, `diagnosis`, `leads`). |
-  | `src/lib`         | Shared infrastructure: site config, API helpers, utilities.           |
-  | `src/data`        | Static/mock content: services, plans, process steps.                  |
-  | `src/types`       | Shared domain types used across features.                             |
-  | `tests`           | `unit`, `integration`, `components`, `e2e`.                           |
-  | `docs/specs`      | SDD specifications.                                                   |
+  | Path             | Contents                                                                              |
+  | ---------------- | ------------------------------------------------------------------------------------- |
+  | `src/app`        | Routes only: pages, layouts, route handlers, metadata files.                          |
+  | `src/components` | Reusable, feature-agnostic UI (`ui`, `layout`, `marketing`, `motion`, `seo`).         |
+  | `src/features`   | Feature modules with business logic and feature UI (`catalog`, `diagnosis`, `leads`). |
+  | `src/lib`        | Shared infrastructure: site config, API helpers, utilities.                           |
+  | `src/data`       | Static/mock content: services, plans, process steps.                                  |
+  | `src/types`      | Shared domain types used across features.                                             |
+  | `tests`          | `unit`, `integration`, `components`, `e2e`.                                           |
+  | `docs/specs`     | SDD specifications.                                                                   |
 
 - R5. Route groups: `(marketing)` for the public site (shared header/footer) and `(admin)` for
   internal views (separate, minimal chrome, `noindex`).
