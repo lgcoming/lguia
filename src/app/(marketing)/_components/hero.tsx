@@ -90,11 +90,11 @@ function DiagnosisPreview({ data }: { data: DiagnosisPreviewData }) {
 export function Hero({ preview }: { preview: DiagnosisPreviewData }) {
   return (
     <section aria-labelledby="hero-titulo" className="border-b border-line">
-      <Container className="grid items-center gap-12 py-14 md:py-20 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:py-24">
-        <div>
+      <Container className="grid items-center gap-12 py-14 md:py-20 lg:grid-cols-[1.3fr_1fr] lg:gap-14 lg:py-24">
+        <div className="min-w-0">
           <h1
             id="hero-titulo"
-            className="text-[2.375rem] leading-[1.06] sm:text-h1 sm:leading-[1.06] lg:text-display"
+            className="text-[1.875rem] leading-[1.08] max-[399px]:hyphens-auto min-[400px]:text-[2.375rem] min-[400px]:leading-[1.06] sm:text-h1 sm:leading-[1.06] lg:text-[3rem] lg:leading-[1.05]"
           >
             Webs, automatizaciones e IA que resuelven problemas reales de tu negocio
           </h1>

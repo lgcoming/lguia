@@ -29,7 +29,7 @@ Category slugs: `desarrollo-web`, `automatizaciones`, `chatbots-ia`, `seo-geo`.
 - Skip link "Saltar al contenido" as the first focusable element, targeting `<main id="contenido">`.
 - **Header** (sticky, solid background): logo (home link), primary nav (Servicios, Planes,
   Diagnóstico, Contacto) with `aria-current="page"`, CTA button "Diagnóstico gratuito".
-  Below `md`, nav collapses into a disclosure menu: button with `aria-expanded`/`aria-controls`,
+  Below `lg` (1024px), nav collapses into a disclosure menu: button with `aria-expanded`/`aria-controls`,
   closes on Escape, on link click and on route change, returns focus to the toggle on Escape.
 - **Footer**: brand statement, service links (all 4 categories), company links, contact email,
   copyright with current year.
