@@ -80,7 +80,9 @@ Rules:
 - UI copy in Spanish (es-ES), sentence case, plain verbs, no hype; code and comments in English.
 - Comments explain _why_, not _what_. Keep them rare.
 - Tailwind utilities with design tokens from `globals.css`; never hard-code hex values in components.
-  Use `cn()` from `src/lib/utils.ts` to compose classes.
+  Use `cn()` from `src/lib/utils.ts` to compose classes. `cn()` does not resolve conflicts, so never
+  override a component's base utilities (display, size, colour) through `className`: add a prop or
+  variant, or wrap the component.
 - Formatting: Prettier (`npm run format`). Linting: ESLint (`npm run lint`).
 
 ## Design system (SPEC-002)

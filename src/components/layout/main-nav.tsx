@@ -54,9 +54,10 @@ export function MainNav({ items }: { items: NavItem[] }) {
       </nav>
 
       <div className="flex items-center gap-2">
-        <ButtonLink href="/diagnostico-digital" className="hidden sm:inline-flex">
-          Diagnóstico gratuito
-        </ButtonLink>
+        {/* Wrapped: overriding the button's own display utility would conflict. */}
+        <div className="hidden sm:block">
+          <ButtonLink href="/diagnostico-digital">Diagnóstico gratuito</ButtonLink>
+        </div>
         <button
           ref={toggleRef}
           type="button"
