@@ -14,6 +14,8 @@ import { ButtonLink } from "@/components/ui/button";
 import { Section, SectionHeader } from "@/components/ui/layout-primitives";
 import { processSteps } from "@/data/process";
 import { getCatalogRepository } from "@/features/catalog/catalog-repository";
+import { diagnose } from "@/features/diagnosis/model/diagnose";
+import type { DiagnosisAnswers } from "@/features/diagnosis/model/options";
 import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
 
@@ -24,18 +26,19 @@ export const metadata: Metadata = createPageMetadata({
   absoluteTitle: true,
 });
 
-// Temporary example values; replaced by a real engine result once the diagnosis exists (SPEC-004).
-const previewData: DiagnosisPreviewData = {
-  caption: "Ejemplo: clínica dental, 8 personas",
-  score: 41,
-  levelLabel: "En desarrollo",
-  areas: [
-    { id: "web", label: "Presencia web", score: 57 },
-    { id: "automation", label: "Automatización", score: 30 },
-    { id: "ai", label: "Inteligencia artificial", score: 15 },
-    { id: "visibility", label: "Visibilidad en buscadores", score: 45 },
-  ],
-  planName: "Web Pro",
+/** A real engine result for an example business, so the hero shows what users will get. */
+const EXAMPLE_ANSWERS: DiagnosisAnswers = {
+  websiteStatus: "basic",
+  sellsOnline: "no",
+  webLeads: "occasional",
+  automationLevel: "basic",
+  repetitiveWorkload: "high",
+  aiAdoption: "interested",
+  chatbotInterest: "yes",
+  seoStatus: "occasional",
+  visibilityGoal: "interested",
+  companySize: "micro",
+  mainGoal: "leads",
 };
 
 export default async function HomePage() {
@@ -45,10 +48,18 @@ export default async function HomePage() {
     catalog.listPlans(),
   ]);
   const featuredPlans = plans.filter((plan) => plan.featured);
+  const example = diagnose(EXAMPLE_ANSWERS, { plans, categories });
+  const preview: DiagnosisPreviewData = {
+    caption: "Ejemplo: clínica dental, 8 personas",
+    score: example.score,
+    levelLabel: example.level.label,
+    areas: example.areas,
+    planName: example.recommendedPlan.name,
+  };
 
   return (
     <>
-      <Hero preview={previewData} />
+      <Hero preview={preview} />
 
       <AboutSection />
 

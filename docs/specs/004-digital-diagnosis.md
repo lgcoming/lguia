@@ -234,8 +234,9 @@ Phases: `intro` → `questions` (step 1–5) → `calculating` → `result` (+ l
   invalid group. Answering a question clears its error.
 - **Focus**: on step change focus moves to the step heading (`tabIndex=-1`); on result, to the
   result heading.
-- **Calculating**: `POST /api/diagnosis`; status message "Analizando tus respuestas…" in a
-  `role="status"` region; minimum display time 900 ms so the transition is perceivable.
+- **Calculating**: `POST /api/diagnosis`; heading "Analizando tus respuestas…" receives focus (the
+  submit button unmounts, so focus must move somewhere meaningful); minimum display time 900 ms so
+  the transition is perceivable.
 - **Error**: message explaining the failure, "Reintentar" (re-sends) and "Revisar respuestas"
   (back to last step). Answers are never lost.
 - **Result**: score ring + level + summary, area bars, recommended plan (with link to `/planes`),
