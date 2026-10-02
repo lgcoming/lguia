@@ -23,12 +23,12 @@ function FooterColumn({ title, children }: { title: string; children: ReactNode 
 
 function FooterLinks({ links }: { links: NavItem[] }) {
   return (
-    <ul className="space-y-1">
+    <ul>
       {links.map((link) => (
         <li key={link.href}>
           <Link
             href={link.href}
-            className="inline-flex min-h-10 items-center text-on-dark-soft transition-colors hover:text-paper"
+            className="inline-flex min-h-11 items-center text-on-dark-soft transition-colors hover:text-paper"
           >
             {link.label}
           </Link>
@@ -58,7 +58,7 @@ export function SiteFooter({ serviceLinks }: { serviceLinks: NavItem[] }) {
           <FooterColumn title="Hablemos">
             <a
               href={`mailto:${siteConfig.email}`}
-              className="inline-flex min-h-10 items-center font-semibold text-paper underline decoration-signal decoration-2 underline-offset-4"
+              className="inline-flex min-h-11 items-center font-semibold text-paper underline decoration-signal decoration-2 underline-offset-4"
             >
               {siteConfig.email}
             </a>
