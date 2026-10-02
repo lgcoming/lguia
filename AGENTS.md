@@ -91,7 +91,8 @@ Rules:
   pine, signal, danger.
 - One typeface (Schibsted Grotesk). Left-aligned layouts. Radius by hierarchy (pill buttons, 12px
   inputs, 20px cards).
-- Signature device: the route line (`RouteLine`) — use it only for real sequences or position.
+- Signature device: the route line (`RouteStop` in `components/ui/route.tsx`) — use it only for
+  real sequences or position.
 - Avoid: AI gradients/glow, glassmorphism, all-caps eyebrows, `→` in link text, `A · B · C` meta
   strings, highlighted single words in headlines, identical card grids everywhere, fake social proof.
 

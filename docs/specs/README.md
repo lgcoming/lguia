@@ -19,16 +19,18 @@ implementation changes its behaviour or contracts.
 
 ## Index
 
-| ID  | Spec                                              | Status   | Sprint |
-| --- | ------------------------------------------------- | -------- | ------ |
-| 001 | [Foundation](./001-foundation.md)                 | Approved | 0      |
-| 002 | [Design system](./002-design-system.md)           | Approved | 0      |
-| 003 | [Marketing site](./003-marketing-site.md)         | Approved | 1      |
-| 004 | [Digital diagnosis](./004-digital-diagnosis.md)   | Approved | 2      |
-| 005 | [Leads and admin view](./005-leads.md)            | Approved | 2–3    |
-| 006 | [REST API](./006-api.md)                          | Approved | 2      |
-| 007 | [SEO](./007-seo.md)                               | Approved | 3      |
-| 008 | [Quality, testing and delivery](./008-quality.md) | Approved | 3      |
+| ID  | Spec                                              | Status       | Sprint |
+| --- | ------------------------------------------------- | ------------ | ------ |
+| 001 | [Foundation](./001-foundation.md)                 | Implemented  | 0      |
+| 002 | [Design system](./002-design-system.md)           | Implemented  | 0      |
+| 003 | [Marketing site](./003-marketing-site.md)         | Implemented  | 1      |
+| 004 | [Digital diagnosis](./004-digital-diagnosis.md)   | Implemented  | 2      |
+| 005 | [Leads and admin view](./005-leads.md)            | Implemented  | 2–3    |
+| 006 | [REST API](./006-api.md)                          | Implemented  | 2      |
+| 007 | [SEO](./007-seo.md)                               | Implemented¹ | 3      |
+| 008 | [Quality, testing and delivery](./008-quality.md) | Implemented² | 3      |
+
+¹ AC3 (Rich Results Test) needs the deployed URL. ² AC2 (first CI run) needs the GitHub remote.
 
 ## Template
 
