@@ -14,10 +14,15 @@ import { ButtonLink } from "@/components/ui/button";
 import { Section, SectionHeader } from "@/components/ui/layout-primitives";
 import { processSteps } from "@/data/process";
 import { getCatalogRepository } from "@/features/catalog/catalog-repository";
+import { createPageMetadata } from "@/lib/metadata";
+import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "LGuIA: webs, automatización e IA práctica para pymes",
+  description: siteConfig.description,
+  path: "/",
+  absoluteTitle: true,
+});
 
 // Temporary example values; replaced by a real engine result once the diagnosis exists (SPEC-004).
 const previewData: DiagnosisPreviewData = {

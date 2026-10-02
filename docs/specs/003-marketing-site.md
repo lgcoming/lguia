@@ -92,6 +92,7 @@ interface ServiceCategory {
   id: ServiceCategoryId; // also the URL slug
   name: string; // "Desarrollo web"
   icon: CategoryIconKey; // mapped to a Lucide icon in the UI
+  seoTitle: string; // page <title> without the brand suffix
   headline: string; // H1 on the detail page
   summary: string; // card copy
   description: string; // detail intro

@@ -38,6 +38,8 @@ export interface ServiceCategory {
   id: ServiceCategoryId;
   name: string;
   icon: CategoryIconKey;
+  /** Page <title> for the category page (without the brand suffix). */
+  seoTitle: string;
   headline: string;
   summary: string;
   description: string;
