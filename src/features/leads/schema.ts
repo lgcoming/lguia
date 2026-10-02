@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { diagnosisAnswersSchema } from "@/features/diagnosis/model/validation";
 import { SERVICE_CATEGORY_IDS } from "@/types/catalog";
 
 /** Lead validation shared by forms and the API (SPEC-005). Messages are user-facing (es-ES). */
@@ -74,4 +75,23 @@ export const contactLeadSchema = z.object({
     .max(2000, LEAD_MESSAGES.messageTooLong),
 });
 
+export const diagnosisLeadSchema = z.object({
+  source: z.literal("diagnosis"),
+  ...contactFields,
+  message: z.preprocess(
+    emptyToUndefined,
+    z.string().trim().max(2000, LEAD_MESSAGES.messageTooLong).optional(),
+  ),
+  // Only the answers are accepted: the server recomputes the diagnosis itself.
+  answers: diagnosisAnswersSchema,
+});
+
+export const leadInputSchema = z.discriminatedUnion(
+  "source",
+  [contactLeadSchema, diagnosisLeadSchema],
+  { error: "Origen del contacto no válido." },
+);
+
 export type ContactLeadInput = z.output<typeof contactLeadSchema>;
+export type DiagnosisLeadInput = z.output<typeof diagnosisLeadSchema>;
+export type LeadInput = z.output<typeof leadInputSchema>;
