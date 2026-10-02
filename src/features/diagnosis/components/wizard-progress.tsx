@@ -1,6 +1,6 @@
 "use client";
 
-import { m } from "motion/react";
+import * as m from "motion/react-m";
 
 import { RouteStop } from "@/components/ui/route";
 import type { DiagnosisStep } from "@/features/diagnosis/model/questions";

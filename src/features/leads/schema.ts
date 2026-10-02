@@ -1,4 +1,6 @@
-import { z } from "zod";
+// zod/mini: same validation engine as "zod", but tree-shakable. The classic namespace import
+// pulled every locale and the JSON Schema converter into the client bundle (~90 KB gzip).
+import * as z from "zod/mini";
 
 import { diagnosisAnswersSchema } from "@/features/diagnosis/model/validation";
 import { SERVICE_CATEGORY_IDS } from "@/types/catalog";
@@ -22,46 +24,48 @@ export const LEAD_MESSAGES = {
 
 const PHONE_PATTERN = /^\+?[\d\s\-()]+$/;
 
-function emptyToUndefined(value: unknown): unknown {
-  return typeof value === "string" && value.trim() === "" ? undefined : value;
-}
-
 function countDigits(value: string): number {
   return value.replace(/\D/g, "").length;
 }
 
-export const emailSchema = z
-  .string({ error: LEAD_MESSAGES.email })
-  .trim()
-  .toLowerCase()
-  .pipe(z.email({ error: LEAD_MESSAGES.email }).max(254, LEAD_MESSAGES.email));
+/**
+ * Optional text: blank strings count as "not provided". Non-string values pass through
+ * unchanged and are rejected by the string schema that follows.
+ */
+function optionalText(...checks: Parameters<ReturnType<typeof z.string>["check"]>) {
+  return z.pipe(
+    z.transform((value: unknown) =>
+      typeof value === "string" && value.trim() === "" ? undefined : (value as string | undefined),
+    ),
+    z.optional(z.string().check(z.trim(), ...checks)),
+  );
+}
+
+export const emailSchema = z.pipe(
+  z.string({ error: LEAD_MESSAGES.email }).check(z.trim(), z.toLowerCase()),
+  z.email({ error: LEAD_MESSAGES.email }).check(z.maxLength(254, LEAD_MESSAGES.email)),
+);
 
 const contactFields = {
   name: z
     .string({ error: LEAD_MESSAGES.name })
-    .trim()
-    .min(2, LEAD_MESSAGES.name)
-    .max(80, LEAD_MESSAGES.nameTooLong),
+    .check(
+      z.trim(),
+      z.minLength(2, LEAD_MESSAGES.name),
+      z.maxLength(80, LEAD_MESSAGES.nameTooLong),
+    ),
   email: emailSchema,
-  company: z.preprocess(
-    emptyToUndefined,
-    z.string().trim().max(120, LEAD_MESSAGES.company).optional(),
-  ),
-  phone: z.preprocess(
-    emptyToUndefined,
-    z
-      .string()
-      .trim()
-      .regex(PHONE_PATTERN, LEAD_MESSAGES.phone)
-      .refine((value) => {
-        const digits = countDigits(value);
-        return digits >= 9 && digits <= 15;
-      }, LEAD_MESSAGES.phone)
-      .optional(),
+  company: optionalText(z.maxLength(120, LEAD_MESSAGES.company)),
+  phone: optionalText(
+    z.regex(PHONE_PATTERN, LEAD_MESSAGES.phone),
+    z.refine((value: string) => {
+      const digits = countDigits(value);
+      return digits >= 9 && digits <= 15;
+    }, LEAD_MESSAGES.phone),
   ),
   consent: z.literal(true, { error: LEAD_MESSAGES.consent }),
   // Honeypot: real users never see or fill it (SPEC-005).
-  website: z.string().max(500).optional(),
+  website: z.optional(z.string().check(z.maxLength(500))),
 };
 
 export const contactLeadSchema = z.object({
@@ -70,18 +74,17 @@ export const contactLeadSchema = z.object({
   interest: z.enum(LEAD_INTERESTS, { error: LEAD_MESSAGES.interest }),
   message: z
     .string({ error: LEAD_MESSAGES.message })
-    .trim()
-    .min(10, LEAD_MESSAGES.message)
-    .max(2000, LEAD_MESSAGES.messageTooLong),
+    .check(
+      z.trim(),
+      z.minLength(10, LEAD_MESSAGES.message),
+      z.maxLength(2000, LEAD_MESSAGES.messageTooLong),
+    ),
 });
 
 export const diagnosisLeadSchema = z.object({
   source: z.literal("diagnosis"),
   ...contactFields,
-  message: z.preprocess(
-    emptyToUndefined,
-    z.string().trim().max(2000, LEAD_MESSAGES.messageTooLong).optional(),
-  ),
+  message: optionalText(z.maxLength(2000, LEAD_MESSAGES.messageTooLong)),
   // Only the answers are accepted: the server recomputes the diagnosis itself.
   answers: diagnosisAnswersSchema,
 });

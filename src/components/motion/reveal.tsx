@@ -1,6 +1,7 @@
 "use client";
 
-import { m, type Variants } from "motion/react";
+import type { Variants } from "motion/react";
+import * as m from "motion/react-m";
 import type { ReactNode } from "react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;

@@ -3,12 +3,12 @@
 import { Check } from "lucide-react";
 import {
   animate,
-  m,
   useMotionValue,
   useReducedMotion,
   useTransform,
   type Variants,
 } from "motion/react";
+import * as m from "motion/react-m";
 import Link from "next/link";
 import { useEffect, type ReactNode } from "react";
 
