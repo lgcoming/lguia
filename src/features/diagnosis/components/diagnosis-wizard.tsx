@@ -3,6 +3,7 @@
 import { AnimatePresence, m, type Variants } from "motion/react";
 import { useReducer, type ReactNode } from "react";
 
+import { DiagnosisLeadForm } from "@/features/diagnosis/components/diagnosis-lead-form";
 import { DiagnosisResultView } from "@/features/diagnosis/components/diagnosis-result";
 import { QuestionStep } from "@/features/diagnosis/components/question-step";
 import { WizardProgress } from "@/features/diagnosis/components/wizard-progress";
@@ -12,7 +13,7 @@ import {
   WizardIntro,
 } from "@/features/diagnosis/components/wizard-screens";
 import { initialWizardState, wizardReducer } from "@/features/diagnosis/components/wizard-state";
-import type { DiagnosisQuestionId } from "@/features/diagnosis/model/options";
+import type { DiagnosisAnswers, DiagnosisQuestionId } from "@/features/diagnosis/model/options";
 import { DIAGNOSIS_QUESTION_COUNT, DIAGNOSIS_STEPS } from "@/features/diagnosis/model/questions";
 import type { DiagnosisResult } from "@/features/diagnosis/model/types";
 import { validateDiagnosisStep } from "@/features/diagnosis/model/validation";
@@ -115,7 +116,13 @@ export function DiagnosisWizard() {
         <DiagnosisResultView
           result={state.result}
           onReview={() => dispatch({ type: "goToStep", stepIndex: 0 })}
-        />
+        >
+          <DiagnosisLeadForm
+            // After the last step every answer is present and validated.
+            answers={state.answers as DiagnosisAnswers}
+            planName={state.result.recommendedPlan.name}
+          />
+        </DiagnosisResultView>
       ) : null;
       break;
   }
