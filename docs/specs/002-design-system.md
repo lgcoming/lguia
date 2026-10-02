@@ -1,6 +1,6 @@
 # SPEC-002 — Design system
 
-- Status: Approved
+- Status: Implemented
 - Sprint: 0
 - Related: [003](./003-marketing-site.md)
 
@@ -90,16 +90,16 @@ surfaces (hero preview, selected plan, mobile menu) — never under every card.
 
 ## Components
 
-| Component                                | Location                           | Notes                                                                                   |
-| ---------------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------- |
-| `Container`                              | `components/ui/container.tsx`      | Width + gutters.                                                                        |
-| `Section`                                | `components/ui/section.tsx`        | `tone`: `paper` / `mist` / `ink`; spacing; `aria-labelledby`.                           |
-| `SectionHeader`                          | `components/ui/section-header.tsx` | h2 + optional intro; no eyebrow by default.                                             |
-| `buttonStyles` / `ButtonLink` / `Button` | `components/ui/button.tsx`         | Variants `primary`, `secondary`, `on-dark`, `ghost`; sizes `md`, `lg`; min target 44px. |
-| `Badge`                                  | `components/ui/badge.tsx`          | `neutral`, `brand`, `signal`.                                                           |
-| Form controls                            | `components/ui/form.tsx`           | `Field` (label, hint, error wiring), `TextInput`, `TextArea`, `Select`, `Checkbox`.     |
-| `Logo`                                   | `components/layout/logo.tsx`       | Route mark + wordmark, SVG, no image request.                                           |
-| `RouteLine`                              | `components/ui/route-line.tsx`     | The brand device: stops + marker.                                                       |
+| Component                                | Location                              | Notes                                                                                     |
+| ---------------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `Container`                              | `components/ui/layout-primitives.tsx` | Width + gutters.                                                                          |
+| `Section`                                | `components/ui/layout-primitives.tsx` | `tone`: `paper` / `mist` / `ink`; spacing; `aria-labelledby`.                             |
+| `SectionHeader`                          | `components/ui/layout-primitives.tsx` | h2 + optional intro; no eyebrow by default.                                               |
+| `buttonStyles` / `ButtonLink` / `Button` | `components/ui/button.tsx`            | Variants `primary`, `secondary`, `on-dark`, `ghost`; sizes `md`, `lg`; min target 44px.   |
+| `Badge`                                  | `components/ui/badge.tsx`             | `neutral`, `brand`, `signal`.                                                             |
+| Form controls                            | `components/ui/form.tsx`              | `TextField`, `TextAreaField`, `SelectField`, `CheckboxField` (label, hint, error wiring). |
+| `Logo`                                   | `components/layout/logo.tsx`          | Route mark + wordmark, SVG, no image request.                                             |
+| `RouteStop`                              | `components/ui/route.tsx`             | The brand device: a stop on the route line; `state`, `size`, `tone` props.                |
 
 ### States
 
@@ -130,9 +130,9 @@ never animated.
 
 ## Acceptance criteria
 
-- [ ] AC1 — All tokens above exist in `globals.css` and no component hard-codes hex values.
-- [ ] AC2 — Text/background pairs used in the UI meet WCAG AA (4.5:1 text, 3:1 UI boundaries).
-- [ ] AC3 — Every interactive element has a visible `:focus-visible` style on every surface tone.
-- [ ] AC4 — With `prefers-reduced-motion: reduce`, no transform animations run.
-- [ ] AC5 — Pages render complete content with JavaScript disabled (except interactive wizard).
-- [ ] AC6 — Interactive targets are at least 44×44px (24×24 minimum for inline controls).
+- [x] AC1 — All tokens above exist in `globals.css` and no component hard-codes hex values.
+- [x] AC2 — Text/background pairs used in the UI meet WCAG AA (4.5:1 text, 3:1 UI boundaries).
+- [x] AC3 — Every interactive element has a visible `:focus-visible` style on every surface tone.
+- [x] AC4 — With `prefers-reduced-motion: reduce`, no transform animations run.
+- [x] AC5 — Pages render complete content with JavaScript disabled (except interactive wizard).
+- [x] AC6 — Interactive targets are at least 44×44px (24×24 minimum for inline controls).

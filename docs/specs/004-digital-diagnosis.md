@@ -1,6 +1,6 @@
 # SPEC-004 — Digital diagnosis
 
-- Status: Approved
+- Status: Implemented
 - Sprint: 2
 - Related: [003](./003-marketing-site.md), [005](./005-leads.md), [006](./006-api.md)
 
@@ -246,17 +246,17 @@ Phases: `intro` → `questions` (step 1–5) → `calculating` → `result` (+ l
 
 ## Acceptance criteria
 
-- [ ] AC1 — `validateDiagnosis` rejects missing fields and unknown option values with per-field
+- [x] AC1 — `validateDiagnosis` rejects missing fields and unknown option values with per-field
       messages; accepts a complete valid object (unit tests).
-- [ ] AC2 — `calculateDiagnosis` returns 0 for the lowest answers and 100 for the highest, applies
+- [x] AC2 — `calculateDiagnosis` returns 0 for the lowest answers and 100 for the highest, applies
       the visibility cap, and level boundaries 34/35 and 64/65 (unit tests).
-- [ ] AC3 — `recommendPlan` returns the expected plan for each rule, including tie-breaks, and
+- [x] AC3 — `recommendPlan` returns the expected plan for each rule, including tie-breaks, and
       never recommends starter-local to a business with a modern website (unit tests).
-- [ ] AC4 — `getRecommendedServices` returns 2–4 unique services, filtered and ordered per spec
+- [x] AC4 — `getRecommendedServices` returns 2–4 unique services, filtered and ordered per spec
       (unit tests).
-- [ ] AC5 — `POST /api/diagnosis` returns a `DiagnosisResult` for valid input and a 400 with issues
+- [x] AC5 — `POST /api/diagnosis` returns a `DiagnosisResult` for valid input and a 400 with issues
       for invalid input (integration tests).
-- [ ] AC6 — The wizard can be completed with keyboard only; validation errors are announced and
+- [x] AC6 — The wizard can be completed with keyboard only; validation errors are announced and
       focus is managed as described (component test + E2E).
-- [ ] AC7 — The full flow intro → result → lead → success works on desktop and mobile (E2E).
-- [ ] AC8 — With reduced motion, the result shows final values immediately.
+- [x] AC7 — The full flow intro → result → lead → success works on desktop and mobile (E2E).
+- [x] AC8 — With reduced motion, the result shows final values immediately.

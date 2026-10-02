@@ -130,4 +130,16 @@ top of each section. Keep entries short; link to specs for detail.
 - **SEO**: unique titles/descriptions, self-referencing canonicals, `og:image` on every page,
   valid sitemap and robots, JSON-LD types as specified. Rich Results Test pending deployment.
 - **Pending manual checks**: screen-reader pass (NVDA/VoiceOver) of the wizard, 200% zoom pass,
-  Rich Results Test on the deployed URL.
+  Rich Results Test on the deployed URL, first CI run on GitHub.
+
+### 2026-10-03 — Closing checks
+
+- Clean clone of the release branch: `npm ci` + `npm run check` + `npm run format:check` pass.
+- Production build: unknown service slug → 404 (`noindex`); `/admin/leads` and `GET /api/leads`
+  → 404 without `ENABLE_DEMO_ADMIN`.
+- Automated keyboard pass (Playwright, real Tab key) on all 10 routes at 1366px and 375px: 13–36
+  tab stops per page, every stop shows a visible focus indicator and is scrolled into view, no
+  focus traps.
+- JavaScript disabled: all reveal-wrapped content visible (`noscript` override works).
+- `prefers-reduced-motion: reduce`: CSS animations neutralised, Motion transforms skipped, the
+  diagnosis score renders at its final value immediately.

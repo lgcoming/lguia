@@ -1,6 +1,6 @@
 # SPEC-003 — Marketing site
 
-- Status: Approved
+- Status: Implemented
 - Sprint: 1
 - Related: [002](./002-design-system.md), [004](./004-digital-diagnosis.md), [007](./007-seo.md)
 
@@ -131,14 +131,15 @@ Icons are stored as keys (not components) so the same data can be served by the 
 
 ## Acceptance criteria
 
-- [ ] AC1 — All routes in the table render with one `<h1>`, a logical heading hierarchy and
+- [x] AC1 — All routes in the table render with one `<h1>`, a logical heading hierarchy and
       landmarks (`header`, `nav`, `main`, `footer`).
-- [ ] AC2 — Home sections appear in the order above; hero shows both CTAs with the exact copy.
-- [ ] AC3 — `/servicios/[slug]` is statically generated for the 4 slugs; unknown slugs return 404.
-- [ ] AC4 — Plan and service content comes from `src/data` via the catalog repository only.
-- [ ] AC5 — Mobile menu is fully keyboard operable and announces its state.
-- [ ] AC6 — No horizontal scroll from 320px to 1440px; layouts verified at 375, 768 and 1280px.
-- [ ] AC7 — Only the header nav, contact form, wizard and motion wrappers are Client Components.
+- [x] AC2 — Home sections appear in the order above; hero shows both CTAs with the exact copy.
+- [x] AC3 — `/servicios/[slug]` is statically generated for the 4 slugs; unknown slugs return 404.
+- [x] AC4 — Plan and service content comes from `src/data` via the catalog repository only
+      (site copy such as process steps and plan FAQs is imported from `src/data` directly).
+- [x] AC5 — Mobile menu is fully keyboard operable and announces its state.
+- [x] AC6 — No horizontal scroll from 320px to 1440px; verified at 320, 375, 768 and ~1400px.
+- [x] AC7 — Only the header nav, contact form, wizard and motion wrappers are Client Components.
 
 ## Decisions
 

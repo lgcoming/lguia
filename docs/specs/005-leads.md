@@ -1,6 +1,6 @@
 # SPEC-005 — Leads and admin view
 
-- Status: Approved
+- Status: Implemented
 - Sprint: 2 (capture) · 3 (admin view)
 - Related: [004](./004-digital-diagnosis.md), [006](./006-api.md)
 
@@ -111,12 +111,12 @@ Both forms share `Field`, inputs and the client helper `postLead()`.
 
 ## Acceptance criteria
 
-- [ ] AC1 — Schema unit tests: valid contact/diagnosis payloads pass; invalid email, short name,
+- [x] AC1 — Schema unit tests: valid contact/diagnosis payloads pass; invalid email, short name,
       missing consent, short contact message and missing diagnosis answers fail with field paths.
-- [ ] AC2 — `POST /api/leads` stores a valid lead (201) and rejects invalid payloads (400 + issues).
-- [ ] AC3 — Diagnosis leads are stored with the server-computed plan and score.
-- [ ] AC4 — Honeypot submissions get a success response and are not stored.
-- [ ] AC5 — `GET /api/leads` and `/admin/leads` return 404 in production unless
+- [x] AC2 — `POST /api/leads` stores a valid lead (201) and rejects invalid payloads (400 + issues).
+- [x] AC3 — Diagnosis leads are stored with the server-computed plan and score.
+- [x] AC4 — Honeypot submissions get a success response and are not stored.
+- [x] AC5 — `GET /api/leads` and `/admin/leads` return 404 in production unless
       `ENABLE_DEMO_ADMIN=true`.
-- [ ] AC6 — Forms are operable by keyboard, errors are announced and associated with fields.
-- [ ] AC7 — Admin table is readable at 375px and has an empty state.
+- [x] AC6 — Forms are operable by keyboard, errors are announced and associated with fields.
+- [x] AC7 — Admin table is readable at 375px and has an empty state.

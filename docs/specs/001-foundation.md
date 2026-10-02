@@ -1,6 +1,6 @@
 # SPEC-001 — Foundation
 
-- Status: Approved
+- Status: Implemented
 - Sprint: 0
 - Related: [002](./002-design-system.md), [008](./008-quality.md)
 
@@ -54,11 +54,11 @@ workflow and agent documentation. Out of scope: features (covered by later specs
 
 ## Acceptance criteria
 
-- [ ] AC1 — `npm run check` passes on a clean clone after `npm ci`.
-- [ ] AC2 — `npm run build` produces a production build without warnings from our code.
-- [ ] AC3 — Folder structure matches R4; no business logic in `src/app` or presentational components.
-- [ ] AC4 — `.env.example` documents every environment variable read by the code.
-- [ ] AC5 — Agent skills used by the project are installed at project level and listed in `AGENTS.md`.
+- [x] AC1 — `npm run check` passes on a clean clone after `npm ci`. _(Verified 2026-10-02.)_
+- [x] AC2 — `npm run build` produces a production build without warnings from our code.
+- [x] AC3 — Folder structure matches R4; no business logic in `src/app` or presentational components.
+- [x] AC4 — `.env.example` documents every environment variable read by the code.
+- [x] AC5 — Agent skills used by the project are installed at project level and listed in `AGENTS.md`.
 
 ## Decisions
 
@@ -71,3 +71,5 @@ workflow and agent documentation. Out of scope: features (covered by later specs
 - **No `clsx`/`tailwind-merge`**: a 3-line `cn()` helper joins class names; variants are designed
   so classes never conflict.
 - **`@types/node` 24** to match the Node 24 LTS runtime (and Vitest 5 peer requirements).
+- **Zod through `zod/mini`**: same engine, tree-shakable API. The classic `z` namespace bundled
+  every locale and the JSON Schema converter into the client (~90 KB gzip on form pages).
