@@ -5,6 +5,7 @@ export const serviceCategories: ServiceCategory[] = [
     id: "desarrollo-web",
     name: "Desarrollo web",
     icon: "web",
+    seoTitle: "Desarrollo web para empresas",
     headline: "Webs rápidas y claras que convierten visitas en clientes",
     summary:
       "Webs corporativas, landing pages y tiendas online rápidas, fáciles de usar y preparadas para captar clientes.",
@@ -92,6 +93,7 @@ export const serviceCategories: ServiceCategory[] = [
     id: "automatizaciones",
     name: "Automatizaciones",
     icon: "automation",
+    seoTitle: "Automatización de procesos para empresas",
     headline: "Automatizaciones que eliminan el trabajo repetitivo",
     summary:
       "Conectamos formularios, email y CRM para que los datos fluyan solos y tu equipo deje de copiar y pegar.",
@@ -162,6 +164,7 @@ export const serviceCategories: ServiceCategory[] = [
     id: "chatbots-ia",
     name: "IA para empresas",
     icon: "ai",
+    seoTitle: "Chatbots e inteligencia artificial para empresas",
     headline: "Inteligencia artificial aplicada a problemas concretos de tu negocio",
     summary:
       "Chatbots, asistentes internos y agentes de IA entrenados con la información de tu empresa y con supervisión humana.",
@@ -232,6 +235,7 @@ export const serviceCategories: ServiceCategory[] = [
     id: "seo-geo",
     name: "SEO + GEO",
     icon: "search",
+    seoTitle: "SEO y GEO para empresas",
     headline: "SEO y GEO para que te encuentren en buscadores y asistentes de IA",
     summary:
       "SEO técnico, contenidos bien estructurados y datos estructurados para aparecer en Google y en respuestas generadas por IA.",
