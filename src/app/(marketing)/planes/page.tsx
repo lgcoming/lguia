@@ -7,11 +7,13 @@ import { FaqList } from "@/components/marketing/faq-list";
 import { PageHero } from "@/components/marketing/page-hero";
 import { PlanCard } from "@/components/marketing/plan-card";
 import { RevealItem, RevealList } from "@/components/motion/reveal";
+import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
 import { Section, SectionHeader } from "@/components/ui/layout-primitives";
 import { planFaqs } from "@/data/plans";
 import { getCatalogRepository } from "@/features/catalog/catalog-repository";
 import { createPageMetadata } from "@/lib/metadata";
+import { faqSchema } from "@/lib/structured-data";
 import type { PlanId } from "@/types/catalog";
 
 export const metadata: Metadata = createPageMetadata({
@@ -55,6 +57,7 @@ export default async function PlansPage() {
 
   return (
     <>
+      <JsonLd data={faqSchema(planFaqs)} />
       <PageHero
         title="Planes pensados para cada etapa de tu negocio"
         intro="Elige un punto de partida. Todos los proyectos empiezan con un diagnóstico y terminan con un presupuesto cerrado, sin sorpresas."

@@ -10,10 +10,18 @@ interface PageMetadataOptions {
   absoluteTitle?: boolean;
 }
 
+/** The generated image at src/app/opengraph-image.tsx. */
+const SHARED_IMAGE = {
+  url: "/opengraph-image",
+  width: 1200,
+  height: 630,
+  alt: "LGuIA: webs, automatización e IA práctica para pymes",
+};
+
 /**
  * Consistent metadata for public pages (SPEC-007): title, description, self-referencing
- * canonical, Open Graph and Twitter card. `openGraph` replaces the parent object, so the
- * shared fields are repeated here.
+ * canonical, Open Graph and Twitter card. A page-level `openGraph` object replaces the
+ * parent one entirely (including the file-based image), so shared fields are repeated here.
  */
 export function createPageMetadata({
   title,
@@ -32,7 +40,8 @@ export function createPageMetadata({
       url: path,
       title,
       description,
+      images: [SHARED_IMAGE],
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: { card: "summary_large_image", title, description, images: [SHARED_IMAGE.url] },
   };
 }

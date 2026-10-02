@@ -9,12 +9,14 @@ import { PlanCard } from "@/components/marketing/plan-card";
 import { ProcessSteps } from "@/components/marketing/process-steps";
 import { ServiceCard } from "@/components/marketing/service-card";
 import { RevealItem, RevealList } from "@/components/motion/reveal";
+import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
 import { Section, SectionHeader } from "@/components/ui/layout-primitives";
 import { processSteps } from "@/data/process";
 import { getCatalogRepository } from "@/features/catalog/catalog-repository";
 import { categoryHref } from "@/features/catalog/routes";
 import { createPageMetadata } from "@/lib/metadata";
+import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/structured-data";
 import { SERVICE_CATEGORY_IDS } from "@/types/catalog";
 
 export const dynamicParams = false;
@@ -48,18 +50,20 @@ export default async function ServiceCategoryPage({ params }: PageProps<"/servic
     catalog.listServiceCategories(),
   ]);
   const otherCategories = allCategories.filter((other) => other.id !== category.id);
+  const breadcrumbs = [
+    { href: "/", label: "Inicio" },
+    { href: "/servicios", label: "Servicios" },
+    { href: categoryHref(category.id), label: category.name },
+  ];
 
   return (
     <>
-      <PageHero
-        title={category.headline}
-        intro={category.description}
-        breadcrumbs={[
-          { href: "/", label: "Inicio" },
-          { href: "/servicios", label: "Servicios" },
-          { href: categoryHref(category.id), label: category.name },
-        ]}
-      >
+      <JsonLd data={serviceSchema(category)} />
+      <JsonLd
+        data={breadcrumbSchema(breadcrumbs.map((item) => ({ name: item.label, path: item.href })))}
+      />
+      <JsonLd data={faqSchema(category.faqs)} />
+      <PageHero title={category.headline} intro={category.description} breadcrumbs={breadcrumbs}>
         <ButtonLink href="/diagnostico-digital" size="lg">
           Haz tu diagnóstico digital
         </ButtonLink>
