@@ -28,9 +28,9 @@ implementation changes its behaviour or contracts.
 | 005 | [Leads and admin view](./005-leads.md)            | Implemented  | 2–3    |
 | 006 | [REST API](./006-api.md)                          | Implemented  | 2      |
 | 007 | [SEO](./007-seo.md)                               | Implemented¹ | 3      |
-| 008 | [Quality, testing and delivery](./008-quality.md) | Implemented² | 3      |
+| 008 | [Quality, testing and delivery](./008-quality.md) | Implemented  | 3      |
 
-¹ AC3 (Rich Results Test) needs the deployed URL. ² AC2 (first CI run) needs the GitHub remote.
+¹ AC3 (Rich Results Test) needs the deployed URL.
 
 ## Template
 

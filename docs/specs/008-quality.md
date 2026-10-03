@@ -1,6 +1,6 @@
 # SPEC-008 — Quality, testing and delivery
 
-- Status: Implemented (AC2 pending first CI run)
+- Status: Implemented
 - Sprint: 3
 - Related: all specs
 
@@ -69,8 +69,8 @@ acceptance criteria satisfied.
 ## Acceptance criteria
 
 - [x] AC1 — `npm run check` and `npm run test:e2e` pass locally.
-- [ ] AC2 — CI workflow runs the steps above. _Pending: the workflow is defined; its first run
-      needs the GitHub remote._
+- [x] AC2 — CI workflow runs the steps above. _First green run: 37087884073 on `main`
+      (2026-10-03), quality job and production build + E2E._
 - [x] AC3 — Lighthouse (mobile, production build): Accessibility, Best Practices and SEO ≥ 95;
       Performance ≥ 90 on `/`.
 - [x] AC4 — Keyboard-only pass of all pages and the diagnosis flow completed (manual, recorded in

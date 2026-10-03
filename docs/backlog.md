@@ -1,7 +1,10 @@
 # Backlog — sprints and issues
 
-Source of truth for the GitHub Project board until the repository is published. Each issue below
-is written to be pasted into GitHub Issues as-is (template: `.github/ISSUE_TEMPLATE/feature.md`).
+The plan as written at the start of the project. The live status is on GitHub:
+[issues](https://github.com/lgcoming/lguia/issues) and the
+[project board](https://github.com/users/lgcoming/projects/2). Issues #1–#17 match the numbering
+below; #18–#24 are follow-ups found during the final review (design approval, screen-reader pass,
+placeholder content, legal pages, persistent leads, admin authentication, strict CSP).
 
 **Board columns:** Backlog → Ready → In Progress → Review → Done.
 **Definition of Done (all issues):** see [SPEC-008](./specs/008-quality.md#definition-of-done-brief-26).
