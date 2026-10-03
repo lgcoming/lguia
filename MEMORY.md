@@ -138,8 +138,18 @@ top of each section. Keep entries short; link to specs for detail.
   and to the result) verified in the browser and covered by component tests.
 - **SEO**: unique titles/descriptions, self-referencing canonicals, `og:image` on every page,
   valid sitemap and robots, JSON-LD types as specified. Rich Results Test pending deployment.
-- **Pending manual checks**: screen-reader pass (NVDA/VoiceOver) of the wizard, 200% zoom pass,
-  Rich Results Test on the deployed URL, first CI run on GitHub.
+- **Pending manual checks**: screen-reader pass (NVDA/VoiceOver) of the wizard (issue #19),
+  Rich Results Test on the deployed URL (issue #15). Reflow at 320 CSS px (equivalent to 400% zoom
+  of a 1280px window) is verified by the responsive checks.
+
+### 2026-10-03 — GitHub
+
+- Private repository `lgcoming/lguia` with `main` (default), `develop`, all feature/fix branches and
+  tags `v0.1.0`–`v0.1.2`.
+- First CI runs failed on `npm ci` (lockfile, see Tooling notes); after the fix, run 37087884073 on
+  `main` and 37087884126 on `develop` passed both jobs (quality; production build + E2E).
+- 24 issues (#1–#17 from `docs/backlog.md`, #18–#24 follow-ups), sprint milestones 0–3 (0–2
+  closed) and project board "LGuIA" (users/lgcoming/projects/2) in board layout grouped by Status.
 
 ### 2026-10-03 — Closing checks
 

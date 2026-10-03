@@ -199,7 +199,8 @@ CLS 0 on every page; total blocking time ≤ 60 ms.
 
 Designed for **Vercel** (zero configuration for Next.js):
 
-1. Push the repository to GitHub (`main` and `develop` branches).
+1. The repository lives at [github.com/lgcoming/lguia](https://github.com/lgcoming/lguia)
+   (private), with `main` and `develop`.
 2. Import it in Vercel. Production deploys from `main`; `develop` and pull requests get previews.
 3. Set `NEXT_PUBLIC_SITE_URL` to the production domain. Leave `ENABLE_DEMO_ADMIN` unset unless the
    deployment is a demo that will never receive real leads (leads are kept in memory and the admin
@@ -211,5 +212,7 @@ the E2E flow on every push and pull request to `main` and `develop`.
 ## Working on this project
 
 Read [`AGENTS.md`](./AGENTS.md) (rules for contributors and AI agents), [`MEMORY.md`](./MEMORY.md)
-(decisions and constraints) and the relevant spec before changing code. The sprint backlog with
-issue-ready descriptions is in [`docs/backlog.md`](./docs/backlog.md).
+(decisions and constraints) and the relevant spec before changing code. Work is tracked in
+[GitHub Issues](https://github.com/lgcoming/lguia/issues) and on the
+[project board](https://github.com/users/lgcoming/projects/2) (Backlog → Ready → In Progress →
+Review → Done); the original sprint plan is in [`docs/backlog.md`](./docs/backlog.md).
