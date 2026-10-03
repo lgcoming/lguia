@@ -45,6 +45,7 @@
   },
   "description": "LGuIA — digital agency platform: web, automation and practical AI for SMEs.",
   "engines": {
-    "node": ">=22.12"
+    "node": ">=22.12",
+    "npm": ">=11.19.0"
   }
 }

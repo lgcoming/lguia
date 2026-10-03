@@ -88,7 +88,10 @@ top of each section. Keep entries short; link to specs for detail.
 - **Regenerate `package-lock.json` with the npm version CI uses** (11.19.0 on Node 24.21 at the
   time of writing): `npx npm@11.19.0 install --package-lock-only`. A lockfile written by npm 11.6
   on Windows lacked top-level `@emnapi/*` entries (optional WebAssembly fallbacks) that newer npm
-  requires, so `npm ci` failed on the first GitHub Actions run.
+  requires, so `npm ci` failed on the first GitHub Actions run. Running `npm install` with an
+  older npm afterwards silently removes those entries again (it happened once), which is why
+  `package.json` declares `engines.npm >= 11.19.0`: older npm now warns (`EBADENGINE`). Upgrade
+  with `npm install -g npm@11.19.0` or newer.
 - `npm run typecheck` runs `next typegen` first so `PageProps`/`RouteContext` globals exist.
 - Vitest projects: `node` (unit + integration) and `dom` (components, jsdom + jest-dom matchers).
 - Vite 8 resolves the `@/*` alias natively via `resolve.tsconfigPaths` (no extra plugin).
