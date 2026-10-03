@@ -90,6 +90,8 @@ top of each section. Keep entries short; link to specs for detail.
 - Vite 8 resolves the `@/*` alias natively via `resolve.tsconfigPaths` (no extra plugin).
 - GitHub CLI (`gh`) is not installed locally: issues/project board are described in
   `docs/backlog.md` and can be created once the remote exists.
+- GitHub CLI 2.102 installed with winget at `C:\Program Files\GitHub CLI\gh.exe` (GitHub Desktop
+  is also installed but cannot create repositories or issues from the terminal).
 - Playwright's browser CDN was unreachable from the development machine; local E2E runs use the
   installed Chrome with `PLAYWRIGHT_CHANNEL=chrome`. CI installs the bundled Chromium.
 - On Windows, stopping `npm run start` can leave the child `next start` process alive and holding
@@ -143,3 +145,10 @@ top of each section. Keep entries short; link to specs for detail.
 - JavaScript disabled: all reveal-wrapped content visible (`noscript` override works).
 - `prefers-reduced-motion: reduce`: CSS animations neutralised, Motion transforms skipped, the
   diagnosis score renders at its final value immediately.
+- ARIA snapshot (Chrome accessibility tree via Playwright) of the wizard: questions are named
+  groups, radios carry their label text, errors sit inside their group, the visual progress is
+  hidden, the result exposes named regions and "57 de 100" style scores. Not a substitute for a
+  real NVDA/VoiceOver pass, which stays pending.
+- Reviewing the reasons per business surfaced two copy/logic issues, now fixed: the AI rule reason
+  duplicated the "interested" signal, and businesses already using AI got a "start from scratch"
+  fallback (new `aiAdoption = using` signal; IA Starter tagline describes the project it includes).
