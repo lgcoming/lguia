@@ -66,7 +66,7 @@ const RULE_REASONS = {
     "Tu mayor oportunidad está en la visibilidad: Web Pro incluye SEO técnico y preparación para respuestas de IA.",
   automation:
     "Tu mayor oportunidad está en automatizar procesos: es donde más tiempo puedes recuperar.",
-  ai: "La IA es tu mayor oportunidad ahora mismo, empezando por un caso de uso acotado y medible.",
+  ai: "Tu mayor oportunidad está en la inteligencia artificial, aplicada a tareas concretas de tu día a día.",
 } as const;
 
 /** Used only when no signal reason applies (typically very mature businesses). */
@@ -128,6 +128,12 @@ const SIGNAL_REASONS: SignalRule[] = [
     category: "ai",
     applies: (a) => a.aiAdoption === "exploring",
     reason: "Ya usáis IA de forma puntual: el siguiente paso es integrarla en procesos concretos.",
+  },
+  {
+    category: "ai",
+    applies: (a) => a.aiAdoption === "using",
+    reason:
+      "Ya usáis IA en algunos procesos: el siguiente paso es aplicarla con orden a nuevas tareas.",
   },
   {
     category: "seo",

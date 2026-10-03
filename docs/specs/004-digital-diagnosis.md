@@ -124,24 +124,25 @@ The first reason explains the rule that fired:
 | 4 seo → starter-local    | Para que te encuentren, primero necesitas una web profesional con el SEO local bien hecho.                                                                                                           |
 | 4 seo → web-pro          | Tu mayor oportunidad está en la visibilidad: Web Pro incluye SEO técnico y preparación para respuestas de IA.                                                                                        |
 | 4 automation             | Tu mayor oportunidad está en automatizar procesos: es donde más tiempo puedes recuperar.                                                                                                             |
-| 4 ai                     | La IA es tu mayor oportunidad ahora mismo, empezando por un caso de uso acotado y medible.                                                                                                           |
+| 4 ai                     | Tu mayor oportunidad está en la inteligencia artificial, aplicada a tareas concretas de tu día a día.                                                                                                |
 | 4 with primary need < 40 | Tu base digital es sólida: el mayor margen de mejora está en {área}. (web → tu web, automation → la automatización de procesos, ai → la inteligencia artificial, seo → la visibilidad en buscadores) |
 
 Then up to two **signal reasons** whose category is covered by the recommended plan, ordered by
 that category's need (desc), then table order:
 
-| Signal                                        | Category   | Reason                                                                                |
-| --------------------------------------------- | ---------- | ------------------------------------------------------------------------------------- |
-| websiteStatus = none                          | web        | Todavía no tienes web, y es lo primero que consultan tus clientes antes de contactar. |
-| websiteStatus = outdated                      | web        | Tu web actual está anticuada y no refleja cómo trabaja hoy tu negocio.                |
-| has website and webLeads = none               | web        | Tu web casi no genera contactos: falta orientarla a convertir visitas en clientes.    |
-| sellsOnline = planned                         | web        | Quieres empezar a vender online y necesitas una tienda preparada para ello.           |
-| repetitiveWorkload = high                     | automation | Tu equipo dedica muchas horas a tareas repetitivas que se pueden automatizar.         |
-| automationLevel = none                        | automation | Casi todo se hace a mano: conectar tus herramientas reduce errores y tiempo.          |
-| chatbotInterest = yes                         | ai         | Te interesa un asistente que atienda consultas, un punto de partida claro para la IA. |
-| aiAdoption = interested                       | ai         | Quieres empezar con la IA y necesitas un primer caso de uso claro y medible.          |
-| aiAdoption = exploring                        | ai         | Ya usáis IA de forma puntual: el siguiente paso es integrarla en procesos concretos.  |
-| seoStatus = none and visibilityGoal ≠ not-now | seo        | No trabajas el SEO y quieres ganar visibilidad en buscadores y asistentes de IA.      |
+| Signal                                        | Category   | Reason                                                                                     |
+| --------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------ |
+| websiteStatus = none                          | web        | Todavía no tienes web, y es lo primero que consultan tus clientes antes de contactar.      |
+| websiteStatus = outdated                      | web        | Tu web actual está anticuada y no refleja cómo trabaja hoy tu negocio.                     |
+| has website and webLeads = none               | web        | Tu web casi no genera contactos: falta orientarla a convertir visitas en clientes.         |
+| sellsOnline = planned                         | web        | Quieres empezar a vender online y necesitas una tienda preparada para ello.                |
+| repetitiveWorkload = high                     | automation | Tu equipo dedica muchas horas a tareas repetitivas que se pueden automatizar.              |
+| automationLevel = none                        | automation | Casi todo se hace a mano: conectar tus herramientas reduce errores y tiempo.               |
+| chatbotInterest = yes                         | ai         | Te interesa un asistente que atienda consultas, un punto de partida claro para la IA.      |
+| aiAdoption = interested                       | ai         | Quieres empezar con la IA y necesitas un primer caso de uso claro y medible.               |
+| aiAdoption = exploring                        | ai         | Ya usáis IA de forma puntual: el siguiente paso es integrarla en procesos concretos.       |
+| aiAdoption = using                            | ai         | Ya usáis IA en algunos procesos: el siguiente paso es aplicarla con orden a nuevas tareas. |
+| seoStatus = none and visibilityGoal ≠ not-now | seo        | No trabajas el SEO y quieres ganar visibilidad en buscadores y asistentes de IA.           |
 
 Plan coverage: starter-local, web-pro → web, seo; ia-starter → ai; automation-pack → automation;
 growth-web-ia, custom-enterprise → all.
