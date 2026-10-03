@@ -85,6 +85,10 @@ top of each section. Keep entries short; link to specs for detail.
 ## Tooling notes
 
 - Windows dev environment: repo uses `core.autocrlf=false` + `.gitattributes` (`eol=lf`).
+- **Regenerate `package-lock.json` with the npm version CI uses** (11.19.0 on Node 24.21 at the
+  time of writing): `npx npm@11.19.0 install --package-lock-only`. A lockfile written by npm 11.6
+  on Windows lacked top-level `@emnapi/*` entries (optional WebAssembly fallbacks) that newer npm
+  requires, so `npm ci` failed on the first GitHub Actions run.
 - `npm run typecheck` runs `next typegen` first so `PageProps`/`RouteContext` globals exist.
 - Vitest projects: `node` (unit + integration) and `dom` (components, jsdom + jest-dom matchers).
 - Vite 8 resolves the `@/*` alias natively via `resolve.tsconfigPaths` (no extra plugin).
