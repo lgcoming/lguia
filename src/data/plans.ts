@@ -41,7 +41,8 @@ export const plans: Plan[] = [
   {
     id: "ia-starter",
     name: "IA Starter",
-    tagline: "Para empresas que quieren empezar a usar IA con un caso de uso concreto.",
+    tagline:
+      "Para empresas que quieren poner en marcha un proyecto de IA concreto, como un chatbot o un asistente interno.",
     idealFor: "Empresas que reciben muchas consultas repetidas",
     pricing: { kind: "from", amount: 1200, currency: "EUR" },
     timeline: "3–4 semanas",
