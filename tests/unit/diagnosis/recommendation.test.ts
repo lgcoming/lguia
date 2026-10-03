@@ -11,6 +11,7 @@ import { calculateDiagnosis } from "@/features/diagnosis/model/scoring";
 
 import {
   AI_CURIOUS_FIRM,
+  HIGHEST_ANSWERS,
   INDUSTRIAL_SUPPLIER,
   LOCAL_BAKERY,
   makeAnswers,
@@ -44,6 +45,15 @@ describe("recommendPlan", () => {
       "Tu mayor oportunidad está en automatizar procesos: es donde más tiempo puedes recuperar.",
       "Tu equipo dedica muchas horas a tareas repetitivas que se pueden automatizar.",
     ]);
+  });
+
+  it("does not tell businesses that already use AI to start from scratch", () => {
+    const plan = planFor(HIGHEST_ANSWERS);
+    expect(plan.planId).toBe("ia-starter");
+    expect(plan.reasons).toContain(
+      "Ya usáis IA en algunos procesos: el siguiente paso es aplicarla con orden a nuevas tareas.",
+    );
+    expect(plan.reasons.join(" ")).not.toMatch(/empezar/i);
   });
 
   it("recommends IA Starter when AI is the biggest opportunity", () => {
