@@ -70,7 +70,7 @@ export function BenefitsSection() {
 
   return (
     <Section labelledBy="por-que-titulo">
-      <SectionHeader id="por-que-titulo" title="Por qué trabajar con LGuIA" />
+      <SectionHeader id="por-que-titulo" title="Por qué trabajar con lguia" />
       <RevealList className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <RevealItem
           className={cn(

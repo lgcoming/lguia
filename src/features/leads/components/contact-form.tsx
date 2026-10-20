@@ -167,7 +167,7 @@ export function ContactForm({
       <CheckboxField
         id={fieldId("consent")}
         name="consent"
-        label="He leído la información sobre protección de datos y acepto que LGuIA use mis datos para responder a mi solicitud."
+        label="He leído la información sobre protección de datos y acepto que lguia use mis datos para responder a mi solicitud."
         checked={values.consent}
         onChange={(event) => setValue("consent", event.target.checked)}
         error={errors.consent}

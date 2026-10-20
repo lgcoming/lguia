@@ -50,7 +50,7 @@ export function Logo({
   return (
     <Link
       href="/"
-      aria-label="LGuIA, ir al inicio"
+      aria-label="lguia, ir al inicio"
       className={cn("inline-flex min-h-11 shrink-0 items-center rounded-lg", className)}
     >
       {variant === "adaptive" ? (

@@ -6,7 +6,7 @@
 
 ## Context
 
-The diagnosis is LGuIA's main conversion tool: a short questionnaire that tells a business where
+The diagnosis is lguia's main conversion tool: a short questionnaire that tells a business where
 it stands digitally, which plan fits and why, and then invites it to leave its details. The
 recommendation must be **deterministic, explainable TypeScript** — no AI API — so it can be tested
 and trusted.

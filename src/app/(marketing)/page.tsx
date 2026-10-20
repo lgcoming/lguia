@@ -22,7 +22,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "LGuIA: webs, automatización e IA práctica para pymes",
+  title: "lguia: webs, automatización e IA práctica para pymes",
   description: siteConfig.description,
   path: "/",
   absoluteTitle: true,

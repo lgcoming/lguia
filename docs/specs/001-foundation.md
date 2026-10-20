@@ -6,7 +6,7 @@
 
 ## Context
 
-LGuIA needs a technical base that a small team (or AI agents) can extend for years: typed,
+lguia needs a technical base that a small team (or AI agents) can extend for years: typed,
 tested, documented, and free of dependencies that do not earn their place.
 
 ## Scope

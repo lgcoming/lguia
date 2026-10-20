@@ -8,9 +8,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# LGuIA — rules for contributors and AI agents
+# lguia — rules for contributors and AI agents
 
-LGuIA is a digital agency for SMEs and local businesses (web, automation, practical AI). This
+lguia is a digital agency for SMEs and local businesses (web, automation, practical AI). This
 repository is its production website. It must look and behave like a real commercial product.
 
 Read this file, then [`MEMORY.md`](./MEMORY.md) and the relevant spec in

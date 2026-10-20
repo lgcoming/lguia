@@ -56,6 +56,15 @@ top of each section. Keep entries short; link to specs for detail.
 
 ## Design decisions (SPEC-002)
 
+- **Brand name is always `lguia`, lowercase** (2026-10-20, owner's rule): titles, metadata,
+  footer, sentence starts and JSON-LD included. Never capitalise it or apply `text-transform`.
+- **The scrubbed hero no longer depends on `prefers-reduced-motion`** (2026-10-20): the owner's
+  machine has Windows animation effects off, so the hero never scrubbed for them. Scrubbing only
+  moves when the user scrolls (no autoplay), so it stays on from 768px; reduced motion keeps the
+  fades but drops the media zoom and text travel. Parallax and entrances still honour it.
+- **"Diagnóstico" removed from the main nav**: the "Diagnóstico gratuito" button is the single
+  entry point in the header (the footer keeps its link).
+
 - **Scroll choreography with Motion, not GSAP/Lenis** (2026-10-20): Motion is already a runtime
   dependency and covers `useScroll` + `useSpring` + `useTransform`; adding GSAP would break the
   dependency policy for no capability gain. Lenis-style smooth scrolling was rejected: it hijacks
@@ -239,7 +248,7 @@ top of each section. Keep entries short; link to specs for detail.
 - First CI runs failed on `npm ci` (lockfile, see Tooling notes); after the fix, run 37087884073 on
   `main` and 37087884126 on `develop` passed both jobs (quality; production build + E2E).
 - 24 issues (#1–#17 from `docs/backlog.md`, #18–#24 follow-ups), sprint milestones 0–3 (0–2
-  closed) and project board "LGuIA" (users/lgcoming/projects/2) in board layout grouped by Status.
+  closed) and project board "lguia" (users/lgcoming/projects/2) in board layout grouped by Status.
 
 ### 2026-10-03 — Closing checks
 

@@ -17,7 +17,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: "LGuIA: webs, automatización e IA práctica para pymes",
+    default: "lguia: webs, automatización e IA práctica para pymes",
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,

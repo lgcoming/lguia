@@ -6,7 +6,7 @@ interface PageMetadataOptions {
   title: string;
   description: string;
   path: string;
-  /** Use the title as-is, without the "| LGuIA" template (home page). */
+  /** Use the title as-is, without the "| lguia" template (home page). */
   absoluteTitle?: boolean;
 }
 
@@ -15,7 +15,7 @@ const SHARED_IMAGE = {
   url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: "LGuIA: webs, automatización e IA práctica para pymes",
+  alt: "lguia: webs, automatización e IA práctica para pymes",
 };
 
 /**

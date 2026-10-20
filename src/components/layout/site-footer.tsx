@@ -53,7 +53,7 @@ export function SiteFooter({ serviceLinks }: { serviceLinks: NavItem[] }) {
           <FooterColumn title="Servicios">
             <FooterLinks links={serviceLinks} />
           </FooterColumn>
-          <FooterColumn title="LGuIA">
+          <FooterColumn title="lguia">
             <FooterLinks links={companyLinks} />
           </FooterColumn>
           <FooterColumn title="Hablemos">
@@ -67,7 +67,7 @@ export function SiteFooter({ serviceLinks }: { serviceLinks: NavItem[] }) {
           </FooterColumn>
         </div>
         <div className="mt-12 border-t border-pale-mist pt-5 text-caption">
-          <p>© {new Date().getFullYear()} LGuIA. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} lguia. Todos los derechos reservados.</p>
         </div>
       </Container>
     </footer>

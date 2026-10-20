@@ -6,7 +6,7 @@
 
 ## Context
 
-The public site has one job: help a business owner understand what LGuIA does, trust it, and take
+The public site has one job: help a business owner understand what lguia does, trust it, and take
 the next step — ideally the digital diagnosis, otherwise the contact form. Content is in Spanish
 (es-ES); code identifiers are in English.
 
@@ -28,7 +28,7 @@ Category slugs: `desarrollo-web`, `automatizaciones`, `chatbots-ia`, `seo-geo`.
 
 - Skip link "Saltar al contenido" as the first focusable element, targeting `<main id="contenido">`.
 - **Header** (sticky, 56px / 64px from `lg`, frosted glass with a hairline — SPEC-002 v2): brand logo (home link), primary nav
-  (Servicios, Planes, Diagnóstico, Contacto) with `aria-current="page"`, CTA button "Diagnóstico
+  (Servicios, Planes, Contacto; the diagnosis is reached only through the CTA) with `aria-current="page"`, CTA button "Diagnóstico
   gratuito". The bar switches to dark glass (light logo and text) while a dark band
   (`[data-nav-theme="dark"]`) is under it. Below `lg` (1024px), nav collapses into a full-screen
   glass sheet (a modal `<dialog>`): button with `aria-expanded`/`aria-controls`, closes on Escape,
@@ -39,14 +39,14 @@ Category slugs: `desarrollo-web`, `automatizaciones`, `chatbots-ia`, `seo-geo`.
 ## Home — section order (brief §8)
 
 1. **Hero** — full-viewport dark band with the "conexiones" video under a dark gradient overlay;
-   it slides under the translucent header. From 768px with motion allowed it is a **pinned
+   it slides under the translucent header. From 768px it is a **pinned
    scroll-scrubbed showcase** (SPEC-002 Motion): the opening stack gives way to the footage, then
    the closing line "Tu web, tus procesos y la IA, por fin conectados." with the subhead "Diseñamos
    cada pieza para que trabaje con las demás, sin herramientas sueltas.". Elsewhere it is a static
    hero on the poster.
    Centered stack: eyebrow (who it is for), H1, subhead, button pair and three reassurances; primary CTA "Haz tu diagnóstico digital" → `/diagnostico-digital`; secondary
    CTA "Ver servicios" → `/servicios`. The H1 (or the optimized poster) is the LCP element.
-2. **Qué es LGuIA** — centered editorial statement and three facts as fog tiles.
+2. **Qué es lguia** — centered editorial statement and three facts as fog tiles.
 3. **Servicios** — bento grid of the four categories (one wide, one tall, two regular), each
    tile with its photograph and a glass caption.
 4. **Problemas que resolvemos** — pain → solution pairs as fog tiles on white.
@@ -54,7 +54,7 @@ Category slugs: `desarrollo-web`, `automatizaciones`, `chatbots-ia`, `seo-geo`.
 6. **Para quién trabajamos** — target business types as fog tiles (one column on mobile).
 7. **Cómo trabajamos** — dark band with the "neuronal" video (parallax); process steps as glass
    panels revealed in cascade.
-8. **Por qué LGuIA** — benefits in a bento grid; the lead tile is dark with the compass watermark.
+8. **Por qué lguia** — benefits in a bento grid; the lead tile is dark with the compass watermark.
 9. **Diagnóstico CTA** — dark photographic tile (circuit) inside a white section, with the live
    diagnosis preview (a real engine result for an example business) on glass as the "product"
    and the compass watermark. Other pages show the three outcomes instead of the preview.

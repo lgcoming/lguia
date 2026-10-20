@@ -19,7 +19,7 @@ accessibility requirements do not change.
 1. **Gallery in daylight, cinema in the dark.** Information lives on a near-white canvas
    (`fog-white`); atmosphere lives in full-bleed dark bands (hero video, process video, image CTAs).
    Sections are separated by a change of surface, never by rules or shadows.
-2. **The product is the hero.** LGuIA's product is its advice: services, plans and the diagnosis
+2. **The product is the hero.** lguia's product is its advice: services, plans and the diagnosis
    result are presented like Apple presents a device — centered, generous, unframed.
 3. **One chromatic action.** `iris-blue` is reserved for the filled primary button and for the
    selected state of option tiles (Apple's configurator pattern). Links and outlined buttons use
@@ -155,8 +155,8 @@ regenerates the derivatives.
 
 All motion uses **Motion** (`motion/react`, already a dependency): no GSAP, no Lenis, no
 scroll hijacking. Native scrolling is kept; scroll-linked values come from `useScroll`, smoothed
-with `useSpring` where inertia matters. Everything below is off with `prefers-reduced-motion` and
-below 768px, except the hover/press feedback.
+with `useSpring` where inertia matters. Everything below is off below 768px and with `prefers-reduced-motion`, except hover/press
+feedback and the hero scrub (user-driven; with reduced motion it keeps fades only).
 
 | Where                         | What                                                                                    | Timing                            |
 | ----------------------------- | --------------------------------------------------------------------------------------- | --------------------------------- |
@@ -171,7 +171,7 @@ below 768px, except the hover/press feedback.
 
 ### Scroll-scrubbed hero
 
-- **Pinning is decided in CSS** (`md:motion-safe:h-[300svh]` on the track, `sticky top-0 h-svh`
+- **Pinning is decided in CSS** (`md:h-[300svh]` on the track, `sticky top-0 h-svh`
   on the stage), so server and client markup agree and there is no layout shift. Without
   JavaScript a `<noscript>` style collapses the track.
 - **Choreography** on the smoothed progress: the opening stack holds until 22%, lifts 56px and
@@ -220,7 +220,7 @@ commands if a pipeline with ffmpeg is added. Posters are the first frame of each
 - [x] AC9 — Lighthouse mobile: Accessibility, Best Practices and SEO 100 on every page; Performance
       92–96. Desktop home with the pinned scrub: 100 in all four (see `MEMORY.md`).
 - [x] AC10 — The scrubbed hero stays pinned for the whole track, follows scroll in both
-      directions with inertia, and degrades to a regular hero (no track) on small screens, with
-      reduced motion and without JavaScript; the closing line keeps ≥ 6.7:1 over its frames.
+      directions with inertia, and degrades to a regular hero (no track) on small screens and
+      without JavaScript; with reduced motion it still scrubs, without zoom or text travel; the closing line keeps ≥ 6.7:1 over its frames.
 - [x] AC11 — Entrance and parallax effects animate only `transform`, `opacity` and (once, on
       entrance) `filter`; no resting `filter` is left on cards.

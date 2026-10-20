@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
 
 import { brandColors } from "@/lib/brand";
 
-export const alt = "LGuIA: webs, automatización e IA práctica para pymes";
+export const alt = "lguia: webs, automatización e IA práctica para pymes";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

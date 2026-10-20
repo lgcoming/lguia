@@ -6,7 +6,7 @@
 
 ## Context
 
-A lead is a business that asked LGuIA to get in touch, either from the contact page or at the end
+A lead is a business that asked lguia to get in touch, either from the contact page or at the end
 of the diagnosis. Version 1 stores leads in memory behind a repository interface; a database
 replaces it later without touching validation, business logic or UI.
 
@@ -93,7 +93,7 @@ Both forms share `Field`, inputs and the client helper `postLead()`.
 - Server-side 400 issues are mapped back to the corresponding fields.
 - Success: the form is replaced by a confirmation message that receives focus.
 - `autocomplete` attributes: `name`, `email`, `organization`, `tel`.
-- Inline data-protection notice: who is responsible (LGuIA), purpose (answering the request),
+- Inline data-protection notice: who is responsible (lguia), purpose (answering the request),
   no data sharing, rights (access, rectification, deletion) via the contact email.
 - Honeypot: visually hidden, `tabIndex=-1`, `autoComplete="off"`, `aria-hidden`.
 

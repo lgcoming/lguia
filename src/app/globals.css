@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * LGuIA design tokens — SPEC-002 v2 (Apple-inspired, Refero "Apple (España)").
+ * lguia design tokens — SPEC-002 v2 (Apple-inspired, Refero "Apple (España)").
  * Colour names follow docs/design/refero-apple. The default Tailwind palette is reset so only
  * these colours exist. Refero's --spacing-N tokens are intentionally not imported: Tailwind's
  * default 4px scale already matches them, and redefining --spacing-N would break p-4 & co.

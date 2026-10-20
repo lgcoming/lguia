@@ -1,6 +1,6 @@
-# LGuIA
+# lguia
 
-**LGuIA** is a digital agency for SMEs and local businesses in Spain. It helps traditional
+**lguia** is a digital agency for SMEs and local businesses in Spain. It helps traditional
 businesses improve their digital presence, automate repetitive work and adopt AI only where it
 provides practical value. This repository is the agency's website and lead platform.
 

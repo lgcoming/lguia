@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "LGuIA",
+  name: "lguia",
   tagline: "Webs, automatización e IA práctica para pymes",
   description:
     "Ayudamos a pymes y negocios locales a conseguir más clientes con su web, ahorrar tiempo automatizando tareas y usar la IA donde aporta valor.",
@@ -17,7 +17,6 @@ export interface NavItem {
 export const mainNav: NavItem[] = [
   { href: "/servicios", label: "Servicios" },
   { href: "/planes", label: "Planes" },
-  { href: "/diagnostico-digital", label: "Diagnóstico" },
   { href: "/contacto", label: "Contacto" },
 ];
 

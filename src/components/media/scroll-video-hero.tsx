@@ -1,13 +1,20 @@
 "use client";
 
-import { useScroll, useSpring, useTransform } from "motion/react";
+import { useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import * as m from "motion/react-m";
 import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { useVideoScrub } from "@/components/media/use-video-scrub";
 import { cn } from "@/lib/utils";
-import { SCROLL_EFFECTS_QUERY, useMediaQuery } from "@/lib/use-media-query";
+import { useMediaQuery } from "@/lib/use-media-query";
+
+/*
+ * Pinned whenever the screen is wide enough, also with reduced motion: the scrub only moves
+ * when the user scrolls (nothing plays on its own). Reduced motion drops the extra zoom and the
+ * text travel and keeps plain fades. Must match the `md:` classes on the track and the stage.
+ */
+const PIN_QUERY = "(min-width: 768px)";
 
 type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean } };
 
@@ -36,15 +43,16 @@ interface ScrollVideoHeroProps {
 }
 
 /**
- * Apple-style product hero: on wide screens with motion allowed the section is a tall track
+ * Apple-style product hero: on wide screens the section is a tall track
  * whose stage stays pinned (CSS `sticky`) while scrolling scrubs the footage. Elsewhere — small
- * screens, reduced motion, no JavaScript — it is a regular full-viewport hero on the poster.
+ * screens, no JavaScript — it is a regular full-viewport hero on the poster.
  * The pinned layout is decided in CSS so server and client markup never disagree.
  */
 export function ScrollVideoHero({ labelledBy, video, children, outro }: ScrollVideoHeroProps) {
   const trackRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const pinned = useMediaQuery(SCROLL_EFFECTS_QUERY);
+  const pinned = useMediaQuery(PIN_QUERY);
+  const reduceMotion = useReducedMotion() ?? false;
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
 
@@ -94,16 +102,16 @@ export function ScrollVideoHero({ labelledBy, video, children, outro }: ScrollVi
       aria-labelledby={labelledBy}
       data-nav-theme="dark"
       data-scroll-track=""
-      className="surface-dark relative -mt-(--header-height) bg-carbon text-pure-white md:motion-safe:h-[300svh]"
+      className="surface-dark relative -mt-(--header-height) bg-carbon text-pure-white md:h-[300svh]"
     >
       <div
         data-scroll-stage=""
-        className="relative isolate flex min-h-[max(38rem,100svh)] items-center overflow-hidden md:motion-safe:sticky md:motion-safe:top-0 md:motion-safe:h-svh"
+        className="relative isolate flex min-h-[max(38rem,100svh)] items-center overflow-hidden md:sticky md:top-0 md:h-svh"
       >
         <m.div
           aria-hidden="true"
           className="absolute inset-0 -z-10"
-          style={pinned ? { scale: mediaScale } : undefined}
+          style={pinned && !reduceMotion ? { scale: mediaScale } : undefined}
         >
           {/* The poster is the first frame of the encoded video, so the swap is invisible. */}
           <Image
@@ -127,7 +135,7 @@ export function ScrollVideoHero({ labelledBy, video, children, outro }: ScrollVi
               tabIndex={-1}
               onLoadedData={() => setReady(true)}
               className={cn(
-                "absolute inset-0 size-full object-cover transition-opacity duration-500 ease-out",
+                "pointer-events-none absolute inset-0 size-full object-cover transition-opacity duration-500 ease-out",
                 ready ? "opacity-100" : "opacity-0",
               )}
             />
@@ -142,7 +150,13 @@ export function ScrollVideoHero({ labelledBy, video, children, outro }: ScrollVi
         <m.div
           data-hero-copy=""
           className="relative z-10 w-full"
-          style={pinned ? { opacity: copyOpacity, y: copyY, scale: copyScale } : undefined}
+          style={
+            pinned
+              ? reduceMotion
+                ? { opacity: copyOpacity }
+                : { opacity: copyOpacity, y: copyY, scale: copyScale }
+              : undefined
+          }
         >
           {children}
         </m.div>
@@ -150,8 +164,14 @@ export function ScrollVideoHero({ labelledBy, video, children, outro }: ScrollVi
         {outro ? (
           <m.div
             data-hero-outro=""
-            className="pointer-events-none absolute inset-0 z-10 hidden items-center justify-center md:motion-safe:flex"
-            style={pinned ? { opacity: outroOpacity, y: outroY } : { opacity: 0 }}
+            className="pointer-events-none absolute inset-0 z-10 hidden items-center justify-center md:flex"
+            style={
+              pinned
+                ? reduceMotion
+                  ? { opacity: outroOpacity }
+                  : { opacity: outroOpacity, y: outroY }
+                : { opacity: 0 }
+            }
           >
             {outro}
           </m.div>

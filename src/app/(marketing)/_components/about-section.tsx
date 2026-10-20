@@ -36,7 +36,7 @@ export function AboutSection() {
         </RevealText>
         <RevealText className="mx-auto mt-6 max-w-3xl space-y-4 text-body text-pewter md:text-subheading">
           <p>
-            LGuIA ayuda a pymes y negocios locales a digitalizarse con sentido común. Diseñamos
+            lguia ayuda a pymes y negocios locales a digitalizarse con sentido común. Diseñamos
             webs, automatizamos procesos y aplicamos inteligencia artificial cuando resuelve un
             problema concreto, no porque esté de moda.
           </p>

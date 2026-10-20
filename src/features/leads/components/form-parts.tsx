@@ -34,7 +34,7 @@ export function DataProtectionNotice() {
   return (
     <p className="text-caption text-pewter">
       <strong className="font-semibold text-obsidian">Protección de datos.</strong> Responsable:
-      LGuIA. Finalidad: responder a tu solicitud y, si lo pides, enviarte una propuesta. No cedemos
+      lguia. Finalidad: responder a tu solicitud y, si lo pides, enviarte una propuesta. No cedemos
       tus datos a terceros. Puedes acceder a ellos, rectificarlos o suprimirlos escribiendo a{" "}
       <a href={`mailto:${siteConfig.email}`} className="text-sapphire underline underline-offset-2">
         {siteConfig.email}

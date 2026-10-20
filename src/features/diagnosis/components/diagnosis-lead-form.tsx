@@ -167,7 +167,7 @@ export function DiagnosisLeadForm({
         <CheckboxField
           id={fieldId("consent")}
           name="consent"
-          label="He leído la información sobre protección de datos y acepto que LGuIA use mis datos y mi diagnóstico para preparar una propuesta."
+          label="He leído la información sobre protección de datos y acepto que lguia use mis datos y mi diagnóstico para preparar una propuesta."
           checked={values.consent}
           onChange={(event) => setValue("consent", event.target.checked)}
           error={errors.consent}

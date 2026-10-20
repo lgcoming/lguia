@@ -16,7 +16,7 @@ export function siteGraph() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        // Organization rather than LocalBusiness: LGuIA works remotely and has no public address.
+        // Organization rather than LocalBusiness: lguia works remotely and has no public address.
         "@type": "Organization",
         "@id": organizationId(),
         name: siteConfig.name,

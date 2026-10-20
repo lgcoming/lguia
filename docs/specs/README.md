@@ -1,6 +1,6 @@
 # Specifications
 
-LGuIA is built with **Spec-Driven Development (SDD)**. Every substantial feature has a
+lguia is built with **Spec-Driven Development (SDD)**. Every substantial feature has a
 specification here _before_ it is implemented, and the spec is updated whenever the
 implementation changes its behaviour or contracts.
 
