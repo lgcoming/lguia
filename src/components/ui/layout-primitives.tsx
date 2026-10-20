@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { RevealGroup, RevealText } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 type ContainerWidth = "text" | "grid";
@@ -73,7 +74,7 @@ interface SectionHeaderProps {
   children?: ReactNode;
 }
 
-/** Centered headline stack: headline → subhead → optional actions. */
+/** Centered headline stack: headline → subhead → optional actions, entering in sequence. */
 export function SectionHeader({
   id,
   title,
@@ -83,16 +84,20 @@ export function SectionHeader({
   children,
 }: SectionHeaderProps) {
   return (
-    <div className={cn("mx-auto mb-12 max-w-3xl text-center md:mb-16", className)}>
-      <h2 id={id} className="text-[2rem] leading-[1.1] tracking-[-0.01em] md:text-heading-lg">
-        {title}
-      </h2>
+    <RevealGroup className={cn("mx-auto mb-12 max-w-3xl text-center md:mb-16", className)}>
+      <RevealText>
+        <h2 id={id} className="text-[2rem] leading-[1.1] tracking-[-0.01em] md:text-heading-lg">
+          {title}
+        </h2>
+      </RevealText>
       {intro ? (
-        <p className={cn("mt-4 text-subheading", onDark ? "text-ash-veil" : "text-pewter")}>
-          {intro}
-        </p>
+        <RevealText>
+          <p className={cn("mt-4 text-subheading", onDark ? "text-ash-veil" : "text-pewter")}>
+            {intro}
+          </p>
+        </RevealText>
       ) : null}
-      {children}
-    </div>
+      {children ? <RevealText>{children}</RevealText> : null}
+    </RevealGroup>
   );
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 
 import { BackgroundVideo } from "@/components/media/background-video";
+import { ParallaxLayer } from "@/components/motion/parallax-layer";
 import { cn } from "@/lib/utils";
 
 type Overlay = "hero" | "band" | "soft";
@@ -56,17 +57,36 @@ export function MediaBand({
       {/* No z-index here: the video pause button (z-20) must stay above the content (z-10). */}
       <div aria-hidden={video ? undefined : true} className="absolute inset-0">
         {video ? (
-          <BackgroundVideo src={video.src} poster={video.poster} eager={eager} lazy={!eager} />
-        ) : image ? (
-          <Image
-            src={image}
-            alt=""
-            fill
-            sizes="100vw"
-            loading={eager ? "eager" : "lazy"}
-            fetchPriority={eager ? "high" : undefined}
-            className={cn("object-cover", imagePosition)}
+          <BackgroundVideo
+            src={video.src}
+            poster={video.poster}
+            eager={eager}
+            lazy={!eager}
+            parallax={!eager}
           />
+        ) : image ? (
+          eager ? (
+            <Image
+              src={image}
+              alt=""
+              fill
+              sizes="100vw"
+              loading="eager"
+              fetchPriority="high"
+              className={cn("object-cover", imagePosition)}
+            />
+          ) : (
+            // Mid-page bands drift slightly slower than the content (subtle parallax).
+            <ParallaxLayer>
+              <Image
+                src={image}
+                alt=""
+                fill
+                sizes="100vw"
+                className={cn("object-cover", imagePosition)}
+              />
+            </ParallaxLayer>
+          )
         ) : null}
         <div className={cn("pointer-events-none absolute inset-0", overlayClasses[overlay])} />
       </div>

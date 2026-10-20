@@ -34,9 +34,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className={inter.variable}>
       <head>
-        {/* Reveal animations start hidden; without JavaScript, show everything. */}
+        {/*
+          Without JavaScript: reveals start visible, and the scroll hero is a plain hero (no
+          pinned track to scroll through, no outro).
+        */}
         <noscript>
-          <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
+          <style>
+            {"[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}" +
+              "[data-scroll-track]{height:auto!important}" +
+              "[data-scroll-stage]{position:relative!important;height:auto!important}" +
+              "[data-hero-outro]{display:none!important}"}
+          </style>
         </noscript>
       </head>
       <body>

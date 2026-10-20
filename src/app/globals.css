@@ -90,10 +90,20 @@
 }
 
 @layer base {
+  /* One source for the header height: the bar, heroes that slide under it, anchor offsets. */
+  :root {
+    --header-height: 3.5rem;
+  }
+  @media (width >= 64rem) {
+    :root {
+      --header-height: 4rem;
+    }
+  }
+
   html {
     -webkit-text-size-adjust: 100%;
     /* Keeps anchor targets and focused elements clear of the sticky header. */
-    scroll-padding-top: 4.5rem;
+    scroll-padding-top: calc(var(--header-height) + 1rem);
   }
 
   body {
@@ -187,12 +197,25 @@
    */
   .site-header {
     color: var(--color-obsidian);
-    background-color: rgb(255 255 255 / 0.72);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    background-color: rgb(255 255 255 / 0.76);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    backdrop-filter: saturate(180%) blur(24px);
     transition:
       background-color 250ms ease-out,
       color 250ms ease-out;
+  }
+  /* Hairline under the glass, drawn without adding to the bar's height. */
+  .site-header::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: rgb(0 0 0 / 0.06);
+    transition: background-color 250ms ease-out;
+  }
+  .site-header[data-theme="dark"]::after {
+    background-color: rgb(255 255 255 / 0.1);
   }
   .site-header .logo-on-dark {
     display: none;
@@ -220,6 +243,10 @@
     background-color: rgb(22 22 23 / 0.72);
   }
   body:has(#contenido > :nth-child(1 of :not(script))[data-nav-theme="dark"])
+    .site-header:not([data-theme])::after {
+    background-color: rgb(255 255 255 / 0.1);
+  }
+  body:has(#contenido > :nth-child(1 of :not(script))[data-nav-theme="dark"])
     .site-header:not([data-theme])
     .logo-on-dark {
     display: block;
@@ -242,6 +269,18 @@
       .site-header:not([data-theme]) {
       background-color: var(--color-night);
     }
+  }
+
+  /*
+   * Pinned scroll hero: a keyboard user can tab back to the opening stack while the scrub has
+   * faded it out. Focus brings it back (beating the inline Motion styles) and hides the outro.
+   */
+  [data-hero-copy]:focus-within {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [data-scroll-stage]:has([data-hero-copy]:focus-within) [data-hero-outro] {
+    opacity: 0 !important;
   }
 
   /* Dark bands: the sky-blue focus ring keeps 3:1 against black (iris-blue would not). */

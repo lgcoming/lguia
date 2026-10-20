@@ -1,3 +1,4 @@
+import { RevealItem, RevealList } from "@/components/motion/reveal";
 import { StepNumber } from "@/components/ui/step-number";
 import { cn } from "@/lib/utils";
 import type { ProcessStep } from "@/types/catalog";
@@ -14,9 +15,9 @@ export function ProcessSteps({
   tone?: "light" | "dark";
 }) {
   return (
-    <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+    <RevealList as="ol" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
       {steps.map((step, index) => (
-        <li
+        <RevealItem
           key={step.title}
           className={cn(
             "flex flex-col p-6 last:sm:col-span-2 last:lg:col-span-1",
@@ -30,8 +31,8 @@ export function ProcessSteps({
           >
             {step.description}
           </p>
-        </li>
+        </RevealItem>
       ))}
-    </ol>
+    </RevealList>
   );
 }

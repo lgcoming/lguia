@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
-// Intrinsic size of public/brand/lguia-logo-*.png (480×169); rendered at a fixed height.
+// Intrinsic size of public/brand/lguia-logo-*.png (480×169).
 const RATIO = 480 / 169;
 
 type LogoVariant = "on-light" | "on-dark" | "adaptive";
@@ -24,7 +24,8 @@ function LogoImage({
       width={Math.round(height * RATIO)}
       height={height}
       loading="eager"
-      className={className}
+      // `w-auto` keeps the aspect ratio when `imageClassName` changes the rendered height.
+      className={cn("w-auto", className)}
     />
   );
 }
@@ -32,14 +33,18 @@ function LogoImage({
 /**
  * Brand logo as a home link. `adaptive` renders both versions and lets the header theme
  * (globals.css .site-header) show the right one, so the swap never waits for JavaScript.
+ * `height` is the largest rendered height (it sizes the image request); `imageClassName` can
+ * render it smaller on narrow screens.
  */
 export function Logo({
   variant = "on-light",
   height = 28,
+  imageClassName,
   className,
 }: {
   variant?: LogoVariant;
   height?: number;
+  imageClassName?: string;
   className?: string;
 }) {
   return (
@@ -50,11 +55,15 @@ export function Logo({
     >
       {variant === "adaptive" ? (
         <>
-          <LogoImage tone="dark" height={height} className="logo-on-light" />
-          <LogoImage tone="light" height={height} className="logo-on-dark" />
+          <LogoImage tone="dark" height={height} className={cn("logo-on-light", imageClassName)} />
+          <LogoImage tone="light" height={height} className={cn("logo-on-dark", imageClassName)} />
         </>
       ) : (
-        <LogoImage tone={variant === "on-dark" ? "light" : "dark"} height={height} />
+        <LogoImage
+          tone={variant === "on-dark" ? "light" : "dark"}
+          height={height}
+          className={imageClassName}
+        />
       )}
     </Link>
   );

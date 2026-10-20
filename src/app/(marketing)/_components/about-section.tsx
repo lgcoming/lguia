@@ -1,5 +1,6 @@
 import { HeartHandshake, Layers, ReceiptText, type LucideIcon } from "lucide-react";
 
+import { RevealGroup, RevealText } from "@/components/motion/reveal";
 import { Section } from "@/components/ui/layout-primitives";
 
 const facts: { icon: LucideIcon; title: string; text: string }[] = [
@@ -24,14 +25,16 @@ const facts: { icon: LucideIcon; title: string; text: string }[] = [
 export function AboutSection() {
   return (
     <Section tone="white" labelledBy="que-es-titulo">
-      <div className="mx-auto max-w-text text-center">
-        <h2
-          id="que-es-titulo"
-          className="text-[2rem] leading-[1.1] tracking-[-0.015em] md:text-[3rem] md:leading-[1.08] lg:text-display"
-        >
-          Una agencia digital que empieza por tu negocio, no por la tecnología
-        </h2>
-        <div className="mx-auto mt-6 max-w-3xl space-y-4 text-body text-pewter md:text-subheading">
+      <RevealGroup className="mx-auto max-w-text text-center">
+        <RevealText>
+          <h2
+            id="que-es-titulo"
+            className="text-[2rem] leading-[1.1] tracking-[-0.015em] md:text-[3rem] md:leading-[1.08] lg:text-display"
+          >
+            Una agencia digital que empieza por tu negocio, no por la tecnología
+          </h2>
+        </RevealText>
+        <RevealText className="mx-auto mt-6 max-w-3xl space-y-4 text-body text-pewter md:text-subheading">
           <p>
             LGuIA ayuda a pymes y negocios locales a digitalizarse con sentido común. Diseñamos
             webs, automatizamos procesos y aplicamos inteligencia artificial cuando resuelve un
@@ -41,8 +44,8 @@ export function AboutSection() {
             Trabajamos las tres cosas con el mismo equipo para que todo encaje: tu web capta
             contactos, las automatizaciones los ordenan y la IA te ayuda a responder antes.
           </p>
-        </div>
-      </div>
+        </RevealText>
+      </RevealGroup>
       <dl className="mt-14 grid gap-4 sm:grid-cols-3 md:mt-20">
         {facts.map(({ icon: Icon, title, text }) => (
           <div key={title} className="rounded-tile bg-fog-white p-7 text-center md:p-8">

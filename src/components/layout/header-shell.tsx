@@ -21,7 +21,7 @@ export function HeaderShell({ children }: { children: ReactNode }) {
     const observe = () => {
       observer?.disconnect();
       underBar.clear();
-      // The root strip is the top 24px of the viewport: the middle of the 52px bar.
+      // The root strip is the top 24px of the viewport, always inside the bar (56–64px).
       observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {

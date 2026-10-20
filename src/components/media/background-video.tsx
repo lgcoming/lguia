@@ -4,6 +4,7 @@ import { Pause, Play } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+import { ParallaxLayer } from "@/components/motion/parallax-layer";
 import { cn } from "@/lib/utils";
 
 interface BackgroundVideoProps {
@@ -14,6 +15,8 @@ interface BackgroundVideoProps {
   eager?: boolean;
   /** Below the fold: only attach the video source once the band is near the viewport. */
   lazy?: boolean;
+  /** Move the footage slightly slower than the page (mid-page bands). */
+  parallax?: boolean;
 }
 
 type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean } };
@@ -37,6 +40,7 @@ export function BackgroundVideo({
   poster,
   eager = false,
   lazy = false,
+  parallax = false,
 }: BackgroundVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [enabled, setEnabled] = useState(false);
@@ -100,7 +104,7 @@ export function BackgroundVideo({
     }
   }
 
-  return (
+  const media = (
     <>
       <Image
         src={poster}
@@ -112,42 +116,53 @@ export function BackgroundVideo({
         className="object-cover"
       />
       {enabled ? (
-        <div className="absolute inset-0">
-          <video
-            ref={videoRef}
-            src={near ? src : undefined}
-            muted
-            loop
-            playsInline
-            preload={near ? "auto" : "none"}
-            disablePictureInPicture
-            aria-hidden="true"
-            tabIndex={-1}
-            onCanPlay={() => setReady(true)}
-            onPlay={() => setPaused(false)}
-            onPause={() => setPaused(true)}
-            className={cn(
-              "size-full object-cover transition-opacity duration-700 ease-out",
-              ready ? "opacity-100" : "opacity-0",
-            )}
-          />
-          {ready ? (
-            <button
-              type="button"
-              onClick={togglePlayback}
-              className="glass-panel absolute right-4 bottom-4 z-20 inline-flex size-11 items-center justify-center rounded-full text-pure-white transition-colors duration-200 hover:bg-pure-white/20 md:right-8 md:bottom-8"
-            >
-              {paused ? (
-                <Play aria-hidden="true" className="size-4 fill-current" />
-              ) : (
-                <Pause aria-hidden="true" className="size-4 fill-current" />
-              )}
-              <span className="sr-only">
-                {paused ? "Reproducir vídeo de fondo" : "Pausar vídeo de fondo"}
-              </span>
-            </button>
-          ) : null}
-        </div>
+        <video
+          ref={videoRef}
+          src={near ? src : undefined}
+          muted
+          loop
+          playsInline
+          // Nothing is fetched until the band is near the viewport; then buffer ahead to play.
+          preload={near ? "auto" : "none"}
+          disablePictureInPicture
+          disableRemotePlayback
+          aria-hidden="true"
+          tabIndex={-1}
+          onCanPlay={() => setReady(true)}
+          onPlay={() => setPaused(false)}
+          onPause={() => setPaused(true)}
+          className={cn(
+            "absolute inset-0 size-full object-cover transition-opacity duration-700 ease-out",
+            ready ? "opacity-100" : "opacity-0",
+          )}
+        />
+      ) : null}
+    </>
+  );
+
+  return (
+    <>
+      {parallax ? (
+        <ParallaxLayer>{media}</ParallaxLayer>
+      ) : (
+        <div className="absolute inset-0">{media}</div>
+      )}
+      {/* Outside the moving layer so the control never drifts or gets clipped. */}
+      {enabled && ready ? (
+        <button
+          type="button"
+          onClick={togglePlayback}
+          className="glass-panel absolute right-4 bottom-4 z-20 inline-flex size-11 items-center justify-center rounded-full text-pure-white transition-colors duration-200 hover:bg-pure-white/20 md:right-8 md:bottom-8"
+        >
+          {paused ? (
+            <Play aria-hidden="true" className="size-4 fill-current" />
+          ) : (
+            <Pause aria-hidden="true" className="size-4 fill-current" />
+          )}
+          <span className="sr-only">
+            {paused ? "Reproducir vídeo de fondo" : "Pausar vídeo de fondo"}
+          </span>
+        </button>
       ) : null}
     </>
   );

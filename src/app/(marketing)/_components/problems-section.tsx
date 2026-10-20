@@ -1,3 +1,4 @@
+import { RevealItem, RevealList } from "@/components/motion/reveal";
 import { Section, SectionHeader } from "@/components/ui/layout-primitives";
 import { TextLink } from "@/components/ui/text-link";
 import { categoryHref } from "@/features/catalog/routes";
@@ -64,17 +65,20 @@ export function ProblemsSection() {
         title="Problemas que sabemos resolver"
         intro="Si alguna de estas frases te suena, podemos ayudarte."
       />
-      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <RevealList className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {problems.map((problem) => (
-          <li key={problem.pain} className="flex flex-col rounded-tile bg-fog-white p-7 md:p-8">
+          <RevealItem
+            key={problem.pain}
+            className="flex flex-col rounded-tile bg-fog-white p-7 md:p-8"
+          >
             <p className="text-subheading font-semibold">«{problem.pain}»</p>
             <p className="mt-3 text-footnote text-pewter">{problem.solution}</p>
             <div className="mt-auto pt-3">
               <TextLink href={categoryHref(problem.categoryId)}>{problem.link}</TextLink>
             </div>
-          </li>
+          </RevealItem>
         ))}
-      </ul>
+      </RevealList>
     </Section>
   );
 }

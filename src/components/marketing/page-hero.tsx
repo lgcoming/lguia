@@ -91,7 +91,7 @@ export function PageHero({ title, intro, breadcrumbs, media, children }: PageHer
         imagePosition={media.position}
         eager
         overlay="band"
-        className="-mt-13"
+        className="-mt-(--header-height)"
       >
         <Container width="text" className="pt-32 pb-20 text-center md:pt-40 md:pb-28">
           {content}

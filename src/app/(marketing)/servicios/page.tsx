@@ -56,7 +56,7 @@ export default async function ServicesPage() {
             id={category.id}
             labelledBy={`${category.id}-titulo`}
             tone={onWhite ? "white" : "canvas"}
-            className="scroll-mt-13"
+            className="scroll-mt-(--header-height)"
           >
             <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
               <div className="lg:sticky lg:top-24">

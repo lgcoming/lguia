@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-import { MediaBand } from "@/components/media/media-band";
+import { ScrollVideoHero } from "@/components/media/scroll-video-hero";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/layout-primitives";
 
@@ -11,26 +11,30 @@ const reassurances = [
 ];
 
 /**
- * Full-viewport video hero. It slides under the translucent header (-mt-13 / pt-13) so the
- * glass bar sits on the footage; the header reads `data-nav-theme="dark"` and turns dark.
- * Text over footage uses white and ash-veil only: silver fails contrast on the bright wave.
+ * Home hero (SPEC-003 §1). On desktop the footage is scrubbed by scroll while the stage stays
+ * pinned: the opening stack gives way to the video, then a closing line. Text over footage uses
+ * white and ash-veil only: silver fails contrast on the bright wave.
  */
 export function Hero() {
   return (
-    <MediaBand
+    <ScrollVideoHero
       labelledBy="hero-titulo"
       video={{
         src: "/media/video/hero-connections.mp4",
         poster: "/media/video/hero-connections-poster.jpg",
       }}
-      eager
-      overlay="hero"
-      className="-mt-13"
+      outro={
+        <Container width="text" className="text-center">
+          <p className="text-[2.5rem] leading-[1.06] font-semibold tracking-[-0.022em] text-balance md:text-display lg:text-display-xl">
+            Tu web, tus procesos y la IA, por fin conectados.
+          </p>
+          <p className="mx-auto mt-5 max-w-2xl text-subheading text-ash-veil">
+            Diseñamos cada pieza para que trabaje con las demás, sin herramientas sueltas.
+          </p>
+        </Container>
+      }
     >
-      <Container
-        width="text"
-        className="flex min-h-[max(38rem,100svh)] flex-col items-center justify-center pt-28 pb-24 text-center"
-      >
+      <Container width="text" className="pt-28 pb-24 text-center">
         <p className="animate-fade-up text-footnote font-semibold text-ash-veil sm:text-subheading">
           Agencia digital para pymes y negocios locales
         </p>
@@ -61,6 +65,6 @@ export function Hero() {
           ))}
         </ul>
       </Container>
-    </MediaBand>
+    </ScrollVideoHero>
   );
 }

@@ -47,7 +47,7 @@ export function MainNav({ items }: { items: NavItem[] }) {
                 href={item.href}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
                 className={cn(
-                  "inline-flex min-h-11 items-center px-3.5 text-footnote opacity-80 transition-opacity duration-200 ease-out hover:opacity-100",
+                  "inline-flex min-h-11 items-center px-4 text-[0.9375rem] tracking-[-0.012em] opacity-80 transition-opacity duration-200 ease-out hover:opacity-100",
                   "aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[6px] aria-[current=page]:opacity-100",
                 )}
               >
@@ -58,10 +58,10 @@ export function MainNav({ items }: { items: NavItem[] }) {
         </ul>
       </nav>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         {/* Wrapped: overriding the button's own display utility would conflict. */}
         <div className="hidden sm:block">
-          <ButtonLink href="/diagnostico-digital" size="sm">
+          <ButtonLink href="/diagnostico-digital" size="md">
             Diagnóstico gratuito
           </ButtonLink>
         </div>
@@ -85,8 +85,8 @@ export function MainNav({ items }: { items: NavItem[] }) {
         onClose={() => setIsOpen(false)}
         className="glass-light fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none p-0 text-obsidian backdrop:bg-transparent lg:hidden"
       >
-        <div className="mx-auto flex h-13 w-full max-w-grid items-center justify-between px-4 sm:px-6">
-          <Logo height={26} />
+        <div className="mx-auto flex h-(--header-height) w-full max-w-grid items-center justify-between px-4 sm:px-6">
+          <Logo height={32} imageClassName="h-7 lg:h-8" />
           <button
             type="button"
             onClick={close}

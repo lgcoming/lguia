@@ -16,7 +16,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     <>
       <SkipLink />
       <header className="glass-light sticky top-0 z-40">
-        <Container className="flex h-13 items-center justify-between gap-4">
+        <Container className="flex h-(--header-height) items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Logo height={26} />
             <Badge>Panel interno</Badge>

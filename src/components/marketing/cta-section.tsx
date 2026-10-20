@@ -6,6 +6,7 @@ import {
 } from "@/components/marketing/diagnosis-preview";
 import { BrandWatermark } from "@/components/media/brand-watermark";
 import { MediaBand } from "@/components/media/media-band";
+import { ParallaxLayer } from "@/components/motion/parallax-layer";
 import { buttonStyles, ButtonLink } from "@/components/ui/button";
 import { Container, Section, type SectionTone } from "@/components/ui/layout-primitives";
 import { StepNumber } from "@/components/ui/step-number";
@@ -36,13 +37,15 @@ export function DiagnosisCTA({
   return (
     <Section tone={tone} labelledBy={`${id}-titulo`}>
       <div className="surface-dark relative isolate overflow-hidden rounded-tile bg-carbon text-pure-white">
-        <Image
-          src="/media/images/circuit.jpg"
-          alt=""
-          fill
-          sizes="(min-width: 1200px) 1136px, 100vw"
-          className="-z-10 object-cover object-[70%_50%]"
-        />
+        <ParallaxLayer className="-z-10">
+          <Image
+            src="/media/images/circuit.jpg"
+            alt=""
+            fill
+            sizes="(min-width: 1200px) 1136px, 100vw"
+            className="object-cover object-[70%_50%]"
+          />
+        </ParallaxLayer>
         <div
           aria-hidden="true"
           className="absolute inset-0 -z-10 bg-linear-to-b from-carbon/85 via-carbon/70 to-carbon/85 lg:bg-linear-to-r lg:from-carbon/90 lg:via-carbon/65 lg:to-carbon/25"
