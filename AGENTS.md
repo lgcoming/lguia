@@ -89,13 +89,15 @@ Rules:
 
 - Reference: `docs/design/refero-apple/` (Refero "Apple (España)"). Tokens in `src/app/globals.css`
   (`@theme`) use its names: fog-white, pure-white, obsidian, carbon, pewter, slate, graphite,
-  silver, pale-mist, ash-veil, iris-blue, sapphire, sky-signal, cornflower, ice-wash (+ danger).
+  silver, pale-mist, ash-veil, iris-blue, sapphire, sky-signal, cornflower, ice-wash (+ danger,
+  night, iris-blue-hover).
 - Type: SF Pro on Apple devices (`-apple-system`), Inter variable elsewhere. Headlines 600 with
   slightly negative tracking; body 17/1.47.
 - Light canvas for information, full-bleed dark bands (video/photography + overlay) for atmosphere.
   Separate sections by surface change, never by rules or shadows. No box shadows.
 - Centered headline stacks (headline → subhead → button pair); left-aligned text inside tiles/forms.
-- `iris-blue` only for filled primary buttons; `sapphire` links/outlines on light, `sky-signal` on dark.
+- `iris-blue` only for filled primary buttons and selected option tiles; `sapphire` links/outlines
+  on light, `sky-signal` on dark. Text over footage uses white or `ash-veil`, never `silver`.
 - Pills (`rounded-full`) for all buttons; tiles 28px (`rounded-tile`); inputs 12px.
 - Glass (`backdrop-filter`) only for the nav, the mobile menu sheet and panels over imagery/dark bands;
   always with an opaque fallback (`@supports`, `prefers-reduced-transparency`).
@@ -109,7 +111,7 @@ Rules:
 
 Semantic HTML first; one `h1` per page; skip link; visible `:focus-visible` on every surface; labels
 for every control; errors linked with `aria-describedby` and announced; focus management on step
-changes; targets ≥ 44px; contrast per SPEC-002; respect `prefers-reduced-motion`. ARIA only where
+changes; targets ≥ 24px (44px for primary controls); contrast per SPEC-002; respect `prefers-reduced-motion`. ARIA only where
 HTML cannot express the state.
 
 ## Performance

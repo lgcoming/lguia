@@ -28,10 +28,12 @@ top of each section. Keep entries short; link to specs for detail.
   Importing `m` from the `motion/react` barrel kept ~30 KB more in the initial bundle.
 - **Page metadata must list the OG image explicitly**: a page-level `openGraph` object replaces the
   parent one, including the file-based `opengraph-image`. `createPageMetadata()` adds it.
-- **The OG image embeds static WOFF files** (`assets/fonts`, OFL) because Satori cannot read the
-  WOFF2/variable files that `next/font` serves.
-- **The hero preview is a real engine result** for an example business (`EXAMPLE_ANSWERS` in the
-  home page), computed at build time, so the marketing visual never drifts from the product.
+- **The OG image uses the renderer's built-in sans (Geist)** plus the light logo and the hero
+  poster read from `public/` (2026-10-20). Satori cannot read the variable WOFF2 that `next/font`
+  serves, and no static Inter file is vendored; the old Schibsted WOFF files were removed.
+- **The diagnosis preview is a real engine result** for an example business (`EXAMPLE_ANSWERS` in
+  the home page), computed at build time, so the marketing visual never drifts from the product.
+  Since the redesign it lives in the diagnosis CTA tile, not in the hero.
 - **Calculating screen moves focus to its heading** instead of using a `role="status"` region: the
   submit button unmounts, so focus must land somewhere meaningful (SPEC-004 updated).
 - **Deterministic diagnosis engine** (SPEC-004): pure functions in `src/features/diagnosis/model`.
@@ -54,19 +56,37 @@ top of each section. Keep entries short; link to specs for detail.
 
 ## Design decisions (SPEC-002)
 
+- **Redesign v2, Apple-inspired** (2026-10-20, branch `feature/apple-redesign`): Refero "Apple
+  (España)" tokens, Inter with optical sizes as the SF Pro substitute, light canvas + dark media
+  bands, glass chrome, bento grids. v1 ("la guía", pine/amber, Schibsted, route line) is in git
+  history.
+- **This development machine reports `prefers-reduced-motion` and `prefers-reduced-transparency`**
+  (Windows animation and transparency effects are off), so the in-app browser and Playwright show
+  posters instead of videos and opaque glass. That is the intended accessible fallback. To see
+  the full effect, measure or screenshot with CDP `Emulation.setEmulatedMedia` set to
+  `no-preference` (as the verification scripts do) or turn those Windows settings on.
+- **Overlays were tuned against real video frames**, not the posters: with the first overlays
+  the hero eyebrow and reassurances dropped to 3.2–3.8:1 on bright frames. The hero overlay is
+  now ~65% black in the text area and the process band 60–80%. Text over footage is white or
+  `ash-veil`; `silver` fails on the bright wave.
+- **The pre-hydration dark header rule ignores JSON-LD scripts**
+  (`:nth-child(1 of :not(script))`): pages such as `/planes` start `<main>` with a `<script>`,
+  so `:first-child` never matched. The `:has()` rules are separate from the `[data-theme]` rules
+  so a browser without `:has()` only loses the pre-hydration state.
+- **`iris-blue` also marks selected option tiles** in the wizard: it is Apple's configurator
+  pattern, and a monochrome selection was weaker than the error state next to it.
+- **Inter keeps its `opsz` axis** (72 KB latin WOFF2): it gives the display cut for headlines.
+  Lighthouse mobile LCP rose from ~2.7 s to 3.0–3.3 s (simulated) with Performance 93–96; drop
+  the axis first if performance needs to recover.
+- **Diagnosis CTA is a tile, contact CTA a full-bleed band**: two full-bleed dark image bands back
+  to back (home sections 9 and 10) felt heavy; the tile keeps the "product shot" contained.
 - **Desktop navigation starts at `lg` (1024px)**: logo + 4 links + CTA overflowed at 768px.
 - **Headings scale down and hyphenate below 400px** (`max-[399px]:hyphens-auto`): long Spanish
   words such as "automatizaciones" otherwise force horizontal scroll at 320px. Hyphenation is
   scoped to narrow screens so desktop headings never break words.
-- **Hero heading is 3rem on desktop** (not the 3.25rem display token) so "Webs, automatizaciones"
-  stays on one line in the 1.3fr column.
 - **`cn()` does not merge conflicting utilities**: never override a component's display, size or
   colour through `className` (this caused a header overflow and invisible route stops). Use props,
   variants or a wrapper.
-- Concept "la guía" → wayfinding; signature **route line** used only for hero preview, process
-  steps and wizard progress.
-- Palette pine green + ink + mist + signal amber; contrast verified numerically (see spec table).
-- Single typeface Schibsted Grotesk (variable) to keep fonts light and the voice consistent.
 - Reveal animations hidden only when JS runs: `noscript` style override keeps content visible
   without JavaScript.
 
@@ -108,6 +128,19 @@ top of each section. Keep entries short; link to specs for detail.
   (after Prettier reformatting) briefly left the OG image without its font.
 
 ## Verification log
+
+### 2026-10-20 — Apple redesign (production build, local)
+
+- `npm run check`: lint clean, types clean, 98 tests passing (11 files). E2E diagnosis → lead flow
+  passing on desktop and mobile (Chrome).
+- Full-page screenshots of every route at 1440px and 375px: no horizontal overflow, one `h1`.
+- Contrast over media measured on 8 frames per video and on every photo hero (see SPEC-002 AC2).
+- JavaScript disabled: header starts dark on pages that open with a dark band; no hidden reveals.
+- Keyboard: focus ring visible on the dark hero (sky ring); the mobile menu `<dialog>` closes on
+  Escape and returns focus to the toggle.
+- Lighthouse 13 mobile: Performance 93–96, Accessibility/Best practices/SEO 100 on `/`,
+  `/servicios`, `/servicios/chatbots-ia`, `/planes`, `/contacto`, `/diagnostico-digital`; CLS 0,
+  TBT 30 ms, LCP element `<h1>` (3.0–3.3 s simulated on media pages).
 
 ### 2026-10-02 — Release candidate (production build, local)
 

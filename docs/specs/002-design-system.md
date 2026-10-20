@@ -1,6 +1,6 @@
 # SPEC-002 — Design system (v2, Apple-inspired)
 
-- Status: Approved
+- Status: Implemented
 - Sprint: Redesign (2026-10)
 - Supersedes: v1 "la guía" (wayfinding, pine palette, Schibsted Grotesk) — see git history
 - Related: [003](./003-marketing-site.md), [004](./004-digital-diagnosis.md)
@@ -21,8 +21,9 @@ accessibility requirements do not change.
    Sections are separated by a change of surface, never by rules or shadows.
 2. **The product is the hero.** LGuIA's product is its advice: services, plans and the diagnosis
    result are presented like Apple presents a device — centered, generous, unframed.
-3. **One chromatic action.** `iris-blue` is reserved for the filled primary button. Links and
-   outlined buttons use `sapphire` (light) or `sky-signal` (dark). Everything else is monochrome;
+3. **One chromatic action.** `iris-blue` is reserved for the filled primary button and for the
+   selected state of option tiles (Apple's configurator pattern). Links and outlined buttons use
+   `sapphire` (light) or `sky-signal` (dark). Everything else is monochrome;
    colour comes from the brand logo and the photography.
 4. **Centered headline stacks.** Section headers and heroes are centered (headline → subhead →
    button pair). Text inside tiles, forms and lists stays left-aligned for readability.
@@ -39,24 +40,26 @@ palette is disabled, so only these colours exist.
 
 ### Colour
 
-| Token            | Hex       | Use                                                    | Contrast (AA)                      |
-| ---------------- | --------- | ------------------------------------------------------ | ---------------------------------- |
-| `fog-white`      | `#f5f5f7` | Canvas, alternate sections, footer                     |                                    |
-| `pure-white`     | `#ffffff` | Tiles, nav (light), text on dark                       |                                    |
-| `obsidian`       | `#1d1d1f` | Headlines and body text                                | 15.5:1 fog · 16.8:1 white          |
-| `carbon`         | `#000000` | Dark bands                                             |                                    |
-| `pewter`         | `#707070` | Secondary text on light                                | 4.55:1 fog · 4.95:1 white          |
-| `slate`          | `#505050` | Tertiary text where more contrast is needed            | 7.4:1 fog                          |
-| `graphite`       | `#474747` | Nav text at rest (light)                               | ≥ 8:1                              |
-| `silver`         | `#858585` | Form control borders; secondary text on dark           | 3.7:1 white (UI) · 5.6:1 black     |
-| `pale-mist`      | `#d6d6d6` | Decorative hairlines only (never as the only boundary) | 1.45:1                             |
-| `ash-veil`       | `#e2e2e5` | Secondary filled surfaces, pressed states              |                                    |
-| `iris-blue`      | `#0071e3` | Filled primary button (white text)                     | 4.7:1 with white                   |
-| `sapphire`       | `#0066cc` | Links and outlined buttons on light                    | 5.1:1 fog · 5.6:1 white            |
-| `sky-signal`     | `#2997ff` | Links and outlined buttons on dark                     | 7.0:1 black                        |
-| `cornflower`     | `#509be7` | Link hover accent (decorative)                         |                                    |
-| `ice-wash`       | `#aad0f6` | One soft blue band; text on it is `obsidian` only      | obsidian 10.5:1 · sapphire 3.5:1 ✗ |
-| `danger` (added) | `#e30000` | Form errors (Apple's error red)                        | 4.9:1 white                        |
+| Token             | Hex       | Use                                                    | Contrast (AA)                      |
+| ----------------- | --------- | ------------------------------------------------------ | ---------------------------------- |
+| `fog-white`       | `#f5f5f7` | Canvas, alternate sections, footer                     |                                    |
+| `pure-white`      | `#ffffff` | Tiles, nav (light), text on dark                       |                                    |
+| `obsidian`        | `#1d1d1f` | Headlines and body text                                | 15.5:1 fog · 16.8:1 white          |
+| `carbon`          | `#000000` | Dark bands                                             |                                    |
+| `night` (added)   | `#161617` | Opaque fallback for dark glass                         | 18:1 with white                    |
+| `pewter`          | `#707070` | Secondary text on light                                | 4.55:1 fog · 4.95:1 white          |
+| `slate`           | `#505050` | Tertiary text where more contrast is needed            | 7.4:1 fog                          |
+| `graphite`        | `#474747` | Nav text at rest (light)                               | ≥ 8:1                              |
+| `silver`          | `#858585` | Form control borders; secondary text on dark           | 3.7:1 white (UI) · 5.6:1 black     |
+| `pale-mist`       | `#d6d6d6` | Decorative hairlines only (never as the only boundary) | 1.45:1                             |
+| `ash-veil`        | `#e2e2e5` | Secondary filled surfaces, pressed states              |                                    |
+| `iris-blue`       | `#0071e3` | Filled primary button (white text), selected options   | 4.7:1 with white                   |
+| `iris-blue-hover` | `#0077ed` | Primary button hover (Apple's value)                   | 4.5:1 with white                   |
+| `sapphire`        | `#0066cc` | Links and outlined buttons on light                    | 5.1:1 fog · 5.6:1 white            |
+| `sky-signal`      | `#2997ff` | Links and outlined buttons on dark                     | 7.0:1 black                        |
+| `cornflower`      | `#509be7` | Link hover accent (decorative)                         |                                    |
+| `ice-wash`        | `#aad0f6` | One soft blue band; text on it is `obsidian` only      | obsidian 10.5:1 · sapphire 3.5:1 ✗ |
+| `danger` (added)  | `#e30000` | Form errors (Apple's error red)                        | 4.9:1 white                        |
 
 ### Typography
 
@@ -70,11 +73,14 @@ palette is disabled, so only these colours exist.
   | `caption`    | 12 / 1.33          | -0.01em  | Footer, legal, micro-copy |
   | `footnote`   | 14 / 1.43          | -0.016em | Buttons, nav, helper text |
   | `body`       | 17 / 1.47          | -0.022em | Body copy (the workhorse) |
-  | `subheading` | 21 / 1.19          | 0.011em  | Subheads under headlines  |
-  | `heading-sm` | 28 / 1.14          | 0.007em  | Tile titles               |
-  | `heading-lg` | 40 / 1.1           | 0        | Section headlines         |
-  | `display`    | 56 / 1.07          | -0.005em | Page heroes               |
-  | `display-xl` | 80 / 1.05          | -0.015em | Home hero (desktop only)  |
+  | `subheading` | 21 / 1.38          | 0.004em  | Subheads under headlines  |
+  | `heading-sm` | 28 / 1.14          | 0.002em  | Tile titles               |
+  | `heading-lg` | 40 / 1.1           | -0.012em | Section headlines         |
+  | `display`    | 56 / 1.07          | -0.02em  | Page heroes               |
+  | `display-xl` | 72 / 1.05          | -0.025em | Home hero (desktop only)  |
+
+  Display tracking is tighter than Refero's SF Pro values because Inter sets wider at large sizes;
+  the result matches the slightly negative tracking of Apple's headlines.
 
 - Headlines weight 600; body 400; never display weights below 21px.
 
@@ -91,47 +97,53 @@ palette is disabled, so only these colours exist.
 
 ### Surfaces and glass
 
-| Surface     | Recipe                                                                  |
-| ----------- | ----------------------------------------------------------------------- |
-| Canvas      | `fog-white`                                                             |
-| Tile        | `pure-white`, radius 28px, no border, no shadow                         |
-| Dark band   | `carbon` + photography/video + gradient overlay (`carbon` 55–85%)       |
-| Glass light | `rgb(255 255 255 / 72%)` + `saturate(180%) blur(20px)`                  |
-| Glass dark  | `rgb(22 22 23 / 72%)` + `saturate(180%) blur(20px)` + `border white/10` |
+| Surface     | Recipe                                                                    |
+| ----------- | ------------------------------------------------------------------------- |
+| Canvas      | `fog-white`                                                               |
+| Tile        | `pure-white`, radius 28px, no border, no shadow                           |
+| Dark band   | `carbon` + photography/video + gradient overlay (`carbon` 60–80%)         |
+| Glass panel | `rgb(255 255 255 / 8%)` + `border white/14` + `saturate(160%) blur(24px)` |
+| Glass light | `rgb(255 255 255 / 72%)` + `saturate(180%) blur(20px)`                    |
+| Glass dark  | `rgb(22 22 23 / 72%)` + `saturate(180%) blur(20px)` + `border white/10`   |
 
 Fallbacks: without `backdrop-filter` support, and with `prefers-reduced-transparency: reduce`,
 glass becomes the opaque surface (`pure-white` / `#161617`).
 
 ## Components
 
-| Component                                | Location                                | Notes                                                                                                                                                                                 |
-| ---------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `buttonStyles` / `Button` / `ButtonLink` | `components/ui/button.tsx`              | `primary` (iris), `secondary` (sapphire outline), `on-dark` (sky outline), `glass` (white glass on media), `light` (white fill on dark); `md` 14px, `lg` 17px; pill; min target 44px. |
-| `TextLink`                               | `components/ui/text-link.tsx`           | Apple-style link with chevron icon (not a `→` character); `tone` light/dark.                                                                                                          |
-| `Section`, `SectionHeader`, `Container`  | `components/ui/layout-primitives.tsx`   | `tone`: `canvas` / `white` / `ice` / `dark`; header centered.                                                                                                                         |
-| `Tile`                                   | `components/ui/tile.tsx`                | White tile (28px); `MediaTile` with `next/image` background + overlay + glass panel.                                                                                                  |
-| `GlassPanel`                             | `components/ui/glass.tsx`               | Dark glass panel for content over imagery.                                                                                                                                            |
-| `BackgroundVideo`                        | `components/media/background-video.tsx` | Client. Loads only ≥768px, without reduced motion or Save-Data; poster image always; plays only while visible.                                                                        |
-| `MediaBand`                              | `components/media/media-band.tsx`       | Full-bleed dark band with image or video + overlay; sets `data-nav-theme="dark"`.                                                                                                     |
-| `SiteHeader` / `MainNav`                 | `components/layout/`                    | 48px glass bar; switches to dark glass while a `[data-nav-theme="dark"]` band is under it (IntersectionObserver, no scroll listeners); full-screen glass sheet on mobile.             |
-| `Logo`                                   | `components/layout/logo.tsx`            | Brand PNGs (transparent) with dark and light variants.                                                                                                                                |
-| Form controls                            | `components/ui/form.tsx`                | 12px radius, `silver` border, blue focus ring, `danger` errors.                                                                                                                       |
+| Component                                       | Location                                     | Notes                                                                                                                                                                                                  |
+| ----------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `buttonStyles` / `Button` / `ButtonLink`        | `components/ui/button.tsx`                   | Pills. `primary` (iris + 12% white top highlight), `secondary` (sapphire outline), `on-dark` (sky outline), `light`, `glass`, `plain`; `sm` 36px (header only), `md` 44px, `lg` 48px.                  |
+| `TextLink`                                      | `components/ui/text-link.tsx`                | Blue text + chevron icon (never a typed `→`); `tone` light/dark, `size` body/footnote; 44px target.                                                                                                    |
+| `Section`, `SectionHeader`, `Container`         | `components/ui/layout-primitives.tsx`        | `tone`: `canvas` / `white` / `ice` / `dark`; header centered; `width`: `text` (980px) / `grid` (1200px).                                                                                               |
+| Tiles                                           | `rounded-tile` + surface utilities           | 28px radius, no border, no shadow; white on fog, fog on white. Plain classes, no wrapper component.                                                                                                    |
+| `.glass-light` / `.glass-dark` / `.glass-panel` | `app/globals.css` (components layer)         | Frosted surfaces (nav and menu sheet; panels over imagery) with opaque fallbacks.                                                                                                                      |
+| `StepNumber`                                    | `components/ui/step-number.tsx`              | Numbered marker for real sequences (process, next steps). Replaces v1 `RouteStop`.                                                                                                                     |
+| `Badge`                                         | `components/ui/badge.tsx`                    | Pill tags: `neutral`, `info`, `strong`, `glass`, `inverse`.                                                                                                                                            |
+| `BackgroundVideo`                               | `components/media/background-video.tsx`      | Client. Poster first; video only ≥768px, without reduced motion or Save-Data; plays while visible; pause button (WCAG 2.2.2).                                                                          |
+| `MediaBand`                                     | `components/media/media-band.tsx`            | Full-bleed dark band with image or video + overlay (`hero`, `band`, `soft`); sets `data-nav-theme="dark"`.                                                                                             |
+| `BrandWatermark`                                | `components/media/brand-watermark.tsx`       | Compass mark as a faint decorative watermark on dark tiles and the 404.                                                                                                                                |
+| `ServiceTile` / `ServicesBento`                 | `components/marketing/service-tile.tsx`      | Photographic tile + glass caption, one stretched link; bento of one wide, one tall and two regular tiles (`category-media.ts`).                                                                        |
+| `DiagnosisPreview`                              | `components/marketing/diagnosis-preview.tsx` | A real engine result on dark glass (the diagnosis "product shot").                                                                                                                                     |
+| `SiteHeader` / `HeaderShell` / `MainNav`        | `components/layout/`                         | 52px glass bar; dark glass while a `[data-nav-theme="dark"]` band is under it (IntersectionObserver, CSS `:has()` before hydration); below `lg` a full-screen glass sheet built on a modal `<dialog>`. |
+| `Logo`                                          | `components/layout/logo.tsx`                 | Transparent PNGs; `adaptive` renders both and lets the header theme pick (no JS wait).                                                                                                                 |
+| Form controls                                   | `components/ui/form.tsx`                     | 12px radius, `silver` border, blue focus ring, `danger` errors; option tiles select with a 2px iris outline.                                                                                           |
 
 ## Brand assets (`/public`)
 
-| Asset                                       | Source                                       | Used in                                                     |
-| ------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------- |
-| `brand/lguia-logo-{dark,light}.png`         | `lguia_logo.jfif` (white background removed) | Nav, footer, 404                                            |
-| `brand/lguia-mark.png`                      | `lguia_icono.jfif`                           | Favicon/app icon, watermark in the diagnosis band, OG image |
-| `brand/lguia-logo-stacked-{dark,light}.png` | `lguia_logo_apilado.jfif`                    | Footer (mobile), contact CTA                                |
-| `media/video/hero-connections.mp4`          | `fondo conexiones.mp4`                       | Home hero                                                   |
-| `media/video/process-neural.mp4`            | `fondo neuronal.mp4`                         | Home "Cómo trabajamos" band                                 |
-| `media/images/web-development.jpg`          | `desarrollo_con_ia.jpg`                      | Desarrollo web tile and category hero                       |
-| `media/images/automation.avif`              | `desarrollo_automatizacion.avif`             | Automatizaciones tile and category hero                     |
-| `media/images/business-ai.jpg`              | `señor_traje_tablet_ia.jfif`                 | IA para empresas tile and category hero                     |
-| `media/images/connections.jpg`              | `fondo_conexiones.jpg`                       | SEO + GEO tile and category hero                            |
-| `media/images/circuit.jpg`                  | `fondo_chip.jpg`                             | Diagnosis CTA band                                          |
-| `media/images/neural-circuit.jpg`           | `fondo_tecnologico.jpg`                      | Contact CTA band, plans hero                                |
+| Asset                                       | Source                           | Used in                                                                  |
+| ------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------ |
+| `brand/lguia-logo-{dark,light}.png`         | `lguia_logo.jfif`                | Header (adaptive), mobile menu, footer, admin header, OG image           |
+| `brand/lguia-logo-tagline-{dark,light}.png` | `logo-tagline.jpg`               | Reserved for print/social; not used on the site yet                      |
+| `brand/lguia-mark.png`                      | `lguia_icono.jfif`               | App icons, contact CTA emblem, watermark (diagnosis tile, benefits, 404) |
+| `media/video/hero-connections.mp4` + poster | `fondo conexiones.mp4`           | Home hero (`overlay="hero"`)                                             |
+| `media/video/process-neural.mp4` + poster   | `fondo neuronal.mp4`             | Home "Cómo trabajamos" band (`overlay="soft"`, lazy)                     |
+| `media/images/web-development.jpg`          | `desarrollo_con_ia.jpg`          | Desarrollo web tile, overview block and category hero                    |
+| `media/images/automation.avif`              | `desarrollo_automatizacion.avif` | Automatizaciones tile, overview block and category hero                  |
+| `media/images/business-ai.jpg`              | `señor_traje_tablet_ia.jfif`     | IA para empresas tile, overview block and category hero                  |
+| `media/images/connections.jpg`              | `fondo_conexiones.jpg`           | SEO + GEO tile, overview block and category hero                         |
+| `media/images/circuit.jpg`                  | `fondo_chip.jpg`                 | Diagnosis CTA tile                                                       |
+| `media/images/neural-circuit.jpg`           | `fondo_tecnologico.jpg`          | Contact CTA band, plans hero                                             |
 
 Originals are kept in `assets/brand-source/` (not served); `scripts/prepare-brand-assets.mjs`
 regenerates the derivatives.
@@ -148,14 +160,20 @@ regenerates the derivatives.
 
 ## Acceptance criteria
 
-- [ ] AC1 — Only the tokens above exist in `globals.css`; no hex values in components.
-- [ ] AC2 — Every text/background pair used meets WCAG AA, including text over video and photography
-      (overlay keeps ≥ 4.5:1 at the brightest frame region behind text).
-- [ ] AC3 — Visible `:focus-visible` on every surface (blue ring on light, sky ring on dark).
-- [ ] AC4 — `prefers-reduced-motion`: no transform animations, no video playback (poster only).
-- [ ] AC5 — `prefers-reduced-transparency` and browsers without `backdrop-filter` get opaque surfaces.
-- [ ] AC6 — Videos never download below 768px, with Save-Data, or with reduced motion; the hero LCP
-      element is text or the optimized poster, not the video.
-- [ ] AC7 — Content renders without JavaScript (videos degrade to posters).
-- [ ] AC8 — Targets ≥ 44px; no horizontal scroll from 320px to 1440px.
-- [ ] AC9 — Lighthouse mobile on `/`: Accessibility, Best Practices and SEO ≥ 95, Performance ≥ 90.
+- [x] AC1 — Only the tokens above exist in `globals.css`; no hex values in components (the OG image
+      reads `lib/brand.ts`).
+- [x] AC2 — Every text/background pair meets WCAG AA, including text over video and photography.
+      Measured on 8 frames of each video and on every photo hero (95th-percentile background
+      luminance behind each text block): hero ≥ 5.7:1, process band ≥ 6.6:1, photo heroes ≥ 6.8:1,
+      text on real glass ≥ 5.8:1.
+- [x] AC3 — Visible `:focus-visible` on every surface (blue ring on light, sky ring on dark).
+- [x] AC4 — `prefers-reduced-motion`: no transform animations, no video playback (poster only).
+- [x] AC5 — `prefers-reduced-transparency` and browsers without `backdrop-filter` get opaque surfaces.
+- [x] AC6 — Videos never download below 768px, with Save-Data, or with reduced motion; the hero LCP
+      element is the `<h1>`, not the video.
+- [x] AC7 — Content renders without JavaScript (videos degrade to posters; the header starts dark on
+      pages that open with a dark band).
+- [x] AC8 — Targets ≥ 24px (WCAG 2.2 AA 2.5.8) and 44px for primary controls; no horizontal scroll
+      from 320px to 1440px.
+- [x] AC9 — Lighthouse mobile: Accessibility, Best Practices and SEO 100 on every page; Performance
+      93–96 (see `MEMORY.md`, verification log).

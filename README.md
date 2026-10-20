@@ -170,20 +170,41 @@ The reasoning behind each decision is recorded in [`MEMORY.md`](./MEMORY.md). Hi
 - **No Cache Components**: the site is static-first; `/admin/leads` opts into request-time
   rendering with `connection()`.
 - **Honeypot, not CAPTCHA**: no third-party script, no friction.
-- **Design concept "la guía"** (wayfinding): one memorable device — the route line — used only
-  for real sequences (hero preview, process, wizard progress).
+- **Apple-inspired design system** ([SPEC-002 v2](./docs/specs/002-design-system.md), Refero
+  "Apple (España)" reference in `docs/design/refero-apple/`): light canvas, full-bleed dark bands
+  with video or photography, frosted glass for the navigation and panels over imagery, bento grids,
+  pill buttons. Text over footage is contrast-checked against real frames.
+- **Background videos are progressive enhancement**: the poster is server-rendered; the video only
+  loads on screens ≥ 768px without reduced motion or Save-Data, plays while visible and can be
+  paused. Glass falls back to opaque surfaces with `prefers-reduced-transparency`.
+
+### Brand and media assets
+
+| Where                                               | Asset                                                                      |
+| --------------------------------------------------- | -------------------------------------------------------------------------- |
+| Header (adaptive light/dark), mobile menu, footer   | `public/brand/lguia-logo-{dark,light}.png`                                 |
+| Watermark (diagnosis tile, benefits lead tile, 404) | `public/brand/lguia-mark.png`                                              |
+| Home hero                                           | `public/media/video/hero-connections.mp4` + poster                         |
+| Home "Cómo trabajamos"                              | `public/media/video/process-neural.mp4` + poster                           |
+| Service tiles, overview blocks and category heroes  | `public/media/images/{web-development,automation,business-ai,connections}` |
+| Diagnosis CTA tile                                  | `public/media/images/circuit.jpg`                                          |
+| Contact CTA band, plans hero                        | `public/media/images/neural-circuit.jpg`                                   |
+
+Originals live in `assets/brand-source/`; `node scripts/prepare-brand-assets.mjs` regenerates the
+transparent logos and app icons.
 
 ### Quality snapshot (production build, Lighthouse mobile)
 
-| Page                   | Performance | Accessibility | Best practices | SEO |
-| ---------------------- | ----------- | ------------- | -------------- | --- |
-| `/`                    | 97          | 100           | 100            | 100 |
-| `/servicios`           | 98          | 100           | 100            | 100 |
-| `/planes`              | 97          | 100           | 100            | 100 |
-| `/contacto`            | 97          | 100           | 100            | 100 |
-| `/diagnostico-digital` | 96          | 100           | 100            | 100 |
+| Page                     | Performance | Accessibility | Best practices | SEO |
+| ------------------------ | ----------- | ------------- | -------------- | --- |
+| `/`                      | 93          | 100           | 100            | 100 |
+| `/servicios`             | 94          | 100           | 100            | 100 |
+| `/servicios/chatbots-ia` | 94          | 100           | 100            | 100 |
+| `/planes`                | 94          | 100           | 100            | 100 |
+| `/contacto`              | 96          | 100           | 100            | 100 |
+| `/diagnostico-digital`   | 95          | 100           | 100            | 100 |
 
-CLS 0 on every page; total blocking time ≤ 60 ms.
+CLS 0 on every page; total blocking time 30 ms; the LCP element is the `<h1>` on every page.
 
 ## Roadmap
 
