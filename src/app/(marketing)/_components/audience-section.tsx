@@ -45,26 +45,26 @@ const sectors: { icon: LucideIcon; name: string; example: string }[] = [
 
 export function AudienceSection() {
   return (
-    <Section labelledBy="para-quien-titulo">
+    <Section tone="white" labelledBy="para-quien-titulo">
       <SectionHeader
         id="para-quien-titulo"
         title="Para quién trabajamos"
         intro="Pymes y negocios locales de cualquier sector. Estos son algunos con los que encajamos especialmente bien."
       />
-      <ul className="grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {sectors.map(({ icon: Icon, name, example }) => (
-          <li key={name} className="flex gap-4 border-t border-line py-6">
-            <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-pine-50 text-pine-700">
-              <Icon aria-hidden="true" className="size-5" />
+          <li key={name} className="flex gap-4 rounded-tile bg-fog-white p-6 md:p-7">
+            <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-pure-white text-obsidian">
+              <Icon aria-hidden="true" className="size-5" strokeWidth={1.75} />
             </span>
             <div>
               <p className="font-semibold">{name}</p>
-              <p className="mt-1 text-base text-ink-soft">{example}</p>
+              <p className="mt-1 text-footnote text-pewter">{example}</p>
             </div>
           </li>
         ))}
       </ul>
-      <p className="mt-8 max-w-2xl text-ink-soft">
+      <p className="mx-auto mt-10 max-w-2xl text-center text-body text-pewter">
         Si tu empresa tiene clientes que te buscan en internet o tareas que se repiten cada semana,
         probablemente podemos ayudarte.
       </p>

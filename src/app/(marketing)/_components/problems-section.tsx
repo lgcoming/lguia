@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { Section, SectionHeader } from "@/components/ui/layout-primitives";
+import { TextLink } from "@/components/ui/text-link";
 import { categoryHref } from "@/features/catalog/routes";
 import type { ServiceCategoryId } from "@/types/catalog";
 
@@ -56,25 +55,23 @@ const problems: Problem[] = [
   },
 ];
 
+/** Pain → solution pairs as fog tiles on white; the pain is quoted in the owner's own words. */
 export function ProblemsSection() {
   return (
-    <Section labelledBy="problemas-titulo">
+    <Section tone="white" labelledBy="problemas-titulo">
       <SectionHeader
         id="problemas-titulo"
         title="Problemas que sabemos resolver"
         intro="Si alguna de estas frases te suena, podemos ayudarte."
       />
-      <ul className="grid gap-x-12 md:grid-cols-2">
+      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {problems.map((problem) => (
-          <li key={problem.pain} className="border-t border-line py-7">
-            <p className="text-h4 font-semibold">«{problem.pain}»</p>
-            <p className="mt-2 text-ink-soft">{problem.solution}</p>
-            <Link
-              href={categoryHref(problem.categoryId)}
-              className="mt-3 inline-flex min-h-11 items-center font-semibold text-pine-700 underline-offset-4 hover:underline"
-            >
-              {problem.link}
-            </Link>
+          <li key={problem.pain} className="flex flex-col rounded-tile bg-fog-white p-7 md:p-8">
+            <p className="text-subheading font-semibold">«{problem.pain}»</p>
+            <p className="mt-3 text-footnote text-pewter">{problem.solution}</p>
+            <div className="mt-auto pt-3">
+              <TextLink href={categoryHref(problem.categoryId)}>{problem.link}</TextLink>
+            </div>
           </li>
         ))}
       </ul>

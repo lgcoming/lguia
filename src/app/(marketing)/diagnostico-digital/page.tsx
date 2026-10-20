@@ -20,14 +20,14 @@ export default function DiagnosisPage() {
         title="Diagnóstico digital gratuito"
         intro="En unos 3 minutos sabrás en qué punto está tu negocio, qué plan te encaja mejor y por dónde empezar. Sin registro y sin compromiso."
       />
-      <div className="bg-mist pt-10 pb-16 md:pt-12 md:pb-24">
+      <div className="bg-fog-white pt-10 pb-20 md:pt-14 md:pb-28">
         <Container>
           <div className="mx-auto max-w-3xl">
             <noscript>
-              <p className="mb-6 rounded-card border border-line bg-paper p-6">
+              <p className="mb-6 rounded-tile bg-pure-white p-6">
                 El diagnóstico necesita JavaScript para funcionar. Si lo prefieres, cuéntanos tu
                 caso desde la{" "}
-                <Link href="/contacto" className="font-semibold text-pine-700 underline">
+                <Link href="/contacto" className="text-sapphire underline underline-offset-4">
                   página de contacto
                 </Link>
                 .

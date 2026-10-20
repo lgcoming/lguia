@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { Schibsted_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { getSiteUrl, siteConfig } from "@/lib/site";
 
 import "./globals.css";
 
-const schibsted = Schibsted_Grotesk({
+// Substitute for SF Pro outside Apple devices (SPEC-002 v2); `opsz` gives display and text cuts.
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-schibsted",
+  axes: ["opsz"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={schibsted.variable}>
+    <html lang="es" className={inter.variable}>
       <head>
         {/* Reveal animations start hidden; without JavaScript, show everything. */}
         <noscript>

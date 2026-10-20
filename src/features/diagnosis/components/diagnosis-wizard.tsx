@@ -131,7 +131,7 @@ export function DiagnosisWizard() {
   const viewKey = state.phase === "questions" ? `step-${state.stepIndex}` : state.phase;
 
   return (
-    <div className="rounded-panel border border-line bg-paper p-6 shadow-lift sm:p-10">
+    <div className="rounded-tile bg-pure-white p-6 sm:p-10">
       {state.phase === "questions" ? (
         <WizardProgress steps={DIAGNOSIS_STEPS} currentIndex={state.stepIndex} />
       ) : null}

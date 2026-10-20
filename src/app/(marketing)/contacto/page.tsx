@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { PageHero } from "@/components/marketing/page-hero";
 import { Section } from "@/components/ui/layout-primitives";
-import { RouteStop } from "@/components/ui/route";
+import { StepNumber } from "@/components/ui/step-number";
+import { TextLink } from "@/components/ui/text-link";
 import { getCatalogRepository } from "@/features/catalog/catalog-repository";
 import { ContactForm } from "@/features/leads/components/contact-form";
 import { createPageMetadata } from "@/lib/metadata";
@@ -46,61 +46,45 @@ export default async function ContactPage() {
       />
 
       <Section labelledBy="formulario-titulo">
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
-          <div>
-            <h2 id="formulario-titulo" className="mb-8 text-h3">
+        <div className="grid items-start gap-4 lg:grid-cols-[1.6fr_1fr]">
+          <div className="rounded-tile bg-pure-white p-6 sm:p-10">
+            <h2 id="formulario-titulo" className="mb-8 text-heading-sm">
               Escríbenos
             </h2>
             <ContactForm interestOptions={interestOptions} />
           </div>
 
-          <aside aria-labelledby="despues-titulo" className="lg:pt-2">
-            <div className="rounded-card bg-mist p-6 md:p-8">
-              <h2 id="despues-titulo" className="text-h4">
+          <aside aria-labelledby="despues-titulo" className="space-y-4 lg:sticky lg:top-24">
+            <div className="rounded-tile bg-pure-white p-6 md:p-8">
+              <h2 id="despues-titulo" className="text-subheading font-semibold">
                 Qué pasa después
               </h2>
-              <ol className="mt-6 space-y-6">
+              <ol className="mt-6 space-y-5">
                 {nextSteps.map((step, index) => (
-                  <li key={step.title} className="relative flex gap-4">
-                    {index < nextSteps.length - 1 ? (
-                      <span
-                        aria-hidden="true"
-                        className="absolute top-9 -bottom-6 left-[17px] w-0.5 bg-pine-100"
-                      />
-                    ) : null}
-                    <RouteStop state={index === 0 ? "current" : "done"}>{index + 1}</RouteStop>
+                  <li key={step.title} className="flex gap-4">
+                    <StepNumber value={index + 1} />
                     <div>
                       <p className="font-semibold">{step.title}</p>
-                      <p className="text-base text-ink-soft">{step.text}</p>
+                      <p className="mt-0.5 text-footnote text-pewter">{step.text}</p>
                     </div>
                   </li>
                 ))}
               </ol>
             </div>
 
-            <div className="mt-8 space-y-6 px-1">
-              <div>
-                <h2 className="font-semibold">¿Prefieres el email?</h2>
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="mt-1 inline-flex min-h-11 items-center font-semibold text-pine-700 underline underline-offset-4"
-                >
-                  {siteConfig.email}
-                </a>
-              </div>
-              <div>
-                <h2 className="font-semibold">¿No sabes qué necesitas?</h2>
-                <p className="mt-1 text-ink-soft">
-                  El{" "}
-                  <Link
-                    href="/diagnostico-digital"
-                    className="font-semibold text-pine-700 underline underline-offset-4"
-                  >
-                    diagnóstico digital
-                  </Link>{" "}
-                  te da una recomendación en unos 3 minutos.
-                </p>
-              </div>
+            <div className="rounded-tile bg-pure-white p-6 md:p-8">
+              <h2 className="font-semibold">¿Prefieres el email?</h2>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="mt-1 inline-flex min-h-11 items-center text-body text-sapphire underline-offset-4 hover:underline"
+              >
+                {siteConfig.email}
+              </a>
+              <h2 className="mt-5 font-semibold">¿No sabes qué necesitas?</h2>
+              <p className="mt-1 text-footnote text-pewter">
+                El diagnóstico digital te da una recomendación en unos 3 minutos.
+              </p>
+              <TextLink href="/diagnostico-digital">Haz el diagnóstico</TextLink>
             </div>
           </aside>
         </div>

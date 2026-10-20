@@ -3,15 +3,17 @@ import type { Metadata } from "next";
 import { AboutSection } from "@/app/(marketing)/_components/about-section";
 import { AudienceSection } from "@/app/(marketing)/_components/audience-section";
 import { BenefitsSection } from "@/app/(marketing)/_components/benefits-section";
-import { Hero, type DiagnosisPreviewData } from "@/app/(marketing)/_components/hero";
+import { Hero } from "@/app/(marketing)/_components/hero";
 import { ProblemsSection } from "@/app/(marketing)/_components/problems-section";
 import { ContactCTA, DiagnosisCTA } from "@/components/marketing/cta-section";
+import type { DiagnosisPreviewData } from "@/components/marketing/diagnosis-preview";
 import { PlanCard } from "@/components/marketing/plan-card";
 import { ProcessSteps } from "@/components/marketing/process-steps";
-import { ServiceCard } from "@/components/marketing/service-card";
+import { ServicesBento } from "@/components/marketing/service-tile";
+import { MediaBand } from "@/components/media/media-band";
 import { RevealItem, RevealList } from "@/components/motion/reveal";
-import { ButtonLink } from "@/components/ui/button";
-import { Section, SectionHeader } from "@/components/ui/layout-primitives";
+import { Container, Section, SectionHeader } from "@/components/ui/layout-primitives";
+import { TextLink } from "@/components/ui/text-link";
 import { processSteps } from "@/data/process";
 import { getCatalogRepository } from "@/features/catalog/catalog-repository";
 import { diagnose } from "@/features/diagnosis/model/diagnose";
@@ -26,7 +28,7 @@ export const metadata: Metadata = createPageMetadata({
   absoluteTitle: true,
 });
 
-/** A real engine result for an example business, so the hero shows what users will get. */
+/** A real engine result for an example business, so the diagnosis band shows what users get. */
 const EXAMPLE_ANSWERS: DiagnosisAnswers = {
   websiteStatus: "basic",
   sellsOnline: "no",
@@ -59,62 +61,68 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero preview={preview} />
+      <Hero />
 
       <AboutSection />
 
-      <Section tone="mist" labelledBy="servicios-titulo">
+      <Section labelledBy="servicios-titulo">
         <SectionHeader
           id="servicios-titulo"
           title="Qué podemos hacer por tu negocio"
           intro="Cuatro áreas que se complementan. Puedes empezar por una y sumar las demás cuando tenga sentido."
-        />
-        <RevealList className="grid gap-6 md:grid-cols-2">
-          {categories.map((category) => (
-            <RevealItem key={category.id}>
-              <ServiceCard category={category} />
-            </RevealItem>
-          ))}
-        </RevealList>
-        <ButtonLink href="/servicios" variant="ghost" className="mt-8 -ml-5">
-          Ver todos los servicios
-        </ButtonLink>
+        >
+          <div className="mt-5 flex justify-center">
+            <TextLink href="/servicios">Ver todos los servicios</TextLink>
+          </div>
+        </SectionHeader>
+        <ServicesBento categories={categories} />
       </Section>
 
       <ProblemsSection />
 
-      <Section tone="mist" labelledBy="planes-titulo">
+      <Section labelledBy="planes-titulo">
         <SectionHeader
           id="planes-titulo"
           title="Planes para empezar con buen pie"
           intro="Precios orientativos para que sepas desde el principio de qué hablamos. El presupuesto final se cierra tras el diagnóstico."
-        />
-        <RevealList className="grid gap-6 lg:grid-cols-3">
+        >
+          <div className="mt-5 flex justify-center">
+            <TextLink href="/planes">Ver todos los planes</TextLink>
+          </div>
+        </SectionHeader>
+        <RevealList className="grid gap-4 lg:grid-cols-3">
           {featuredPlans.map((plan) => (
             <RevealItem key={plan.id}>
               <PlanCard plan={plan} />
             </RevealItem>
           ))}
         </RevealList>
-        <ButtonLink href="/planes" variant="ghost" className="mt-8 -ml-5">
-          Ver todos los planes
-        </ButtonLink>
       </Section>
 
       <AudienceSection />
 
-      <Section tone="mist" labelledBy="proceso-titulo">
-        <SectionHeader
-          id="proceso-titulo"
-          title="Cómo trabajamos"
-          intro="Un proceso claro y por fases, para que sepas en todo momento en qué punto está tu proyecto."
-        />
-        <ProcessSteps steps={processSteps} />
-      </Section>
+      <MediaBand
+        labelledBy="proceso-titulo"
+        video={{
+          src: "/media/video/process-neural.mp4",
+          poster: "/media/video/process-neural-poster.jpg",
+        }}
+        overlay="soft"
+      >
+        <Container className="py-20 md:py-28">
+          <SectionHeader
+            id="proceso-titulo"
+            title="Cómo trabajamos"
+            intro="Un proceso claro y por fases, para que sepas en todo momento en qué punto está tu proyecto."
+            onDark
+          />
+          <ProcessSteps steps={processSteps} tone="dark" />
+        </Container>
+      </MediaBand>
 
       <BenefitsSection />
 
-      <DiagnosisCTA />
+      <DiagnosisCTA preview={preview} tone="white" />
 
       <ContactCTA />
     </>

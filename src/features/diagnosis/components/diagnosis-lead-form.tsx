@@ -40,13 +40,17 @@ const fieldOrder = ["name", "email", "company", "phone", "message", "consent"] a
 function LeadSuccess({ name, email }: { name: string; email: string }) {
   const headingRef = useFocusOnMount<HTMLHeadingElement>();
   return (
-    <div className="rounded-card border border-pine-700 bg-pine-50 p-6 md:p-8">
-      <CircleCheck aria-hidden="true" className="size-8 text-pine-700" />
-      <h3 ref={headingRef} tabIndex={-1} className="mt-4 text-h4 outline-none">
+    <div className="rounded-tile bg-fog-white p-6 md:p-8">
+      <CircleCheck aria-hidden="true" className="size-8 text-obsidian" strokeWidth={1.5} />
+      <h3
+        ref={headingRef}
+        tabIndex={-1}
+        className="mt-4 text-subheading font-semibold outline-none"
+      >
         Gracias, {name}. Hemos recibido tu diagnóstico.
       </h3>
-      <p className="mt-2 text-ink-soft">
-        Te escribiremos a <strong className="text-ink">{email}</strong> en un máximo de 2 días
+      <p className="mt-2 text-pewter">
+        Te escribiremos a <strong className="text-obsidian">{email}</strong> en un máximo de 2 días
         laborables para concertar una llamada de 30 minutos.
       </p>
     </div>
@@ -82,11 +86,11 @@ export function DiagnosisLeadForm({
   const submitting = status === "submitting";
 
   return (
-    <section aria-labelledby="lead-titulo" className="rounded-card bg-mist p-6 md:p-8">
-      <h3 id="lead-titulo" className="text-h4">
+    <section aria-labelledby="lead-titulo" className="rounded-tile bg-fog-white p-6 md:p-8">
+      <h3 id="lead-titulo" className="text-heading-sm">
         ¿Revisamos este diagnóstico contigo?
       </h3>
-      <p className="mt-2 text-ink-soft">
+      <p className="mt-2 text-pewter">
         Déjanos tus datos y te enviaremos una propuesta para el plan {planName}, sin compromiso.
       </p>
 

@@ -49,10 +49,10 @@ export default async function AdminLeadsPage() {
 
   return (
     <Container className="py-10 md:py-14">
-      <h1 className="text-h2">Leads</h1>
+      <h1 className="text-heading-lg">Leads</h1>
 
-      <p className="mt-4 flex max-w-3xl gap-3 rounded-xl border border-signal bg-paper p-4 text-sm">
-        <Info aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-signal-700" />
+      <p className="mt-4 flex max-w-3xl gap-3 rounded-control bg-ice-wash p-4 text-footnote">
+        <Info aria-hidden="true" className="mt-0.5 size-5 shrink-0" />
         <span>
           Vista de demostración: los leads se guardan en memoria y se pierden al reiniciar el
           servidor. No tiene autenticación, por eso está desactivada en producción salvo que se
@@ -62,9 +62,9 @@ export default async function AdminLeadsPage() {
 
       <dl className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.label} className="rounded-card border border-line bg-paper p-5">
-            <dt className="text-sm text-ink-soft">{stat.label}</dt>
-            <dd className="mt-1 text-h3 font-bold tabular">{stat.value}</dd>
+          <div key={stat.label} className="rounded-tile bg-pure-white p-6">
+            <dt className="text-footnote text-pewter">{stat.label}</dt>
+            <dd className="mt-1 text-heading-sm font-semibold tabular">{stat.value}</dd>
           </div>
         ))}
       </dl>

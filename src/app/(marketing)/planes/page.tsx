@@ -1,6 +1,5 @@
 import { Info } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { DiagnosisCTA } from "@/components/marketing/cta-section";
 import { FaqList } from "@/components/marketing/faq-list";
@@ -10,6 +9,7 @@ import { RevealItem, RevealList } from "@/components/motion/reveal";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
 import { Section, SectionHeader } from "@/components/ui/layout-primitives";
+import { TextLink } from "@/components/ui/text-link";
 import { planFaqs } from "@/data/plans";
 import { getCatalogRepository } from "@/features/catalog/catalog-repository";
 import { createPageMetadata } from "@/lib/metadata";
@@ -61,6 +61,7 @@ export default async function PlansPage() {
       <PageHero
         title="Planes pensados para cada etapa de tu negocio"
         intro="Elige un punto de partida. Todos los proyectos empiezan con un diagnóstico y terminan con un presupuesto cerrado, sin sorpresas."
+        media={{ image: "/media/images/neural-circuit.jpg", position: "object-[60%_35%]" }}
       >
         <ButtonLink href="/diagnostico-digital" size="lg">
           Descubre qué plan te encaja
@@ -71,50 +72,47 @@ export default async function PlansPage() {
         <h2 id="todos-planes-titulo" className="sr-only">
           Todos los planes
         </h2>
-        <RevealList className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <RevealList className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan) => (
             <RevealItem key={plan.id}>
               <PlanCard plan={plan} />
             </RevealItem>
           ))}
         </RevealList>
-        <p className="mt-8 flex max-w-3xl gap-3 text-ink-soft">
-          <Info aria-hidden="true" className="mt-1 size-5 shrink-0 text-pine-700" />
+        <p className="mx-auto mt-10 flex max-w-3xl justify-center gap-2.5 text-footnote text-pewter">
+          <Info aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
           Precios orientativos sin IVA. El presupuesto final depende del alcance de cada proyecto y
           se cierra contigo tras el diagnóstico, antes de empezar.
         </p>
       </Section>
 
-      <Section tone="mist" labelledBy="encaja-titulo">
+      <Section tone="white" width="text" labelledBy="encaja-titulo">
         <SectionHeader
           id="encaja-titulo"
           title="¿Qué plan encaja contigo?"
           intro="Una guía rápida. Si sigues con dudas, el diagnóstico digital te recomienda un plan con sus motivos en unos 3 minutos."
         />
-        <ul className="divide-y divide-line border-y border-line">
+        <ul className="space-y-3">
           {planGuide.map((item) => (
             <li
               key={item.planId}
-              className="grid gap-2 py-5 md:grid-cols-[1fr_auto] md:items-center md:gap-8"
+              className="grid gap-2 rounded-tile bg-fog-white px-6 py-5 md:grid-cols-[1fr_auto] md:items-center md:gap-8 md:px-8"
             >
               <p>{item.situation}</p>
-              <Link
-                href={`#${item.planId}`}
-                className="inline-flex min-h-11 items-center font-semibold text-pine-700 underline-offset-4 hover:underline"
-              >
+              <TextLink href={`#${item.planId}`} className="font-semibold">
                 {planNames.get(item.planId)}
-              </Link>
+              </TextLink>
             </li>
           ))}
         </ul>
       </Section>
 
-      <Section labelledBy="faq-planes-titulo">
+      <Section width="text" labelledBy="faq-planes-titulo">
         <SectionHeader id="faq-planes-titulo" title="Preguntas frecuentes sobre los planes" />
         <FaqList faqs={planFaqs} />
       </Section>
 
-      <DiagnosisCTA />
+      <DiagnosisCTA tone="white" />
     </>
   );
 }

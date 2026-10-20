@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import { Logo } from "@/components/layout/logo";
 import { SkipLink } from "@/components/layout/skip-link";
+import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/layout-primitives";
 
 export const metadata: Metadata = {
@@ -14,23 +15,21 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <SkipLink />
-      <header className="border-b border-line bg-paper">
-        <Container className="flex h-16 items-center justify-between gap-4">
+      <header className="glass-light sticky top-0 z-40">
+        <Container className="flex h-13 items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Logo />
-            <span className="rounded-full bg-mist px-3 py-1 text-sm font-semibold text-ink-soft">
-              Panel interno
-            </span>
+            <Logo height={26} />
+            <Badge>Panel interno</Badge>
           </div>
           <Link
             href="/"
-            className="inline-flex min-h-11 items-center font-semibold text-pine-700 underline-offset-4 hover:underline"
+            className="inline-flex min-h-11 items-center text-footnote text-sapphire underline-offset-4 hover:underline"
           >
             Volver a la web
           </Link>
         </Container>
       </header>
-      <main id="contenido" tabIndex={-1} className="min-h-[70vh] bg-mist outline-none">
+      <main id="contenido" tabIndex={-1} className="min-h-[70vh] bg-fog-white outline-none">
         {children}
       </main>
     </>

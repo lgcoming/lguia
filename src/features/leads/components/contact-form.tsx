@@ -65,18 +65,18 @@ export function ContactForm({
 
   if (status === "success") {
     return (
-      <div className="rounded-card border border-pine-700 bg-pine-50 p-6 md:p-8">
-        <CircleCheck aria-hidden="true" className="size-8 text-pine-700" />
-        <h2 ref={successHeadingRef} tabIndex={-1} className="mt-4 text-h3 outline-none">
+      <div className="rounded-tile bg-fog-white p-6 md:p-8">
+        <CircleCheck aria-hidden="true" className="size-8 text-obsidian" strokeWidth={1.5} />
+        <h2 ref={successHeadingRef} tabIndex={-1} className="mt-4 text-heading-sm outline-none">
           Gracias, {values.name.trim().split(" ")[0]}. Hemos recibido tu mensaje.
         </h2>
-        <p className="mt-3 text-ink-soft">
-          Te responderemos a <strong className="text-ink">{values.email.trim()}</strong> en un
+        <p className="mt-3 text-pewter">
+          Te responderemos a <strong className="text-obsidian">{values.email.trim()}</strong> en un
           máximo de 2 días laborables con una primera valoración.
         </p>
         <p className="mt-6">
           Mientras tanto, puedes{" "}
-          <Link href="/diagnostico-digital" className="font-semibold text-pine-700 underline">
+          <Link href="/diagnostico-digital" className="text-sapphire underline underline-offset-4">
             hacer el diagnóstico digital
           </Link>{" "}
           para adelantar trabajo.

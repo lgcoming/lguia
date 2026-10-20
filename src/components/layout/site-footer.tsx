@@ -15,20 +15,20 @@ const companyLinks: NavItem[] = [
 function FooterColumn({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div>
-      <h2 className="text-base font-semibold text-paper">{title}</h2>
-      <div className="mt-4">{children}</div>
+      <h2 className="text-caption font-semibold text-obsidian">{title}</h2>
+      <div className="mt-3">{children}</div>
     </div>
   );
 }
 
 function FooterLinks({ links }: { links: NavItem[] }) {
   return (
-    <ul>
+    <ul className="space-y-1">
       {links.map((link) => (
         <li key={link.href}>
           <Link
             href={link.href}
-            className="inline-flex min-h-11 items-center text-on-dark-soft transition-colors hover:text-paper"
+            className="inline-flex min-h-8 items-center text-footnote text-slate underline-offset-4 transition-colors duration-200 hover:text-obsidian hover:underline"
           >
             {link.label}
           </Link>
@@ -38,14 +38,15 @@ function FooterLinks({ links }: { links: NavItem[] }) {
   );
 }
 
+/** Apple-style footer: fog canvas, dense columns, fine print (SPEC-003). */
 export function SiteFooter({ serviceLinks }: { serviceLinks: NavItem[] }) {
   return (
-    <footer className="bg-ink text-paper [--focus-ring:var(--color-signal)]">
-      <Container className="py-14 md:py-16">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+    <footer className="border-t border-pale-mist bg-fog-white text-pewter">
+      <Container className="pt-14 pb-10">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
           <div className="max-w-xs">
-            <Logo onDark />
-            <p className="mt-4 text-on-dark-soft">
+            <Logo height={30} className="-ml-0.5" />
+            <p className="mt-4 text-footnote">
               Webs, automatización e inteligencia artificial práctica para pymes y negocios locales.
             </p>
           </div>
@@ -58,16 +59,14 @@ export function SiteFooter({ serviceLinks }: { serviceLinks: NavItem[] }) {
           <FooterColumn title="Hablemos">
             <a
               href={`mailto:${siteConfig.email}`}
-              className="inline-flex min-h-11 items-center font-semibold text-paper underline decoration-signal decoration-2 underline-offset-4"
+              className="inline-flex min-h-8 items-center text-footnote text-sapphire underline-offset-4 hover:underline"
             >
               {siteConfig.email}
             </a>
-            <p className="mt-2 text-on-dark-soft">
-              Trabajamos en remoto con empresas de toda España.
-            </p>
+            <p className="mt-1 text-footnote">Trabajamos en remoto con empresas de toda España.</p>
           </FooterColumn>
         </div>
-        <div className="mt-12 border-t border-ink-raised pt-6 text-sm text-on-dark-soft">
+        <div className="mt-12 border-t border-pale-mist pt-5 text-caption">
           <p>© {new Date().getFullYear()} LGuIA. Todos los derechos reservados.</p>
         </div>
       </Container>

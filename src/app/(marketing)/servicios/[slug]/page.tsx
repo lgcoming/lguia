@@ -2,12 +2,13 @@ import { Check } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { categoryMedia } from "@/components/marketing/category-media";
 import { ContactCTA } from "@/components/marketing/cta-section";
 import { FaqList } from "@/components/marketing/faq-list";
 import { PageHero } from "@/components/marketing/page-hero";
 import { PlanCard } from "@/components/marketing/plan-card";
 import { ProcessSteps } from "@/components/marketing/process-steps";
-import { ServiceCard } from "@/components/marketing/service-card";
+import { ServiceTile } from "@/components/marketing/service-tile";
 import { RevealItem, RevealList } from "@/components/motion/reveal";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
@@ -63,11 +64,19 @@ export default async function ServiceCategoryPage({ params }: PageProps<"/servic
         data={breadcrumbSchema(breadcrumbs.map((item) => ({ name: item.label, path: item.href })))}
       />
       <JsonLd data={faqSchema(category.faqs)} />
-      <PageHero title={category.headline} intro={category.description} breadcrumbs={breadcrumbs}>
-        <ButtonLink href="/diagnostico-digital" size="lg">
+      <PageHero
+        title={category.headline}
+        intro={category.description}
+        breadcrumbs={breadcrumbs}
+        media={{
+          image: categoryMedia[category.id].image,
+          position: categoryMedia[category.id].position,
+        }}
+      >
+        <ButtonLink href="/diagnostico-digital" size="lg" className="w-full sm:w-auto">
           Haz tu diagnóstico digital
         </ButtonLink>
-        <ButtonLink href="/contacto" variant="secondary" size="lg">
+        <ButtonLink href="/contacto" variant="glass" size="lg" className="w-full sm:w-auto">
           Pedir propuesta
         </ButtonLink>
       </PageHero>
@@ -76,21 +85,23 @@ export default async function ServiceCategoryPage({ params }: PageProps<"/servic
         <SectionHeader id="incluye-titulo" title="Qué incluye" />
         <RevealList className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {category.services.map((service) => (
-            <RevealItem key={service.id} className="rounded-card border border-line bg-paper p-6">
-              <h3 className="text-h4">{service.name}</h3>
-              <p className="mt-2 text-ink-soft">{service.description}</p>
+            <RevealItem key={service.id} className="rounded-tile bg-pure-white p-7 md:p-8">
+              <h3 className="text-subheading font-semibold">{service.name}</h3>
+              <p className="mt-2 text-footnote text-pewter">{service.description}</p>
             </RevealItem>
           ))}
         </RevealList>
       </Section>
 
-      <Section tone="mist" labelledBy="consigues-titulo">
+      <Section tone="white" labelledBy="consigues-titulo">
         <SectionHeader id="consigues-titulo" title="Qué consigue tu negocio" />
-        <ul className="grid gap-x-10 gap-y-5 md:grid-cols-2">
+        <ul className="grid gap-4 md:grid-cols-2">
           {category.outcomes.map((outcome) => (
-            <li key={outcome} className="flex gap-3 text-lead">
-              <Check aria-hidden="true" className="mt-1.5 size-5 shrink-0 text-pine-700" />
-              {outcome}
+            <li key={outcome} className="flex items-start gap-4 rounded-tile bg-fog-white p-6">
+              <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-obsidian text-pure-white">
+                <Check aria-hidden="true" className="size-4" strokeWidth={2.5} />
+              </span>
+              <span className="pt-0.5 text-body">{outcome}</span>
             </li>
           ))}
         </ul>
@@ -105,31 +116,37 @@ export default async function ServiceCategoryPage({ params }: PageProps<"/servic
         <ProcessSteps steps={processSteps} />
       </Section>
 
-      <Section tone="mist" labelledBy="planes-titulo">
+      <Section tone="white" labelledBy="planes-titulo">
         <SectionHeader
           id="planes-titulo"
           title="Planes relacionados"
           intro="Precios orientativos sin IVA. El presupuesto final se cierra tras el diagnóstico."
         />
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-4 lg:grid-cols-3">
           {relatedPlans.map((plan) => (
-            <PlanCard key={plan.id} plan={plan} />
+            <PlanCard key={plan.id} plan={plan} tone="canvas" />
           ))}
         </div>
       </Section>
 
-      <Section labelledBy="faq-titulo">
+      <Section width="text" labelledBy="faq-titulo">
         <SectionHeader id="faq-titulo" title="Preguntas frecuentes" />
         <FaqList faqs={category.faqs} />
       </Section>
 
-      <Section tone="mist" labelledBy="otros-titulo">
+      <Section tone="white" labelledBy="otros-titulo">
         <SectionHeader id="otros-titulo" title="Otros servicios" />
-        <div className="grid gap-6 md:grid-cols-3">
+        <ul className="grid gap-4 md:grid-cols-3">
           {otherCategories.map((other) => (
-            <ServiceCard key={other.id} category={other} />
+            <li key={other.id} className="flex">
+              <ServiceTile
+                category={other}
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="w-full"
+              />
+            </li>
           ))}
-        </div>
+        </ul>
       </Section>
 
       <ContactCTA />

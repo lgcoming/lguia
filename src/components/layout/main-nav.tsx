@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
+import { Logo } from "@/components/layout/logo";
 import { ButtonLink } from "@/components/ui/button";
 import type { NavItem } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -13,37 +14,41 @@ function isActive(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+/**
+ * Desktop: inline links + CTA. Below lg: a full-screen glass sheet built on a modal <dialog>,
+ * which traps focus, closes on Escape and returns focus to the toggle natively.
+ */
 export function MainNav({ items }: { items: NavItem[] }) {
   const pathname = usePathname();
-  // The menu belongs to the page it was opened on: navigating closes it without an effect.
-  const [openOnPath, setOpenOnPath] = useState<string | null>(null);
-  const isOpen = openOnPath === pathname;
-  const toggleRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
+  // Navigating (links, back/forward) always closes the sheet.
   useEffect(() => {
-    if (!isOpen) return;
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setOpenOnPath(null);
-        toggleRef.current?.focus();
-      }
-    }
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [isOpen]);
+    dialogRef.current?.close();
+  }, [pathname]);
+
+  function open() {
+    dialogRef.current?.showModal();
+    setIsOpen(true);
+  }
+
+  function close() {
+    dialogRef.current?.close();
+  }
 
   return (
     <>
       <nav aria-label="Principal" className="hidden lg:block">
-        <ul className="flex items-center gap-1">
+        <ul className="flex items-center">
           {items.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
                 className={cn(
-                  "inline-flex min-h-11 items-center rounded-full px-4 font-medium transition-colors duration-150 hover:bg-mist",
-                  "aria-[current=page]:text-pine-700 aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8",
+                  "inline-flex min-h-11 items-center px-3.5 text-footnote opacity-80 transition-opacity duration-200 ease-out hover:opacity-100",
+                  "aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[6px] aria-[current=page]:opacity-100",
                 )}
               >
                 {item.label}
@@ -56,39 +61,53 @@ export function MainNav({ items }: { items: NavItem[] }) {
       <div className="flex items-center gap-2">
         {/* Wrapped: overriding the button's own display utility would conflict. */}
         <div className="hidden sm:block">
-          <ButtonLink href="/diagnostico-digital">Diagnóstico gratuito</ButtonLink>
+          <ButtonLink href="/diagnostico-digital" size="sm">
+            Diagnóstico gratuito
+          </ButtonLink>
         </div>
         <button
-          ref={toggleRef}
           type="button"
           aria-expanded={isOpen}
           aria-controls="menu-movil"
-          onClick={() => setOpenOnPath(isOpen ? null : pathname)}
-          className="inline-flex size-11 items-center justify-center rounded-full border border-line lg:hidden"
+          aria-haspopup="dialog"
+          onClick={open}
+          className="-mr-2 inline-flex size-11 items-center justify-center rounded-full transition-opacity duration-200 hover:opacity-70 lg:hidden"
         >
-          {isOpen ? (
-            <X aria-hidden="true" className="size-5" />
-          ) : (
-            <Menu aria-hidden="true" className="size-5" />
-          )}
-          <span className="sr-only">{isOpen ? "Cerrar menú" : "Abrir menú"}</span>
+          <Menu aria-hidden="true" className="size-5" strokeWidth={1.75} />
+          <span className="sr-only">Abrir menú</span>
         </button>
       </div>
 
-      <div
+      <dialog
+        ref={dialogRef}
         id="menu-movil"
-        hidden={!isOpen}
-        className="absolute inset-x-0 top-full border-b border-line bg-paper shadow-lift lg:hidden"
+        aria-label="Menú"
+        onClose={() => setIsOpen(false)}
+        className="glass-light fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none p-0 text-obsidian backdrop:bg-transparent lg:hidden"
       >
-        <nav aria-label="Principal móvil" className="mx-auto max-w-content px-4 pt-2 pb-6 sm:px-6">
-          <ul className="divide-y divide-line">
+        <div className="mx-auto flex h-13 w-full max-w-grid items-center justify-between px-4 sm:px-6">
+          <Logo height={26} />
+          <button
+            type="button"
+            onClick={close}
+            className="-mr-2 inline-flex size-11 items-center justify-center rounded-full transition-opacity duration-200 hover:opacity-70"
+          >
+            <X aria-hidden="true" className="size-5" strokeWidth={1.75} />
+            <span className="sr-only">Cerrar menú</span>
+          </button>
+        </div>
+        <nav
+          aria-label="Principal móvil"
+          className="mx-auto w-full max-w-grid px-6 pt-6 pb-10 sm:px-8"
+        >
+          <ul className="space-y-1">
             {items.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   aria-current={isActive(pathname, item.href) ? "page" : undefined}
-                  onClick={() => setOpenOnPath(null)}
-                  className="flex min-h-12 items-center text-h4 font-semibold aria-[current=page]:text-pine-700"
+                  onClick={close}
+                  className="flex min-h-12 items-center text-heading-sm font-semibold transition-colors duration-200 hover:text-graphite aria-[current=page]:text-sapphire"
                 >
                   {item.label}
                 </Link>
@@ -98,13 +117,13 @@ export function MainNav({ items }: { items: NavItem[] }) {
           <ButtonLink
             href="/diagnostico-digital"
             size="lg"
-            className="mt-4 w-full"
-            onClick={() => setOpenOnPath(null)}
+            className="mt-10 w-full"
+            onClick={close}
           >
             Haz tu diagnóstico digital
           </ButtonLink>
         </nav>
-      </div>
+      </dialog>
     </>
   );
 }
