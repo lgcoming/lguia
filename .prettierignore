@@ -7,3 +7,4 @@ package-lock.json
 .claude/skills
 .agents/skills
 skills-lock.json
+docs/design/refero-apple
