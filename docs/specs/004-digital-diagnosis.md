@@ -228,7 +228,7 @@ Phases: `intro` → `questions` (step 1–5) → `calculating` → `result` (+ l
 - **Questions**: one `<form>` per step; each question is a `<fieldset>` with `<legend>` and native
   radio inputs styled as option tiles (arrow keys move within a group, Tab between groups, Enter
   submits the step). Buttons "Anterior" and "Siguiente" (last step: "Ver mi diagnóstico").
-- **Progress**: "Paso N de 5: {step title}" text plus the route line with five stops; the visual
+- **Progress**: "Paso N de 5: {step title}" text plus a five-segment progress bar; the visual
   route is decorative (`aria-hidden`), the text is the accessible source of truth.
 - **Validation**: on "Siguiente", unanswered questions show "Selecciona una opción para continuar."
   inside the fieldset (`aria-describedby`, `aria-invalid` on the inputs), focus moves to the first

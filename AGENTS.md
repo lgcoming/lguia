@@ -85,16 +85,25 @@ Rules:
   variant, or wrap the component.
 - Formatting: Prettier (`npm run format`). Linting: ESLint (`npm run lint`).
 
-## Design system (SPEC-002)
+## Design system (SPEC-002 v2, Apple-inspired)
 
-- Tokens in `src/app/globals.css` (`@theme`). Palette: ink, ink-soft, paper, mist, line, control,
-  pine, signal, danger.
-- One typeface (Schibsted Grotesk). Left-aligned layouts. Radius by hierarchy (pill buttons, 12px
-  inputs, 20px cards).
-- Signature device: the route line (`RouteStop` in `components/ui/route.tsx`) — use it only for
-  real sequences or position.
-- Avoid: AI gradients/glow, glassmorphism, all-caps eyebrows, `→` in link text, `A · B · C` meta
-  strings, highlighted single words in headlines, identical card grids everywhere, fake social proof.
+- Reference: `docs/design/refero-apple/` (Refero "Apple (España)"). Tokens in `src/app/globals.css`
+  (`@theme`) use its names: fog-white, pure-white, obsidian, carbon, pewter, slate, graphite,
+  silver, pale-mist, ash-veil, iris-blue, sapphire, sky-signal, cornflower, ice-wash (+ danger).
+- Type: SF Pro on Apple devices (`-apple-system`), Inter variable elsewhere. Headlines 600 with
+  slightly negative tracking; body 17/1.47.
+- Light canvas for information, full-bleed dark bands (video/photography + overlay) for atmosphere.
+  Separate sections by surface change, never by rules or shadows. No box shadows.
+- Centered headline stacks (headline → subhead → button pair); left-aligned text inside tiles/forms.
+- `iris-blue` only for filled primary buttons; `sapphire` links/outlines on light, `sky-signal` on dark.
+- Pills (`rounded-full`) for all buttons; tiles 28px (`rounded-tile`); inputs 12px.
+- Glass (`backdrop-filter`) only for the nav, the mobile menu sheet and panels over imagery/dark bands;
+  always with an opaque fallback (`@supports`, `prefers-reduced-transparency`).
+- Bento grids for services and benefits; vary tile sizes, do not repeat one grid everywhere.
+- Media: `next/image` for photographs; background videos via `BackgroundVideo` (desktop only,
+  reduced-motion and Save-Data aware, poster first). Brand logos from `public/brand/`.
+- Avoid: decorative gradients or glow outside the brand logo and photography, `→` in link text (use
+  the chevron icon), all-caps labels, fake social proof, more than one filled blue button per group.
 
 ## Accessibility (WCAG 2.2 AA)
 

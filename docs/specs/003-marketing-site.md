@@ -27,36 +27,39 @@ Category slugs: `desarrollo-web`, `automatizaciones`, `chatbots-ia`, `seo-geo`.
 ## Shared layout — `(marketing)` route group
 
 - Skip link "Saltar al contenido" as the first focusable element, targeting `<main id="contenido">`.
-- **Header** (sticky, solid background): logo (home link), primary nav (Servicios, Planes,
-  Diagnóstico, Contacto) with `aria-current="page"`, CTA button "Diagnóstico gratuito".
-  Below `lg` (1024px), nav collapses into a disclosure menu: button with `aria-expanded`/`aria-controls`,
-  closes on Escape, on link click and on route change, returns focus to the toggle on Escape.
-- **Footer**: brand statement, service links (all 4 categories), company links, contact email,
-  copyright with current year.
+- **Header** (sticky, 48px, frosted glass — SPEC-002 v2): brand logo (home link), primary nav
+  (Servicios, Planes, Diagnóstico, Contacto) with `aria-current="page"`, CTA button "Diagnóstico
+  gratuito". The bar switches to dark glass (light logo and text) while a dark band
+  (`[data-nav-theme="dark"]`) is under it. Below `lg` (1024px), nav collapses into a full-screen
+  glass sheet: button with `aria-expanded`/`aria-controls`, closes on Escape, on link click and on
+  route change, returns focus to the toggle on Escape, page scroll locked while open.
+- **Footer** (`fog-white`, Apple-style dense columns at 12–14px): brand logo and statement, service
+  links (all 4 categories), company links, contact email, copyright with current year.
 
 ## Home — section order (brief §8)
 
-1. **Hero** — states what LGuIA does, for whom and the outcome; primary CTA "Haz tu diagnóstico
-   digital" → `/diagnostico-digital`; secondary CTA "Ver servicios" → `/servicios`. Visual: a
-   static-HTML preview of a diagnosis result (score, areas, recommended plan) drawn with the route
-   line — no image request, the H1 is the LCP element.
-2. **Qué es LGuIA** — short editorial explanation of the agency and its approach.
-3. **Servicios** — the four categories (cards → detail pages).
-4. **Problemas que resolvemos** — pain → solution rows.
-5. **Planes destacados** — plans with `featured: true` + link to `/planes`.
-6. **Para quién trabajamos** — target business types.
-7. **Cómo trabajamos** — shared process steps on the route line.
-8. **Por qué LGuIA** — benefits.
-9. **Diagnóstico CTA** — dark band.
-10. **Contacto CTA**.
+1. **Hero** — full-viewport dark band with the "conexiones" background video (poster image first,
+   video only on desktop) under a dark gradient overlay; centered stack: what LGuIA does, for whom
+   and the outcome; primary CTA "Haz tu diagnóstico digital" → `/diagnostico-digital`; secondary
+   CTA "Ver servicios" → `/servicios`. The H1 (or the optimized poster) is the LCP element.
+2. **Qué es LGuIA** — centered editorial statement and three facts.
+3. **Servicios** — bento grid of the four categories, each tile with its photograph.
+4. **Problemas que resolvemos** — pain → solution pairs on white.
+5. **Planes destacados** — plans with `featured: true` as white tiles + link to `/planes`.
+6. **Para quién trabajamos** — target business types (tiles; horizontal scroll on mobile).
+7. **Cómo trabajamos** — dark band with the "neuronal" video; process steps as glass panels.
+8. **Por qué LGuIA** — benefits in a bento grid.
+9. **Diagnóstico CTA** — dark image band (circuit photograph) with the live diagnosis preview
+   (a real engine result for an example business) presented as the "product".
+10. **Contacto CTA** — dark image band with centered text and button pair.
 11. Footer (layout).
 
 ## Services
 
-- `/servicios`: page hero; one block per category (icon, name, description, full list of
-  services, link to detail); diagnosis CTA; contact CTA.
-- `/servicios/[slug]`: visible breadcrumbs; hero with category headline and CTAs (diagnosis and
-  "Pedir propuesta" → `/contacto`); "Qué incluye" (service items); "Qué consigues" (outcomes);
+- `/servicios`: centered page hero; bento grid of categories; one block per category (name,
+  description, full list of services as tiles, link to detail); diagnosis CTA; contact CTA.
+- `/servicios/[slug]`: dark hero band with the category photograph, visible breadcrumbs, category
+  headline and CTAs (diagnosis and "Pedir propuesta" → `/contacto`); "Qué incluye" (service items); "Qué consigues" (outcomes);
   process steps; related plans (PlanCard); FAQ (native `<details>`); links to the other
   categories; contact CTA.
 - GEO content must not promise rankings or guaranteed appearances in AI answers.
