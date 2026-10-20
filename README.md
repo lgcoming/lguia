@@ -111,26 +111,28 @@ In development the admin view is available at `/admin/leads` with three fictiona
 
 ## Available scripts
 
-| Script                            | What it does                                             |
-| --------------------------------- | -------------------------------------------------------- |
-| `npm run dev`                     | Development server                                       |
-| `npm run build` / `npm start`     | Production build / serve it                              |
-| `npm run lint`                    | ESLint (Next.js core-web-vitals + TypeScript rules)      |
-| `npm run typecheck`               | Generates route types (`next typegen`) and runs `tsc`    |
-| `npm test`                        | Vitest: unit, integration and component tests            |
-| `npm run test:watch`              | Vitest in watch mode                                     |
-| `npm run test:e2e`                | Playwright against a production build (desktop + mobile) |
-| `npm run format` / `format:check` | Prettier write / check                                   |
-| `npm run check`                   | lint + typecheck + tests                                 |
+| Script                                  | What it does                                              |
+| --------------------------------------- | --------------------------------------------------------- |
+| `npm run dev`                           | Development server                                        |
+| `npm run build` / `npm start`           | Production build / serve it                               |
+| `npm run lint`                          | ESLint (Next.js core-web-vitals + TypeScript rules)       |
+| `npm run typecheck`                     | Generates route types (`next typegen`) and runs `tsc`     |
+| `npm test`                              | Vitest: unit, integration and component tests             |
+| `npm run test:watch`                    | Vitest in watch mode                                      |
+| `npm run test:e2e`                      | Playwright against a production build (desktop + mobile)  |
+| `npm run format` / `format:check`       | Prettier write / check                                    |
+| `npm run check`                         | lint + typecheck + tests                                  |
+| `node scripts/encode-videos.mjs`        | Re-encode background videos (Chrome WebCodecs, no ffmpeg) |
+| `node scripts/prepare-brand-assets.mjs` | Regenerate transparent logos and app icons                |
 
 ## Testing
 
-| Layer       | Where               | What                                                                                                                                                                     |
-| ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Unit        | `tests/unit`        | Diagnosis validation, scoring, plan rules and tie-breaks, service recommendations, an invariant sweep over 262k answer combinations, lead/email validation, lead service |
-| Integration | `tests/integration` | Route Handlers with real `Request` objects: success, invalid JSON, missing/invalid fields, tampering, honeypot, production gate                                          |
-| Component   | `tests/components`  | Wizard navigation, validation, keyboard-only use, API success and error recovery; contact form                                                                           |
-| E2E         | `tests/e2e`         | `/diagnostico-digital` → complete → recommendation → lead → success, desktop and mobile                                                                                  |
+| Layer       | Where               | What                                                                                                                                                                                              |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unit        | `tests/unit`        | Diagnosis validation, scoring, plan rules and tie-breaks, service recommendations, an invariant sweep over 262k answer combinations, lead/email validation, lead service, scroll-to-video mapping |
+| Integration | `tests/integration` | Route Handlers with real `Request` objects: success, invalid JSON, missing/invalid fields, tampering, honeypot, production gate                                                                   |
+| Component   | `tests/components`  | Wizard navigation, validation, keyboard-only use, API success and error recovery; contact form                                                                                                    |
+| E2E         | `tests/e2e`         | `/diagnostico-digital` → complete → recommendation → lead → success, desktop and mobile                                                                                                           |
 
 ```bash
 npm test
@@ -175,8 +177,13 @@ The reasoning behind each decision is recorded in [`MEMORY.md`](./MEMORY.md). Hi
   with video or photography, frosted glass for the navigation and panels over imagery, bento grids,
   pill buttons. Text over footage is contrast-checked against real frames.
 - **Background videos are progressive enhancement**: the poster is server-rendered; the video only
-  loads on screens ≥ 768px without reduced motion or Save-Data, plays while visible and can be
-  paused. Glass falls back to opaque surfaces with `prefers-reduced-transparency`.
+  loads on screens ≥ 768px without reduced motion or Save-Data. The home hero is scrubbed by
+  scroll (pinned with CSS `sticky`, smoothed with a Motion spring); the process band loops while
+  visible and can be paused. Videos are re-encoded for the web (H.264, no audio, fast start, dense
+  keyframes for scrubbing) by `scripts/encode-videos.mjs`. Glass falls back to opaque surfaces with
+  `prefers-reduced-transparency`.
+- **No GSAP or Lenis**: Motion (already used) covers scroll-linked values, springs and entrances;
+  native scrolling is kept for accessibility and battery.
 
 ### Brand and media assets
 
@@ -184,20 +191,20 @@ The reasoning behind each decision is recorded in [`MEMORY.md`](./MEMORY.md). Hi
 | --------------------------------------------------- | -------------------------------------------------------------------------- |
 | Header (adaptive light/dark), mobile menu, footer   | `public/brand/lguia-logo-{dark,light}.png`                                 |
 | Watermark (diagnosis tile, benefits lead tile, 404) | `public/brand/lguia-mark.png`                                              |
-| Home hero                                           | `public/media/video/hero-connections.mp4` + poster                         |
+| Home hero (scroll-scrubbed)                         | `public/media/video/hero-connections.mp4` + poster                         |
 | Home "Cómo trabajamos"                              | `public/media/video/process-neural.mp4` + poster                           |
 | Service tiles, overview blocks and category heroes  | `public/media/images/{web-development,automation,business-ai,connections}` |
 | Diagnosis CTA tile                                  | `public/media/images/circuit.jpg`                                          |
 | Contact CTA band, plans hero                        | `public/media/images/neural-circuit.jpg`                                   |
 
-Originals live in `assets/brand-source/`; `node scripts/prepare-brand-assets.mjs` regenerates the
-transparent logos and app icons.
+Originals live in `assets/brand-source/` and `assets/media-source/`; the two scripts in "Available
+scripts" regenerate the served files.
 
 ### Quality snapshot (production build, Lighthouse mobile)
 
 | Page                     | Performance | Accessibility | Best practices | SEO |
 | ------------------------ | ----------- | ------------- | -------------- | --- |
-| `/`                      | 93          | 100           | 100            | 100 |
+| `/`                      | 92          | 100           | 100            | 100 |
 | `/servicios`             | 94          | 100           | 100            | 100 |
 | `/servicios/chatbots-ia` | 94          | 100           | 100            | 100 |
 | `/planes`                | 94          | 100           | 100            | 100 |
@@ -205,6 +212,8 @@ transparent logos and app icons.
 | `/diagnostico-digital`   | 95          | 100           | 100            | 100 |
 
 CLS 0 on every page; total blocking time 30 ms; the LCP element is the `<h1>` on every page.
+Desktop home with the pinned, scrubbed hero: 100 / 100 / 100 / 100 (LCP 0.7 s, TBT 0 ms; the
+2.6 MB hero video is fetched after `load`).
 
 ## Roadmap
 

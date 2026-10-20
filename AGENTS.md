@@ -117,8 +117,11 @@ HTML cannot express the state.
 ## Performance
 
 Static rendering wherever possible; minimal client JS; `LazyMotion` + `m` components; animate only
-`transform`/`opacity`; no scroll listeners; `next/font` self-hosting; no third-party scripts; no
-images in the critical path unless optimized with `next/image`.
+`transform`/`opacity` (plus a one-off entrance `blur` on cards); no hand-written scroll listeners —
+scroll-linked effects use Motion's `useScroll`, and pinning is CSS `sticky`; no scroll hijacking or
+smooth-scroll libraries; `next/font` self-hosting; no third-party scripts; no images in the
+critical path unless optimized with `next/image`. Re-encode videos with
+`node scripts/encode-videos.mjs` (originals in `assets/media-source/`).
 
 ## SEO
 
