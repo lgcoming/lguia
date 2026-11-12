@@ -3,9 +3,10 @@ import Link from "next/link";
 
 import { PageHero } from "@/components/marketing/page-hero";
 import { JsonLd } from "@/components/seo/json-ld";
-import { Container } from "@/components/ui/layout-primitives";
+import { Container, Section, SectionHeader } from "@/components/ui/layout-primitives";
+import { StepNumber } from "@/components/ui/step-number";
 import { DiagnosisWizard } from "@/features/diagnosis/components/diagnosis-wizard";
-import { getDiagnosisUiContent } from "@/features/diagnosis/content";
+import { getDiagnosisSteps, getDiagnosisUiContent } from "@/features/diagnosis/content";
 import { getLeadContent } from "@/features/leads/content";
 import { splitAt, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -61,6 +62,22 @@ export function DiagnosisView({ locale }: { locale: Locale }) {
           </div>
         </Container>
       </div>
+
+      {/* Server-rendered summary: the wizard is client-side, so this is what crawlers read. */}
+      <Section tone="white" width="text" labelledBy="evalua-titulo">
+        <SectionHeader id="evalua-titulo" title={page.coversTitle} intro={page.coversIntro} />
+        <ol className="grid gap-3 sm:grid-cols-2">
+          {getDiagnosisSteps(locale).map((step, index) => (
+            <li key={step.id} className="flex gap-4 rounded-tile bg-fog-white p-6">
+              <StepNumber value={index + 1} />
+              <div>
+                <p className="font-semibold">{step.title}</p>
+                <p className="mt-1 text-footnote text-pewter">{step.description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Section>
     </>
   );
 }

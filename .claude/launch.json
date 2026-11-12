@@ -9,8 +9,15 @@
     },
     {
       "name": "lguia-prod",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start", "--", "--port", "3100"],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "-y",
+        "node@24.12.0",
+        "node_modules/next/dist/bin/next",
+        "start",
+        "--port",
+        "3100"
+      ],
       "port": 3100
     }
   ]

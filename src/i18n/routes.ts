@@ -32,14 +32,14 @@ const PAGE_SEGMENTS: Record<Locale, Record<PageId, string>> = {
 const SERVICE_SLUGS: Record<Locale, Record<ServiceCategoryId, string>> = {
   es: {
     "desarrollo-web": "desarrollo-web-a-medida",
-    automatizaciones: "automatizacion-con-ia",
-    "chatbots-ia": "agentes-de-ia",
+    automatizaciones: "automatizacion-de-procesos",
+    "chatbots-ia": "agentes-ia-chatbots",
     "seo-geo": "seo-geo",
   },
   en: {
     "desarrollo-web": "custom-web-development",
     automatizaciones: "ai-automation",
-    "chatbots-ia": "ai-agents",
+    "chatbots-ia": "ai-agents-chatbots",
     "seo-geo": "seo-geo",
   },
 };

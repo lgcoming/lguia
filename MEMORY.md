@@ -54,6 +54,29 @@ top of each section. Keep entries short; link to specs for detail.
   must have a label.
 - **Honeypot instead of CAPTCHA** for spam on lead forms: zero third-party JS, no user friction.
 
+## Internationalisation and SEO (SPEC-009)
+
+- **Bilingual ES + EN with one root layout per language** (2026-11-12): Spanish at `/`, English
+  under `/en`, translated segments and slugs, physical route folders that call shared views in
+  `src/views/`. Chosen over `app/[lang]` + rewrites: fully static, correct `<html lang>` without a
+  proxy, no duplicate internal URLs. Cost: thin route files per language and a client-painted 404.
+- **x-default points at English**; hreflang uses language-only codes (`es`, `en`) so Spanish also
+  serves Latin America.
+- **Keyword targets** (qualitative, from SERP checks; no keyword tool, volumes not measured):
+  desarrollo web a medida / custom web development; automatización de procesos (con IA) / AI
+  automation; agentes de IA y chatbots para empresas / AI agents and chatbots for business; SEO y
+  GEO / SEO and GEO services; diagnóstico digital gratuito / free digital maturity assessment.
+- **Copy rules for both languages**: head term first in title and H1, an answer-first `answer`
+  per service with price and timeline, no superlatives, no invented figures, no ranking or
+  citation promises. Prices quoted in copy are unit-tested against the plans.
+- **`opengraph-image` inside a route group gets a hashed URL**, so the English social image is a
+  fixed route handler (`/og-en.png`).
+- **Do not name an app folder `_document`** (kept as `_shared`).
+- **AI crawlers are all allowed** in robots.txt, training ones included; move GPTBot, ClaudeBot,
+  Google-Extended and Applebot-Extended to a Disallow rule to opt out of training only.
+- **English copy is not reviewed by a native speaker yet**; `.es` domain geo-targets Spain (use
+  a generic TLD for international reach). Both are owner decisions.
+
 ## Design decisions (SPEC-002)
 
 - **Brand name is always `lguia`, lowercase** (2026-10-20, owner's rule): titles, metadata,
@@ -152,6 +175,14 @@ top of each section. Keep entries short; link to specs for detail.
 
 ## Tooling notes
 
+- **Node 24.22.0 breaks this toolchain** (2026-11-12): `next build`/`next start` fail with
+  "Expected workStore to be initialized", Playwright reports "did not expect test() to be called
+  here" and the jest-dom side-effect import stops extending `expect` (all are "two copies of a
+  module" symptoms). Node 24.12.0 and 24.21 (CI) work. Until Next ships a fix, build and run with
+  `npx -y node@24.12.0 node_modules/next/dist/bin/next build|start` (the `lguia-prod` preview
+  config does this) and run E2E with `npx -y node@24.12.0 node_modules/@playwright/test/cli.js
+test`. `tests/setup-dom.ts` registers the matchers explicitly so unit tests pass on any version.
+
 - Windows dev environment: repo uses `core.autocrlf=false` + `.gitattributes` (`eol=lf`).
 - **Regenerate `package-lock.json` with the npm version CI uses** (11.19.0 on Node 24.21 at the
   time of writing): `npx npm@11.19.0 install --package-lock-only`. A lockfile written by npm 11.6
@@ -176,6 +207,17 @@ top of each section. Keep entries short; link to specs for detail.
   (after Prettier reformatting) briefly left the OG image without its font.
 
 ## Verification log
+
+### 2026-11-12 — Bilingual site and international SEO
+
+- Lint and types clean; 126 unit/integration/component tests; 10 E2E (Spanish flow, English site,
+  language switcher, English assessment, 404 per language) on desktop and mobile, Node 24.12.
+- Production build: 32 static pages. Checked with curl: `<html lang>`, canonical, hreflang (es, en,
+  x-default), `og:locale` and alternates, sitemap with `xhtml:link`, robots.txt, `/llms.txt`,
+  `/og-en.png`, 404 status for unknown URLs in both trees, JSON 404 for unknown API paths, English
+  API responses with `?locale=en`.
+- Not re-measured after this change: Lighthouse and contrast over media (layout of media bands is
+  unchanged).
 
 ### 2026-10-20 — Scroll choreography, media pipeline and navbar
 

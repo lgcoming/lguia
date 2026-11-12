@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { RootDocument } from "@/app/_document/root-document";
+import { RootDocument } from "@/app/_shared/root-document";
 import { rootMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = rootMetadata("en");

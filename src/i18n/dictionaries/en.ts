@@ -135,7 +135,7 @@ export const en: Dictionary = {
           solution:
             "An AI agent handles frequent enquiries and leaves you the ones that need your judgement.",
           service: "chatbots-ia",
-          link: "View AI agents",
+          link: "View AI agents and chatbots",
         },
         {
           pain: "We lose hours copying data",
@@ -156,7 +156,7 @@ export const en: Dictionary = {
           solution:
             "We identify a first use case with a clear return and get it running in a few weeks.",
           service: "chatbots-ia",
-          link: "View AI agents",
+          link: "View AI agents and chatbots",
         },
       ],
     },
@@ -349,6 +349,9 @@ export const en: Dictionary = {
     noscript:
       "The assessment needs JavaScript to work. If you prefer, tell us about your case on the {link}.",
     noscriptLink: "contact page",
+    coversTitle: "What the assessment covers",
+    coversIntro:
+      "Eleven questions in five blocks. At the end you get a score from 0 to 100 by area, the recommended plan with its reasons and your next steps.",
   },
   contactPage: {
     metaTitle: "Contact: request a proposal",

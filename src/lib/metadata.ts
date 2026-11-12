@@ -5,9 +5,11 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { alternateHrefs, routeHref, type RouteRef } from "@/i18n/routes";
 import { getSiteUrl, siteConfig } from "@/lib/site";
 
-/** The generated Open Graph image of each language (opengraph-image.tsx route files). */
+/** The generated Open Graph image of each language (app/opengraph-image.tsx, app/og-en.png). */
+const OG_IMAGE: Record<Locale, string> = { es: "/opengraph-image", en: "/og-en.png" };
+
 export function ogImagePath(locale: Locale): string {
-  return `${LOCALE_INFO[locale].prefix}/opengraph-image`;
+  return OG_IMAGE[locale];
 }
 
 function sharedImage(locale: Locale) {

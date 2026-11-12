@@ -220,7 +220,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "chatbots-ia",
-    name: "AI agents",
+    name: "AI agents and chatbots",
     icon: "ai",
     seoTitle: "AI agents and chatbots for business",
     seoDescription:

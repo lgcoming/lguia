@@ -5,7 +5,6 @@ import { NotFoundView } from "@/views/not-found/not-found-view";
 
 export const metadata: Metadata = {
   title: getDictionary("en").notFound.metaTitle,
-  robots: { index: false },
 };
 
 export default function NotFound() {

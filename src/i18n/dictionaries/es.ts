@@ -149,28 +149,28 @@ export const es = {
           solution:
             "Un agente de IA atiende las consultas frecuentes y te deja las que necesitan tu criterio.",
           service: service("chatbots-ia"),
-          link: "Ver agentes de IA",
+          link: "Ver agentes de IA y chatbots",
         },
         {
           pain: "Perdemos horas copiando datos",
           solution:
             "Conectamos formularios, email y CRM para que la información fluya sin pasar de mano en mano.",
           service: service("automatizaciones"),
-          link: "Ver automatización con IA",
+          link: "Ver automatización de procesos",
         },
         {
           pain: "Los contactos se pierden o se responden tarde",
           solution:
             "Cada solicitud se clasifica y se asigna automáticamente, con un aviso a la persona responsable.",
           service: service("automatizaciones"),
-          link: "Ver automatización con IA",
+          link: "Ver automatización de procesos",
         },
         {
           pain: "Quiero usar IA, pero no sé por dónde empezar",
           solution:
             "Identificamos un primer caso de uso con un retorno claro y lo ponemos en marcha en pocas semanas.",
           service: service("chatbots-ia"),
-          link: "Ver agentes de IA",
+          link: "Ver agentes de IA y chatbots",
         },
       ],
     },
@@ -371,6 +371,9 @@ export const es = {
     noscript:
       "El diagnóstico necesita JavaScript para funcionar. Si lo prefieres, cuéntanos tu caso desde la {link}.",
     noscriptLink: "página de contacto",
+    coversTitle: "Qué evalúa el diagnóstico",
+    coversIntro:
+      "Once preguntas en cinco bloques. Al terminar verás una puntuación de 0 a 100 por áreas, el plan recomendado con sus motivos y los próximos pasos.",
   },
   contactPage: {
     metaTitle: "Contacto: pide una propuesta",

@@ -14,10 +14,7 @@ const organizationId = () => `${getSiteUrl().origin}/#organization`;
 const websiteId = () => `${getSiteUrl().origin}/#website`;
 
 /** lguia works remotely from Spain for clients anywhere: the country is the only location shown. */
-const AREA_SERVED = [
-  { "@type": "Country", name: "Spain" },
-  { "@type": "AdministrativeArea", name: "Worldwide" },
-];
+const AREA_SERVED = [{ "@type": "Country", name: "Spain" }, "Worldwide"];
 
 const LANGUAGE_NAMES: Record<Locale, string> = { es: "Spanish", en: "English" };
 
@@ -36,7 +33,8 @@ export function siteGraph(locale: Locale, categories: ServiceCategory[]) {
         "@type": ["Organization", "ProfessionalService"],
         "@id": organizationId(),
         name: siteConfig.name,
-        url: absoluteUrl(pageHref(locale, "home")),
+        // One entity, one URL: the same in every language.
+        url: absoluteUrl("/"),
         logo: { "@type": "ImageObject", url: logo, width: 512, height: 512 },
         image: logo,
         email: siteConfig.email,
@@ -111,6 +109,13 @@ function lowestPrice(plans: Plan[]): number | undefined {
   return amounts.length > 0 ? Math.min(...amounts) : undefined;
 }
 
+function highestPrice(plans: Plan[]): number | undefined {
+  const amounts = plans.flatMap((plan) =>
+    plan.pricing.kind === "from" ? [plan.pricing.amount] : [],
+  );
+  return amounts.length > 0 ? Math.max(...amounts) : undefined;
+}
+
 /** A service page. Prices come from the related plans shown on the same page. */
 export function serviceSchema(category: ServiceCategory, locale: Locale, relatedPlans: Plan[]) {
   const from = lowestPrice(relatedPlans);
@@ -131,7 +136,7 @@ export function serviceSchema(category: ServiceCategory, locale: Locale, related
             "@type": "AggregateOffer",
             priceCurrency: "EUR",
             lowPrice: from,
-            offerCount: relatedPlans.length,
+            highPrice: highestPrice(relatedPlans),
           },
         }),
     hasOfferCatalog: {
@@ -158,6 +163,7 @@ export function plansSchema(plans: Plan[], locale: Locale, name: string) {
       name: plan.name,
       description: plan.tagline,
       url: absoluteUrl(planHref(locale, plan.id)),
+      itemOffered: { "@type": "Service", name: plan.name, description: plan.idealFor },
       seller: { "@id": organizationId() },
       ...(plan.pricing.kind === "from"
         ? {

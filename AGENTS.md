@@ -45,13 +45,15 @@ Zod · Vitest + React Testing Library · Playwright · Vercel.
 ```
 src/
   app/            routes only (pages, layouts, route handlers, metadata files)
-    (marketing)/  public site with Header/Footer; _components/ for route-specific sections
-    (admin)/      internal views, noindex, gated by isAdminEnabled()
+    (es)/         Spanish root layout: (marketing)/ public pages at /, (admin)/ internal views
+    (en)/en/      English root layout and pages under /en (SPEC-009)
     api/          Route Handlers (thin)
   components/     reusable UI: ui/, layout/, marketing/, motion/, seo/
   features/       feature modules: catalog/, diagnosis/, leads/ (model + services + feature UI)
+  views/          page compositions shared by every language (route files stay thin)
+  i18n/           languages, localized routes, site dictionaries
   lib/            shared infrastructure (site config, api helpers, utils)
-  data/           static/mock content (services, plans, process)
+  data/           static/mock content per language (services, plans, process)
   types/          shared domain types
 tests/            unit/, integration/, components/, e2e/
 docs/specs/       SDD specifications
@@ -72,12 +74,22 @@ Rules:
 - No module-level mutable request state on the server. The in-memory lead store on `globalThis` is
   the single intentional exception (it is a mock database).
 
+## Languages (SPEC-009)
+
+- The site is bilingual: Spanish (default, at `/`) and English (`/en`). Every user-facing string
+  lives in a per-language file (`src/i18n/dictionaries/`, `src/data/<locale>/`,
+  `src/features/*/content/`); never hard-code copy in components. Add both languages together:
+  unit tests fail if their structure, placeholders or quoted prices differ.
+- Build every internal URL with `src/i18n/routes.ts` (`pageHref`, `serviceHref`, `planHref`).
+- Server Components read copy directly; Client Components receive strings as props.
+- The brand is always written `lguia`, lowercase, in both languages.
+
 ## Coding standards
 
 - TypeScript strict; no `any`; prefer `type`/`interface` from `src/types` or the feature module.
 - Names: components `PascalCase`, files `kebab-case.tsx`, functions `camelCase`, constants
   `SCREAMING_SNAKE_CASE` only for true constants.
-- UI copy in Spanish (es-ES), sentence case, plain verbs, no hype; code and comments in English.
+- UI copy in Spanish and English, sentence case, plain verbs, no hype; code and comments in English.
 - Comments explain _why_, not _what_. Keep them rare.
 - Tailwind utilities with design tokens from `globals.css`; never hard-code hex values in components.
   Use `cn()` from `src/lib/utils.ts` to compose classes. `cn()` does not resolve conflicts, so never

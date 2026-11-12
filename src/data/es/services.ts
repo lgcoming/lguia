@@ -128,7 +128,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "automatizaciones",
-    name: "Automatización con IA",
+    name: "Automatización de procesos",
     icon: "automation",
     seoTitle: "Automatización de procesos con IA para empresas",
     seoDescription:
@@ -225,7 +225,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "chatbots-ia",
-    name: "Agentes de IA",
+    name: "Agentes de IA y chatbots",
     icon: "ai",
     seoTitle: "Agentes de IA y chatbots para empresas",
     seoDescription:

@@ -52,8 +52,12 @@ describe("localized routes", () => {
   });
 
   it("switches language keeping the page, and falls back to home for unknown paths", () => {
-    expect(localizedPath("/servicios/agentes-de-ia", "en")).toBe("/en/services/ai-agents");
-    expect(localizedPath("/en/services/ai-agents", "es")).toBe("/servicios/agentes-de-ia");
+    expect(localizedPath("/servicios/agentes-ia-chatbots", "en")).toBe(
+      "/en/services/ai-agents-chatbots",
+    );
+    expect(localizedPath("/en/services/ai-agents-chatbots", "es")).toBe(
+      "/servicios/agentes-ia-chatbots",
+    );
     expect(localizedPath("/planes/", "en")).toBe("/en/pricing");
     expect(localizedPath("/en", "es")).toBe("/");
     expect(localizedPath("/admin/leads", "en")).toBe("/en");
