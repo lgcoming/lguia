@@ -3,12 +3,15 @@ import { Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { formatEuro } from "@/features/catalog/format";
+import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { pageHref } from "@/i18n/routes";
 import { cn } from "@/lib/utils";
 import type { Plan } from "@/types/catalog";
 
 interface PlanCardProps {
   plan: Plan;
-  cta?: { href: string; label: string };
+  locale: Locale;
   /** White tiles sit on the fog canvas; on white sections use the fog tone. */
   tone?: "white" | "canvas";
   className?: string;
@@ -18,12 +21,8 @@ interface PlanCardProps {
  * Plan as an Apple-style tile: no border, no shadow. The highlighted plan is told apart by its
  * badge and the only filled (primary) button in the row.
  */
-export function PlanCard({
-  plan,
-  cta = { href: "/contacto", label: "Pedir propuesta" },
-  tone = "white",
-  className,
-}: PlanCardProps) {
+export function PlanCard({ plan, locale, tone = "white", className }: PlanCardProps) {
+  const t = getDictionary(locale);
   const highlighted = Boolean(plan.highlight);
 
   return (
@@ -31,7 +30,7 @@ export function PlanCard({
       id={plan.id}
       aria-labelledby={`${plan.id}-name`}
       className={cn(
-        "flex h-full scroll-mt-24 flex-col rounded-tile p-7 md:p-8",
+        "tile-hover flex h-full scroll-mt-24 flex-col rounded-tile p-7 md:p-8",
         tone === "white" ? "bg-pure-white" : "bg-fog-white",
         className,
       )}
@@ -47,11 +46,11 @@ export function PlanCard({
       <p className="mt-7 flex flex-wrap items-baseline gap-x-2">
         {plan.pricing.kind === "from" ? (
           <>
-            <span className="text-footnote text-pewter">Desde</span>
+            <span className="text-footnote text-pewter">{t.planCard.from}</span>
             <span className="text-heading-lg font-semibold tabular">
-              {formatEuro(plan.pricing.amount)}
+              {formatEuro(plan.pricing.amount, locale)}
             </span>
-            <span className="text-caption text-pewter">sin IVA</span>
+            <span className="text-caption text-pewter">{t.planCard.vatExcluded}</span>
           </>
         ) : (
           <span className="text-heading-lg font-semibold">{plan.pricing.label}</span>
@@ -60,11 +59,11 @@ export function PlanCard({
 
       <dl className="mt-6 grid grid-cols-2 gap-4 text-footnote">
         <div>
-          <dt className="text-pewter">Plazo orientativo</dt>
+          <dt className="text-pewter">{t.planCard.timeline}</dt>
           <dd className="mt-1 font-semibold">{plan.timeline}</dd>
         </div>
         <div>
-          <dt className="text-pewter">Ideal para</dt>
+          <dt className="text-pewter">{t.planCard.idealFor}</dt>
           <dd className="mt-1 font-semibold">{plan.idealFor}</dd>
         </div>
       </dl>
@@ -80,11 +79,11 @@ export function PlanCard({
 
       <div className="mt-auto pt-8">
         <ButtonLink
-          href={cta.href}
+          href={pageHref(locale, "contact")}
           variant={highlighted ? "primary" : "secondary"}
           className="w-full"
         >
-          {cta.label}
+          {t.common.proposalCta}
           <span className="sr-only">: {plan.name}</span>
         </ButtonLink>
       </div>

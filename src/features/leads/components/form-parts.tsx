@@ -7,16 +7,18 @@ import { siteConfig } from "@/lib/site";
 /** Off-screen field that only bots fill in. Hidden from people and assistive technology. */
 export function HoneypotField({
   id,
+  label,
   value,
   onChange,
 }: {
   id: string;
+  label: string;
   value: string;
   onChange: (value: string) => void;
 }) {
   return (
     <div aria-hidden="true" className="absolute -left-[9999px] size-px overflow-hidden">
-      <label htmlFor={id}>No rellenes este campo</label>
+      <label htmlFor={id}>{label}</label>
       <input
         id={id}
         name="website"
@@ -30,12 +32,10 @@ export function HoneypotField({
   );
 }
 
-export function DataProtectionNotice() {
+export function DataProtectionNotice({ content }: { content: { title: string; text: string } }) {
   return (
     <p className="text-caption text-pewter">
-      <strong className="font-semibold text-obsidian">Protección de datos.</strong> Responsable:
-      lguia. Finalidad: responder a tu solicitud y, si lo pides, enviarte una propuesta. No cedemos
-      tus datos a terceros. Puedes acceder a ellos, rectificarlos o suprimirlos escribiendo a{" "}
+      <strong className="font-semibold text-obsidian">{content.title}</strong> {content.text}{" "}
       <a href={`mailto:${siteConfig.email}`} className="text-sapphire underline underline-offset-2">
         {siteConfig.email}
       </a>
@@ -59,11 +59,11 @@ export function FormAlert({ children }: { children: ReactNode }) {
 export function SubmitButton({
   submitting,
   label,
-  submittingLabel = "Enviando…",
+  submittingLabel,
 }: {
   submitting: boolean;
   label: string;
-  submittingLabel?: string;
+  submittingLabel: string;
 }) {
   return (
     <Button type="submit" size="lg" disabled={submitting} aria-disabled={submitting}>

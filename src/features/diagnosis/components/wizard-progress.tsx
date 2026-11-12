@@ -3,6 +3,7 @@
 import * as m from "motion/react-m";
 
 import type { DiagnosisStep } from "@/features/diagnosis/model/questions";
+import { format } from "@/i18n/config";
 import { cn } from "@/lib/utils";
 
 /**
@@ -12,14 +13,17 @@ import { cn } from "@/lib/utils";
 export function WizardProgress({
   steps,
   currentIndex,
+  label,
 }: {
   steps: DiagnosisStep[];
   currentIndex: number;
+  /** Template with `{current}` and `{total}`. */
+  label: string;
 }) {
   return (
     <div aria-hidden="true" className="mb-10">
       <p className="text-footnote font-semibold text-pewter">
-        Paso {currentIndex + 1} de {steps.length}
+        {format(label, { current: currentIndex + 1, total: steps.length })}
       </p>
       <ol
         className="mt-3 grid gap-1.5"

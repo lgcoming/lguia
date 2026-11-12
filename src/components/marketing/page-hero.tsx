@@ -10,9 +10,17 @@ export interface Breadcrumb {
   label: string;
 }
 
-function Breadcrumbs({ items, onDark }: { items: Breadcrumb[]; onDark: boolean }) {
+function Breadcrumbs({
+  items,
+  label,
+  onDark,
+}: {
+  items: Breadcrumb[];
+  label: string;
+  onDark: boolean;
+}) {
   return (
-    <nav aria-label="Migas de pan" className="mb-6">
+    <nav aria-label={label} className="mb-6">
       <ol
         className={cn(
           "flex flex-wrap items-center justify-center gap-x-2 text-footnote",
@@ -53,17 +61,28 @@ interface PageHeroProps {
   title: string;
   intro: string;
   breadcrumbs?: Breadcrumb[];
+  /** Accessible name of the breadcrumb trail, in the page's language. */
+  breadcrumbsLabel?: string;
   /** A photograph turns the hero into a dark band that slides under the header glass. */
   media?: { image: string; position?: string };
   children?: ReactNode;
 }
 
 /** Centered page hero: headline → subhead → actions, on white or over a photograph. */
-export function PageHero({ title, intro, breadcrumbs, media, children }: PageHeroProps) {
+export function PageHero({
+  title,
+  intro,
+  breadcrumbs,
+  breadcrumbsLabel = "Breadcrumbs",
+  media,
+  children,
+}: PageHeroProps) {
   const onDark = Boolean(media);
   const content = (
     <>
-      {breadcrumbs ? <Breadcrumbs items={breadcrumbs} onDark={onDark} /> : null}
+      {breadcrumbs ? (
+        <Breadcrumbs items={breadcrumbs} label={breadcrumbsLabel} onDark={onDark} />
+      ) : null}
       {/* Long Spanish words ("automatizaciones") need a smaller size and hyphenation on 320px. */}
       <h1 className="text-[2.25rem] leading-[1.08] tracking-[-0.02em] max-[399px]:text-[1.875rem] max-[399px]:hyphens-auto sm:text-[3rem] md:text-display">
         {title}

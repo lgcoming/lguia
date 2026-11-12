@@ -39,18 +39,24 @@ function LogoImage({
 export function Logo({
   variant = "on-light",
   height = 28,
+  href = "/",
+  label,
   imageClassName,
   className,
 }: {
   variant?: LogoVariant;
   height?: number;
+  /** Home of the current language. */
+  href?: string;
+  /** Accessible name in the current language, e.g. "lguia, ir al inicio". */
+  label: string;
   imageClassName?: string;
   className?: string;
 }) {
   return (
     <Link
-      href="/"
-      aria-label="lguia, ir al inicio"
+      href={href}
+      aria-label={label}
       className={cn("inline-flex min-h-11 shrink-0 items-center rounded-lg", className)}
     >
       {variant === "adaptive" ? (

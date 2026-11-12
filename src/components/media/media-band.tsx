@@ -24,7 +24,8 @@ interface MediaBandProps {
   image?: string;
   /** Focal point of the photograph, as a literal `object-*` class. */
   imagePosition?: string;
-  video?: { src: string; poster: string };
+  /** A looping background video; `labels` name its pause control in the page's language. */
+  video?: { src: string; poster: string; labels: { pause: string; play: string } };
   /** Above the fold (hero): load the poster/image eagerly with high priority. */
   eager?: boolean;
   overlay?: Overlay;
@@ -60,6 +61,7 @@ export function MediaBand({
           <BackgroundVideo
             src={video.src}
             poster={video.poster}
+            labels={video.labels}
             eager={eager}
             lazy={!eager}
             parallax={!eager}

@@ -2,9 +2,11 @@ import { describe, expect, it } from "vitest";
 
 import { createInMemoryLeadRepository } from "@/features/leads/lead-repository";
 import { submitLead } from "@/features/leads/lead-service";
-import { diagnosisLeadSchema, leadInputSchema } from "@/features/leads/schema";
+import { getLeadSchemas } from "@/features/leads/content";
 
 import { INDUSTRIAL_SUPPLIER } from "../diagnosis/fixtures";
+
+const { diagnosisLeadSchema, leadInputSchema } = getLeadSchemas("es");
 
 const NOW = new Date("2026-10-02T09:30:00.000Z");
 

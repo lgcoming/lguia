@@ -2,6 +2,8 @@ import { Badge } from "@/components/ui/badge";
 
 export interface DiagnosisPreviewData {
   caption: string;
+  /** Interface labels in the page's language. */
+  labels: { label: string; title: string; recommended: string; today: string; points: string };
   score: number;
   levelLabel: string;
   areas: { id: string; label: string; score: number }[];
@@ -15,11 +17,11 @@ export interface DiagnosisPreviewData {
 export function DiagnosisPreview({ data }: { data: DiagnosisPreviewData }) {
   return (
     <figure
-      aria-label="Ejemplo de resultado del diagnóstico digital"
+      aria-label={data.labels.label}
       className="glass-panel rounded-tile p-6 text-left sm:p-8"
     >
       <figcaption className="flex flex-wrap items-center justify-between gap-3">
-        <span className="text-footnote font-semibold">Diagnóstico digital</span>
+        <span className="text-footnote font-semibold">{data.labels.title}</span>
         <Badge tone="glass">{data.caption}</Badge>
       </figcaption>
 
@@ -57,13 +59,13 @@ export function DiagnosisPreview({ data }: { data: DiagnosisPreviewData }) {
 
       <div className="mt-8 flex flex-wrap items-end justify-between gap-4 border-t border-pure-white/10 pt-6">
         <p>
-          <span className="block text-caption text-ash-veil">Plan recomendado</span>
+          <span className="block text-caption text-ash-veil">{data.labels.recommended}</span>
           <span className="mt-1 block text-subheading font-semibold">{data.planName}</span>
         </p>
         <p className="text-right">
-          <span className="block text-caption text-ash-veil">Hoy</span>
+          <span className="block text-caption text-ash-veil">{data.labels.today}</span>
           <span className="mt-1 block text-footnote font-semibold tabular">
-            {data.score} puntos
+            {data.labels.points}
           </span>
         </p>
       </div>

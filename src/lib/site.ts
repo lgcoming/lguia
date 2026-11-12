@@ -1,24 +1,15 @@
 export const siteConfig = {
   name: "lguia",
-  tagline: "Webs, automatización e IA práctica para pymes",
-  description:
-    "Ayudamos a pymes y negocios locales a conseguir más clientes con su web, ahorrar tiempo automatizando tareas y usar la IA donde aporta valor.",
   // Placeholder until the real mailbox is confirmed (see MEMORY.md).
   email: "hola@lguia.es",
-  locale: "es_ES",
-  areaServed: "España",
+  /** ISO 3166-1 code of the country lguia operates from (it works remotely, no public address). */
+  country: "ES",
+  /**
+   * Date of the last meaningful content change, for the sitemap's <lastmod>. Bump it when copy,
+   * prices or pages change: a date that moves on every build teaches crawlers to ignore it.
+   */
+  contentUpdated: "2026-11-12",
 } as const;
-
-export interface NavItem {
-  href: string;
-  label: string;
-}
-
-export const mainNav: NavItem[] = [
-  { href: "/servicios", label: "Servicios" },
-  { href: "/planes", label: "Planes" },
-  { href: "/contacto", label: "Contacto" },
-];
 
 /**
  * Canonical origin for metadata, sitemap and structured data.

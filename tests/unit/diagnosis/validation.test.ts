@@ -1,14 +1,23 @@
 import { describe, expect, it } from "vitest";
 
 import { DIAGNOSIS_QUESTION_IDS } from "@/features/diagnosis/model/options";
-import { DIAGNOSIS_QUESTION_COUNT, DIAGNOSIS_STEPS } from "@/features/diagnosis/model/questions";
+import { getDiagnosisContent, getDiagnosisSteps } from "@/features/diagnosis/content";
+import { DIAGNOSIS_QUESTION_COUNT } from "@/features/diagnosis/model/questions";
 import {
-  DIAGNOSIS_REQUIRED_MESSAGE,
-  validateDiagnosis,
-  validateDiagnosisStep,
+  validateDiagnosis as validate,
+  validateDiagnosisStep as validateStep,
 } from "@/features/diagnosis/model/validation";
+import { LOCALES } from "@/i18n/config";
 
 import { makeAnswers } from "./fixtures";
+
+const DIAGNOSIS_REQUIRED_MESSAGE = getDiagnosisContent("es").requiredMessage;
+const DIAGNOSIS_STEPS = getDiagnosisSteps("es");
+
+const validateDiagnosis = (input: unknown) => validate(input, DIAGNOSIS_REQUIRED_MESSAGE);
+const validateDiagnosisStep = (
+  ...args: [Parameters<typeof validateStep>[0], Parameters<typeof validateStep>[1]]
+) => validateStep(...args, DIAGNOSIS_REQUIRED_MESSAGE);
 
 describe("validateDiagnosis", () => {
   it("accepts a complete set of answers", () => {
@@ -69,10 +78,17 @@ describe("question definitions", () => {
     expect([...asked].sort()).toEqual([...DIAGNOSIS_QUESTION_IDS].sort());
   });
 
-  it("label every option", () => {
-    for (const question of DIAGNOSIS_STEPS.flatMap((step) => step.questions)) {
+  it.each(LOCALES)("label every option (%s)", (locale) => {
+    for (const question of getDiagnosisSteps(locale).flatMap((step) => step.questions)) {
+      expect(question.label.trim()).not.toBe("");
       expect(question.options.length).toBeGreaterThanOrEqual(3);
       for (const option of question.options) expect(option.label.trim()).not.toBe("");
     }
+  });
+
+  it("uses the message of the requested language", () => {
+    const message = getDiagnosisContent("en").requiredMessage;
+    const result = validate({}, message);
+    expect(!result.success && result.issues[0]?.message).toBe("Select an option to continue.");
   });
 });

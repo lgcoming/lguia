@@ -5,8 +5,10 @@ import { useRef, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import { FieldError } from "@/components/ui/form";
+import type { DiagnosisUiStrings } from "@/features/diagnosis/content/types";
 import type { DiagnosisAnswers, DiagnosisQuestionId } from "@/features/diagnosis/model/options";
 import type { DiagnosisQuestion, DiagnosisStep } from "@/features/diagnosis/model/questions";
+import { format } from "@/i18n/config";
 import { cn } from "@/lib/utils";
 import { useFocusOnMount } from "@/lib/use-focus-on-mount";
 
@@ -18,6 +20,7 @@ interface QuestionStepProps {
   errors: Partial<Record<DiagnosisQuestionId, string>>;
   onAnswer: (questionId: DiagnosisQuestionId, value: string) => void;
   onPrevious?: () => void;
+  strings: Pick<DiagnosisUiStrings, "stepPrefix" | "previous" | "next" | "finish">;
   /** Returns the ids of unanswered questions, or an empty list when the step is complete. */
   onNext: () => DiagnosisQuestionId[];
 }
@@ -84,6 +87,7 @@ export function QuestionStep({
   onAnswer,
   onPrevious,
   onNext,
+  strings,
 }: QuestionStepProps) {
   const headingRef = useFocusOnMount<HTMLHeadingElement>();
   const formRef = useRef<HTMLFormElement>(null);
@@ -101,7 +105,7 @@ export function QuestionStep({
     <form ref={formRef} noValidate onSubmit={handleSubmit}>
       <h2 ref={headingRef} tabIndex={-1} className="text-heading-sm outline-none">
         <span className="sr-only">
-          Paso {stepNumber} de {totalSteps}:
+          {format(strings.stepPrefix, { current: stepNumber, total: totalSteps })}
         </span>{" "}
         {step.title}
       </h2>
@@ -123,13 +127,13 @@ export function QuestionStep({
         {onPrevious ? (
           <Button variant="plain" onClick={onPrevious} className="-ml-4">
             <ChevronLeft aria-hidden="true" className="size-4" />
-            Anterior
+            {strings.previous}
           </Button>
         ) : (
           <span />
         )}
         <Button type="submit" size="lg">
-          {isLast ? "Ver mi diagnóstico" : "Siguiente"}
+          {isLast ? strings.finish : strings.next}
         </Button>
       </div>
     </form>

@@ -17,6 +17,8 @@ interface BackgroundVideoProps {
   lazy?: boolean;
   /** Move the footage slightly slower than the page (mid-page bands). */
   parallax?: boolean;
+  /** Accessible names of the pause control, in the page's language. */
+  labels: { pause: string; play: string };
 }
 
 type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean } };
@@ -41,6 +43,7 @@ export function BackgroundVideo({
   eager = false,
   lazy = false,
   parallax = false,
+  labels,
 }: BackgroundVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [enabled, setEnabled] = useState(false);
@@ -159,9 +162,7 @@ export function BackgroundVideo({
           ) : (
             <Pause aria-hidden="true" className="size-4 fill-current" />
           )}
-          <span className="sr-only">
-            {paused ? "Reproducir vídeo de fondo" : "Pausar vídeo de fondo"}
-          </span>
+          <span className="sr-only">{paused ? labels.play : labels.pause}</span>
         </button>
       ) : null}
     </>

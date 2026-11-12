@@ -16,7 +16,9 @@ import { Button, ButtonLink } from "@/components/ui/button";
 import { StepNumber } from "@/components/ui/step-number";
 import { TextLink } from "@/components/ui/text-link";
 import { formatPlanPrice } from "@/features/catalog/format";
+import type { DiagnosisUiStrings } from "@/features/diagnosis/content/types";
 import type { DiagnosisResult } from "@/features/diagnosis/model/types";
+import { format, type Locale } from "@/i18n/config";
 import { useFocusOnMount } from "@/lib/use-focus-on-mount";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -31,7 +33,7 @@ const block: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } },
 };
 
-function ScoreRing({ score }: { score: number }) {
+function ScoreRing({ score, outOf }: { score: number; outOf: string }) {
   const reduceMotion = useReducedMotion();
   const count = useMotionValue(reduceMotion ? score : 0);
   const rounded = useTransform(count, (value) => Math.round(value));
@@ -66,13 +68,13 @@ function ScoreRing({ score }: { score: number }) {
         <m.span className="text-[2.5rem] leading-none font-semibold tracking-[-0.03em] tabular">
           {rounded}
         </m.span>
-        <span className="mt-1 text-caption text-pewter">de 100</span>
+        <span className="mt-1 text-caption text-pewter">{outOf}</span>
       </div>
     </div>
   );
 }
 
-function AreaBars({ areas }: { areas: DiagnosisResult["areas"] }) {
+function AreaBars({ areas, outOf }: { areas: DiagnosisResult["areas"]; outOf: string }) {
   const reduceMotion = useReducedMotion();
   return (
     <ul className="mt-6 space-y-4">
@@ -82,7 +84,7 @@ function AreaBars({ areas }: { areas: DiagnosisResult["areas"] }) {
             <span>{area.label}</span>
             <span className="font-semibold tabular">
               {area.score}
-              <span className="sr-only"> de 100</span>
+              <span className="sr-only"> {outOf}</span>
             </span>
           </div>
           <div aria-hidden="true" className="mt-2 h-1.5 overflow-hidden rounded-full bg-ash-veil">
@@ -103,11 +105,19 @@ function AreaBars({ areas }: { areas: DiagnosisResult["areas"] }) {
 interface DiagnosisResultViewProps {
   result: DiagnosisResult;
   onReview: () => void;
+  strings: DiagnosisUiStrings["result"];
+  locale: Locale;
   /** Lead capture rendered after the recommendations. */
   children?: ReactNode;
 }
 
-export function DiagnosisResultView({ result, onReview, children }: DiagnosisResultViewProps) {
+export function DiagnosisResultView({
+  result,
+  onReview,
+  strings,
+  locale,
+  children,
+}: DiagnosisResultViewProps) {
   const headingRef = useFocusOnMount<HTMLHeadingElement>();
   const plan = result.recommendedPlan;
 
@@ -115,9 +125,9 @@ export function DiagnosisResultView({ result, onReview, children }: DiagnosisRes
     <m.div variants={container} initial="hidden" animate="visible">
       <m.div variants={block}>
         <h2 ref={headingRef} tabIndex={-1} className="text-heading-sm outline-none">
-          Tu diagnóstico digital
+          {strings.title}
         </h2>
-        <p className="mt-2 text-pewter">Basado en tus respuestas de hoy.</p>
+        <p className="mt-2 text-pewter">{strings.subtitle}</p>
       </m.div>
 
       <m.section
@@ -126,16 +136,16 @@ export function DiagnosisResultView({ result, onReview, children }: DiagnosisRes
         className="mt-8 grid gap-8 rounded-tile bg-fog-white p-6 sm:grid-cols-[auto_1fr] sm:items-start md:p-8"
       >
         <h3 id="resultado-puntuacion" className="sr-only">
-          Tu puntuación: {result.score} de 100, nivel {result.level.label}
+          {format(strings.scoreHeading, { score: result.score, level: result.level.label })}
         </h3>
-        <ScoreRing score={result.score} />
+        <ScoreRing score={result.score} outOf={strings.outOf} />
         <div>
           <p className="flex flex-wrap items-center gap-3">
-            <span className="font-semibold">Nivel de madurez digital</span>
+            <span className="font-semibold">{strings.maturity}</span>
             <Badge tone="strong">{result.level.label}</Badge>
           </p>
           <p className="mt-2 text-footnote text-pewter">{result.level.summary}</p>
-          <AreaBars areas={result.areas} />
+          <AreaBars areas={result.areas} outOf={strings.outOf} />
         </div>
       </m.section>
 
@@ -145,21 +155,24 @@ export function DiagnosisResultView({ result, onReview, children }: DiagnosisRes
         aria-labelledby="resultado-plan"
         className="surface-dark mt-4 rounded-tile bg-obsidian p-6 text-pure-white md:p-8"
       >
-        <p className="text-footnote font-semibold text-ash-veil">Plan recomendado</p>
+        <p className="text-footnote font-semibold text-ash-veil">{strings.planEyebrow}</p>
         <div className="mt-1 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <h3 id="resultado-plan" className="text-heading-sm">
             {plan.name}
           </h3>
           <p className="font-semibold tabular">
-            {formatPlanPrice(plan.pricing)}
+            {formatPlanPrice(plan.pricing, locale)}
             {plan.pricing.kind === "from" ? (
-              <span className="text-footnote font-normal text-ash-veil"> sin IVA</span>
+              <span className="text-footnote font-normal text-ash-veil">
+                {" "}
+                {strings.vatExcluded}
+              </span>
             ) : null}
           </p>
         </div>
         <p className="mt-2 text-footnote text-ash-veil">{plan.tagline}</p>
 
-        <h4 className="mt-6 font-semibold">Por qué te lo recomendamos</h4>
+        <h4 className="mt-6 font-semibold">{strings.why}</h4>
         <ul className="mt-3 space-y-3">
           {result.reasons.map((reason) => (
             <li key={reason} className="flex gap-3 text-footnote">
@@ -169,13 +182,13 @@ export function DiagnosisResultView({ result, onReview, children }: DiagnosisRes
           ))}
         </ul>
         <ButtonLink href={plan.href} variant="on-dark" className="mt-7">
-          Ver qué incluye {plan.name}
+          {format(strings.planLink, { plan: plan.name })}
         </ButtonLink>
       </m.section>
 
       <m.section variants={block} aria-labelledby="resultado-servicios" className="mt-10">
         <h3 id="resultado-servicios" className="text-subheading font-semibold">
-          Servicios recomendados
+          {strings.services}
         </h3>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {result.recommendedServices.map((service) => (
@@ -184,7 +197,7 @@ export function DiagnosisResultView({ result, onReview, children }: DiagnosisRes
               <p className="mt-1 text-footnote text-pewter">{service.reason}</p>
               <div className="mt-auto pt-2">
                 <TextLink href={service.category.href} size="footnote">
-                  Más sobre {service.category.name}
+                  {format(strings.moreAbout, { category: service.category.name })}
                 </TextLink>
               </div>
             </li>
@@ -194,7 +207,7 @@ export function DiagnosisResultView({ result, onReview, children }: DiagnosisRes
 
       <m.section variants={block} aria-labelledby="resultado-pasos" className="mt-10">
         <h3 id="resultado-pasos" className="text-subheading font-semibold">
-          Próximos pasos
+          {strings.nextSteps}
         </h3>
         <ol className="mt-5 space-y-4">
           {result.nextSteps.map((step, index) => (
@@ -214,7 +227,7 @@ export function DiagnosisResultView({ result, onReview, children }: DiagnosisRes
 
       <m.div variants={block} className="mt-8 border-t border-pale-mist pt-6">
         <Button variant="plain" onClick={onReview} className="-ml-5">
-          Cambiar mis respuestas
+          {strings.change}
         </Button>
       </m.div>
     </m.div>

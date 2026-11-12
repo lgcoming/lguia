@@ -16,7 +16,8 @@ interface FieldChromeProps {
   label: string;
   hint?: string;
   error?: string;
-  optional?: boolean;
+  /** Suffix for optional fields in the form's language, e.g. "(opcional)". */
+  optional?: string;
 }
 
 function describedBy(id: string, hint?: string, error?: string): string | undefined {
@@ -28,7 +29,7 @@ function FieldLabel({ id, label, optional }: Pick<FieldChromeProps, "id" | "labe
   return (
     <label htmlFor={id} className="mb-2 block text-footnote font-semibold">
       {label}
-      {optional ? <span className="font-normal text-pewter"> (opcional)</span> : null}
+      {optional ? <span className="font-normal text-pewter"> {optional}</span> : null}
     </label>
   );
 }

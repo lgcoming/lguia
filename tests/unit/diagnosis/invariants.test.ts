@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import { plans } from "@/data/plans";
-import { serviceCategories } from "@/data/services";
+import { CATALOG } from "@/data/catalog";
+import { plans } from "@/data/es/plans";
+import { serviceCategories } from "@/data/es/services";
 import { diagnose, evaluateDiagnosis } from "@/features/diagnosis/model/diagnose";
 import {
   DIAGNOSIS_OPTIONS,
@@ -70,5 +71,40 @@ describe("diagnosis invariants", () => {
     // Each of the six plans is reachable.
     expect([...seenPlans].sort()).toEqual(plans.map((plan) => plan.id).sort());
     expect(seenServices.size).toBeGreaterThan(5);
+  });
+
+  it("gives the same scores, plan and services in English, with English wording", () => {
+    const english = {
+      plans: CATALOG.en.plans,
+      categories: CATALOG.en.serviceCategories,
+    };
+    const spanish = { plans, categories: serviceCategories };
+
+    for (const answers of combinations({
+      sellsOnline: "planned",
+      webLeads: "none",
+      automationLevel: "none",
+      chatbotInterest: "yes",
+      visibilityGoal: "priority",
+      aiAdoption: "interested",
+    })) {
+      const es = diagnose(answers, spanish, "es");
+      const en = diagnose(answers, english, "en");
+
+      expect(en.score).toBe(es.score);
+      expect(en.recommendedPlan.id).toBe(es.recommendedPlan.id);
+      expect(en.recommendedServices.map((s) => s.id)).toEqual(
+        es.recommendedServices.map((s) => s.id),
+      );
+      expect(en.reasons).toHaveLength(es.reasons.length);
+      expect(en.recommendedPlan.href).toBe(`/en/pricing#${en.recommendedPlan.id}`);
+      expect(es.recommendedPlan.href).toBe(`/planes#${es.recommendedPlan.id}`);
+      for (const service of en.recommendedServices) {
+        expect(service.category.href.startsWith("/en/services/")).toBe(true);
+      }
+      // No Spanish sentence leaks into the English result.
+      const text = [...en.reasons, ...en.nextSteps, en.level.label, en.level.summary].join(" ");
+      expect(text).not.toMatch(/[áéíóúñ¿¡]/);
+    }
   });
 });

@@ -33,7 +33,7 @@ describe("POST /api/diagnosis", () => {
     expect(result.recommendedServices).toHaveLength(4);
     expect(result.recommendedServices[0]).toMatchObject({
       id: "reduccion-tareas",
-      category: { id: "automatizaciones", href: "/servicios/automatizaciones" },
+      category: { id: "automatizaciones", href: "/servicios/automatizacion-con-ia" },
     });
     expect(result.nextSteps).toHaveLength(3);
   });

@@ -5,12 +5,15 @@ import Link from "next/link";
 import { CategoryIcon } from "@/components/marketing/category-icon";
 import { categoryMedia } from "@/components/marketing/category-media";
 import { RevealItem, RevealList } from "@/components/motion/reveal";
-import { categoryHref } from "@/features/catalog/routes";
+import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { serviceHref } from "@/i18n/routes";
 import { cn } from "@/lib/utils";
 import type { ServiceCategory } from "@/types/catalog";
 
 interface ServiceTileProps {
   category: ServiceCategory;
+  locale: Locale;
   /** Sizes hint for the photograph, matching the tile's width in its grid. */
   sizes: string;
   className?: string;
@@ -20,7 +23,7 @@ interface ServiceTileProps {
  * Photographic bento tile with a glass caption. The whole tile is clickable through one
  * stretched link (one tab stop, one accessible name).
  */
-export function ServiceTile({ category, sizes, className }: ServiceTileProps) {
+export function ServiceTile({ category, locale, sizes, className }: ServiceTileProps) {
   const media = categoryMedia[category.id];
 
   return (
@@ -50,7 +53,7 @@ export function ServiceTile({ category, sizes, className }: ServiceTileProps) {
           <CategoryIcon icon={category.icon} className="size-6 text-pure-white" />
           <h3 className="mt-3 text-heading-sm">
             <Link
-              href={categoryHref(category.id)}
+              href={serviceHref(locale, category.id)}
               className="after:absolute after:inset-0 after:rounded-tile focus-visible:outline-none"
             >
               {category.name}
@@ -61,7 +64,7 @@ export function ServiceTile({ category, sizes, className }: ServiceTileProps) {
             aria-hidden="true"
             className="mt-4 inline-flex items-center gap-0.5 text-footnote text-sky-signal group-hover:underline"
           >
-            Más información
+            {getDictionary(locale).common.learnMore}
             <ChevronRight className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
           </span>
         </div>
@@ -83,7 +86,13 @@ const slotSizes = {
 } as const;
 
 /** Services bento: one wide, one tall and two regular tiles that interlock on desktop. */
-export function ServicesBento({ categories }: { categories: ServiceCategory[] }) {
+export function ServicesBento({
+  categories,
+  locale,
+}: {
+  categories: ServiceCategory[];
+  locale: Locale;
+}) {
   const ordered = [...categories].sort(
     (a, b) => categoryMedia[a.id].order - categoryMedia[b.id].order,
   );
@@ -94,7 +103,12 @@ export function ServicesBento({ categories }: { categories: ServiceCategory[] })
         const slot = categoryMedia[category.id].slot;
         return (
           <RevealItem key={category.id} className={cn("flex", slotClasses[slot])}>
-            <ServiceTile category={category} sizes={slotSizes[slot]} className="w-full" />
+            <ServiceTile
+              category={category}
+              locale={locale}
+              sizes={slotSizes[slot]}
+              className="w-full"
+            />
           </RevealItem>
         );
       })}

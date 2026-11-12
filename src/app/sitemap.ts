@@ -1,27 +1,30 @@
 import type { MetadataRoute } from "next";
 
-import { getCatalogRepository } from "@/features/catalog/catalog-repository";
-import { categoryHref } from "@/features/catalog/routes";
-import { absoluteUrl } from "@/lib/site";
+import { LOCALES } from "@/i18n/config";
+import { allRoutes, routeHref, type RouteRef } from "@/i18n/routes";
+import { languageAlternates } from "@/lib/metadata";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
-/** Public, indexable routes only (SPEC-007). Admin and API routes are excluded. */
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const categories = await getCatalogRepository().listServiceCategories();
-  const lastModified = new Date();
+function priority(route: RouteRef): number {
+  if ("service" in route) return 0.8;
+  return { home: 1, diagnosis: 0.9, services: 0.9, pricing: 0.8, contact: 0.7 }[route.page];
+}
 
-  const pages: { path: string; priority: number }[] = [
-    { path: "/", priority: 1 },
-    { path: "/diagnostico-digital", priority: 0.9 },
-    { path: "/servicios", priority: 0.9 },
-    ...categories.map((category) => ({ path: categoryHref(category.id), priority: 0.8 })),
-    { path: "/planes", priority: 0.8 },
-    { path: "/contacto", priority: 0.7 },
-  ];
-
-  return pages.map(({ path, priority }) => ({
-    url: absoluteUrl(path),
-    lastModified,
-    changeFrequency: "monthly",
-    priority,
-  }));
+/**
+ * Public, indexable routes in every language (SPEC-007, SPEC-009). Each URL lists its hreflang
+ * alternates, itself included, so the annotations are reciprocal. Admin and API are excluded.
+ */
+export default function sitemap(): MetadataRoute.Sitemap {
+  return allRoutes().flatMap((route) => {
+    const languages = Object.fromEntries(
+      Object.entries(languageAlternates(route)).map(([lang, path]) => [lang, absoluteUrl(path)]),
+    );
+    return LOCALES.map((locale) => ({
+      url: absoluteUrl(routeHref(locale, route)),
+      lastModified: siteConfig.contentUpdated,
+      changeFrequency: "monthly" as const,
+      priority: priority(route),
+      alternates: { languages },
+    }));
+  });
 }

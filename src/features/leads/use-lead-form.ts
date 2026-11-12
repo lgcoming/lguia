@@ -3,6 +3,7 @@
 import { useRef, useState, type FormEvent } from "react";
 
 import { submitLeadRequest } from "@/features/leads/client";
+import type { Locale } from "@/i18n/config";
 
 type ValidationResult =
   { success: true; payload: unknown } | { success: false; fieldErrors: Record<string, string> };
@@ -13,6 +14,10 @@ interface UseLeadFormOptions<V> {
   /** Visual order of fields, used to move focus to the first error. */
   fieldOrder: ReadonlyArray<keyof V & string>;
   validate: (values: V) => ValidationResult;
+  /** Language of the form: sent to the API and stored with the lead. */
+  locale: Locale;
+  /** Network and server error messages in that language. */
+  errorMessages: { network: string; server: string };
 }
 
 export type LeadFormStatus = "idle" | "submitting" | "success" | "error";
@@ -27,6 +32,8 @@ export function useLeadForm<V extends Record<string, unknown>>({
   idPrefix,
   fieldOrder,
   validate,
+  locale,
+  errorMessages,
 }: UseLeadFormOptions<V>) {
   const [values, setValues] = useState<V>(initialValues);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -65,7 +72,7 @@ export function useLeadForm<V extends Record<string, unknown>>({
     setErrors({});
     setFormError(null);
     setStatus("submitting");
-    const outcome = await submitLeadRequest(result.payload);
+    const outcome = await submitLeadRequest(result.payload, locale, errorMessages);
 
     if (outcome.ok) {
       setStatus("success");

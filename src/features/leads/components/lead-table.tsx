@@ -100,6 +100,9 @@ export function LeadTable({ leads, planNames, interestLabels }: LeadTableProps) 
                 <Badge tone={lead.source === "diagnosis" ? "strong" : "neutral"}>
                   {lead.source === "diagnosis" ? "Diagnóstico" : "Contacto"}
                 </Badge>
+                <p className="mt-2 text-caption text-pewter">
+                  Idioma: {lead.locale === "en" ? "inglés" : "español"}
+                </p>
               </td>
               <td className="px-5 py-4">
                 <LeadNeed lead={lead} planNames={planNames} interestLabels={interestLabels} />

@@ -10,15 +10,13 @@ import { ParallaxLayer } from "@/components/motion/parallax-layer";
 import { buttonStyles, ButtonLink } from "@/components/ui/button";
 import { Container, Section, type SectionTone } from "@/components/ui/layout-primitives";
 import { StepNumber } from "@/components/ui/step-number";
+import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { pageHref } from "@/i18n/routes";
 import { siteConfig } from "@/lib/site";
 
-const diagnosisOutcomes = [
-  { title: "Tu nivel de madurez digital", text: "Una puntuación de 0 a 100 por áreas." },
-  { title: "El plan que mejor encaja", text: "Con los motivos, explicados sin tecnicismos." },
-  { title: "Tus próximos pasos", text: "Qué hacer primero para notar resultados." },
-];
-
 interface DiagnosisCTAProps {
+  locale: Locale;
   id?: string;
   /** Home shows a real example result; other pages list what the diagnosis gives you. */
   preview?: DiagnosisPreviewData;
@@ -30,10 +28,12 @@ interface DiagnosisCTAProps {
  * light section, with the compass mark as a watermark and the result on glass.
  */
 export function DiagnosisCTA({
+  locale,
   id = "cta-diagnostico",
   preview,
   tone = "canvas",
 }: DiagnosisCTAProps) {
+  const t = getDictionary(locale);
   return (
     <Section tone={tone} labelledBy={`${id}-titulo`}>
       <div className="surface-dark relative isolate overflow-hidden rounded-tile bg-carbon text-pure-white">
@@ -58,22 +58,21 @@ export function DiagnosisCTA({
               id={`${id}-titulo`}
               className="text-[2rem] leading-[1.1] tracking-[-0.01em] md:text-heading-lg"
             >
-              ¿No sabes por dónde empezar?
+              {t.diagnosisCta.title}
             </h2>
             <p className="mt-4 max-w-xl text-body text-ash-veil md:text-subheading">
-              Responde 11 preguntas sobre tu negocio y descubre qué mejorar primero. Es gratis, se
-              hace en unos 3 minutos y no necesitas registrarte para ver el resultado.
+              {t.diagnosisCta.text}
             </p>
-            <ButtonLink href="/diagnostico-digital" size="lg" className="mt-8">
-              Haz tu diagnóstico digital
+            <ButtonLink href={pageHref(locale, "diagnosis")} size="lg" className="mt-8">
+              {t.common.diagnosisCta}
             </ButtonLink>
           </div>
 
           {preview ? (
             <DiagnosisPreview data={preview} />
           ) : (
-            <ol aria-label="Qué obtienes con el diagnóstico" className="space-y-3">
-              {diagnosisOutcomes.map((outcome, index) => (
+            <ol aria-label={t.diagnosisCta.outcomesLabel} className="space-y-3">
+              {t.diagnosisCta.outcomes.map((outcome, index) => (
                 <li
                   key={outcome.title}
                   className="glass-panel flex items-start gap-4 rounded-[1.25rem] p-5"
@@ -94,7 +93,8 @@ export function DiagnosisCTA({
 }
 
 /** Closing band: the neural-circuit photograph behind a centered stack with the brand mark. */
-export function ContactCTA({ id = "cta-contacto" }: { id?: string }) {
+export function ContactCTA({ locale, id = "cta-contacto" }: { locale: Locale; id?: string }) {
+  const t = getDictionary(locale);
   return (
     <MediaBand
       labelledBy={`${id}-titulo`}
@@ -114,15 +114,14 @@ export function ContactCTA({ id = "cta-contacto" }: { id?: string }) {
           id={`${id}-titulo`}
           className="mt-6 text-[2rem] leading-[1.1] tracking-[-0.01em] md:text-display"
         >
-          ¿Prefieres contarnos tu proyecto?
+          {t.contactCta.title}
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-body text-ash-veil md:text-subheading">
-          Escríbenos con lo que tienes en mente y te respondemos con una primera valoración, sin
-          compromiso.
+          {t.contactCta.text}
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <ButtonLink href="/contacto" size="lg" className="w-full sm:w-auto">
-            Escríbenos
+          <ButtonLink href={pageHref(locale, "contact")} size="lg" className="w-full sm:w-auto">
+            {t.common.proposalCta}
           </ButtonLink>
           <a
             href={`mailto:${siteConfig.email}`}
