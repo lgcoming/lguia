@@ -3,19 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node scripts/in-real-path.mjs next dev",
+    "build": "node scripts/in-real-path.mjs next build",
+    "start": "node scripts/in-real-path.mjs next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "node scripts/in-real-path.mjs playwright test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run lint && npm run typecheck && npm run test",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "preview": "node scripts/in-real-path.mjs \"opennextjs-cloudflare build && opennextjs-cloudflare preview\"",
+    "deploy": "node scripts/in-real-path.mjs \"opennextjs-cloudflare build && opennextjs-cloudflare deploy\""
   },
   "dependencies": {
     "lucide-react": "^1.49.0",

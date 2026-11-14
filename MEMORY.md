@@ -187,7 +187,8 @@ top of each section. Keep entries short; link to specs for detail.
   "Cannot read properties of null (reading 'useContext')"), Playwright reports "did not expect
   test() to be called here" and jest-dom stops extending `expect`. This was first blamed on Node
   24.22 (2026-11-12); Node 24.22 works from the right path. `tests/setup-dom.ts` registers the
-  matchers explicitly anyway.
+  matchers explicitly anyway. `dev`, `build`, `start`, `test:e2e`, `preview` and `deploy` run
+  through `scripts/in-real-path.mjs`, which switches to the real casing first.
 - Playwright: if the bundled browser is missing, run with `PLAYWRIGHT_CHANNEL=chrome`.
 
 - Windows dev environment: repo uses `core.autocrlf=false` + `.gitattributes` (`eol=lf`).
