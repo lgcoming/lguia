@@ -31,13 +31,16 @@ export function getLeadNotifier(): LeadNotifier {
   } catch {
     return noopLeadNotifier;
   }
-  const { LEADS_EMAIL: binding, LEADS_TO: to } = env;
+  const binding = env.LEADS_EMAIL;
+  const to = normalizeAddress(env.LEADS_TO);
   if (!binding || !to) {
     // On Workers the in-memory store is lost between requests: failing tells the visitor to use
     // the email address instead of thanking them for a lead nobody will read.
     return {
       async notify() {
-        throw new Error("LEADS_EMAIL binding or LEADS_TO secret is not configured");
+        throw new Error(
+          `LEADS_EMAIL binding or a valid LEADS_TO secret is missing (${describeSecret(env.LEADS_TO)})`,
+        );
       },
     };
   }
@@ -45,7 +48,26 @@ export function getLeadNotifier(): LeadNotifier {
   return {
     async notify(lead) {
       const { subject, text } = formatLeadEmail(lead);
-      await binding.send({ from: SENDER, to, replyTo: lead.email, subject, text });
+      try {
+        await binding.send({ from: SENDER, to, replyTo: lead.email, subject, text });
+      } catch (error) {
+        // Without the reply-to the team can still read the visitor's address in the body.
+        console.error("[leads] send with Reply-To failed, retrying without it", error);
+        await binding.send({ from: SENDER, to, subject, text });
+      }
     },
   };
+}
+
+const EMAIL = /[^\s<>"'@]+@[^\s<>"'@]+\.[^\s<>"'@]+/;
+
+/** Accepts the address typed with stray spaces, quotes or "Name <address>" around it. */
+export function normalizeAddress(value: string | undefined): string | undefined {
+  return value?.match(EMAIL)?.[0];
+}
+
+/** Shape of the secret for logs, without revealing the address. */
+function describeSecret(value: string | undefined): string {
+  if (value === undefined) return "LEADS_TO not set";
+  return `LEADS_TO has ${value.length} characters, ${value.includes("@") ? "with" : "without"} "@"`;
 }

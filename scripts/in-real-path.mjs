@@ -16,5 +16,6 @@ if (!command) {
 }
 
 const cwd = realpathSync.native(process.cwd());
-const result = spawnSync(command, args, { cwd, stdio: "inherit", shell: true });
+// One command string: passing an args array together with `shell` is deprecated (DEP0190).
+const result = spawnSync([command, ...args].join(" "), { cwd, stdio: "inherit", shell: true });
 process.exit(result.status ?? 1);
