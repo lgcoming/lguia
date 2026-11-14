@@ -15,6 +15,7 @@ import type { LeadFormContent } from "@/features/leads/content/types";
 import { createLeadSchemas } from "@/features/leads/schema";
 import { useLeadForm } from "@/features/leads/use-lead-form";
 import { format, splitAt, type Locale } from "@/i18n/config";
+import { pageHref } from "@/i18n/routes";
 import { issuesToFieldErrors, toApiIssues } from "@/lib/validation";
 
 interface ContactFormValues extends Record<string, unknown> {
@@ -191,7 +192,10 @@ export function ContactForm({ locale, content, interestOptions, diagnosisHref }:
         error={errors.consent}
       />
 
-      <DataProtectionNotice content={content.dataProtection} />
+      <DataProtectionNotice
+        content={content.dataProtection}
+        privacyHref={pageHref(locale, "privacy")}
+      />
 
       {formError ? <FormAlert>{formError}</FormAlert> : null}
 

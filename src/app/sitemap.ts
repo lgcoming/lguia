@@ -1,13 +1,23 @@
 import type { MetadataRoute } from "next";
 
 import { LOCALES } from "@/i18n/config";
-import { allRoutes, routeHref, type RouteRef } from "@/i18n/routes";
+import { allRoutes, routeHref, type PageId, type RouteRef } from "@/i18n/routes";
 import { languageAlternates } from "@/lib/metadata";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 function priority(route: RouteRef): number {
   if ("service" in route) return 0.8;
-  return { home: 1, diagnosis: 0.9, services: 0.9, pricing: 0.8, contact: 0.7 }[route.page];
+  const priorities: Record<PageId, number> = {
+    home: 1,
+    diagnosis: 0.9,
+    services: 0.9,
+    pricing: 0.8,
+    contact: 0.7,
+    legal: 0.2,
+    privacy: 0.2,
+    cookies: 0.2,
+  };
+  return priorities[route.page];
 }
 
 /**

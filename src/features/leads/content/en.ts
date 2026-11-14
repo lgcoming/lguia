@@ -29,7 +29,9 @@ export const leadContentEn: LeadFormContent = {
     "I have read the data protection information and agree to lguia using my details to answer my request.",
   dataProtection: {
     title: "Data protection.",
-    text: "Controller: lguia. Purpose: to answer your request and, if you ask for it, send you a proposal. We do not share your data with third parties. You can access, correct or delete it by writing to",
+    text: "Controller: {owner} ({brand}). Purpose: to answer your request and, if you ask for it, send you a proposal. We do not share your data with third parties. You can exercise your rights by writing to",
+    more: "More information in our",
+    policy: "privacy policy",
   },
   honeypotLabel: "Leave this field empty",
   submit: "Send message",

@@ -3,7 +3,9 @@ export const PRODUCTION_ORIGIN = "https://lguia.com";
 
 export const siteConfig = {
   name: "lguia",
-  // The mailbox must exist on the lguia.com domain before launch (see MEMORY.md).
+  /** Person behind the brand (legal notice, privacy policy, structured data). */
+  owner: "Luis Gómez",
+  // Email Routing forwards it to the owner's inbox; leads use LEADS_TO instead (SPEC-010).
   email: "hola@lguia.com",
   /** ISO 3166-1 code of the country lguia operates from (it works remotely, no public address). */
   country: "ES",
