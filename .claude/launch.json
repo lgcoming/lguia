@@ -8,10 +8,10 @@
       "port": 3000
     },
     {
-      "name": "lguia-prod",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start", "--", "--port", "3100"],
-      "port": 3100
+      "name": "lguia-workers",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["wrangler", "dev", "--port", "8787"],
+      "port": 8787
     }
   ]
 }

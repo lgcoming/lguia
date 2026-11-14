@@ -1,4 +1,6 @@
-import { categoryHref } from "@/features/catalog/routes";
+import { getDiagnosisContent } from "@/features/diagnosis/content";
+import { diagnosisContentEs } from "@/features/diagnosis/content/es";
+import type { DiagnosisEngineCopy } from "@/features/diagnosis/content/types";
 import type { DiagnosisAnswers } from "@/features/diagnosis/model/options";
 import {
   buildNextSteps,
@@ -14,34 +16,15 @@ import type {
   PlanRecommendation,
   ServiceRecommendation,
 } from "@/features/diagnosis/model/types";
+import { DEFAULT_LOCALE, type Locale } from "@/i18n/config";
+import { planHref, serviceHref } from "@/i18n/routes";
 import type { Plan, ServiceCategory } from "@/types/catalog";
-
-export const AREA_LABELS: Record<DiagnosisArea, string> = {
-  web: "Presencia web",
-  automation: "Automatización",
-  ai: "Inteligencia artificial",
-  visibility: "Visibilidad en buscadores",
-};
 
 const AREA_ORDER: DiagnosisArea[] = ["web", "automation", "ai", "visibility"];
 
-export const MATURITY_LEVELS: Record<MaturityLevelId, { label: string; summary: string }> = {
-  initial: {
-    label: "Inicial",
-    summary:
-      "Tu negocio tiene mucho margen de mejora digital. Con pocos cambios bien elegidos se nota la diferencia.",
-  },
-  developing: {
-    label: "En desarrollo",
-    summary:
-      "Tienes una base digital, pero hay áreas concretas donde estás dejando pasar oportunidades.",
-  },
-  advanced: {
-    label: "Avanzado",
-    summary:
-      "Tu negocio está bien digitalizado. El siguiente paso es optimizar y sacar más partido a lo que ya tienes.",
-  },
-};
+/** Spanish labels, used by the internal admin view. */
+export const MATURITY_LEVELS: Record<MaturityLevelId, { label: string; summary: string }> =
+  diagnosisContentEs.engine.levels;
 
 export interface DiagnosisEvaluation {
   assessment: DiagnosisAssessment;
@@ -50,15 +33,18 @@ export interface DiagnosisEvaluation {
   nextSteps: string[];
 }
 
-/** The full deterministic pipeline, without catalog data. */
-export function evaluateDiagnosis(answers: DiagnosisAnswers): DiagnosisEvaluation {
+/** The full deterministic pipeline, without catalog data. Scores and ids never depend on `copy`. */
+export function evaluateDiagnosis(
+  answers: DiagnosisAnswers,
+  copy: DiagnosisEngineCopy = diagnosisContentEs.engine,
+): DiagnosisEvaluation {
   const assessment = calculateDiagnosis(answers);
-  const plan = recommendPlan(answers, assessment);
+  const plan = recommendPlan(answers, assessment, copy);
   return {
     assessment,
     plan,
-    services: getRecommendedServices(answers, assessment),
-    nextSteps: buildNextSteps(plan.planId),
+    services: getRecommendedServices(answers, assessment, copy),
+    nextSteps: buildNextSteps(plan.planId, copy),
   };
 }
 
@@ -67,9 +53,17 @@ export interface DiagnosisCatalog {
   categories: ServiceCategory[];
 }
 
-/** Evaluates the answers and resolves names, prices and links from the catalog. */
-export function diagnose(answers: DiagnosisAnswers, catalog: DiagnosisCatalog): DiagnosisResult {
-  const { assessment, plan, services, nextSteps } = evaluateDiagnosis(answers);
+/**
+ * Evaluates the answers and resolves names, prices and links from the catalog. The catalog and
+ * `locale` must be in the same language: wording and URLs follow the locale (SPEC-009).
+ */
+export function diagnose(
+  answers: DiagnosisAnswers,
+  catalog: DiagnosisCatalog,
+  locale: Locale = DEFAULT_LOCALE,
+): DiagnosisResult {
+  const copy = getDiagnosisContent(locale).engine;
+  const { assessment, plan, services, nextSteps } = evaluateDiagnosis(answers, copy);
 
   const recommendedPlan = catalog.plans.find((candidate) => candidate.id === plan.planId);
   if (!recommendedPlan) {
@@ -87,21 +81,21 @@ export function diagnose(answers: DiagnosisAnswers, catalog: DiagnosisCatalog): 
       name: service.name,
       description: service.description,
       reason: recommendation.reason,
-      category: { id: category.id, name: category.name, href: categoryHref(category.id) },
+      category: { id: category.id, name: category.name, href: serviceHref(locale, category.id) },
     };
   });
 
   return {
     score: assessment.score,
-    level: { id: assessment.level, ...MATURITY_LEVELS[assessment.level] },
-    areas: AREA_ORDER.map((id) => ({ id, label: AREA_LABELS[id], score: assessment.areas[id] })),
+    level: { id: assessment.level, ...copy.levels[assessment.level] },
+    areas: AREA_ORDER.map((id) => ({ id, label: copy.areas[id], score: assessment.areas[id] })),
     recommendedPlan: {
       id: recommendedPlan.id,
       name: recommendedPlan.name,
       tagline: recommendedPlan.tagline,
       pricing: recommendedPlan.pricing,
       features: recommendedPlan.features,
-      href: `/planes#${recommendedPlan.id}`,
+      href: planHref(locale, recommendedPlan.id),
     },
     recommendedServices,
     reasons: plan.reasons,

@@ -1,28 +1,49 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { MediaBand } from "@/components/media/media-band";
 import { Container } from "@/components/ui/layout-primitives";
+import { cn } from "@/lib/utils";
 
 export interface Breadcrumb {
   href: string;
   label: string;
 }
 
-function Breadcrumbs({ items }: { items: Breadcrumb[] }) {
+function Breadcrumbs({
+  items,
+  label,
+  onDark,
+}: {
+  items: Breadcrumb[];
+  label: string;
+  onDark: boolean;
+}) {
   return (
-    <nav aria-label="Migas de pan" className="mb-6">
-      <ol className="flex flex-wrap items-center gap-x-2 text-sm text-ink-soft">
+    <nav aria-label={label} className="mb-6">
+      <ol
+        className={cn(
+          "flex flex-wrap items-center justify-center gap-x-2 text-footnote",
+          onDark ? "text-ash-veil" : "text-pewter",
+        )}
+      >
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
           return (
             <li key={item.href} className="flex items-center gap-2">
               {isLast ? (
-                <span aria-current="page" className="font-semibold text-ink">
+                <span
+                  aria-current="page"
+                  className={cn("font-semibold", onDark ? "text-pure-white" : "text-obsidian")}
+                >
                   {item.label}
                 </span>
               ) : (
                 <>
-                  <Link href={item.href} className="underline-offset-4 hover:underline">
+                  <Link
+                    href={item.href}
+                    className="inline-flex min-h-6 items-center underline-offset-4 hover:underline"
+                  >
                     {item.label}
                   </Link>
                   <span aria-hidden="true">/</span>
@@ -40,20 +61,68 @@ interface PageHeroProps {
   title: string;
   intro: string;
   breadcrumbs?: Breadcrumb[];
+  /** Accessible name of the breadcrumb trail, in the page's language. */
+  breadcrumbsLabel?: string;
+  /** A photograph turns the hero into a dark band that slides under the header glass. */
+  media?: { image: string; position?: string };
   children?: ReactNode;
 }
 
-export function PageHero({ title, intro, breadcrumbs, children }: PageHeroProps) {
+/** Centered page hero: headline → subhead → actions, on white or over a photograph. */
+export function PageHero({
+  title,
+  intro,
+  breadcrumbs,
+  breadcrumbsLabel = "Breadcrumbs",
+  media,
+  children,
+}: PageHeroProps) {
+  const onDark = Boolean(media);
+  const content = (
+    <>
+      {breadcrumbs ? (
+        <Breadcrumbs items={breadcrumbs} label={breadcrumbsLabel} onDark={onDark} />
+      ) : null}
+      {/* Long Spanish words ("automatizaciones") need a smaller size and hyphenation on 320px. */}
+      <h1 className="text-[2.25rem] leading-[1.08] tracking-[-0.02em] max-[399px]:text-[1.875rem] max-[399px]:hyphens-auto sm:text-[3rem] md:text-display">
+        {title}
+      </h1>
+      <p
+        className={cn(
+          "mx-auto mt-5 max-w-2xl text-body sm:text-subheading",
+          onDark ? "text-ash-veil" : "text-pewter",
+        )}
+      >
+        {intro}
+      </p>
+      {children ? (
+        <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+          {children}
+        </div>
+      ) : null}
+    </>
+  );
+
+  if (media) {
+    return (
+      <MediaBand
+        image={media.image}
+        imagePosition={media.position}
+        eager
+        overlay="band"
+        className="-mt-(--header-height)"
+      >
+        <Container width="text" className="pt-32 pb-20 text-center md:pt-40 md:pb-28">
+          {content}
+        </Container>
+      </MediaBand>
+    );
+  }
+
   return (
-    <div className="border-b border-line bg-mist">
-      <Container className="py-14 md:py-20">
-        {breadcrumbs ? <Breadcrumbs items={breadcrumbs} /> : null}
-        {/* Long Spanish words ("automatizaciones") need a smaller size and hyphenation on 320px screens. */}
-        <h1 className="max-w-3xl text-[1.875rem] leading-[1.1] max-[399px]:hyphens-auto min-[400px]:text-h1 md:text-[3rem] md:leading-[1.06]">
-          {title}
-        </h1>
-        <p className="mt-5 max-w-2xl text-lead text-ink-soft">{intro}</p>
-        {children ? <div className="mt-8 flex flex-wrap gap-3">{children}</div> : null}
+    <div className="bg-pure-white">
+      <Container width="text" className="pt-14 pb-16 text-center md:pt-20 md:pb-24">
+        {content}
       </Container>
     </div>
   );

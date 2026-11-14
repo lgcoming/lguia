@@ -6,7 +6,7 @@
 
 ## Context
 
-The public site has one job: help a business owner understand what LGuIA does, trust it, and take
+The public site has one job: help a business owner understand what lguia does, trust it, and take
 the next step — ideally the digital diagnosis, otherwise the contact form. Content is in Spanish
 (es-ES); code identifiers are in English.
 
@@ -27,50 +27,61 @@ Category slugs: `desarrollo-web`, `automatizaciones`, `chatbots-ia`, `seo-geo`.
 ## Shared layout — `(marketing)` route group
 
 - Skip link "Saltar al contenido" as the first focusable element, targeting `<main id="contenido">`.
-- **Header** (sticky, solid background): logo (home link), primary nav (Servicios, Planes,
-  Diagnóstico, Contacto) with `aria-current="page"`, CTA button "Diagnóstico gratuito".
-  Below `lg` (1024px), nav collapses into a disclosure menu: button with `aria-expanded`/`aria-controls`,
-  closes on Escape, on link click and on route change, returns focus to the toggle on Escape.
-- **Footer**: brand statement, service links (all 4 categories), company links, contact email,
-  copyright with current year.
+- **Header** (sticky, 56px / 64px from `lg`, frosted glass with a hairline — SPEC-002 v2): brand logo (home link), primary nav
+  (Servicios, Planes, Contacto; the diagnosis is reached only through the CTA) with `aria-current="page"`, CTA button "Diagnóstico
+  gratuito". The bar switches to dark glass (light logo and text) while a dark band
+  (`[data-nav-theme="dark"]`) is under it. Below `lg` (1024px), nav collapses into a full-screen
+  glass sheet (a modal `<dialog>`): button with `aria-expanded`/`aria-controls`, closes on Escape,
+  on link click and on route change, returns focus to the toggle, page scroll locked while open.
+- **Footer** (`fog-white` with a hairline on top, Apple-style dense columns at 12–14px): brand logo and statement, service
+  links (all 4 categories), company links, contact email, copyright with current year.
 
 ## Home — section order (brief §8)
 
-1. **Hero** — states what LGuIA does, for whom and the outcome; primary CTA "Haz tu diagnóstico
-   digital" → `/diagnostico-digital`; secondary CTA "Ver servicios" → `/servicios`. Visual: a
-   static-HTML preview of a diagnosis result (score, areas, recommended plan) drawn with the route
-   line — no image request, the H1 is the LCP element.
-2. **Qué es LGuIA** — short editorial explanation of the agency and its approach.
-3. **Servicios** — the four categories (cards → detail pages).
-4. **Problemas que resolvemos** — pain → solution rows.
-5. **Planes destacados** — plans with `featured: true` + link to `/planes`.
-6. **Para quién trabajamos** — target business types.
-7. **Cómo trabajamos** — shared process steps on the route line.
-8. **Por qué LGuIA** — benefits.
-9. **Diagnóstico CTA** — dark band.
-10. **Contacto CTA**.
+1. **Hero** — full-viewport dark band with the "conexiones" video under a dark gradient overlay;
+   it slides under the translucent header. From 768px it is a **pinned
+   scroll-scrubbed showcase** (SPEC-002 Motion): the opening stack gives way to the footage, then
+   the closing line "Tu web, tus procesos y la IA, por fin conectados." with the subhead "Diseñamos
+   cada pieza para que trabaje con las demás, sin herramientas sueltas.". Elsewhere it is a static
+   hero on the poster.
+   Centered stack: eyebrow (who it is for), H1, subhead, button pair and three reassurances; primary CTA "Haz tu diagnóstico digital" → `/diagnostico-digital`; secondary
+   CTA "Ver servicios" → `/servicios`. The H1 (or the optimized poster) is the LCP element.
+2. **Qué es lguia** — centered editorial statement and three facts as fog tiles.
+3. **Servicios** — bento grid of the four categories (one wide, one tall, two regular), each
+   tile with its photograph and a glass caption.
+4. **Problemas que resolvemos** — pain → solution pairs as fog tiles on white.
+5. **Planes destacados** — plans with `featured: true` as white tiles + link to `/planes`.
+6. **Para quién trabajamos** — target business types as fog tiles (one column on mobile).
+7. **Cómo trabajamos** — dark band with the "neuronal" video (parallax); process steps as glass
+   panels revealed in cascade.
+8. **Por qué lguia** — benefits in a bento grid; the lead tile is dark with the compass watermark.
+9. **Diagnóstico CTA** — dark photographic tile (circuit) inside a white section, with the live
+   diagnosis preview (a real engine result for an example business) on glass as the "product"
+   and the compass watermark. Other pages show the three outcomes instead of the preview.
+10. **Contacto CTA** — dark image band (neural-circuit photograph) with the compass mark, centered
+    text, "Escríbenos" and the email address as a glass button.
 11. Footer (layout).
 
 ## Services
 
-- `/servicios`: page hero; one block per category (icon, name, description, full list of
-  services, link to detail); diagnosis CTA; contact CTA.
-- `/servicios/[slug]`: visible breadcrumbs; hero with category headline and CTAs (diagnosis and
-  "Pedir propuesta" → `/contacto`); "Qué incluye" (service items); "Qué consigues" (outcomes);
+- `/servicios`: centered white hero; bento grid of categories; one block per category (photograph,
+  name, description, link to detail; full list of services as tiles); diagnosis CTA; contact CTA.
+- `/servicios/[slug]`: dark hero band with the category photograph, visible breadcrumbs, category
+  headline and CTAs (diagnosis and "Pedir propuesta" → `/contacto`); "Qué incluye" (service items); "Qué consigues" (outcomes);
   process steps; related plans (PlanCard); FAQ (native `<details>`); links to the other
   categories; contact CTA.
 - GEO content must not promise rankings or guaranteed appearances in AI answers.
 
 ## Plans
 
-- `/planes`: page hero; all six plans; pricing note (indicative prices, VAT excluded, closed quote
+- `/planes`: dark photographic hero (neural-circuit); all six plans; pricing note (indicative prices, VAT excluded, closed quote
   after diagnosis); "¿Qué plan encaja contigo?" guide (situation → plan); plans FAQ; diagnosis CTA.
 - Plans are **data** (`src/data/plans.ts`); UI never hard-codes plan names, prices or features.
 
 ## Contact
 
-- `/contacto`: page hero; `ContactForm` (SPEC-005) and an aside with "Qué pasa después"
-  (3 steps), contact email and a link to the diagnosis.
+- `/contacto`: white hero; `ContactForm` (SPEC-005) in a white tile and an aside with "Qué pasa
+  después" (3 steps), contact email and a link to the diagnosis.
 
 ## Content model (`src/types/catalog.ts`)
 

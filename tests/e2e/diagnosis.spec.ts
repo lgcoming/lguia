@@ -71,7 +71,7 @@ test("a business completes the diagnosis and requests a proposal", async ({ page
   const resultHeading = page.getByRole("heading", { name: "Tu diagnóstico digital" });
   await expect(resultHeading).toBeVisible({ timeout: 10_000 });
   await expect(resultHeading).toBeFocused();
-  await expect(page.getByText("Plan recomendado")).toBeVisible();
+  await expect(page.getByText("Plan recomendado", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { level: 3, name: "Growth Web + IA" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Servicios recomendados" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Próximos pasos" })).toBeVisible();
@@ -84,7 +84,7 @@ test("a business completes the diagnosis and requests a proposal", async ({ page
   await leadForm.getByRole("checkbox").check();
 
   const leadRequest = page.waitForRequest(
-    (request) => request.url().endsWith("/api/leads") && request.method() === "POST",
+    (request) => new URL(request.url()).pathname === "/api/leads" && request.method() === "POST",
   );
   await leadForm.getByRole("button", { name: "Quiero mi propuesta" }).click();
 

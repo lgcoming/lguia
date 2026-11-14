@@ -34,15 +34,32 @@ export const PLAN_IDS = [
 
 export type PlanId = (typeof PLAN_IDS)[number];
 
+/** A business pain the service addresses, and what lguia does about it. */
+export interface ServiceProblem {
+  pain: string;
+  solution: string;
+}
+
 export interface ServiceCategory {
   id: ServiceCategoryId;
   name: string;
   icon: CategoryIconKey;
   /** Page <title> for the category page (without the brand suffix). */
   seoTitle: string;
+  /** Meta description: the search snippet, written around the buyer's query. */
+  seoDescription: string;
+  /** The page's H1: the service plus the business outcome. */
   headline: string;
+  /** One line for tiles and cards. */
   summary: string;
+  /** Hero paragraph. */
   description: string;
+  /**
+   * Self-contained definition of the service and the offer (what, for whom, price, timeline).
+   * Answer-first copy that search engines and AI assistants can quote as is (SPEC-009, GEO).
+   */
+  answer: string;
+  problems: ServiceProblem[];
   outcomes: string[];
   services: ServiceItem[];
   faqs: Faq[];

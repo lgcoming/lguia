@@ -3,11 +3,23 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import { ContactForm } from "@/features/leads/components/contact-form";
+import { getLeadContent } from "@/features/leads/content";
 
 const interestOptions = [
   { value: "general", label: "Todavía no lo sé, quiero orientación" },
   { value: "desarrollo-web", label: "Desarrollo web" },
 ];
+
+function renderForm() {
+  render(
+    <ContactForm
+      locale="es"
+      content={getLeadContent("es")}
+      interestOptions={interestOptions}
+      diagnosisHref="/diagnostico-digital"
+    />,
+  );
+}
 
 function jsonResponse(body: unknown, status: number) {
   return new Response(JSON.stringify(body), {
@@ -32,7 +44,7 @@ describe("ContactForm", () => {
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);
     const user = userEvent.setup();
-    render(<ContactForm interestOptions={interestOptions} />);
+    renderForm();
 
     await user.click(screen.getByRole("button", { name: "Enviar mensaje" }));
 
@@ -58,7 +70,7 @@ describe("ContactForm", () => {
       );
     vi.stubGlobal("fetch", fetchMock);
     const user = userEvent.setup();
-    render(<ContactForm interestOptions={interestOptions} />);
+    renderForm();
 
     await fillValidForm(user);
     await user.click(screen.getByRole("button", { name: "Enviar mensaje" }));
@@ -91,7 +103,7 @@ describe("ContactForm", () => {
       ),
     );
     const user = userEvent.setup();
-    render(<ContactForm interestOptions={interestOptions} />);
+    renderForm();
 
     await fillValidForm(user);
     await user.click(screen.getByRole("button", { name: "Enviar mensaje" }));
@@ -107,7 +119,7 @@ describe("ContactForm", () => {
       vi.fn().mockResolvedValue(jsonResponse({ error: { code: "INTERNAL_ERROR" } }, 500)),
     );
     const user = userEvent.setup();
-    render(<ContactForm interestOptions={interestOptions} />);
+    renderForm();
 
     await fillValidForm(user);
     await user.click(screen.getByRole("button", { name: "Enviar mensaje" }));

@@ -3,11 +3,14 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import { MotionProvider } from "@/components/motion/motion-provider";
-import { plans } from "@/data/plans";
-import { serviceCategories } from "@/data/services";
+import { plans } from "@/data/es/plans";
+import { serviceCategories } from "@/data/es/services";
 import { DiagnosisWizard } from "@/features/diagnosis/components/diagnosis-wizard";
+import { getDiagnosisUiContent } from "@/features/diagnosis/content";
 import { diagnose } from "@/features/diagnosis/model/diagnose";
 import type { DiagnosisAnswers } from "@/features/diagnosis/model/options";
+import { getLeadContent } from "@/features/leads/content";
+import type { Locale } from "@/i18n/config";
 
 const ANSWERS: DiagnosisAnswers = {
   websiteStatus: "outdated",
@@ -32,11 +35,15 @@ function jsonResponse(body: unknown, status = 200) {
   });
 }
 
-function renderWizard() {
+function renderWizard(locale: Locale = "es") {
   const user = userEvent.setup();
   render(
     <MotionProvider>
-      <DiagnosisWizard />
+      <DiagnosisWizard
+        locale={locale}
+        content={getDiagnosisUiContent(locale)}
+        leadContent={getLeadContent(locale)}
+      />
     </MotionProvider>,
   );
   return user;
@@ -121,7 +128,7 @@ describe("DiagnosisWizard", () => {
       await screen.findByRole("heading", { name: "Tu diagnóstico digital" }, { timeout: 3000 }),
     ).toHaveFocus();
     expect(fetchMock).toHaveBeenCalledWith(
-      "/api/diagnosis",
+      "/api/diagnosis?locale=es",
       expect.objectContaining({ method: "POST", body: JSON.stringify(ANSWERS) }),
     );
     expect(screen.getByRole("heading", { name: RESULT.recommendedPlan.name })).toBeInTheDocument();

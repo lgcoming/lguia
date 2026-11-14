@@ -1,40 +1,66 @@
 import type { ReactNode } from "react";
 
+import { RevealGroup, RevealText } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
-export function Container({ className, children }: { className?: string; children: ReactNode }) {
+type ContainerWidth = "text" | "grid";
+
+const widthClasses: Record<ContainerWidth, string> = {
+  text: "max-w-text",
+  grid: "max-w-grid",
+};
+
+export function Container({
+  width = "grid",
+  className,
+  children,
+}: {
+  width?: ContainerWidth;
+  className?: string;
+  children: ReactNode;
+}) {
   return (
-    <div className={cn("mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8", className)}>
+    <div className={cn("mx-auto w-full px-4 sm:px-6 lg:px-8", widthClasses[width], className)}>
       {children}
     </div>
   );
 }
 
-type SectionTone = "paper" | "mist" | "ink";
+export type SectionTone = "canvas" | "white" | "ice" | "dark";
 
 const toneClasses: Record<SectionTone, string> = {
-  paper: "bg-paper text-ink",
-  mist: "bg-mist text-ink",
-  // Amber focus ring: pine would not reach 3:1 against ink.
-  ink: "bg-ink text-paper [--focus-ring:var(--color-signal)]",
+  canvas: "bg-fog-white text-obsidian",
+  white: "bg-pure-white text-obsidian",
+  ice: "bg-ice-wash text-obsidian",
+  dark: "surface-dark bg-carbon text-pure-white",
 };
 
 interface SectionProps {
   id?: string;
   labelledBy?: string;
   tone?: SectionTone;
+  width?: ContainerWidth;
   className?: string;
   children: ReactNode;
 }
 
-export function Section({ id, labelledBy, tone = "paper", className, children }: SectionProps) {
+/** Full-bleed band. Sections are separated by surface changes, never by rules (SPEC-002 v2). */
+export function Section({
+  id,
+  labelledBy,
+  tone = "canvas",
+  width = "grid",
+  className,
+  children,
+}: SectionProps) {
   return (
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={cn("py-16 md:py-24", toneClasses[tone], className)}
+      data-nav-theme={tone === "dark" ? "dark" : undefined}
+      className={cn("py-20 md:py-28", toneClasses[tone], className)}
     >
-      <Container>{children}</Container>
+      <Container width={width}>{children}</Container>
     </section>
   );
 }
@@ -48,6 +74,7 @@ interface SectionHeaderProps {
   children?: ReactNode;
 }
 
+/** Centered headline stack: headline → subhead → optional actions, entering in sequence. */
 export function SectionHeader({
   id,
   title,
@@ -57,16 +84,20 @@ export function SectionHeader({
   children,
 }: SectionHeaderProps) {
   return (
-    <div className={cn("mb-10 max-w-2xl md:mb-12", className)}>
-      <h2 id={id} className="text-[1.75rem] leading-tight md:text-h2">
-        {title}
-      </h2>
+    <RevealGroup className={cn("mx-auto mb-12 max-w-3xl text-center md:mb-16", className)}>
+      <RevealText>
+        <h2 id={id} className="text-[2rem] leading-[1.1] tracking-[-0.01em] md:text-heading-lg">
+          {title}
+        </h2>
+      </RevealText>
       {intro ? (
-        <p className={cn("mt-4 text-lead", onDark ? "text-on-dark-soft" : "text-ink-soft")}>
-          {intro}
-        </p>
+        <RevealText>
+          <p className={cn("mt-4 text-subheading", onDark ? "text-ash-veil" : "text-pewter")}>
+            {intro}
+          </p>
+        </RevealText>
       ) : null}
-      {children}
-    </div>
+      {children ? <RevealText>{children}</RevealText> : null}
+    </RevealGroup>
   );
 }

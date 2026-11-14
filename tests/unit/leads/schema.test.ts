@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import { contactLeadSchema, emailSchema, LEAD_MESSAGES } from "@/features/leads/schema";
+import { getLeadContent, getLeadSchemas } from "@/features/leads/content";
 import { issuesToFieldErrors, toApiIssues } from "@/lib/validation";
+
+const { contactLeadSchema, emailSchema } = getLeadSchemas("es");
+const LEAD_MESSAGES = getLeadContent("es").validation;
 
 const validContact = {
   source: "contact",
@@ -86,5 +89,25 @@ describe("contactLeadSchema", () => {
     expect(fieldErrorsFor({ ...validContact, interest: "blockchain" }).interest).toBe(
       LEAD_MESSAGES.interest,
     );
+  });
+});
+
+describe("lead schemas per language", () => {
+  it("reports errors in English for the English forms", () => {
+    const result = getLeadSchemas("en").contactLeadSchema.safeParse({
+      ...validContact,
+      name: "",
+      consent: false,
+    });
+    expect(result.success).toBe(false);
+    expect(issuesToFieldErrors(toApiIssues(result.error!))).toEqual({
+      name: "Enter your name (at least 2 characters).",
+      consent: "We need your consent to be able to reply.",
+    });
+  });
+
+  it("accepts the same input in both languages", () => {
+    expect(getLeadSchemas("en").contactLeadSchema.safeParse(validContact).success).toBe(true);
+    expect(getLeadSchemas("es").contactLeadSchema.safeParse(validContact).success).toBe(true);
   });
 });

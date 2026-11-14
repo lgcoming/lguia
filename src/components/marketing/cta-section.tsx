@@ -1,86 +1,140 @@
-import { ButtonLink } from "@/components/ui/button";
-import { Section } from "@/components/ui/layout-primitives";
-import { RouteStop } from "@/components/ui/route";
+import Image from "next/image";
+
+import {
+  DiagnosisPreview,
+  type DiagnosisPreviewData,
+} from "@/components/marketing/diagnosis-preview";
+import { BrandWatermark } from "@/components/media/brand-watermark";
+import { MediaBand } from "@/components/media/media-band";
+import { ParallaxLayer } from "@/components/motion/parallax-layer";
+import { buttonStyles, ButtonLink } from "@/components/ui/button";
+import { Container, Section, type SectionTone } from "@/components/ui/layout-primitives";
+import { StepNumber } from "@/components/ui/step-number";
+import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { pageHref } from "@/i18n/routes";
 import { siteConfig } from "@/lib/site";
 
-const diagnosisOutcomes = [
-  { title: "Tu nivel de madurez digital", text: "Una puntuación de 0 a 100 por áreas." },
-  { title: "El plan que mejor encaja", text: "Con los motivos, explicados sin tecnicismos." },
-  { title: "Tus próximos pasos", text: "Qué hacer primero para notar resultados." },
-];
+interface DiagnosisCTAProps {
+  locale: Locale;
+  id?: string;
+  /** Home shows a real example result; other pages list what the diagnosis gives you. */
+  preview?: DiagnosisPreviewData;
+  tone?: Exclude<SectionTone, "dark">;
+}
 
-export function DiagnosisCTA({ id = "cta-diagnostico" }: { id?: string }) {
+/**
+ * The diagnosis presented like a product: a dark photographic tile (circuit board) inside a
+ * light section, with the compass mark as a watermark and the result on glass.
+ */
+export function DiagnosisCTA({
+  locale,
+  id = "cta-diagnostico",
+  preview,
+  tone = "canvas",
+}: DiagnosisCTAProps) {
+  const t = getDictionary(locale);
   return (
-    <Section tone="ink" labelledBy={`${id}-titulo`}>
-      <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
-        <div>
-          <h2 id={`${id}-titulo`} className="text-[1.75rem] leading-tight md:text-h2">
-            ¿No sabes por dónde empezar?
-          </h2>
-          <p className="mt-4 max-w-xl text-lead text-on-dark-soft">
-            Responde 11 preguntas sobre tu negocio y descubre qué mejorar primero. Es gratis, se
-            hace en unos 3 minutos y no necesitas registrarte para ver el resultado.
-          </p>
-          <ButtonLink href="/diagnostico-digital" variant="on-dark" size="lg" className="mt-8">
-            Haz tu diagnóstico digital
-          </ButtonLink>
+    <Section tone={tone} labelledBy={`${id}-titulo`}>
+      <div className="surface-dark relative isolate overflow-hidden rounded-tile bg-carbon text-pure-white">
+        <ParallaxLayer className="-z-10">
+          <Image
+            src="/media/images/circuit.jpg"
+            alt=""
+            fill
+            sizes="(min-width: 1200px) 1136px, 100vw"
+            className="object-cover object-[70%_50%]"
+          />
+        </ParallaxLayer>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-linear-to-b from-carbon/85 via-carbon/70 to-carbon/85 lg:bg-linear-to-r lg:from-carbon/90 lg:via-carbon/65 lg:to-carbon/25"
+        />
+        <BrandWatermark className="-bottom-28 -left-28 size-96 opacity-[0.07]" />
+
+        <div className="grid items-center gap-10 p-6 sm:p-10 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:p-16">
+          <div>
+            <h2
+              id={`${id}-titulo`}
+              className="text-[2rem] leading-[1.1] tracking-[-0.01em] md:text-heading-lg"
+            >
+              {t.diagnosisCta.title}
+            </h2>
+            <p className="mt-4 max-w-xl text-body text-ash-veil md:text-subheading">
+              {t.diagnosisCta.text}
+            </p>
+            <ButtonLink href={pageHref(locale, "diagnosis")} size="lg" className="mt-8">
+              {t.common.diagnosisCta}
+            </ButtonLink>
+          </div>
+
+          {preview ? (
+            <DiagnosisPreview data={preview} />
+          ) : (
+            <ol aria-label={t.diagnosisCta.outcomesLabel} className="space-y-3">
+              {t.diagnosisCta.outcomes.map((outcome, index) => (
+                <li
+                  key={outcome.title}
+                  className="glass-panel flex items-start gap-4 rounded-[1.25rem] p-5"
+                >
+                  <StepNumber value={index + 1} tone="dark" />
+                  <div>
+                    <p className="font-semibold">{outcome.title}</p>
+                    <p className="mt-0.5 text-footnote text-ash-veil">{outcome.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
-        <ol className="space-y-6" aria-label="Qué obtienes con el diagnóstico">
-          {diagnosisOutcomes.map((outcome, index) => (
-            <li key={outcome.title} className="relative flex gap-4">
-              {index < diagnosisOutcomes.length - 1 ? (
-                <span
-                  aria-hidden="true"
-                  className="absolute top-9 -bottom-6 left-[17px] w-0.5 bg-ink-raised"
-                />
-              ) : null}
-              <RouteStop
-                state={index === diagnosisOutcomes.length - 1 ? "current" : "upcoming"}
-                tone="dark"
-              >
-                {index + 1}
-              </RouteStop>
-              <div>
-                <p className="font-semibold text-paper">{outcome.title}</p>
-                <p className="text-on-dark-soft">{outcome.text}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
       </div>
     </Section>
   );
 }
 
-export function ContactCTA({ id = "cta-contacto" }: { id?: string }) {
+/** Closing band: the neural-circuit photograph behind a centered stack with the brand mark. */
+export function ContactCTA({ locale, id = "cta-contacto" }: { locale: Locale; id?: string }) {
+  const t = getDictionary(locale);
   return (
-    <Section labelledBy={`${id}-titulo`}>
-      <div className="flex flex-col gap-8 rounded-panel border border-line p-8 md:flex-row md:items-center md:justify-between md:p-12">
-        <div className="max-w-2xl">
-          <h2 id={`${id}-titulo`} className="text-[1.75rem] leading-tight md:text-h2">
-            ¿Prefieres contarnos tu proyecto?
-          </h2>
-          <p className="mt-4 text-lead text-ink-soft">
-            Escríbenos con lo que tienes en mente y te respondemos con una primera valoración, sin
-            compromiso. También puedes escribir a{" "}
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="font-semibold text-pine-700 underline underline-offset-4"
-            >
-              {siteConfig.email}
-            </a>
-            .
-          </p>
-        </div>
-        <ButtonLink
-          href="/contacto"
-          variant="secondary"
-          size="lg"
-          className="self-start md:self-auto"
+    <MediaBand
+      labelledBy={`${id}-titulo`}
+      image="/media/images/neural-circuit.jpg"
+      imagePosition="object-[60%_40%]"
+      overlay="band"
+    >
+      <Container width="text" className="py-24 text-center md:py-32">
+        <Image
+          src="/brand/lguia-mark.png"
+          alt=""
+          width={64}
+          height={64}
+          className="mx-auto size-14 md:size-16"
+        />
+        <h2
+          id={`${id}-titulo`}
+          className="mt-6 text-[2rem] leading-[1.1] tracking-[-0.01em] md:text-display"
         >
-          Escríbenos
-        </ButtonLink>
-      </div>
-    </Section>
+          {t.contactCta.title}
+        </h2>
+        <p className="mx-auto mt-5 max-w-2xl text-body text-ash-veil md:text-subheading">
+          {t.contactCta.text}
+        </p>
+        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <ButtonLink href={pageHref(locale, "contact")} size="lg" className="w-full sm:w-auto">
+            {t.common.proposalCta}
+          </ButtonLink>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className={buttonStyles({
+              variant: "glass",
+              size: "lg",
+              className: "w-full sm:w-auto",
+            })}
+          >
+            {siteConfig.email}
+          </a>
+        </div>
+      </Container>
+    </MediaBand>
   );
 }

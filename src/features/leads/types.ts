@@ -1,6 +1,7 @@
 import type { DiagnosisAnswers } from "@/features/diagnosis/model/options";
 import type { MaturityLevelId } from "@/features/diagnosis/model/types";
 import type { LeadInterest } from "@/features/leads/schema";
+import type { Locale } from "@/i18n/config";
 import type { PlanId } from "@/types/catalog";
 
 export type LeadSource = "contact" | "diagnosis";
@@ -21,6 +22,8 @@ export interface Lead {
   createdAt: string;
   status: LeadStatus;
   source: LeadSource;
+  /** Language of the page the lead was sent from: the language to reply in. */
+  locale: Locale;
   name: string;
   email: string;
   company?: string;

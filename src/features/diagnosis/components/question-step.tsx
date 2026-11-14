@@ -1,12 +1,14 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { useRef, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import { FieldError } from "@/components/ui/form";
+import type { DiagnosisUiStrings } from "@/features/diagnosis/content/types";
 import type { DiagnosisAnswers, DiagnosisQuestionId } from "@/features/diagnosis/model/options";
 import type { DiagnosisQuestion, DiagnosisStep } from "@/features/diagnosis/model/questions";
+import { format } from "@/i18n/config";
 import { cn } from "@/lib/utils";
 import { useFocusOnMount } from "@/lib/use-focus-on-mount";
 
@@ -18,6 +20,7 @@ interface QuestionStepProps {
   errors: Partial<Record<DiagnosisQuestionId, string>>;
   onAnswer: (questionId: DiagnosisQuestionId, value: string) => void;
   onPrevious?: () => void;
+  strings: Pick<DiagnosisUiStrings, "stepPrefix" | "previous" | "next" | "finish">;
   /** Returns the ids of unanswered questions, or an empty list when the step is complete. */
   onNext: () => DiagnosisQuestionId[];
 }
@@ -39,7 +42,7 @@ function QuestionFieldset({
   // when focus moves to the first option.
   return (
     <fieldset aria-describedby={error ? errorId : undefined}>
-      <legend className="text-h4 font-semibold">{question.label}</legend>
+      <legend className="text-subheading font-semibold">{question.label}</legend>
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {question.options.map((option) => {
           const checked = value === option.value;
@@ -47,13 +50,14 @@ function QuestionFieldset({
             <label
               key={option.value}
               className={cn(
-                "flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 transition-colors duration-150",
-                "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-pine-700",
+                "flex min-h-14 cursor-pointer items-center gap-3 rounded-control border bg-pure-white px-4 py-3 text-body transition-[border-color,box-shadow] duration-200 ease-out",
+                "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-iris-blue",
+                // Apple's selection affordance: a 2px blue outline (border + 1px ring, no layout shift).
                 checked
-                  ? "border-pine-700 bg-pine-50 font-semibold"
+                  ? "border-iris-blue ring-1 ring-iris-blue"
                   : error
-                    ? "border-danger bg-paper hover:bg-mist"
-                    : "border-control bg-paper hover:border-ink hover:bg-mist",
+                    ? "border-danger hover:border-obsidian"
+                    : "border-silver hover:border-obsidian",
               )}
             >
               <input
@@ -62,7 +66,7 @@ function QuestionFieldset({
                 value={option.value}
                 checked={checked}
                 onChange={() => onAnswer(question.id, option.value)}
-                className="size-5 shrink-0 cursor-pointer accent-pine-700 focus-visible:outline-none"
+                className="size-5 shrink-0 cursor-pointer accent-iris-blue focus-visible:outline-none"
               />
               <span>{option.label}</span>
             </label>
@@ -83,6 +87,7 @@ export function QuestionStep({
   onAnswer,
   onPrevious,
   onNext,
+  strings,
 }: QuestionStepProps) {
   const headingRef = useFocusOnMount<HTMLHeadingElement>();
   const formRef = useRef<HTMLFormElement>(null);
@@ -98,13 +103,13 @@ export function QuestionStep({
 
   return (
     <form ref={formRef} noValidate onSubmit={handleSubmit}>
-      <h2 ref={headingRef} tabIndex={-1} className="text-h3 outline-none">
+      <h2 ref={headingRef} tabIndex={-1} className="text-heading-sm outline-none">
         <span className="sr-only">
-          Paso {stepNumber} de {totalSteps}:
+          {format(strings.stepPrefix, { current: stepNumber, total: totalSteps })}
         </span>{" "}
         {step.title}
       </h2>
-      <p className="mt-2 text-ink-soft">{step.description}</p>
+      <p className="mt-2 text-pewter">{step.description}</p>
 
       <div className="mt-8 space-y-10">
         {step.questions.map((question) => (
@@ -118,17 +123,17 @@ export function QuestionStep({
         ))}
       </div>
 
-      <div className="mt-10 flex items-center justify-between gap-4 border-t border-line pt-6">
+      <div className="mt-10 flex items-center justify-between gap-4 border-t border-pale-mist pt-6">
         {onPrevious ? (
-          <Button variant="ghost" onClick={onPrevious} className="-ml-3">
-            <ArrowLeft aria-hidden="true" className="size-4" />
-            Anterior
+          <Button variant="plain" onClick={onPrevious} className="-ml-4">
+            <ChevronLeft aria-hidden="true" className="size-4" />
+            {strings.previous}
           </Button>
         ) : (
           <span />
         )}
         <Button type="submit" size="lg">
-          {isLast ? "Ver mi diagnóstico" : "Siguiente"}
+          {isLast ? strings.finish : strings.next}
         </Button>
       </div>
     </form>

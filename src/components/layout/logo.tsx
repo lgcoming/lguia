@@ -1,41 +1,76 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
-/** The route mark: a path from where you are to where you want to be. */
-export function LogoMark({ className }: { className?: string }) {
+// Intrinsic size of public/brand/lguia-logo-*.png (480×169).
+const RATIO = 480 / 169;
+
+type LogoVariant = "on-light" | "on-dark" | "adaptive";
+
+function LogoImage({
+  tone,
+  height,
+  className,
+}: {
+  tone: "light" | "dark";
+  height: number;
+  className?: string;
+}) {
   return (
-    <svg viewBox="0 0 32 32" aria-hidden="true" className={cn("size-8 shrink-0", className)}>
-      <rect width="32" height="32" rx="9" className="fill-pine-700" />
-      <path
-        d="M9.5 22.5c0-7 13-5 13-12.5"
-        fill="none"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        className="stroke-paper"
-      />
-      <circle cx="9.5" cy="22.5" r="2.6" className="fill-paper" />
-      <circle cx="22.5" cy="10" r="3.4" className="fill-signal" />
-    </svg>
+    <Image
+      src={tone === "dark" ? "/brand/lguia-logo-dark.png" : "/brand/lguia-logo-light.png"}
+      alt=""
+      width={Math.round(height * RATIO)}
+      height={height}
+      loading="eager"
+      // `w-auto` keeps the aspect ratio when `imageClassName` changes the rendered height.
+      className={cn("w-auto", className)}
+    />
   );
 }
 
-export function Logo({ onDark = false, className }: { onDark?: boolean; className?: string }) {
+/**
+ * Brand logo as a home link. `adaptive` renders both versions and lets the header theme
+ * (globals.css .site-header) show the right one, so the swap never waits for JavaScript.
+ * `height` is the largest rendered height (it sizes the image request); `imageClassName` can
+ * render it smaller on narrow screens.
+ */
+export function Logo({
+  variant = "on-light",
+  height = 28,
+  href = "/",
+  label,
+  imageClassName,
+  className,
+}: {
+  variant?: LogoVariant;
+  height?: number;
+  /** Home of the current language. */
+  href?: string;
+  /** Accessible name in the current language, e.g. "lguia, ir al inicio". */
+  label: string;
+  imageClassName?: string;
+  className?: string;
+}) {
   return (
     <Link
-      href="/"
-      aria-label="LGuIA, ir al inicio"
-      className={cn("inline-flex min-h-11 items-center gap-2.5 rounded-lg", className)}
+      href={href}
+      aria-label={label}
+      className={cn("inline-flex min-h-11 shrink-0 items-center rounded-lg", className)}
     >
-      <LogoMark />
-      <span
-        className={cn(
-          "text-[1.375rem] leading-none font-extrabold tracking-[-0.03em]",
-          onDark ? "text-paper" : "text-ink",
-        )}
-      >
-        LGuIA
-      </span>
+      {variant === "adaptive" ? (
+        <>
+          <LogoImage tone="dark" height={height} className={cn("logo-on-light", imageClassName)} />
+          <LogoImage tone="light" height={height} className={cn("logo-on-dark", imageClassName)} />
+        </>
+      ) : (
+        <LogoImage
+          tone={variant === "on-dark" ? "light" : "dark"}
+          height={height}
+          className={imageClassName}
+        />
+      )}
     </Link>
   );
 }

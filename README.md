@@ -1,6 +1,6 @@
-# LGuIA
+# lguia
 
-**LGuIA** is a digital agency for SMEs and local businesses in Spain. It helps traditional
+**lguia** is a digital agency for SMEs and local businesses in Spain. It helps traditional
 businesses improve their digital presence, automate repetitive work and adopt AI only where it
 provides practical value. This repository is the agency's website and lead platform.
 
@@ -39,7 +39,7 @@ testing and a Spec-Driven Development workflow.
 | Validation | Zod 4 via `zod/mini` (shared client/server schemas)                 |
 | Testing    | Vitest + React Testing Library · Playwright                         |
 | Tooling    | ESLint · Prettier (+ Tailwind class sorting) · GitHub Actions       |
-| Hosting    | Vercel                                                              |
+| Hosting    | Cloudflare Workers via OpenNext (SPEC-010)                          |
 
 No database, auth system, CMS, state library or external AI API: the brief excludes them for v1,
 and the architecture keeps them pluggable.
@@ -104,33 +104,35 @@ In development the admin view is available at `/admin/leads` with three fictiona
 
 ### Environment variables
 
-| Variable               | Purpose                                                                       | Default                                             |
-| ---------------------- | ----------------------------------------------------------------------------- | --------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | Canonical origin for metadata, sitemap and JSON-LD                            | Vercel production URL, then `http://localhost:3000` |
-| `ENABLE_DEMO_ADMIN`    | Expose `/admin/leads` and `GET /api/leads` in production (demo only, no auth) | `false`                                             |
+| Variable               | Purpose                                                                       | Default                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical origin for metadata, sitemap and JSON-LD                            | `https://lguia.com` for production builds, then `http://localhost:3000` |
+| `ENABLE_DEMO_ADMIN`    | Expose `/admin/leads` and `GET /api/leads` in production (demo only, no auth) | `false`                                                                 |
 
 ## Available scripts
 
-| Script                            | What it does                                             |
-| --------------------------------- | -------------------------------------------------------- |
-| `npm run dev`                     | Development server                                       |
-| `npm run build` / `npm start`     | Production build / serve it                              |
-| `npm run lint`                    | ESLint (Next.js core-web-vitals + TypeScript rules)      |
-| `npm run typecheck`               | Generates route types (`next typegen`) and runs `tsc`    |
-| `npm test`                        | Vitest: unit, integration and component tests            |
-| `npm run test:watch`              | Vitest in watch mode                                     |
-| `npm run test:e2e`                | Playwright against a production build (desktop + mobile) |
-| `npm run format` / `format:check` | Prettier write / check                                   |
-| `npm run check`                   | lint + typecheck + tests                                 |
+| Script                                  | What it does                                              |
+| --------------------------------------- | --------------------------------------------------------- |
+| `npm run dev`                           | Development server                                        |
+| `npm run build` / `npm start`           | Production build / serve it                               |
+| `npm run lint`                          | ESLint (Next.js core-web-vitals + TypeScript rules)       |
+| `npm run typecheck`                     | Generates route types (`next typegen`) and runs `tsc`     |
+| `npm test`                              | Vitest: unit, integration and component tests             |
+| `npm run test:watch`                    | Vitest in watch mode                                      |
+| `npm run test:e2e`                      | Playwright against a production build (desktop + mobile)  |
+| `npm run format` / `format:check`       | Prettier write / check                                    |
+| `npm run check`                         | lint + typecheck + tests                                  |
+| `node scripts/encode-videos.mjs`        | Re-encode background videos (Chrome WebCodecs, no ffmpeg) |
+| `node scripts/prepare-brand-assets.mjs` | Regenerate transparent logos and app icons                |
 
 ## Testing
 
-| Layer       | Where               | What                                                                                                                                                                     |
-| ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Unit        | `tests/unit`        | Diagnosis validation, scoring, plan rules and tie-breaks, service recommendations, an invariant sweep over 262k answer combinations, lead/email validation, lead service |
-| Integration | `tests/integration` | Route Handlers with real `Request` objects: success, invalid JSON, missing/invalid fields, tampering, honeypot, production gate                                          |
-| Component   | `tests/components`  | Wizard navigation, validation, keyboard-only use, API success and error recovery; contact form                                                                           |
-| E2E         | `tests/e2e`         | `/diagnostico-digital` → complete → recommendation → lead → success, desktop and mobile                                                                                  |
+| Layer       | Where               | What                                                                                                                                                                                              |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unit        | `tests/unit`        | Diagnosis validation, scoring, plan rules and tie-breaks, service recommendations, an invariant sweep over 262k answer combinations, lead/email validation, lead service, scroll-to-video mapping |
+| Integration | `tests/integration` | Route Handlers with real `Request` objects: success, invalid JSON, missing/invalid fields, tampering, honeypot, production gate                                                                   |
+| Component   | `tests/components`  | Wizard navigation, validation, keyboard-only use, API success and error recovery; contact form                                                                                                    |
+| E2E         | `tests/e2e`         | `/diagnostico-digital` → complete → recommendation → lead → success, desktop and mobile                                                                                                           |
 
 ```bash
 npm test
@@ -170,20 +172,48 @@ The reasoning behind each decision is recorded in [`MEMORY.md`](./MEMORY.md). Hi
 - **No Cache Components**: the site is static-first; `/admin/leads` opts into request-time
   rendering with `connection()`.
 - **Honeypot, not CAPTCHA**: no third-party script, no friction.
-- **Design concept "la guía"** (wayfinding): one memorable device — the route line — used only
-  for real sequences (hero preview, process, wizard progress).
+- **Apple-inspired design system** ([SPEC-002 v2](./docs/specs/002-design-system.md), Refero
+  "Apple (España)" reference in `docs/design/refero-apple/`): light canvas, full-bleed dark bands
+  with video or photography, frosted glass for the navigation and panels over imagery, bento grids,
+  pill buttons. Text over footage is contrast-checked against real frames.
+- **Background videos are progressive enhancement**: the poster is server-rendered; the video only
+  loads on screens ≥ 768px without reduced motion or Save-Data. The home hero is scrubbed by
+  scroll (pinned with CSS `sticky`, smoothed with a Motion spring); the process band loops while
+  visible and can be paused. Videos are re-encoded for the web (H.264, no audio, fast start, dense
+  keyframes for scrubbing) by `scripts/encode-videos.mjs`. Glass falls back to opaque surfaces with
+  `prefers-reduced-transparency`.
+- **No GSAP or Lenis**: Motion (already used) covers scroll-linked values, springs and entrances;
+  native scrolling is kept for accessibility and battery.
+
+### Brand and media assets
+
+| Where                                               | Asset                                                                      |
+| --------------------------------------------------- | -------------------------------------------------------------------------- |
+| Header (adaptive light/dark), mobile menu, footer   | `public/brand/lguia-logo-{dark,light}.png`                                 |
+| Watermark (diagnosis tile, benefits lead tile, 404) | `public/brand/lguia-mark.png`                                              |
+| Home hero (scroll-scrubbed)                         | `public/media/video/hero-connections.mp4` + poster                         |
+| Home "Cómo trabajamos"                              | `public/media/video/process-neural.mp4` + poster                           |
+| Service tiles, overview blocks and category heroes  | `public/media/images/{web-development,automation,business-ai,connections}` |
+| Diagnosis CTA tile                                  | `public/media/images/circuit.jpg`                                          |
+| Contact CTA band, plans hero                        | `public/media/images/neural-circuit.jpg`                                   |
+
+Originals live in `assets/brand-source/` and `assets/media-source/`; the two scripts in "Available
+scripts" regenerate the served files.
 
 ### Quality snapshot (production build, Lighthouse mobile)
 
-| Page                   | Performance | Accessibility | Best practices | SEO |
-| ---------------------- | ----------- | ------------- | -------------- | --- |
-| `/`                    | 97          | 100           | 100            | 100 |
-| `/servicios`           | 98          | 100           | 100            | 100 |
-| `/planes`              | 97          | 100           | 100            | 100 |
-| `/contacto`            | 97          | 100           | 100            | 100 |
-| `/diagnostico-digital` | 96          | 100           | 100            | 100 |
+| Page                     | Performance | Accessibility | Best practices | SEO |
+| ------------------------ | ----------- | ------------- | -------------- | --- |
+| `/`                      | 92          | 100           | 100            | 100 |
+| `/servicios`             | 94          | 100           | 100            | 100 |
+| `/servicios/chatbots-ia` | 94          | 100           | 100            | 100 |
+| `/planes`                | 94          | 100           | 100            | 100 |
+| `/contacto`              | 96          | 100           | 100            | 100 |
+| `/diagnostico-digital`   | 95          | 100           | 100            | 100 |
 
-CLS 0 on every page; total blocking time ≤ 60 ms.
+CLS 0 on every page; total blocking time 30 ms; the LCP element is the `<h1>` on every page.
+Desktop home with the pinned, scrubbed hero: 100 / 100 / 100 / 100 (LCP 0.7 s, TBT 0 ms; the
+2.6 MB hero video is fetched after `load`).
 
 ## Roadmap
 
@@ -197,13 +227,22 @@ CLS 0 on every page; total blocking time ≤ 60 ms.
 
 ## Deployment
 
-Designed for **Vercel** (zero configuration for Next.js):
+Hosted on **Cloudflare Workers** with the OpenNext adapter (SPEC-010), next to the `lguia.com`
+domain and its Email Routing mailbox.
 
-1. Push the repository to GitHub (`main` and `develop` branches).
-2. Import it in Vercel. Production deploys from `main`; `develop` and pull requests get previews.
-3. Set `NEXT_PUBLIC_SITE_URL` to the production domain. Leave `ENABLE_DEMO_ADMIN` unset unless the
-   deployment is a demo that will never receive real leads (leads are kept in memory and the admin
-   view has no authentication).
+1. The repository lives at [github.com/lgcoming/lguia](https://github.com/lgcoming/lguia)
+   (private), with `main` and `develop`.
+2. Once: `npx wrangler login`, then `npx wrangler secret put LEADS_TO` with the inbox that must
+   receive leads (it must be a verified destination address in Email Routing).
+3. `npm run deploy` builds with OpenNext and deploys the `lguia` Worker. `wrangler.jsonc` attaches
+   `lguia.com` and `www.lguia.com` as Custom Domains (Cloudflare creates the DNS records and the
+   certificate; remove any old `A`/`CNAME` record on those names first, keep `MX`/`TXT`).
+4. `npm run preview` runs the same Worker locally; `.dev.vars` (not committed) can set
+   `LEADS_TO=leads@example.test`, and emails are printed instead of sent.
+
+Leave `ENABLE_DEMO_ADMIN` unset in production (leads are kept in memory and the admin view has no
+authentication). Work from the folder's real casing (`Agencia lguia`): see the tooling note in
+`MEMORY.md`.
 
 CI (`.github/workflows/ci.yml`) runs lint, type checks, formatting, tests, a production build and
 the E2E flow on every push and pull request to `main` and `develop`.
@@ -211,5 +250,7 @@ the E2E flow on every push and pull request to `main` and `develop`.
 ## Working on this project
 
 Read [`AGENTS.md`](./AGENTS.md) (rules for contributors and AI agents), [`MEMORY.md`](./MEMORY.md)
-(decisions and constraints) and the relevant spec before changing code. The sprint backlog with
-issue-ready descriptions is in [`docs/backlog.md`](./docs/backlog.md).
+(decisions and constraints) and the relevant spec before changing code. Work is tracked in
+[GitHub Issues](https://github.com/lgcoming/lguia/issues) and on the
+[project board](https://github.com/users/lgcoming/projects/2) (Backlog → Ready → In Progress →
+Review → Done); the original sprint plan is in [`docs/backlog.md`](./docs/backlog.md).
