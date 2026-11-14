@@ -6,9 +6,10 @@ top of each section. Keep entries short; link to specs for detail.
 ## Product facts and placeholders
 
 - Site language: Spanish (es-ES). Market: Spain. Code and docs: English.
-- **Prices in `src/data/plans.ts` are indicative placeholders** (Starter Local 690 €, Web Pro
-  1900 €, IA Starter 1200 €, Automation Pack 950 €, Growth Web + IA 3900 €, Custom Enterprise "a
-  medida"; VAT excluded). Validate with the business before launch.
+- **Starting prices confirmed by the owner (2026-11-14)**, VAT excluded: Starter Local 590 €,
+  Automation Pack 890 €, IA Starter 750 €, Web Pro 1.950 €, Growth Web + IA 3.250 € (SEO/GEO
+  content is written during the build, no three-month content service), Custom Enterprise on
+  quote. The owner works alone: no promises of a dedicated team or SLAs.
 - **Domain is `lguia.com`** (owner's, at Cloudflare; decided 2026-11-14). Production builds use it
   as canonical origin. `hola@lguia.com` forwards to the owner's inbox with Email Routing.
 - **Legal pages (SPEC-011)**: owner "Luis Gómez" trading as lguia. The owner does not publish their
@@ -17,7 +18,7 @@ top of each section. Keep entries short; link to specs for detail.
 - **Hosting is Cloudflare Workers via OpenNext** (owner decision 2026-11-14, SPEC-010): same
   provider as domain and mail, free plan; Vercel Hobby excludes commercial use. Leads are emailed
   through the `send_email` binding to the `LEADS_TO` secret (the personal inbox is never committed).
-- Response-time promise in forms ("2 días laborables") is a placeholder commitment to confirm.
+- Response time "2 días laborables" (2 business days) is confirmed by the owner (2026-11-14).
 - No testimonials, logos or stats until real ones exist (credibility over decoration).
 - Legal pages (aviso legal, privacidad, cookies) are pending; forms carry an inline basic
   data-protection notice. No cookies or analytics are used yet, so no cookie banner is needed.
@@ -78,7 +79,9 @@ top of each section. Keep entries short; link to specs for detail.
 - **`opengraph-image` inside a route group gets a hashed URL**, so the English social image is a
   fixed route handler (`/og-en.png`).
 - **Do not name an app folder `_document`** (kept as `_shared`).
-- **AI crawlers are all allowed** in robots.txt, training ones included; move GPTBot, ClaudeBot,
+- **AI crawlers are all allowed** in robots.txt, training ones included (owner confirmed 2026-11-14:
+  maximum visibility). Cloudflare must not override it: "Managed robots.txt" and "Block AI bots"
+  in the dashboard stay off, or GPTBot/ClaudeBot get 403 and robots.txt becomes invalid; move GPTBot, ClaudeBot,
   Google-Extended and Applebot-Extended to a Disallow rule to opt out of training only.
 - **English copy is not reviewed by a native speaker yet** (owner decision).
 - **Dark glass is AMOLED black** (`carbon` at 85%, opaque `carbon` fallback); the old `night`
