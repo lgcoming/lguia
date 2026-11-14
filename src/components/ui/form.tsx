@@ -9,14 +9,15 @@ import { cn } from "@/lib/utils";
  */
 
 const controlClasses =
-  "block w-full rounded-xl border border-control bg-paper px-4 py-3 text-base text-ink transition-colors duration-150 hover:border-ink aria-[invalid=true]:border-danger aria-[invalid=true]:bg-danger-50";
+  "block w-full rounded-control border border-silver bg-pure-white px-4 py-3 text-body text-obsidian transition-colors duration-200 ease-out hover:border-graphite focus-visible:border-iris-blue aria-[invalid=true]:border-2 aria-[invalid=true]:border-danger";
 
 interface FieldChromeProps {
   id: string;
   label: string;
   hint?: string;
   error?: string;
-  optional?: boolean;
+  /** Suffix for optional fields in the form's language, e.g. "(opcional)". */
+  optional?: string;
 }
 
 function describedBy(id: string, hint?: string, error?: string): string | undefined {
@@ -26,9 +27,9 @@ function describedBy(id: string, hint?: string, error?: string): string | undefi
 
 function FieldLabel({ id, label, optional }: Pick<FieldChromeProps, "id" | "label" | "optional">) {
   return (
-    <label htmlFor={id} className="mb-2 block font-semibold">
+    <label htmlFor={id} className="mb-2 block text-footnote font-semibold">
       {label}
-      {optional ? <span className="font-normal text-ink-soft"> (opcional)</span> : null}
+      {optional ? <span className="font-normal text-pewter"> {optional}</span> : null}
     </label>
   );
 }
@@ -36,7 +37,7 @@ function FieldLabel({ id, label, optional }: Pick<FieldChromeProps, "id" | "labe
 export function FieldError({ id, children }: { id: string; children?: ReactNode }) {
   if (!children) return null;
   return (
-    <p id={id} className="mt-2 flex items-start gap-1.5 text-sm font-medium text-danger">
+    <p id={id} className="mt-2 flex items-start gap-1.5 text-footnote text-danger">
       <CircleAlert aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
       <span>{children}</span>
     </p>
@@ -46,7 +47,7 @@ export function FieldError({ id, children }: { id: string; children?: ReactNode 
 function FieldHint({ id, children }: { id: string; children?: ReactNode }) {
   if (!children) return null;
   return (
-    <p id={id} className="mt-2 text-sm text-ink-soft">
+    <p id={id} className="mt-2 text-footnote text-pewter">
       {children}
     </p>
   );
@@ -155,10 +156,10 @@ export function CheckboxField({ id, label, hint, error, className, ...props }: C
           type="checkbox"
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy(id, hint, error)}
-          className="mt-0.5 size-6 shrink-0 cursor-pointer accent-pine-700"
+          className="mt-0.5 size-6 shrink-0 cursor-pointer accent-iris-blue"
           {...props}
         />
-        <label htmlFor={id} className="cursor-pointer text-base">
+        <label htmlFor={id} className="cursor-pointer text-footnote text-graphite">
           {label}
         </label>
       </div>

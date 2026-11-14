@@ -1,9 +1,9 @@
-import { plans } from "@/data/plans";
-import { serviceCategories } from "@/data/services";
-import type { Plan, PlanId, ServiceCategory } from "@/types/catalog";
+import { CATALOG } from "@/data/catalog";
+import { DEFAULT_LOCALE, type Locale } from "@/i18n/config";
+import type { Faq, Plan, PlanId, ProcessStep, ServiceCategory } from "@/types/catalog";
 
 /**
- * Read access to services and plans. Async on purpose: a CMS or database
+ * Read access to services and plans in one language. Async on purpose: a CMS or database
  * implementation can replace the static one without changing callers.
  */
 export interface CatalogRepository {
@@ -11,23 +11,39 @@ export interface CatalogRepository {
   getServiceCategory(id: string): Promise<ServiceCategory | undefined>;
   listPlans(): Promise<Plan[]>;
   getPlans(ids: readonly PlanId[]): Promise<Plan[]>;
+  listPlanFaqs(): Promise<Faq[]>;
+  listProcessSteps(): Promise<ProcessStep[]>;
 }
 
-const staticCatalogRepository: CatalogRepository = {
-  async listServiceCategories() {
-    return serviceCategories;
-  },
-  async getServiceCategory(id) {
-    return serviceCategories.find((category) => category.id === id);
-  },
-  async listPlans() {
-    return plans;
-  },
-  async getPlans(ids) {
-    return plans.filter((plan) => ids.includes(plan.id));
-  },
+function createStaticCatalogRepository(locale: Locale): CatalogRepository {
+  const content = CATALOG[locale];
+  return {
+    async listServiceCategories() {
+      return content.serviceCategories;
+    },
+    async getServiceCategory(id) {
+      return content.serviceCategories.find((category) => category.id === id);
+    },
+    async listPlans() {
+      return content.plans;
+    },
+    async getPlans(ids) {
+      return content.plans.filter((plan) => ids.includes(plan.id));
+    },
+    async listPlanFaqs() {
+      return content.planFaqs;
+    },
+    async listProcessSteps() {
+      return content.processSteps;
+    },
+  };
+}
+
+const repositories: Record<Locale, CatalogRepository> = {
+  es: createStaticCatalogRepository("es"),
+  en: createStaticCatalogRepository("en"),
 };
 
-export function getCatalogRepository(): CatalogRepository {
-  return staticCatalogRepository;
+export function getCatalogRepository(locale: Locale = DEFAULT_LOCALE): CatalogRepository {
+  return repositories[locale];
 }

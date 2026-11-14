@@ -2,7 +2,7 @@
 
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 import { CheckboxField, SelectField, TextAreaField, TextField } from "@/components/ui/form";
 import {
@@ -11,8 +11,10 @@ import {
   HoneypotField,
   SubmitButton,
 } from "@/features/leads/components/form-parts";
-import { contactLeadSchema } from "@/features/leads/schema";
+import type { LeadFormContent } from "@/features/leads/content/types";
+import { createLeadSchemas } from "@/features/leads/schema";
 import { useLeadForm } from "@/features/leads/use-lead-form";
+import { format, splitAt, type Locale } from "@/i18n/config";
 import { issuesToFieldErrors, toApiIssues } from "@/lib/validation";
 
 interface ContactFormValues extends Record<string, unknown> {
@@ -39,23 +41,34 @@ const initialValues: ContactFormValues = {
 
 const fieldOrder = ["name", "email", "company", "phone", "interest", "message", "consent"] as const;
 
-function validate(values: ContactFormValues) {
-  const result = contactLeadSchema.safeParse({ ...values, source: "contact" });
-  return result.success
-    ? { success: true as const, payload: result.data }
-    : { success: false as const, fieldErrors: issuesToFieldErrors(toApiIssues(result.error)) };
+interface ContactFormProps {
+  locale: Locale;
+  content: LeadFormContent;
+  interestOptions: ReadonlyArray<{ value: string; label: string }>;
+  /** Where the success message sends people next (the diagnosis page of this language). */
+  diagnosisHref: string;
 }
 
-export function ContactForm({
-  interestOptions,
-}: {
-  interestOptions: ReadonlyArray<{ value: string; label: string }>;
-}) {
+export function ContactForm({ locale, content, interestOptions, diagnosisHref }: ContactFormProps) {
+  const schema = useMemo(
+    () => createLeadSchemas(content.validation).contactLeadSchema,
+    [content.validation],
+  );
   const { values, errors, status, formError, fieldId, setValue, handleSubmit } = useLeadForm({
     initialValues,
     idPrefix: "contacto",
     fieldOrder,
-    validate,
+    locale,
+    errorMessages: content.errors,
+    validate: (current: ContactFormValues) => {
+      const result = schema.safeParse({ ...current, source: "contact" });
+      return result.success
+        ? { success: true as const, payload: result.data }
+        : {
+            success: false as const,
+            fieldErrors: issuesToFieldErrors(toApiIssues(result.error)),
+          };
+    },
   });
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
 
@@ -64,28 +77,32 @@ export function ContactForm({
   }, [status]);
 
   if (status === "success") {
+    const [textBefore, textAfter] = splitAt(content.success.text, "{email}");
+    const [nextBefore, nextAfter] = splitAt(content.success.next, "{link}");
     return (
-      <div className="rounded-card border border-pine-700 bg-pine-50 p-6 md:p-8">
-        <CircleCheck aria-hidden="true" className="size-8 text-pine-700" />
-        <h2 ref={successHeadingRef} tabIndex={-1} className="mt-4 text-h3 outline-none">
-          Gracias, {values.name.trim().split(" ")[0]}. Hemos recibido tu mensaje.
+      <div className="rounded-tile bg-fog-white p-6 md:p-8">
+        <CircleCheck aria-hidden="true" className="size-8 text-obsidian" strokeWidth={1.5} />
+        <h2 ref={successHeadingRef} tabIndex={-1} className="mt-4 text-heading-sm outline-none">
+          {format(content.success.title, { name: values.name.trim().split(" ")[0] })}
         </h2>
-        <p className="mt-3 text-ink-soft">
-          Te responderemos a <strong className="text-ink">{values.email.trim()}</strong> en un
-          máximo de 2 días laborables con una primera valoración.
+        <p className="mt-3 text-pewter">
+          {textBefore}
+          <strong className="text-obsidian">{values.email.trim()}</strong>
+          {textAfter}
         </p>
         <p className="mt-6">
-          Mientras tanto, puedes{" "}
-          <Link href="/diagnostico-digital" className="font-semibold text-pine-700 underline">
-            hacer el diagnóstico digital
-          </Link>{" "}
-          para adelantar trabajo.
+          {nextBefore}
+          <Link href={diagnosisHref} className="text-sapphire underline underline-offset-4">
+            {content.success.nextLink}
+          </Link>
+          {nextAfter}
         </p>
       </div>
     );
   }
 
   const submitting = status === "submitting";
+  const { fields } = content;
 
   return (
     <form noValidate onSubmit={handleSubmit} className="relative space-y-6" aria-busy={submitting}>
@@ -93,7 +110,7 @@ export function ContactForm({
         <TextField
           id={fieldId("name")}
           name="name"
-          label="Nombre"
+          label={fields.name}
           autoComplete="name"
           required
           value={values.name}
@@ -104,7 +121,7 @@ export function ContactForm({
           id={fieldId("email")}
           name="email"
           type="email"
-          label="Email"
+          label={fields.email}
           autoComplete="email"
           inputMode="email"
           required
@@ -115,8 +132,8 @@ export function ContactForm({
         <TextField
           id={fieldId("company")}
           name="company"
-          label="Empresa"
-          optional
+          label={fields.company}
+          optional={fields.optional}
           autoComplete="organization"
           value={values.company}
           onChange={(event) => setValue("company", event.target.value)}
@@ -126,8 +143,8 @@ export function ContactForm({
           id={fieldId("phone")}
           name="phone"
           type="tel"
-          label="Teléfono"
-          optional
+          label={fields.phone}
+          optional={fields.optional}
           autoComplete="tel"
           inputMode="tel"
           value={values.phone}
@@ -139,7 +156,7 @@ export function ContactForm({
       <SelectField
         id={fieldId("interest")}
         name="interest"
-        label="¿En qué podemos ayudarte?"
+        label={fields.interest}
         options={interestOptions}
         value={values.interest}
         onChange={(event) => setValue("interest", event.target.value)}
@@ -149,8 +166,8 @@ export function ContactForm({
       <TextAreaField
         id={fieldId("message")}
         name="message"
-        label="Cuéntanos tu proyecto"
-        hint="Qué necesitas, en qué plazo y cualquier detalle que nos ayude a entenderlo."
+        label={fields.message}
+        hint={fields.messageHint}
         required
         rows={6}
         value={values.message}
@@ -160,6 +177,7 @@ export function ContactForm({
 
       <HoneypotField
         id={fieldId("website")}
+        label={content.honeypotLabel}
         value={values.website}
         onChange={(value) => setValue("website", value)}
       />
@@ -167,17 +185,21 @@ export function ContactForm({
       <CheckboxField
         id={fieldId("consent")}
         name="consent"
-        label="He leído la información sobre protección de datos y acepto que LGuIA use mis datos para responder a mi solicitud."
+        label={content.consent}
         checked={values.consent}
         onChange={(event) => setValue("consent", event.target.checked)}
         error={errors.consent}
       />
 
-      <DataProtectionNotice />
+      <DataProtectionNotice content={content.dataProtection} />
 
       {formError ? <FormAlert>{formError}</FormAlert> : null}
 
-      <SubmitButton submitting={submitting} label="Enviar mensaje" />
+      <SubmitButton
+        submitting={submitting}
+        label={content.submit}
+        submittingLabel={content.submitting}
+      />
     </form>
   );
 }

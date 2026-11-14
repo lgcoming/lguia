@@ -6,7 +6,7 @@
 
 ## Context
 
-LGuIA needs a technical base that a small team (or AI agents) can extend for years: typed,
+lguia needs a technical base that a small team (or AI agents) can extend for years: typed,
 tested, documented, and free of dependencies that do not earn their place.
 
 ## Scope
@@ -43,7 +43,7 @@ workflow and agent documentation. Out of scope: features (covered by later specs
   first implementations are static/in-memory; swapping them for a database must not touch UI or
   business logic.
 - R8. Environment variables are documented in `.env.example`:
-  - `NEXT_PUBLIC_SITE_URL` — canonical origin (fallback: Vercel production URL, then localhost).
+  - `NEXT_PUBLIC_SITE_URL` — canonical origin (fallback: `https://lguia.com` for production builds, then localhost).
   - `ENABLE_DEMO_ADMIN` — exposes lead data in production for demo deployments only.
 - R9. Scripts: `dev`, `build`, `start`, `lint`, `typecheck`, `test`, `test:watch`, `test:e2e`,
   `format`, `format:check`, `check` (lint + typecheck + tests).
@@ -62,7 +62,7 @@ workflow and agent documentation. Out of scope: features (covered by later specs
 
 ## Decisions
 
-- **npm** as package manager: default on Vercel and CI, no extra tooling.
+- **npm** as package manager: default in CI and on Cloudflare Workers Builds, no extra tooling.
 - **No Cache Components** (`cacheComponents` off): almost every page is static content, and the
   only request-time page (`/admin/leads`) opts in explicitly with `connection()`. This keeps the
   rendering model simple; it can be revisited when real data sources exist.

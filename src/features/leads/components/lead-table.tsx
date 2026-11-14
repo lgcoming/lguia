@@ -25,7 +25,7 @@ function LeadNeed({
     return (
       <>
         <p className="font-semibold">{planNames[lead.diagnosis.recommendedPlanId]}</p>
-        <p className="text-sm text-ink-soft">
+        <p className="text-footnote text-pewter">
           <span className="tabular">{lead.diagnosis.score}/100</span>,{" "}
           {MATURITY_LEVELS[lead.diagnosis.level].label.toLowerCase()}
         </p>
@@ -39,10 +39,10 @@ function LeadNeed({
 export function LeadTable({ leads, planNames, interestLabels }: LeadTableProps) {
   if (leads.length === 0) {
     return (
-      <div className="rounded-card border border-dashed border-control p-10 text-center">
-        <Inbox aria-hidden="true" className="mx-auto size-8 text-ink-soft" />
+      <div className="rounded-tile bg-pure-white p-10 text-center">
+        <Inbox aria-hidden="true" className="mx-auto size-8 text-pewter" strokeWidth={1.5} />
         <p className="mt-3 font-semibold">Todavía no hay leads</p>
-        <p className="mt-1 text-ink-soft">
+        <p className="mt-1 text-pewter">
           Aparecerán aquí cuando alguien envíe el formulario de contacto o el del diagnóstico.
         </p>
       </div>
@@ -54,13 +54,13 @@ export function LeadTable({ leads, planNames, interestLabels }: LeadTableProps) 
       role="region"
       aria-labelledby="leads-caption"
       tabIndex={0}
-      className="overflow-x-auto rounded-card border border-line bg-paper"
+      className="overflow-x-auto rounded-tile bg-pure-white"
     >
-      <table className="w-full min-w-[56rem] text-left text-base">
+      <table className="w-full min-w-[56rem] text-left text-footnote">
         <caption id="leads-caption" className="sr-only">
           Leads recibidos, del más reciente al más antiguo
         </caption>
-        <thead className="border-b border-line bg-mist text-sm text-ink-soft">
+        <thead className="border-b border-pale-mist text-caption text-pewter">
           <tr>
             <th scope="col" className="px-5 py-3 font-semibold">
               Fecha
@@ -79,32 +79,35 @@ export function LeadTable({ leads, planNames, interestLabels }: LeadTableProps) 
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-line">
+        <tbody className="divide-y divide-pale-mist">
           {leads.map((lead) => (
             <tr key={lead.id} className="align-top">
-              <td className="px-5 py-4 text-sm whitespace-nowrap text-ink-soft">
+              <td className="px-5 py-4 whitespace-nowrap text-pewter">
                 <time dateTime={lead.createdAt}>{dateFormat.format(new Date(lead.createdAt))}</time>
               </td>
               <td className="px-5 py-4">
                 <p className="font-semibold">{lead.name}</p>
-                {lead.company ? <p className="text-sm text-ink-soft">{lead.company}</p> : null}
+                {lead.company ? <p className="text-pewter">{lead.company}</p> : null}
                 <a
                   href={`mailto:${lead.email}`}
-                  className="text-sm text-pine-700 underline underline-offset-2"
+                  className="text-sapphire underline-offset-2 hover:underline"
                 >
                   {lead.email}
                 </a>
-                {lead.phone ? <p className="text-sm text-ink-soft">{lead.phone}</p> : null}
+                {lead.phone ? <p className="text-pewter">{lead.phone}</p> : null}
               </td>
               <td className="px-5 py-4">
-                <Badge tone={lead.source === "diagnosis" ? "brand" : "neutral"}>
+                <Badge tone={lead.source === "diagnosis" ? "strong" : "neutral"}>
                   {lead.source === "diagnosis" ? "Diagnóstico" : "Contacto"}
                 </Badge>
+                <p className="mt-2 text-caption text-pewter">
+                  Idioma: {lead.locale === "en" ? "inglés" : "español"}
+                </p>
               </td>
               <td className="px-5 py-4">
                 <LeadNeed lead={lead} planNames={planNames} interestLabels={interestLabels} />
               </td>
-              <td className="max-w-xs px-5 py-4 text-sm text-ink-soft">
+              <td className="max-w-xs px-5 py-4 text-pewter">
                 {lead.message ? <p className="line-clamp-3">{lead.message}</p> : "—"}
               </td>
             </tr>

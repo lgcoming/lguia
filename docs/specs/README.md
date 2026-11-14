@@ -1,6 +1,6 @@
 # Specifications
 
-LGuIA is built with **Spec-Driven Development (SDD)**. Every substantial feature has a
+lguia is built with **Spec-Driven Development (SDD)**. Every substantial feature has a
 specification here _before_ it is implemented, and the spec is updated whenever the
 implementation changes its behaviour or contracts.
 
@@ -19,16 +19,18 @@ implementation changes its behaviour or contracts.
 
 ## Index
 
-| ID  | Spec                                              | Status       | Sprint |
-| --- | ------------------------------------------------- | ------------ | ------ |
-| 001 | [Foundation](./001-foundation.md)                 | Implemented  | 0      |
-| 002 | [Design system](./002-design-system.md)           | Implemented  | 0      |
-| 003 | [Marketing site](./003-marketing-site.md)         | Implemented  | 1      |
-| 004 | [Digital diagnosis](./004-digital-diagnosis.md)   | Implemented  | 2      |
-| 005 | [Leads and admin view](./005-leads.md)            | Implemented  | 2–3    |
-| 006 | [REST API](./006-api.md)                          | Implemented  | 2      |
-| 007 | [SEO](./007-seo.md)                               | Implemented¹ | 3      |
-| 008 | [Quality, testing and delivery](./008-quality.md) | Implemented  | 3      |
+| ID  | Spec                                                                                | Status       | Sprint        |
+| --- | ----------------------------------------------------------------------------------- | ------------ | ------------- |
+| 001 | [Foundation](./001-foundation.md)                                                   | Implemented  | 0             |
+| 002 | [Design system](./002-design-system.md)                                             | Implemented  | 0             |
+| 003 | [Marketing site](./003-marketing-site.md)                                           | Implemented  | 1             |
+| 004 | [Digital diagnosis](./004-digital-diagnosis.md)                                     | Implemented  | 2             |
+| 005 | [Leads and admin view](./005-leads.md)                                              | Implemented  | 2–3           |
+| 006 | [REST API](./006-api.md)                                                            | Implemented  | 2             |
+| 007 | [SEO](./007-seo.md)                                                                 | Implemented¹ | 3             |
+| 008 | [Quality, testing and delivery](./008-quality.md)                                   | Implemented  | 3             |
+| 009 | [Bilingual site, international SEO and GEO](./009-international-seo.md)             | Implemented  | International |
+| 010 | [Hosting on Cloudflare Workers and lead notifications](./010-cloudflare-workers.md) | Implemented  | Launch        |
 
 ¹ AC3 (Rich Results Test) needs the deployed URL.
 

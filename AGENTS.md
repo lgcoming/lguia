@@ -8,9 +8,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# LGuIA — rules for contributors and AI agents
+# lguia — rules for contributors and AI agents
 
-LGuIA is a digital agency for SMEs and local businesses (web, automation, practical AI). This
+lguia is a digital agency for SMEs and local businesses (web, automation, practical AI). This
 repository is its production website. It must look and behave like a real commercial product.
 
 Read this file, then [`MEMORY.md`](./MEMORY.md) and the relevant spec in
@@ -32,7 +32,7 @@ without a reason.
 ## Stack and dependency policy
 
 Next.js 16 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS v4 · Motion · Lucide React ·
-Zod · Vitest + React Testing Library · Playwright · Vercel.
+Zod · Vitest + React Testing Library · Playwright · Cloudflare Workers (OpenNext).
 
 - Runtime dependencies are limited to `next`, `react`, `react-dom`, `motion`, `lucide-react`, `zod`.
 - Do **not** add Redux, Zustand, Prisma, PostgreSQL, Redis, Supabase, Firebase, OpenAI/LangChain or
@@ -45,13 +45,15 @@ Zod · Vitest + React Testing Library · Playwright · Vercel.
 ```
 src/
   app/            routes only (pages, layouts, route handlers, metadata files)
-    (marketing)/  public site with Header/Footer; _components/ for route-specific sections
-    (admin)/      internal views, noindex, gated by isAdminEnabled()
+    (es)/         Spanish root layout: (marketing)/ public pages at /, (admin)/ internal views
+    (en)/en/      English root layout and pages under /en (SPEC-009)
     api/          Route Handlers (thin)
   components/     reusable UI: ui/, layout/, marketing/, motion/, seo/
   features/       feature modules: catalog/, diagnosis/, leads/ (model + services + feature UI)
+  views/          page compositions shared by every language (route files stay thin)
+  i18n/           languages, localized routes, site dictionaries
   lib/            shared infrastructure (site config, api helpers, utils)
-  data/           static/mock content (services, plans, process)
+  data/           static/mock content per language (services, plans, process)
   types/          shared domain types
 tests/            unit/, integration/, components/, e2e/
 docs/specs/       SDD specifications
@@ -72,12 +74,22 @@ Rules:
 - No module-level mutable request state on the server. The in-memory lead store on `globalThis` is
   the single intentional exception (it is a mock database).
 
+## Languages (SPEC-009)
+
+- The site is bilingual: Spanish (default, at `/`) and English (`/en`). Every user-facing string
+  lives in a per-language file (`src/i18n/dictionaries/`, `src/data/<locale>/`,
+  `src/features/*/content/`); never hard-code copy in components. Add both languages together:
+  unit tests fail if their structure, placeholders or quoted prices differ.
+- Build every internal URL with `src/i18n/routes.ts` (`pageHref`, `serviceHref`, `planHref`).
+- Server Components read copy directly; Client Components receive strings as props.
+- The brand is always written `lguia`, lowercase, in both languages.
+
 ## Coding standards
 
 - TypeScript strict; no `any`; prefer `type`/`interface` from `src/types` or the feature module.
 - Names: components `PascalCase`, files `kebab-case.tsx`, functions `camelCase`, constants
   `SCREAMING_SNAKE_CASE` only for true constants.
-- UI copy in Spanish (es-ES), sentence case, plain verbs, no hype; code and comments in English.
+- UI copy in Spanish and English, sentence case, plain verbs, no hype; code and comments in English.
 - Comments explain _why_, not _what_. Keep them rare.
 - Tailwind utilities with design tokens from `globals.css`; never hard-code hex values in components.
   Use `cn()` from `src/lib/utils.ts` to compose classes. `cn()` does not resolve conflicts, so never
@@ -85,29 +97,43 @@ Rules:
   variant, or wrap the component.
 - Formatting: Prettier (`npm run format`). Linting: ESLint (`npm run lint`).
 
-## Design system (SPEC-002)
+## Design system (SPEC-002 v2, Apple-inspired)
 
-- Tokens in `src/app/globals.css` (`@theme`). Palette: ink, ink-soft, paper, mist, line, control,
-  pine, signal, danger.
-- One typeface (Schibsted Grotesk). Left-aligned layouts. Radius by hierarchy (pill buttons, 12px
-  inputs, 20px cards).
-- Signature device: the route line (`RouteStop` in `components/ui/route.tsx`) — use it only for
-  real sequences or position.
-- Avoid: AI gradients/glow, glassmorphism, all-caps eyebrows, `→` in link text, `A · B · C` meta
-  strings, highlighted single words in headlines, identical card grids everywhere, fake social proof.
+- Reference: `docs/design/refero-apple/` (Refero "Apple (España)"). Tokens in `src/app/globals.css`
+  (`@theme`) use its names: fog-white, pure-white, obsidian, carbon, pewter, slate, graphite,
+  silver, pale-mist, ash-veil, iris-blue, sapphire, sky-signal, cornflower, ice-wash (+ danger,
+  iris-blue-hover).
+- Type: SF Pro on Apple devices (`-apple-system`), Inter variable elsewhere. Headlines 600 with
+  slightly negative tracking; body 17/1.47.
+- Light canvas for information, full-bleed dark bands (video/photography + overlay) for atmosphere.
+  Separate sections by surface change, never by rules or shadows. No box shadows.
+- Centered headline stacks (headline → subhead → button pair); left-aligned text inside tiles/forms.
+- `iris-blue` only for filled primary buttons and selected option tiles; `sapphire` links/outlines
+  on light, `sky-signal` on dark. Text over footage uses white or `ash-veil`, never `silver`.
+- Pills (`rounded-full`) for all buttons; tiles 28px (`rounded-tile`); inputs 12px.
+- Glass (`backdrop-filter`) only for the nav, the mobile menu sheet and panels over imagery/dark bands;
+  always with an opaque fallback (`@supports`, `prefers-reduced-transparency`).
+- Bento grids for services and benefits; vary tile sizes, do not repeat one grid everywhere.
+- Media: `next/image` for photographs; background videos via `BackgroundVideo` (desktop only,
+  reduced-motion and Save-Data aware, poster first). Brand logos from `public/brand/`.
+- Avoid: decorative gradients or glow outside the brand logo and photography, `→` in link text (use
+  the chevron icon), all-caps labels, fake social proof, more than one filled blue button per group.
 
 ## Accessibility (WCAG 2.2 AA)
 
 Semantic HTML first; one `h1` per page; skip link; visible `:focus-visible` on every surface; labels
 for every control; errors linked with `aria-describedby` and announced; focus management on step
-changes; targets ≥ 44px; contrast per SPEC-002; respect `prefers-reduced-motion`. ARIA only where
+changes; targets ≥ 24px (44px for primary controls); contrast per SPEC-002; respect `prefers-reduced-motion`. ARIA only where
 HTML cannot express the state.
 
 ## Performance
 
 Static rendering wherever possible; minimal client JS; `LazyMotion` + `m` components; animate only
-`transform`/`opacity`; no scroll listeners; `next/font` self-hosting; no third-party scripts; no
-images in the critical path unless optimized with `next/image`.
+`transform`/`opacity` (plus a one-off entrance `blur` on cards); no hand-written scroll listeners —
+scroll-linked effects use Motion's `useScroll`, and pinning is CSS `sticky`; no scroll hijacking or
+smooth-scroll libraries; `next/font` self-hosting; no third-party scripts; no images in the
+critical path unless optimized with `next/image`. Re-encode videos with
+`node scripts/encode-videos.mjs` (originals in `assets/media-source/`).
 
 ## SEO
 

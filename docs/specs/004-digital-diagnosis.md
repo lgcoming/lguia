@@ -6,7 +6,7 @@
 
 ## Context
 
-The diagnosis is LGuIA's main conversion tool: a short questionnaire that tells a business where
+The diagnosis is lguia's main conversion tool: a short questionnaire that tells a business where
 it stands digitally, which plan fits and why, and then invites it to leave its details. The
 recommendation must be **deterministic, explainable TypeScript** — no AI API — so it can be tested
 and trusted.
@@ -228,8 +228,9 @@ Phases: `intro` → `questions` (step 1–5) → `calculating` → `result` (+ l
 - **Questions**: one `<form>` per step; each question is a `<fieldset>` with `<legend>` and native
   radio inputs styled as option tiles (arrow keys move within a group, Tab between groups, Enter
   submits the step). Buttons "Anterior" and "Siguiente" (last step: "Ver mi diagnóstico").
-- **Progress**: "Paso N de 5: {step title}" text plus the route line with five stops; the visual
-  route is decorative (`aria-hidden`), the text is the accessible source of truth.
+- **Progress**: "Paso N de 5: {step title}" text plus a five-segment progress bar; the bar is
+  decorative (`aria-hidden`), the text is the accessible source of truth. Selected option tiles
+  show a 2px `iris-blue` outline (SPEC-002).
 - **Validation**: on "Siguiente", unanswered questions show "Selecciona una opción para continuar."
   inside the fieldset (`aria-describedby`, `aria-invalid` on the inputs), focus moves to the first
   invalid group. Answering a question clears its error.

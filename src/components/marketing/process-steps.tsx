@@ -1,26 +1,38 @@
-import { RouteStop } from "@/components/ui/route";
+import { RevealItem, RevealList } from "@/components/motion/reveal";
+import { StepNumber } from "@/components/ui/step-number";
+import { cn } from "@/lib/utils";
 import type { ProcessStep } from "@/types/catalog";
 
-/** The work process drawn on the route line: vertical on mobile, horizontal from md. */
-export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
+/**
+ * The work process as five numbered panels: dark glass over the process video, or white
+ * tiles on light pages. Five columns from lg; two on tablets with the last one full width.
+ */
+export function ProcessSteps({
+  steps,
+  tone = "light",
+}: {
+  steps: ProcessStep[];
+  tone?: "light" | "dark";
+}) {
   return (
-    <ol className="grid gap-8 md:grid-cols-5 md:gap-6">
+    <RevealList as="ol" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
       {steps.map((step, index) => (
-        <li key={step.title} className="relative flex gap-4 md:flex-col md:gap-0">
-          {index < steps.length - 1 ? (
-            <span
-              aria-hidden="true"
-              className="absolute top-9 -bottom-8 left-[17px] w-0.5 bg-pine-100 md:top-[17px] md:right-[-1.5rem] md:bottom-auto md:left-9 md:h-0.5 md:w-auto"
-            />
-          ) : null}
-          {/* The first stop is amber: it is where every project starts. */}
-          <RouteStop state={index === 0 ? "current" : "done"}>{index + 1}</RouteStop>
-          <div className="md:mt-5">
-            <h3 className="text-h4">{step.title}</h3>
-            <p className="mt-2 text-ink-soft">{step.description}</p>
-          </div>
-        </li>
+        <RevealItem
+          key={step.title}
+          className={cn(
+            "flex flex-col p-6 last:sm:col-span-2 last:lg:col-span-1",
+            tone === "dark" ? "glass-panel rounded-[1.25rem]" : "rounded-tile bg-pure-white",
+          )}
+        >
+          <StepNumber value={index + 1} tone={tone} />
+          <h3 className="mt-5 text-subheading font-semibold">{step.title}</h3>
+          <p
+            className={cn("mt-2 text-footnote", tone === "dark" ? "text-ash-veil" : "text-pewter")}
+          >
+            {step.description}
+          </p>
+        </RevealItem>
       ))}
-    </ol>
+    </RevealList>
   );
 }

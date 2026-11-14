@@ -1,53 +1,144 @@
-import { categoryHref } from "@/features/catalog/routes";
+import { LOCALE_INFO, LOCALES, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { pageHref, planHref, routeHref, serviceHref, type RouteRef } from "@/i18n/routes";
 import { absoluteUrl, getSiteUrl, siteConfig } from "@/lib/site";
-import type { Faq, ServiceCategory } from "@/types/catalog";
+import type { Faq, Plan, ServiceCategory } from "@/types/catalog";
 
 /*
- * Schema.org builders (SPEC-007). Only describe content that is visible on the page:
- * no ratings, reviews, addresses or prices that the page does not show.
+ * Schema.org builders (SPEC-007, SPEC-009). Only describe content that is visible on the page:
+ * no ratings, reviews, street addresses or figures that the page does not show. The same
+ * entities (@id) are referenced from every language so engines see one organisation, not two.
  */
 
 const organizationId = () => `${getSiteUrl().origin}/#organization`;
+const websiteId = () => `${getSiteUrl().origin}/#website`;
 
-const areaServed = { "@type": "Country", name: siteConfig.areaServed };
+/** lguia works remotely from Spain for clients anywhere: the country is the only location shown. */
+const AREA_SERVED = [{ "@type": "Country", name: "Spain" }, "Worldwide"];
 
-export function siteGraph() {
+const LANGUAGE_NAMES: Record<Locale, string> = { es: "Spanish", en: "English" };
+
+/**
+ * The organisation and the website, emitted on every page. ProfessionalService is the specific
+ * type for an agency; it inherits from LocalBusiness, whose `address` is given at country
+ * level only because there is no public office.
+ */
+export function siteGraph(locale: Locale, categories: ServiceCategory[]) {
+  const { meta } = getDictionary(locale);
+  const logo = absoluteUrl("/brand/lguia-mark.png");
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
-        // Organization rather than LocalBusiness: LGuIA works remotely and has no public address.
-        "@type": "Organization",
+        "@type": ["Organization", "ProfessionalService"],
         "@id": organizationId(),
         name: siteConfig.name,
+        // One entity, one URL: the same in every language.
         url: absoluteUrl("/"),
-        logo: absoluteUrl("/icon.svg"),
+        logo: { "@type": "ImageObject", url: logo, width: 512, height: 512 },
+        image: logo,
         email: siteConfig.email,
-        description: siteConfig.description,
-        areaServed,
+        description: meta.description,
+        address: { "@type": "PostalAddress", addressCountry: siteConfig.country },
+        areaServed: AREA_SERVED,
+        knowsLanguage: LOCALES.map((code) => LOCALE_INFO[code].lang),
+        knowsAbout: categories.map((category) => category.name),
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: siteConfig.email,
+          url: absoluteUrl(pageHref(locale, "contact")),
+          availableLanguage: LOCALES.map((code) => LANGUAGE_NAMES[code]),
+        },
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: getDictionary(locale).footer.services,
+          itemListElement: categories.map((category) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: category.name,
+              description: category.summary,
+              url: absoluteUrl(serviceHref(locale, category.id)),
+            },
+          })),
+        },
       },
       {
         "@type": "WebSite",
-        "@id": `${getSiteUrl().origin}/#website`,
+        "@id": websiteId(),
         name: siteConfig.name,
         url: absoluteUrl("/"),
-        inLanguage: "es-ES",
+        inLanguage: LOCALES.map((code) => LOCALE_INFO[code].lang),
         publisher: { "@id": organizationId() },
       },
     ],
   };
 }
 
-export function serviceSchema(category: ServiceCategory) {
+type WebPageType = "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
+
+/** The page itself: ties its language version to the site and the organisation. */
+export function webPageSchema(options: {
+  locale: Locale;
+  route: RouteRef;
+  name: string;
+  description: string;
+  type?: WebPageType;
+}) {
+  const { locale, route, name, description, type = "WebPage" } = options;
+  const url = absoluteUrl(routeHref(locale, route));
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    "@id": `${url}#webpage`,
+    url,
+    name,
+    description,
+    inLanguage: LOCALE_INFO[locale].lang,
+    isPartOf: { "@id": websiteId() },
+    about: { "@id": organizationId() },
+    dateModified: siteConfig.contentUpdated,
+  };
+}
+
+function lowestPrice(plans: Plan[]): number | undefined {
+  const amounts = plans.flatMap((plan) =>
+    plan.pricing.kind === "from" ? [plan.pricing.amount] : [],
+  );
+  return amounts.length > 0 ? Math.min(...amounts) : undefined;
+}
+
+function highestPrice(plans: Plan[]): number | undefined {
+  const amounts = plans.flatMap((plan) =>
+    plan.pricing.kind === "from" ? [plan.pricing.amount] : [],
+  );
+  return amounts.length > 0 ? Math.max(...amounts) : undefined;
+}
+
+/** A service page. Prices come from the related plans shown on the same page. */
+export function serviceSchema(category: ServiceCategory, locale: Locale, relatedPlans: Plan[]) {
+  const from = lowestPrice(relatedPlans);
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: category.name,
     serviceType: category.name,
-    description: category.description,
-    url: absoluteUrl(categoryHref(category.id)),
+    description: category.answer,
+    url: absoluteUrl(serviceHref(locale, category.id)),
+    inLanguage: LOCALE_INFO[locale].lang,
     provider: { "@id": organizationId() },
-    areaServed,
+    areaServed: AREA_SERVED,
+    ...(from === undefined
+      ? {}
+      : {
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: "EUR",
+            lowPrice: from,
+            highPrice: highestPrice(relatedPlans),
+          },
+        }),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: category.name,
@@ -56,6 +147,35 @@ export function serviceSchema(category: ServiceCategory) {
         itemOffered: { "@type": "Service", name: service.name, description: service.description },
       })),
     },
+  };
+}
+
+/** The pricing page: every plan as an offer with its indicative starting price. */
+export function plansSchema(plans: Plan[], locale: Locale, name: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    name,
+    url: absoluteUrl(pageHref(locale, "pricing")),
+    inLanguage: LOCALE_INFO[locale].lang,
+    itemListElement: plans.map((plan) => ({
+      "@type": "Offer",
+      name: plan.name,
+      description: plan.tagline,
+      url: absoluteUrl(planHref(locale, plan.id)),
+      itemOffered: { "@type": "Service", name: plan.name, description: plan.idealFor },
+      seller: { "@id": organizationId() },
+      ...(plan.pricing.kind === "from"
+        ? {
+            priceSpecification: {
+              "@type": "PriceSpecification",
+              priceCurrency: plan.pricing.currency,
+              minPrice: plan.pricing.amount,
+              valueAddedTaxIncluded: false,
+            },
+          }
+        : {}),
+    })),
   };
 }
 
