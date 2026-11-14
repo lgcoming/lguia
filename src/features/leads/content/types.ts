@@ -30,7 +30,7 @@ export interface LeadFormContent {
   /** First option of the interest select: "I am not sure yet". */
   interestGeneral: string;
   consent: string;
-  dataProtection: { title: string; text: string };
+  dataProtection: { title: string; text: string; more: string; policy: string };
   honeypotLabel: string;
   submit: string;
   submitting: string;

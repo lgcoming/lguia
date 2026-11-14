@@ -7,7 +7,16 @@ import { SERVICE_CATEGORY_IDS, type PlanId, type ServiceCategoryId } from "@/typ
  * src/app/(es) and src/app/(en)/en must use exactly these segments (a unit test checks it).
  */
 
-export const PAGE_IDS = ["home", "services", "pricing", "diagnosis", "contact"] as const;
+export const PAGE_IDS = [
+  "home",
+  "services",
+  "pricing",
+  "diagnosis",
+  "contact",
+  "legal",
+  "privacy",
+  "cookies",
+] as const;
 
 export type PageId = (typeof PAGE_IDS)[number];
 
@@ -18,6 +27,9 @@ const PAGE_SEGMENTS: Record<Locale, Record<PageId, string>> = {
     pricing: "planes",
     diagnosis: "diagnostico-digital",
     contact: "contacto",
+    legal: "aviso-legal",
+    privacy: "privacidad",
+    cookies: "cookies",
   },
   en: {
     home: "",
@@ -25,6 +37,9 @@ const PAGE_SEGMENTS: Record<Locale, Record<PageId, string>> = {
     pricing: "pricing",
     diagnosis: "digital-assessment",
     contact: "contact",
+    legal: "legal-notice",
+    privacy: "privacy",
+    cookies: "cookies",
   },
 };
 
@@ -98,6 +113,9 @@ export function allRoutes(): RouteRef[] {
     ...SERVICE_CATEGORY_IDS.map((service) => ({ service })),
     { page: "pricing" },
     { page: "contact" },
+    { page: "legal" },
+    { page: "privacy" },
+    { page: "cookies" },
   ];
 }
 

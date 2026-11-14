@@ -16,6 +16,7 @@ import type { LeadFormContent } from "@/features/leads/content/types";
 import { createLeadSchemas } from "@/features/leads/schema";
 import { useLeadForm } from "@/features/leads/use-lead-form";
 import { format, splitAt, type Locale } from "@/i18n/config";
+import { pageHref } from "@/i18n/routes";
 import { useFocusOnMount } from "@/lib/use-focus-on-mount";
 import { issuesToFieldErrors, toApiIssues } from "@/lib/validation";
 
@@ -210,7 +211,10 @@ export function DiagnosisLeadForm({
           error={errors.consent}
         />
 
-        <DataProtectionNotice content={leadContent.dataProtection} />
+        <DataProtectionNotice
+          content={leadContent.dataProtection}
+          privacyHref={pageHref(locale, "privacy")}
+        />
 
         {formError ? <FormAlert>{formError}</FormAlert> : null}
 

@@ -38,6 +38,7 @@ export function siteGraph(locale: Locale, categories: ServiceCategory[]) {
         logo: { "@type": "ImageObject", url: logo, width: 512, height: 512 },
         image: logo,
         email: siteConfig.email,
+        founder: { "@type": "Person", name: siteConfig.owner },
         description: meta.description,
         address: { "@type": "PostalAddress", addressCountry: siteConfig.country },
         areaServed: AREA_SERVED,

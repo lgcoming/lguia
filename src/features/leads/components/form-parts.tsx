@@ -2,6 +2,7 @@ import { CircleAlert, LoaderCircle } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
+import { format } from "@/i18n/config";
 import { siteConfig } from "@/lib/site";
 
 /** Off-screen field that only bots fill in. Hidden from people and assistive technology. */
@@ -32,12 +33,24 @@ export function HoneypotField({
   );
 }
 
-export function DataProtectionNotice({ content }: { content: { title: string; text: string } }) {
+export function DataProtectionNotice({
+  content,
+  privacyHref,
+}: {
+  content: { title: string; text: string; more: string; policy: string };
+  privacyHref: string;
+}) {
+  const link = "text-sapphire underline underline-offset-2";
   return (
     <p className="text-caption text-pewter">
-      <strong className="font-semibold text-obsidian">{content.title}</strong> {content.text}{" "}
-      <a href={`mailto:${siteConfig.email}`} className="text-sapphire underline underline-offset-2">
+      <strong className="font-semibold text-obsidian">{content.title}</strong>{" "}
+      {format(content.text, { owner: siteConfig.owner, brand: siteConfig.name })}{" "}
+      <a href={`mailto:${siteConfig.email}`} className={link}>
         {siteConfig.email}
+      </a>
+      . {content.more}{" "}
+      <a href={privacyHref} className={link}>
+        {content.policy}
       </a>
       .
     </p>

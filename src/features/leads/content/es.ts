@@ -29,7 +29,9 @@ export const leadContentEs: LeadFormContent = {
     "He leído la información sobre protección de datos y acepto que lguia use mis datos para responder a mi solicitud.",
   dataProtection: {
     title: "Protección de datos.",
-    text: "Responsable: lguia. Finalidad: responder a tu solicitud y, si lo pides, enviarte una propuesta. No cedemos tus datos a terceros. Puedes acceder a ellos, rectificarlos o suprimirlos escribiendo a",
+    text: "Responsable: {owner} ({brand}). Finalidad: responder a tu solicitud y, si lo pides, enviarte una propuesta. No cedemos tus datos a terceros. Puedes ejercer tus derechos escribiendo a",
+    more: "Más información en la",
+    policy: "política de privacidad",
   },
   honeypotLabel: "No rellenes este campo",
   submit: "Enviar mensaje",

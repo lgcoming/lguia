@@ -86,6 +86,20 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           <p>
             © {new Date().getFullYear()} {siteConfig.name}. {t.footer.rights}
           </p>
+          <nav aria-label={t.legal.footerLabel}>
+            <ul className="flex flex-wrap gap-x-4">
+              {(["legal", "privacy", "cookies"] as const).map((page) => (
+                <li key={page}>
+                  <Link
+                    href={pageHref(locale, page)}
+                    className="inline-flex min-h-6 items-center underline-offset-4 hover:text-obsidian hover:underline"
+                  >
+                    {t.legal.pages[page].navLabel}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <p className="flex items-center gap-2">
             <span>{t.footer.language}:</span>
             <span className="font-semibold text-obsidian">{LOCALE_INFO[locale].nativeName}</span>
