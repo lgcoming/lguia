@@ -1,6 +1,6 @@
 # SPEC-010 — Hosting on Cloudflare Workers and lead notifications
 
-- Status: Implemented (not deployed yet)
+- Status: Implemented, live on lguia.com since 2026-11-14
 - Sprint: Launch (2026-11)
 - Related: [005](./005-leads.md), [006](./006-api.md), [008](./008-quality.md),
   [009](./009-international-seo.md)
@@ -52,4 +52,5 @@ Vercel's free plan excludes commercial use.
       (unit tests + local binding log); honeypot leads send nothing.
 - [x] AC3 — Canonical and hreflang URLs use `https://lguia.com` in the Worker build.
 - [x] AC4 — The compressed Worker stays under the 3 MiB free-plan limit (2.2 MiB).
-- [ ] AC5 — Deployed on `lguia.com` with HTTPS and the `www` redirect (pending owner approval).
+- [x] AC5 — Deployed on `lguia.com` with HTTPS (Always Use HTTPS on), the `www` redirect and a
+      live lead email verified.

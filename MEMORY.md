@@ -221,7 +221,9 @@ top of each section. Keep entries short; link to specs for detail.
 - Lint and types clean; 132 unit/integration/component tests; 10 E2E on desktop and mobile.
 - Worker build (2.2 MiB gzip) run locally in workerd: all pages, 404s, APIs, sitemap, robots,
   llms.txt, social images and `next/image` answer correctly; canonical/hreflang on lguia.com; a
-  contact lead triggers one `send_email` call. Not deployed.
+  contact lead triggers one `send_email` call.
+- Deployed to lguia.com: every route, 404s, www and http redirects, closed admin view and a live
+  lead email checked. The first live lead failed because the `LEADS_TO` secret was mistyped.
 
 ### 2026-11-12 — Bilingual site and international SEO
 
