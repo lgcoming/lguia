@@ -78,7 +78,9 @@ top of each section. Keep entries short; link to specs for detail.
 - **`opengraph-image` inside a route group gets a hashed URL**, so the English social image is a
   fixed route handler (`/og-en.png`).
 - **Do not name an app folder `_document`** (kept as `_shared`).
-- **AI crawlers are all allowed** in robots.txt, training ones included; move GPTBot, ClaudeBot,
+- **AI crawlers are all allowed** in robots.txt, training ones included (owner confirmed 2026-11-14:
+  maximum visibility). Cloudflare must not override it: "Managed robots.txt" and "Block AI bots"
+  in the dashboard stay off, or GPTBot/ClaudeBot get 403 and robots.txt becomes invalid; move GPTBot, ClaudeBot,
   Google-Extended and Applebot-Extended to a Disallow rule to opt out of training only.
 - **English copy is not reviewed by a native speaker yet** (owner decision).
 - **Dark glass is AMOLED black** (`carbon` at 85%, opaque `carbon` fallback); the old `night`
