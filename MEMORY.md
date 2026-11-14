@@ -17,7 +17,7 @@ top of each section. Keep entries short; link to specs for detail.
 - **Hosting is Cloudflare Workers via OpenNext** (owner decision 2026-11-14, SPEC-010): same
   provider as domain and mail, free plan; Vercel Hobby excludes commercial use. Leads are emailed
   through the `send_email` binding to the `LEADS_TO` secret (the personal inbox is never committed).
-- Response-time promise in forms ("2 días laborables") is a placeholder commitment to confirm.
+- Response time "2 días laborables" (2 business days) is confirmed by the owner (2026-11-14).
 - No testimonials, logos or stats until real ones exist (credibility over decoration).
 - Legal pages (aviso legal, privacidad, cookies) are pending; forms carry an inline basic
   data-protection notice. No cookies or analytics are used yet, so no cookie banner is needed.
