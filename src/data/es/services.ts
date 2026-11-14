@@ -13,14 +13,14 @@ export const serviceCategories: ServiceCategory[] = [
     icon: "web",
     seoTitle: "Desarrollo web a medida para empresas",
     seoDescription:
-      "Desarrollo web a medida para empresas: webs corporativas, landing pages y tiendas online rápidas y pensadas para captar clientes. Presupuesto cerrado desde 690 €.",
+      "Desarrollo web a medida para empresas: webs corporativas, landing pages y tiendas online rápidas y pensadas para captar clientes. Presupuesto cerrado desde 590 €.",
     headline: "Desarrollo web a medida que convierte visitas en clientes",
     summary:
       "Webs corporativas, landing pages y tiendas online a medida: rápidas, claras y preparadas para captar clientes.",
     description:
       "Diseñamos y programamos tu web desde cero, sin plantillas recargadas: carga rápido, se entiende a la primera y lleva cada visita hacia el contacto o la compra. Con presupuesto cerrado y con el código, el dominio y las cuentas a tu nombre.",
     answer:
-      "lguia desarrolla webs a medida para empresas: webs corporativas, landing pages y tiendas online programadas sin plantillas, optimizadas para velocidad (Core Web Vitals), SEO técnico y conversión. Un proyecto parte de 690 € para una web de hasta cinco secciones y de 1.900 € para una web corporativa completa, se entrega en 2 a 6 semanas y se cierra con un presupuesto fijo antes de empezar.",
+      "lguia desarrolla webs a medida para empresas: webs corporativas, landing pages y tiendas online programadas sin plantillas, optimizadas para velocidad (Core Web Vitals), SEO técnico y conversión. Un proyecto parte de 590 € para una web de hasta cinco secciones y de 1.950 € para una web corporativa completa, se entrega en 2 a 6 semanas y se cierra con un presupuesto fijo antes de empezar.",
     problems: [
       {
         pain: "Tu web recibe visitas, pero casi nadie contacta",
@@ -96,7 +96,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         question: "¿Cuánto cuesta una página web a medida?",
         answer:
-          "Depende del alcance. Una web profesional de hasta cinco secciones parte de 690 € y una web corporativa a medida de hasta doce páginas, de 1.900 €, sin IVA. Tras el diagnóstico te enviamos un presupuesto cerrado con el alcance exacto.",
+          "Depende del alcance. Una web profesional de hasta cinco secciones parte de 590 € y una web corporativa a medida de hasta doce páginas, de 1.950 €, sin IVA. Tras el diagnóstico te enviamos un presupuesto cerrado con el alcance exacto.",
       },
       {
         question: "¿Cuánto tarda en estar lista una web?",
@@ -132,14 +132,14 @@ export const serviceCategories: ServiceCategory[] = [
     icon: "automation",
     seoTitle: "Automatización de procesos con IA para empresas",
     seoDescription:
-      "Automatización de procesos con IA para empresas: conectamos formularios, email y CRM para eliminar el trabajo manual y responder antes. Desde 950 €, en 2 a 4 semanas.",
+      "Automatización de procesos con IA para empresas: conectamos formularios, email y CRM para eliminar el trabajo manual y responder antes. Desde 890 €, en 2 a 4 semanas.",
     headline: "Automatización de procesos con IA que elimina el trabajo manual",
     summary:
       "Conectamos formularios, email y CRM y añadimos IA donde ahorra tiempo, para que los datos fluyan solos y tu equipo deje de copiar y pegar.",
     description:
       "Analizamos cómo trabaja tu equipo y automatizamos lo que se repite cada día: registrar solicitudes, pasar datos entre herramientas, clasificar contactos o avisar a la persona adecuada. Menos errores, respuestas más rápidas y horas recuperadas cada semana.",
     answer:
-      "lguia automatiza procesos de negocio para empresas: conecta formularios, email, hojas de cálculo y CRM, y usa inteligencia artificial para clasificar y responder solicitudes. Un proyecto tipo incluye el análisis de los procesos y hasta tres automatizaciones documentadas, parte de 950 € y se pone en marcha en 2 a 4 semanas, con avisos de error y una alternativa manual en cada flujo.",
+      "lguia automatiza procesos de negocio para empresas: conecta formularios, email, hojas de cálculo y CRM, y usa inteligencia artificial para clasificar y responder solicitudes. Un proyecto tipo incluye el análisis de los procesos y hasta tres automatizaciones documentadas, parte de 890 € y se pone en marcha en 2 a 4 semanas, con avisos de error y una alternativa manual en cada flujo.",
     problems: [
       {
         pain: "Tu equipo pierde horas copiando datos de una herramienta a otra",
@@ -203,7 +203,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         question: "¿Cuánto cuesta automatizar procesos en una empresa?",
         answer:
-          "Un primer proyecto con el análisis de tus procesos y hasta tres automatizaciones parte de 950 €, sin IVA. El precio final depende del número de herramientas a conectar y lo cerramos antes de empezar.",
+          "Un primer proyecto con el análisis de tus procesos y hasta tres automatizaciones parte de 890 €, sin IVA. El precio final depende del número de herramientas a conectar y lo cerramos antes de empezar.",
       },
       {
         question: "¿Qué procesos se pueden automatizar con IA?",
@@ -229,14 +229,14 @@ export const serviceCategories: ServiceCategory[] = [
     icon: "ai",
     seoTitle: "Agentes de IA y chatbots para empresas",
     seoDescription:
-      "Agentes de IA y chatbots para empresas, entrenados con tu información y con supervisión humana: atención al cliente, asistentes internos y tareas. Desde 1.200 €.",
+      "Agentes de IA y chatbots para empresas, entrenados con tu información y con supervisión humana: atención al cliente, asistentes internos y tareas. Desde 750 €.",
     headline: "Agentes de IA y chatbots entrenados con los datos de tu empresa",
     summary:
       "Chatbots, asistentes internos y agentes de IA que responden con la información de tu empresa y pasan la conversación a una persona cuando hace falta.",
     description:
       "Aplicamos la IA donde aporta un valor medible: atender consultas frecuentes a cualquier hora, ayudar a tu equipo a encontrar información o completar tareas sencillas. Empezamos por un caso de uso acotado, medimos el resultado y solo después ampliamos.",
     answer:
-      "lguia desarrolla agentes de IA y chatbots para empresas: asistentes de atención al cliente, buscadores internos sobre la documentación de la empresa y agentes que completan tareas como registrar una solicitud. Se entrenan con información verificada del negocio, respetan el RGPD y derivan la conversación a una persona cuando hace falta. Un primer proyecto parte de 1.200 € y se pone en marcha en 3 a 4 semanas.",
+      "lguia desarrolla agentes de IA y chatbots para empresas: asistentes de atención al cliente, buscadores internos sobre la documentación de la empresa y agentes que completan tareas como registrar una solicitud. Se entrenan con información verificada del negocio, respetan el RGPD y derivan la conversación a una persona cuando hace falta. Un primer proyecto parte de 750 € y se pone en marcha en 3 a 4 semanas.",
     problems: [
       {
         pain: "Respondes las mismas preguntas todos los días",
@@ -305,7 +305,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         question: "¿Cuánto cuesta un agente de IA o un chatbot para mi empresa?",
         answer:
-          "Un primer proyecto, con la identificación del caso de uso, un chatbot o asistente entrenado con tu información y un mes de ajustes, parte de 1.200 €, sin IVA. Los agentes conectados con varios sistemas se presupuestan a medida.",
+          "Un primer proyecto, con la identificación del caso de uso, un chatbot o asistente entrenado con tu información y un mes de ajustes, parte de 750 €, sin IVA. Los agentes conectados con varios sistemas se presupuestan a medida.",
       },
       {
         question: "¿La IA puede dar respuestas incorrectas?",
@@ -338,7 +338,7 @@ export const serviceCategories: ServiceCategory[] = [
     description:
       "Tus clientes buscan en Google y preguntan a asistentes como ChatGPT, Perplexity o Gemini. Trabajamos la base técnica, la estructura de tus contenidos y los datos estructurados para que tu empresa se entienda bien en ambos. Sin promesas de primeras posiciones: con trabajo medible y continuo.",
     answer:
-      "lguia ofrece SEO y GEO (Generative Engine Optimization) para empresas: SEO técnico, arquitectura de contenidos, datos estructurados schema.org y contenido claro y verificable para que los buscadores y los asistentes de IA como ChatGPT, Perplexity y Gemini entiendan el negocio y puedan citarlo. Está incluido en los proyectos web a partir de 690 € y se trabaja de forma continua con seguimiento mensual. Nadie puede garantizar posiciones ni citas, y lguia no lo promete.",
+      "lguia ofrece SEO y GEO (Generative Engine Optimization) para empresas: SEO técnico, arquitectura de contenidos, datos estructurados schema.org y contenido claro y verificable para que los buscadores y los asistentes de IA como ChatGPT, Perplexity y Gemini entiendan el negocio y puedan citarlo. Está incluido en los proyectos web a partir de 590 € y se trabaja de forma continua con seguimiento mensual. Nadie puede garantizar posiciones ni citas, y lguia no lo promete.",
     problems: [
       {
         pain: "No apareces cuando buscan lo que ofreces",

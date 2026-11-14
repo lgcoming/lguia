@@ -75,14 +75,14 @@ describe("structured data", () => {
     const category = CATALOG.en.serviceCategories[0];
     const related = CATALOG.en.plans.filter((plan) => category.relatedPlanIds.includes(plan.id));
     const service = serviceSchema(category, "en", related) as Record<string, unknown>;
-    expect(service.offers).toMatchObject({ priceCurrency: "EUR", lowPrice: 690 });
+    expect(service.offers).toMatchObject({ priceCurrency: "EUR", lowPrice: 590 });
     expect(service.url).toMatch(/\/en\/services\/custom-web-development$/);
 
     const catalog = plansSchema(CATALOG.es.plans, "es", "Planes");
     expect(catalog.itemListElement).toHaveLength(6);
     expect(catalog.itemListElement[0]).toMatchObject({
       name: "Starter Local",
-      priceSpecification: { minPrice: 690, priceCurrency: "EUR", valueAddedTaxIncluded: false },
+      priceSpecification: { minPrice: 590, priceCurrency: "EUR", valueAddedTaxIncluded: false },
     });
     expect(catalog.itemListElement[5]).not.toHaveProperty("priceSpecification");
   });

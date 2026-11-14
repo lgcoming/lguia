@@ -258,7 +258,7 @@ export const es = {
         {
           question: "¿Cuánto cuesta un proyecto con lguia?",
           answer:
-            "Publicamos precios orientativos de partida, sin IVA: una web profesional desde 690 €, un pack de automatizaciones desde 950 €, un primer agente de IA o chatbot desde 1.200 €, una web corporativa a medida desde 1.900 € y un proyecto conjunto de web, SEO, IA y automatización desde 3.900 €. El presupuesto final es cerrado y se acuerda antes de empezar.",
+            "Publicamos precios orientativos de partida, sin IVA: una web profesional desde 590 €, un pack de automatizaciones desde 890 €, un primer agente de IA o chatbot desde 750 €, una web corporativa a medida desde 1.950 € y un proyecto conjunto de web, SEO, IA y automatización desde 3.250 €. El presupuesto final es cerrado y se acuerda antes de empezar.",
         },
         {
           question: "¿Cuánto tarda un proyecto?",
@@ -319,7 +319,7 @@ export const es = {
   pricingPage: {
     metaTitle: "Planes y precios de desarrollo web, automatización e IA",
     metaDescription:
-      "Precios de desarrollo web a medida, automatización e IA para empresas: planes desde 690 €, con plazos orientativos y presupuesto cerrado tras un diagnóstico gratuito.",
+      "Precios de desarrollo web a medida, automatización e IA para empresas: planes desde 590 €, con plazos orientativos y presupuesto cerrado tras un diagnóstico gratuito.",
     title: "Planes y precios para cada etapa de tu empresa",
     intro:
       "Elige un punto de partida. Todos los proyectos empiezan con un diagnóstico y terminan con un presupuesto cerrado, sin sorpresas.",

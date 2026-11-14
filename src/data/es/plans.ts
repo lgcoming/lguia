@@ -2,7 +2,7 @@ import type { Faq, Plan } from "@/types/catalog";
 
 /**
  * Plans in Spanish (es). src/data/en/plans.ts must mirror ids, prices, categories and flags.
- * Prices are indicative placeholders pending business validation (see MEMORY.md).
+ * Starting prices confirmed by the owner on 2026-11-14 (see MEMORY.md).
  */
 export const plans: Plan[] = [
   {
@@ -10,7 +10,7 @@ export const plans: Plan[] = [
     name: "Starter Local",
     tagline: "Para pequeños negocios que necesitan una presencia digital profesional.",
     idealFor: "Autónomos, comercios y negocios locales",
-    pricing: { kind: "from", amount: 690, currency: "EUR" },
+    pricing: { kind: "from", amount: 590, currency: "EUR" },
     timeline: "2–3 semanas",
     features: [
       "Web profesional de hasta 5 secciones",
@@ -28,7 +28,7 @@ export const plans: Plan[] = [
     name: "Web Pro",
     tagline: "Para empresas que necesitan una web corporativa más avanzada.",
     idealFor: "Pymes y empresas de servicios",
-    pricing: { kind: "from", amount: 1900, currency: "EUR" },
+    pricing: { kind: "from", amount: 1950, currency: "EUR" },
     timeline: "4–6 semanas",
     features: [
       "Diseño a medida de hasta 12 páginas",
@@ -47,7 +47,7 @@ export const plans: Plan[] = [
     tagline:
       "Para empresas que quieren poner en marcha un proyecto de IA concreto, como un chatbot o un asistente interno.",
     idealFor: "Empresas que reciben muchas consultas repetidas",
-    pricing: { kind: "from", amount: 1200, currency: "EUR" },
+    pricing: { kind: "from", amount: 750, currency: "EUR" },
     timeline: "3–4 semanas",
     features: [
       "Sesión para identificar el caso de uso con más retorno",
@@ -65,7 +65,7 @@ export const plans: Plan[] = [
     name: "Automation Pack",
     tagline: "Para empresas con procesos repetitivos que quieren recuperar horas.",
     idealFor: "Equipos que pierden horas en tareas manuales",
-    pricing: { kind: "from", amount: 950, currency: "EUR" },
+    pricing: { kind: "from", amount: 890, currency: "EUR" },
     timeline: "2–4 semanas",
     features: [
       "Análisis de tus procesos actuales",
@@ -82,11 +82,11 @@ export const plans: Plan[] = [
     name: "Growth Web + IA",
     tagline: "Para empresas que quieren web, SEO/GEO, IA y automatización trabajando juntas.",
     idealFor: "Empresas que quieren crecer en digital",
-    pricing: { kind: "from", amount: 3900, currency: "EUR" },
+    pricing: { kind: "from", amount: 3250, currency: "EUR" },
     timeline: "8–10 semanas",
     features: [
       "Todo lo incluido en Web Pro",
-      "Estrategia SEO + GEO con contenidos durante 3 meses",
+      "Estrategia SEO + GEO y contenidos optimizados durante el desarrollo",
       "Asistente con IA integrado en tu web",
       "2 automatizaciones conectadas a tu CRM",
       "Revisión mensual de resultados y mejoras",
@@ -106,8 +106,8 @@ export const plans: Plan[] = [
       "Fase de descubrimiento con tu equipo",
       "Arquitectura e integraciones con tus sistemas (ERP, CRM, API)",
       "Agentes de IA y automatizaciones avanzadas",
-      "Equipo dedicado y planificación por fases",
-      "Soporte con acuerdos de nivel de servicio",
+      "Planificación por fases con un único interlocutor durante todo el proyecto",
+      "Soporte prioritario y mantenimiento a medida",
     ],
     categories: ["desarrollo-web", "seo-geo", "chatbots-ia", "automatizaciones"],
     featured: false,

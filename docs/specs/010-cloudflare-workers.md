@@ -43,6 +43,9 @@ Vercel's free plan excludes commercial use.
 - `npm run preview`: build and run the Worker locally (`.dev.vars` provides `LEADS_TO`; emails are
   logged, not sent).
 - First deploy: `npx wrangler login`, `npx wrangler secret put LEADS_TO`, `npm run deploy`.
+- Since 2026-11-14 **Workers Builds** deploys every push to `main` (GitHub app limited to
+  `lgcoming/lguia`; build `npx opennextjs-cloudflare build`, deploy
+  `npx opennextjs-cloudflare deploy`; preview builds off). `npm run deploy` stays as a manual fallback.
 
 ## Acceptance criteria
 

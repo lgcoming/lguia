@@ -6,9 +6,10 @@ top of each section. Keep entries short; link to specs for detail.
 ## Product facts and placeholders
 
 - Site language: Spanish (es-ES). Market: Spain. Code and docs: English.
-- **Prices in `src/data/plans.ts` are indicative placeholders** (Starter Local 690 €, Web Pro
-  1900 €, IA Starter 1200 €, Automation Pack 950 €, Growth Web + IA 3900 €, Custom Enterprise "a
-  medida"; VAT excluded). Validate with the business before launch.
+- **Starting prices confirmed by the owner (2026-11-14)**, VAT excluded: Starter Local 590 €,
+  Automation Pack 890 €, IA Starter 750 €, Web Pro 1.950 €, Growth Web + IA 3.250 € (SEO/GEO
+  content is written during the build, no three-month content service), Custom Enterprise on
+  quote. The owner works alone: no promises of a dedicated team or SLAs.
 - **Domain is `lguia.com`** (owner's, at Cloudflare; decided 2026-11-14). Production builds use it
   as canonical origin. `hola@lguia.com` forwards to the owner's inbox with Email Routing.
 - **Legal pages (SPEC-011)**: owner "Luis Gómez" trading as lguia. The owner does not publish their

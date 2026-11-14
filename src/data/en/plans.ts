@@ -10,7 +10,7 @@ export const plans: Plan[] = [
     name: "Starter Local",
     tagline: "For small businesses that need a professional online presence.",
     idealFor: "Freelancers, shops and local businesses",
-    pricing: { kind: "from", amount: 690, currency: "EUR" },
+    pricing: { kind: "from", amount: 590, currency: "EUR" },
     timeline: "2–3 weeks",
     features: [
       "Professional website of up to 5 sections",
@@ -28,7 +28,7 @@ export const plans: Plan[] = [
     name: "Web Pro",
     tagline: "For companies that need a more advanced corporate website.",
     idealFor: "SMEs and service companies",
-    pricing: { kind: "from", amount: 1900, currency: "EUR" },
+    pricing: { kind: "from", amount: 1950, currency: "EUR" },
     timeline: "4–6 weeks",
     features: [
       "Custom design of up to 12 pages",
@@ -47,7 +47,7 @@ export const plans: Plan[] = [
     tagline:
       "For companies that want to launch one specific AI project, such as a chatbot or an internal assistant.",
     idealFor: "Companies that receive many repeated enquiries",
-    pricing: { kind: "from", amount: 1200, currency: "EUR" },
+    pricing: { kind: "from", amount: 750, currency: "EUR" },
     timeline: "3–4 weeks",
     features: [
       "Session to identify the use case with the best return",
@@ -65,7 +65,7 @@ export const plans: Plan[] = [
     name: "Automation Pack",
     tagline: "For companies with repetitive processes that want their hours back.",
     idealFor: "Teams that lose hours to manual tasks",
-    pricing: { kind: "from", amount: 950, currency: "EUR" },
+    pricing: { kind: "from", amount: 890, currency: "EUR" },
     timeline: "2–4 weeks",
     features: [
       "Review of your current processes",
@@ -82,11 +82,11 @@ export const plans: Plan[] = [
     name: "Growth Web + IA",
     tagline: "For companies that want web, SEO/GEO, AI and automation working together.",
     idealFor: "Companies that want to grow online",
-    pricing: { kind: "from", amount: 3900, currency: "EUR" },
+    pricing: { kind: "from", amount: 3250, currency: "EUR" },
     timeline: "8–10 weeks",
     features: [
       "Everything in Web Pro",
-      "SEO + GEO strategy with content for 3 months",
+      "SEO + GEO strategy and optimised content written during the build",
       "AI assistant built into your website",
       "2 automations connected to your CRM",
       "Monthly review of results and improvements",
@@ -106,8 +106,8 @@ export const plans: Plan[] = [
       "Discovery phase with your team",
       "Architecture and integrations with your systems (ERP, CRM, API)",
       "AI agents and advanced automations",
-      "Dedicated team and phased planning",
-      "Support with service-level agreements",
+      "Phased planning with a single point of contact throughout the project",
+      "Priority support and tailored maintenance",
     ],
     categories: ["desarrollo-web", "seo-geo", "chatbots-ia", "automatizaciones"],
     featured: false,
