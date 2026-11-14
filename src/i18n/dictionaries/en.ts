@@ -242,7 +242,7 @@ export const en: Dictionary = {
         {
           question: "How much does a project with lguia cost?",
           answer:
-            "We publish indicative starting prices, VAT excluded: a professional website from €690, an automation pack from €950, a first AI agent or chatbot from €1,200, a custom corporate website from €1,900 and a combined web, SEO, AI and automation project from €3,900. The final quote is fixed and agreed before we start.",
+            "We publish indicative starting prices, VAT excluded: a professional website from €590, an automation pack from €890, a first AI agent or chatbot from €750, a custom corporate website from €1,950 and a combined web, SEO, AI and automation project from €3,250. The final quote is fixed and agreed before we start.",
         },
         {
           question: "How long does a project take?",
@@ -300,7 +300,7 @@ export const en: Dictionary = {
   pricingPage: {
     metaTitle: "Pricing for web development, AI automation and AI agents",
     metaDescription:
-      "Pricing for custom web development, AI automation and AI agents: plans from €690, with estimated timelines and a fixed quote after a free assessment.",
+      "Pricing for custom web development, AI automation and AI agents: plans from €590, with estimated timelines and a fixed quote after a free assessment.",
     title: "Plans and pricing for every stage of your company",
     intro:
       "Choose a starting point. Every project begins with an assessment and ends with a fixed quote, with no surprises.",

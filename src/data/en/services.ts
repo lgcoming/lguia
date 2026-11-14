@@ -12,14 +12,14 @@ export const serviceCategories: ServiceCategory[] = [
     icon: "web",
     seoTitle: "Custom web development for businesses",
     seoDescription:
-      "Custom web development for businesses: corporate websites, landing pages and online stores built to load fast and win customers. Fixed quotes from €690.",
+      "Custom web development for businesses: corporate websites, landing pages and online stores built to load fast and win customers. Fixed quotes from €590.",
     headline: "Custom web development that turns visitors into customers",
     summary:
       "Corporate websites, landing pages and online stores built from scratch: fast, clear and designed to generate leads.",
     description:
       "We design and code your website from scratch, with no bloated templates: it loads fast, makes sense at first glance and moves every visitor toward a call or a purchase. Fixed quote, and the code, the domain and every account in your name.",
     answer:
-      "lguia builds custom websites for businesses: corporate sites, landing pages and online stores coded without templates and optimised for speed (Core Web Vitals), technical SEO and conversion. Projects start at €690 for a site of up to five sections and at €1,900 for a full corporate website, ship in 2 to 6 weeks, and are agreed as a fixed quote before work begins.",
+      "lguia builds custom websites for businesses: corporate sites, landing pages and online stores coded without templates and optimised for speed (Core Web Vitals), technical SEO and conversion. Projects start at €590 for a site of up to five sections and at €1,950 for a full corporate website, ship in 2 to 6 weeks, and are agreed as a fixed quote before work begins.",
     problems: [
       {
         pain: "Your website gets traffic, but almost nobody gets in touch",
@@ -94,7 +94,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         question: "How much does a custom website cost?",
         answer:
-          "It depends on scope. A professional site of up to five sections starts at €690 and a custom corporate website of up to twelve pages at €1,900, VAT excluded. After the assessment we send a fixed quote with the exact scope.",
+          "It depends on scope. A professional site of up to five sections starts at €590 and a custom corporate website of up to twelve pages at €1,950, VAT excluded. After the assessment we send a fixed quote with the exact scope.",
       },
       {
         question: "How long does it take to build a website?",
@@ -130,14 +130,14 @@ export const serviceCategories: ServiceCategory[] = [
     icon: "automation",
     seoTitle: "AI automation and business process automation",
     seoDescription:
-      "AI automation for businesses: we connect forms, email and your CRM to remove manual work and answer leads faster. From €950, live in 2 to 4 weeks.",
+      "AI automation for businesses: we connect forms, email and your CRM to remove manual work and answer leads faster. From €890, live in 2 to 4 weeks.",
     headline: "AI automation that removes manual work from your operations",
     summary:
       "We connect forms, email and your CRM, and add AI where it saves time, so data moves on its own and your team stops copying and pasting.",
     description:
       "We study how your team works and automate what repeats every day: logging requests, moving data between tools, qualifying leads or alerting the right person. Fewer errors, faster replies and hours back every week.",
     answer:
-      "lguia automates business processes for companies: it connects forms, email, spreadsheets and CRMs, and uses artificial intelligence to classify and answer incoming requests. A typical project includes a process review and up to three documented automations, starts at €950 and goes live in 2 to 4 weeks, with error alerts and a manual fallback for every workflow.",
+      "lguia automates business processes for companies: it connects forms, email, spreadsheets and CRMs, and uses artificial intelligence to classify and answer incoming requests. A typical project includes a process review and up to three documented automations, starts at €890 and goes live in 2 to 4 weeks, with error alerts and a manual fallback for every workflow.",
     problems: [
       {
         pain: "Your team loses hours copying data from one tool to another",
@@ -198,7 +198,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         question: "How much does business process automation cost?",
         answer:
-          "A first project with a review of your processes and up to three automations starts at €950, VAT excluded. The final price depends on how many tools need connecting, and we agree it before starting.",
+          "A first project with a review of your processes and up to three automations starts at €890, VAT excluded. The final price depends on how many tools need connecting, and we agree it before starting.",
       },
       {
         question: "Which processes can be automated with AI?",
@@ -224,14 +224,14 @@ export const serviceCategories: ServiceCategory[] = [
     icon: "ai",
     seoTitle: "AI agents and chatbots for business",
     seoDescription:
-      "AI agents and chatbots for business, trained on your own information and supervised by people: customer service, internal assistants and task automation. From €1,200.",
+      "AI agents and chatbots for business, trained on your own information and supervised by people: customer service, internal assistants and task automation. From €750.",
     headline: "AI agents and chatbots trained on your company's data",
     summary:
       "Chatbots, internal assistants and AI agents that answer with your company's information and hand the conversation to a person when needed.",
     description:
       "We apply AI where it delivers measurable value: answering frequent questions around the clock, helping your team find information or completing simple tasks. We start with one narrow use case, measure the result and only then expand.",
     answer:
-      "lguia develops AI agents and chatbots for businesses: customer-service assistants, internal search over company documentation, and agents that complete tasks such as logging a request. They are trained on verified company information, comply with the GDPR and hand over to a person when needed. A first project starts at €1,200 and goes live in 3 to 4 weeks.",
+      "lguia develops AI agents and chatbots for businesses: customer-service assistants, internal search over company documentation, and agents that complete tasks such as logging a request. They are trained on verified company information, comply with the GDPR and hand over to a person when needed. A first project starts at €750 and goes live in 3 to 4 weeks.",
     problems: [
       {
         pain: "You answer the same questions every day",
@@ -297,7 +297,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         question: "How much does an AI agent or chatbot cost?",
         answer:
-          "A first project, with use-case discovery, a chatbot or assistant trained on your information and a month of tuning, starts at €1,200, VAT excluded. Agents connected to several systems are quoted to order.",
+          "A first project, with use-case discovery, a chatbot or assistant trained on your information and a month of tuning, starts at €750, VAT excluded. Agents connected to several systems are quoted to order.",
       },
       {
         question: "Can the AI give wrong answers?",
@@ -330,7 +330,7 @@ export const serviceCategories: ServiceCategory[] = [
     description:
       "Your buyers search on Google and ask assistants such as ChatGPT, Perplexity or Gemini. We work on the technical foundation, the structure of your content and structured data so your company is understood in both. No promises of top positions: measurable, continuous work.",
     answer:
-      "lguia provides SEO and GEO (generative engine optimization) for businesses: technical SEO, content architecture, schema.org structured data and clear, verifiable content so that search engines and AI assistants such as ChatGPT, Perplexity and Gemini understand the business and can cite it. It is included in web projects from €690 and continues as ongoing work with monthly reporting. Nobody can guarantee rankings or citations, and lguia does not promise them.",
+      "lguia provides SEO and GEO (generative engine optimization) for businesses: technical SEO, content architecture, schema.org structured data and clear, verifiable content so that search engines and AI assistants such as ChatGPT, Perplexity and Gemini understand the business and can cite it. It is included in web projects from €590 and continues as ongoing work with monthly reporting. Nobody can guarantee rankings or citations, and lguia does not promise them.",
     problems: [
       {
         pain: "You do not show up when people search for what you offer",

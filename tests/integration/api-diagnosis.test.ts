@@ -27,7 +27,7 @@ describe("POST /api/diagnosis", () => {
       id: "automation-pack",
       name: "Automation Pack",
       href: "/planes#automation-pack",
-      pricing: { kind: "from", amount: 950, currency: "EUR" },
+      pricing: { kind: "from", amount: 890, currency: "EUR" },
     });
     expect(result.reasons.length).toBeGreaterThanOrEqual(2);
     expect(result.recommendedServices).toHaveLength(4);
