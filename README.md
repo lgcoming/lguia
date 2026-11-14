@@ -235,8 +235,7 @@ domain and its Email Routing mailbox.
 2. Once: `npx wrangler login`, then `npx wrangler secret put LEADS_TO` with the inbox that must
    receive leads (it must be a verified destination address in Email Routing).
 3. Every push to `main` is built and deployed by Cloudflare Workers Builds (SPEC-010).
-   `npm run deploy` does the same from a local machine and builds with OpenNext and deploys the
-   `lguia` Worker. `wrangler.jsonc` attaches
+   `npm run deploy` does the same from a local machine (manual fallback). `wrangler.jsonc` attaches
    `lguia.com` and `www.lguia.com` as Custom Domains (Cloudflare creates the DNS records and the
    certificate; remove any old `A`/`CNAME` record on those names first, keep `MX`/`TXT`).
 4. `npm run preview` runs the same Worker locally; `.dev.vars` (not committed) can set
