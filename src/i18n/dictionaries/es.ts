@@ -409,6 +409,159 @@ export const es = {
     services: "Ver servicios",
     diagnosis: "Hacer el diagnóstico",
   },
+  legal: {
+    footerLabel: "Información legal",
+    updatedLabel: "Última actualización",
+    updated: "14 de noviembre de 2026",
+    pages: {
+      legal: {
+        navLabel: "Aviso legal",
+        metaTitle: "Aviso legal",
+        metaDescription:
+          "Datos del titular de lguia.com y condiciones de uso del sitio web, conforme a la LSSI-CE.",
+        title: "Aviso legal",
+        intro:
+          "En cumplimiento de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), estos son los datos del titular de este sitio web y las condiciones para usarlo.",
+        sections: [
+          {
+            heading: "Titular del sitio web",
+            paragraphs: [
+              "Titular: {owner}, profesional que presta sus servicios con el nombre comercial {brand}.",
+              "Sitio web: lguia.com. Correo electrónico de contacto: {email}.",
+              "Actividad: desarrollo web a medida, automatización de procesos e implantación de inteligencia artificial para empresas.",
+            ],
+          },
+          {
+            heading: "Condiciones de uso",
+            paragraphs: [
+              "El acceso a este sitio web es gratuito y no requiere registro. Al usarlo aceptas estas condiciones.",
+              "Te comprometes a hacer un uso adecuado de los contenidos y a no emplearlos para actividades ilícitas o que perjudiquen a terceros o al funcionamiento del sitio.",
+            ],
+          },
+          {
+            heading: "Información y precios",
+            paragraphs: [
+              "Los precios publicados son orientativos, no incluyen IVA y no constituyen una oferta vinculante. Cada proyecto se presupuesta por escrito antes de empezar.",
+              "El diagnóstico digital es una orientación automática basada en tus respuestas; no sustituye un análisis profesional de tu caso.",
+            ],
+          },
+          {
+            heading: "Propiedad intelectual e industrial",
+            paragraphs: [
+              "Los textos, el diseño, el código, los logotipos y la marca {brand} pertenecen a su titular. No se permite reproducirlos, distribuirlos ni transformarlos sin autorización expresa.",
+              "Las fotografías y los vídeos de terceros se usan conforme a sus licencias.",
+            ],
+          },
+          {
+            heading: "Responsabilidad",
+            paragraphs: [
+              "El titular procura que la información sea correcta y esté actualizada, pero no garantiza la ausencia de errores ni que el sitio esté disponible sin interrupciones.",
+              "Los enlaces a sitios de terceros se ofrecen solo como referencia; el titular no responde de su contenido.",
+            ],
+          },
+          {
+            heading: "Legislación aplicable",
+            paragraphs: [
+              "Estas condiciones se rigen por la legislación española. Cualquier controversia se resolverá ante los juzgados y tribunales que correspondan según la normativa vigente, incluida la de protección de las personas consumidoras cuando sea aplicable.",
+            ],
+          },
+        ],
+      },
+      privacy: {
+        navLabel: "Privacidad",
+        metaTitle: "Política de privacidad",
+        metaDescription:
+          "Qué datos personales trata lguia cuando usas sus formularios, para qué, durante cuánto tiempo y cómo ejercer tus derechos.",
+        title: "Política de privacidad",
+        intro:
+          "Esta política explica qué datos personales tratamos cuando usas los formularios de lguia.com, para qué y qué derechos tienes, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD).",
+        sections: [
+          {
+            heading: "Responsable del tratamiento",
+            paragraphs: [
+              "{owner}, que presta sus servicios con el nombre comercial {brand}.",
+              "Contacto para cualquier cuestión sobre tus datos: {email}.",
+            ],
+          },
+          {
+            heading: "Qué datos tratamos",
+            paragraphs: [
+              "Los que nos das en los formularios de contacto y de diagnóstico: nombre, correo electrónico y, si los indicas, empresa, teléfono, servicio de interés y mensaje.",
+              "En el diagnóstico, además, tus respuestas sobre la situación digital de tu negocio y el resultado calculado.",
+              "No pedimos datos especialmente protegidos. El sitio está dirigido a empresas y profesionales, no a menores de 14 años.",
+            ],
+          },
+          {
+            heading: "Para qué los usamos",
+            paragraphs: [
+              "Para responder a tu solicitud y, si lo pides, preparar y enviarte una propuesta o un presupuesto.",
+              "No los usamos para enviarte publicidad ni tomamos decisiones automatizadas sobre ti: el resultado del diagnóstico es solo orientativo.",
+            ],
+          },
+          {
+            heading: "Base legal",
+            paragraphs: [
+              "Tu consentimiento, que das al enviar el formulario (artículo 6.1.a del RGPD), y la aplicación de medidas precontractuales a petición tuya (artículo 6.1.b del RGPD). Puedes retirar el consentimiento cuando quieras, sin que afecte a lo tratado antes.",
+            ],
+          },
+          {
+            heading: "Cuánto tiempo los conservamos",
+            paragraphs: [
+              "Mientras gestionamos tu solicitud y, si no llegamos a trabajar juntos, un máximo de 12 meses desde el último contacto. Si contratas un servicio, durante la relación y los plazos que exija la ley, por ejemplo los fiscales.",
+            ],
+          },
+          {
+            heading: "Quién más accede a tus datos",
+            paragraphs: [
+              "No cedemos tus datos a terceros salvo obligación legal.",
+              "Nos ayudan proveedores que tratan los datos por nuestra cuenta: Cloudflare, Inc. aloja la web y nos entrega los formularios por correo electrónico, y nuestro proveedor de correo los recibe. Pueden tratar datos fuera del Espacio Económico Europeo con las garantías previstas en el RGPD, como el Marco de Privacidad de Datos UE-EE. UU. y las cláusulas contractuales tipo.",
+            ],
+          },
+          {
+            heading: "Tus derechos",
+            paragraphs: [
+              "Puedes pedir el acceso, la rectificación, la supresión, la oposición, la limitación del tratamiento y la portabilidad de tus datos escribiendo a {email}. Te responderemos en el plazo máximo de un mes.",
+              "Si crees que no hemos atendido bien tu solicitud, puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es).",
+            ],
+          },
+        ],
+      },
+      cookies: {
+        navLabel: "Cookies",
+        metaTitle: "Política de cookies",
+        metaDescription:
+          "lguia.com no usa cookies de análisis, publicidad ni seguimiento. Qué cookies técnicas puede usar su proveedor de alojamiento.",
+        title: "Política de cookies",
+        intro: "Esta política explica el uso de cookies y tecnologías similares en lguia.com.",
+        sections: [
+          {
+            heading: "Qué cookies usamos",
+            paragraphs: [
+              "lguia.com no usa cookies propias de análisis, publicidad ni seguimiento, ni guarda información en tu navegador para identificarte. Por eso no te mostramos un aviso de cookies.",
+            ],
+          },
+          {
+            heading: "Cookies técnicas del proveedor",
+            paragraphs: [
+              "Cloudflare, que aloja y protege la web, puede usar cookies técnicas estrictamente necesarias para detectar tráfico malicioso y mantener el servicio seguro. Están exentas de consentimiento (artículo 22.2 de la LSSI-CE) y no se usan para seguirte.",
+            ],
+          },
+          {
+            heading: "Contenido de terceros",
+            paragraphs: [
+              "La web no incrusta vídeos, mapas, redes sociales ni otros servicios de terceros que instalen cookies. Las fuentes tipográficas y los vídeos se sirven desde nuestro propio dominio.",
+            ],
+          },
+          {
+            heading: "Cambios en esta política",
+            paragraphs: [
+              "Si en el futuro usamos cookies que necesiten tu consentimiento, actualizaremos esta página y te lo pediremos antes de instalarlas. Puedes borrar o bloquear las cookies desde la configuración de tu navegador.",
+            ],
+          },
+        ],
+      },
+    },
+  },
 };
 
 export type Dictionary = typeof es;

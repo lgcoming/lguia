@@ -387,4 +387,157 @@ export const en: Dictionary = {
     services: "View services",
     diagnosis: "Take the assessment",
   },
+  legal: {
+    footerLabel: "Legal information",
+    updatedLabel: "Last updated",
+    updated: "14 November 2026",
+    pages: {
+      legal: {
+        navLabel: "Legal notice",
+        metaTitle: "Legal notice",
+        metaDescription:
+          "Who runs lguia.com and the terms of use of the website, under Spanish law (LSSI-CE).",
+        title: "Legal notice",
+        intro:
+          "Under Spanish Law 34/2002 on information society services and electronic commerce (LSSI-CE), these are the details of the owner of this website and the terms for using it.",
+        sections: [
+          {
+            heading: "Website owner",
+            paragraphs: [
+              "Owner: {owner}, a professional who trades under the name {brand}.",
+              "Website: lguia.com. Contact email: {email}.",
+              "Activity: custom web development, process automation and AI implementation for businesses.",
+            ],
+          },
+          {
+            heading: "Terms of use",
+            paragraphs: [
+              "Access to this website is free and needs no registration. By using it you accept these terms.",
+              "You agree to use the content properly and not for unlawful activities or anything that harms others or the operation of the site.",
+            ],
+          },
+          {
+            heading: "Information and prices",
+            paragraphs: [
+              "Published prices are indicative, exclude VAT and are not a binding offer. Every project is quoted in writing before work starts.",
+              "The digital assessment is automatic guidance based on your answers; it does not replace a professional review of your case.",
+            ],
+          },
+          {
+            heading: "Intellectual and industrial property",
+            paragraphs: [
+              "The text, design, code, logos and the {brand} brand belong to their owner. They may not be reproduced, distributed or altered without express permission.",
+              "Third-party photographs and videos are used under their licences.",
+            ],
+          },
+          {
+            heading: "Liability",
+            paragraphs: [
+              "The owner works to keep the information accurate and up to date, but does not guarantee that it is free of errors or that the site is always available.",
+              "Links to third-party sites are provided for reference only; the owner is not responsible for their content.",
+            ],
+          },
+          {
+            heading: "Governing law",
+            paragraphs: [
+              "These terms are governed by Spanish law. Any dispute will be settled by the courts that have jurisdiction under the applicable rules, including consumer protection law where it applies.",
+            ],
+          },
+        ],
+      },
+      privacy: {
+        navLabel: "Privacy",
+        metaTitle: "Privacy policy",
+        metaDescription:
+          "What personal data lguia processes when you use its forms, why, for how long and how to exercise your rights.",
+        title: "Privacy policy",
+        intro:
+          "This policy explains what personal data we process when you use the forms on lguia.com, why, and what rights you have under the General Data Protection Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018.",
+        sections: [
+          {
+            heading: "Data controller",
+            paragraphs: [
+              "{owner}, who trades under the name {brand}.",
+              "Contact for any question about your data: {email}.",
+            ],
+          },
+          {
+            heading: "What data we process",
+            paragraphs: [
+              "The data you give us in the contact and assessment forms: name, email address and, if you provide them, company, phone, service of interest and message.",
+              "In the assessment, also your answers about the digital situation of your business and the calculated result.",
+              "We do not ask for special categories of data. The site is aimed at businesses and professionals, not at children under 14.",
+            ],
+          },
+          {
+            heading: "Why we use it",
+            paragraphs: [
+              "To answer your request and, if you ask for it, prepare and send you a proposal or a quote.",
+              "We do not use it to send you advertising and we make no automated decisions about you: the assessment result is guidance only.",
+            ],
+          },
+          {
+            heading: "Legal basis",
+            paragraphs: [
+              "Your consent, given when you send the form (Article 6(1)(a) GDPR), and steps taken at your request before entering into a contract (Article 6(1)(b) GDPR). You can withdraw your consent at any time without affecting earlier processing.",
+            ],
+          },
+          {
+            heading: "How long we keep it",
+            paragraphs: [
+              "While we handle your request and, if we do not end up working together, for up to 12 months after the last contact. If you hire a service, for the length of the relationship and the periods required by law, such as tax rules.",
+            ],
+          },
+          {
+            heading: "Who else can access your data",
+            paragraphs: [
+              "We do not share your data with third parties unless the law requires it.",
+              "Providers process data on our behalf: Cloudflare, Inc. hosts the website and delivers the forms to us by email, and our email provider receives them. They may process data outside the European Economic Area with the safeguards provided by the GDPR, such as the EU-US Data Privacy Framework and standard contractual clauses.",
+            ],
+          },
+          {
+            heading: "Your rights",
+            paragraphs: [
+              "You can ask for access, rectification, erasure, objection, restriction of processing and portability of your data by writing to {email}. We will answer within one month at the latest.",
+              "If you believe we have not handled your request properly, you can complain to the Spanish Data Protection Agency (aepd.es) or to the authority of your country.",
+            ],
+          },
+        ],
+      },
+      cookies: {
+        navLabel: "Cookies",
+        metaTitle: "Cookie policy",
+        metaDescription:
+          "lguia.com uses no analytics, advertising or tracking cookies. Which technical cookies its hosting provider may use.",
+        title: "Cookie policy",
+        intro: "This policy explains the use of cookies and similar technologies on lguia.com.",
+        sections: [
+          {
+            heading: "Which cookies we use",
+            paragraphs: [
+              "lguia.com uses no analytics, advertising or tracking cookies of its own, and stores nothing in your browser to identify you. That is why we do not show you a cookie banner.",
+            ],
+          },
+          {
+            heading: "Technical cookies from our provider",
+            paragraphs: [
+              "Cloudflare, which hosts and protects the website, may use strictly necessary technical cookies to detect malicious traffic and keep the service secure. They are exempt from consent (Article 22.2 LSSI-CE) and are not used to track you.",
+            ],
+          },
+          {
+            heading: "Third-party content",
+            paragraphs: [
+              "The website embeds no videos, maps, social networks or other third-party services that set cookies. Fonts and videos are served from our own domain.",
+            ],
+          },
+          {
+            heading: "Changes to this policy",
+            paragraphs: [
+              "If we ever use cookies that need your consent, we will update this page and ask you before setting them. You can delete or block cookies in your browser settings.",
+            ],
+          },
+        ],
+      },
+    },
+  },
 };
