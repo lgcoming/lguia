@@ -11,6 +11,9 @@ top of each section. Keep entries short; link to specs for detail.
   medida"; VAT excluded). Validate with the business before launch.
 - **Domain is `lguia.com`** (owner's, at Cloudflare; decided 2026-11-14). Production builds use it
   as canonical origin. `hola@lguia.com` forwards to the owner's inbox with Email Routing.
+- **Legal pages (SPEC-011)**: owner "Luis Gómez" trading as lguia. The owner does not publish his
+  NIF or home address (2026-11-14); LSSI-CE art. 10 requires them, so this is a known gap until
+  there is a business address or a company. No cookie banner while no cookies are set.
 - **Hosting is Cloudflare Workers via OpenNext** (owner decision 2026-11-14, SPEC-010): same
   provider as domain and mail, free plan; Vercel Hobby excludes commercial use. Leads are emailed
   through the `send_email` binding to the `LEADS_TO` secret (the personal inbox is never committed).
