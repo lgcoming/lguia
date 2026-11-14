@@ -9,8 +9,9 @@ top of each section. Keep entries short; link to specs for detail.
 - **Prices in `src/data/plans.ts` are indicative placeholders** (Starter Local 690 €, Web Pro
   1900 €, IA Starter 1200 €, Automation Pack 950 €, Growth Web + IA 3900 €, Custom Enterprise "a
   medida"; VAT excluded). Validate with the business before launch.
-- **Contact email `hola@lguia.es` is a placeholder** in `src/lib/site.ts`. Confirm the real domain
-  and mailbox before launch; also set `NEXT_PUBLIC_SITE_URL`.
+- **Domain is `lguia.com`** (owner's, DNS at Cloudflare; decided 2026-11-14). `getSiteUrl()` uses
+  it on Vercel production even without `NEXT_PUBLIC_SITE_URL`, so canonicals never point to
+  `*.vercel.app`. The mailbox `hola@lguia.com` must be created before launch.
 - Response-time promise in forms ("2 días laborables") is a placeholder commitment to confirm.
 - No testimonials, logos or stats until real ones exist (credibility over decoration).
 - Legal pages (aviso legal, privacidad, cookies) are pending; forms carry an inline basic
@@ -74,8 +75,11 @@ top of each section. Keep entries short; link to specs for detail.
 - **Do not name an app folder `_document`** (kept as `_shared`).
 - **AI crawlers are all allowed** in robots.txt, training ones included; move GPTBot, ClaudeBot,
   Google-Extended and Applebot-Extended to a Disallow rule to opt out of training only.
-- **English copy is not reviewed by a native speaker yet**; `.es` domain geo-targets Spain (use
-  a generic TLD for international reach). Both are owner decisions.
+- **English copy is not reviewed by a native speaker yet** (owner decision).
+- **Dark glass is AMOLED black** (`carbon` at 85%, opaque `carbon` fallback); the old `night`
+  (#161617) token was removed at the owner's request (2026-11-14).
+- **Node is pinned to 24.12.0** (`.nvmrc`, CI): Node 24.22 breaks `next build` on Next 16.3.8
+  ("Expected workStore to be initialized"), and Next 16.4.6 fails there too (null `useContext`).
 
 ## Design decisions (SPEC-002)
 

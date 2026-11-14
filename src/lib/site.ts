@@ -1,26 +1,32 @@
+/** Production origin. A generic TLD so the English site is not geo-targeted to one country. */
+export const PRODUCTION_ORIGIN = "https://lguia.com";
+
 export const siteConfig = {
   name: "lguia",
-  // Placeholder until the real mailbox is confirmed (see MEMORY.md).
-  email: "hola@lguia.es",
+  // The mailbox must exist on the lguia.com domain before launch (see MEMORY.md).
+  email: "hola@lguia.com",
   /** ISO 3166-1 code of the country lguia operates from (it works remotely, no public address). */
   country: "ES",
   /**
    * Date of the last meaningful content change, for the sitemap's <lastmod>. Bump it when copy,
    * prices or pages change: a date that moves on every build teaches crawlers to ignore it.
    */
-  contentUpdated: "2026-11-12",
+  contentUpdated: "2026-11-14",
 } as const;
 
 /**
  * Canonical origin for metadata, sitemap and structured data.
- * Order: explicit env → Vercel production domain → local development.
+ * Order: explicit env → Vercel production (always lguia.com, never the *.vercel.app alias) →
+ * Vercel preview deployment → local development.
  */
 export function getSiteUrl(): URL {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
   if (explicit) return new URL(explicit);
 
-  const vercelProduction = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-  if (vercelProduction) return new URL(`https://${vercelProduction}`);
+  if (process.env.VERCEL_ENV === "production") return new URL(PRODUCTION_ORIGIN);
+
+  const vercelPreview = process.env.VERCEL_URL;
+  if (vercelPreview) return new URL(`https://${vercelPreview}`);
 
   return new URL("http://localhost:3000");
 }

@@ -12,7 +12,6 @@
   --color-pure-white: #ffffff;
   --color-obsidian: #1d1d1f;
   --color-carbon: #000000;
-  --color-night: #161617;
   --color-pewter: #707070;
   --color-slate: #505050;
   --color-graphite: #474747;
@@ -164,7 +163,7 @@
   }
 
   .glass-dark {
-    background-color: rgb(22 22 23 / 0.72);
+    background-color: rgb(0 0 0 / 0.85);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
   }
@@ -218,7 +217,7 @@
     }
     .glass-dark,
     .glass-panel {
-      background-color: var(--color-night);
+      background-color: var(--color-carbon);
     }
   }
 
@@ -229,7 +228,7 @@
     }
     .glass-dark,
     .glass-panel {
-      background-color: var(--color-night);
+      background-color: var(--color-carbon);
       backdrop-filter: none;
     }
   }
@@ -265,7 +264,7 @@
   .site-header[data-theme="dark"] {
     --focus-ring: var(--color-sky-signal);
     color: var(--color-pure-white);
-    background-color: rgb(22 22 23 / 0.72);
+    background-color: rgb(0 0 0 / 0.85);
   }
   .site-header[data-theme="dark"] .logo-on-dark {
     display: block;
@@ -282,7 +281,7 @@
     .site-header:not([data-theme]) {
     --focus-ring: var(--color-sky-signal);
     color: var(--color-pure-white);
-    background-color: rgb(22 22 23 / 0.72);
+    background-color: rgb(0 0 0 / 0.85);
   }
   body:has(#contenido > :nth-child(1 of :not(script))[data-nav-theme="dark"])
     .site-header:not([data-theme])::after {
@@ -305,11 +304,11 @@
       backdrop-filter: none;
     }
     .site-header[data-theme="dark"] {
-      background-color: var(--color-night);
+      background-color: var(--color-carbon);
     }
     body:has(#contenido > :nth-child(1 of :not(script))[data-nav-theme="dark"])
       .site-header:not([data-theme]) {
-      background-color: var(--color-night);
+      background-color: var(--color-carbon);
     }
   }
 

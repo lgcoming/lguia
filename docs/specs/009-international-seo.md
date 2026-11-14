@@ -93,6 +93,6 @@ language switcher). `src/i18n/config.ts` defines the languages.
 
 - The 404 document is server-sent with status 404 and `noindex`, but its localized content is
   painted on the client (limitation of multiple root layouts without `globalNotFound`).
-- A `.es` domain geo-targets Spain. For international English traffic a generic TLD is advisable;
-  the domain is still a placeholder.
+- Production domain: `lguia.com` (generic TLD, no country geo-targeting). DNS at Cloudflare must
+  point to Vercel with the proxy off (DNS only); see README.
 - English copy should be reviewed by a native speaker before launch.

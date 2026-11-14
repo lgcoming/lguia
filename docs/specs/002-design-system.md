@@ -45,8 +45,7 @@ palette is disabled, so only these colours exist.
 | `fog-white`       | `#f5f5f7` | Canvas, alternate sections, footer                     |                                    |
 | `pure-white`      | `#ffffff` | Tiles, nav (light), text on dark                       |                                    |
 | `obsidian`        | `#1d1d1f` | Headlines and body text                                | 15.5:1 fog · 16.8:1 white          |
-| `carbon`          | `#000000` | Dark bands                                             |                                    |
-| `night` (added)   | `#161617` | Opaque fallback for dark glass                         | 18:1 with white                    |
+| `carbon`          | `#000000` | Dark bands, dark glass (AMOLED black) and its fallback | 21:1 with white                    |
 | `pewter`          | `#707070` | Secondary text on light                                | 4.55:1 fog · 4.95:1 white          |
 | `slate`           | `#505050` | Tertiary text where more contrast is needed            | 7.4:1 fog                          |
 | `graphite`        | `#474747` | Nav text at rest (light)                               | ≥ 8:1                              |
@@ -104,10 +103,10 @@ palette is disabled, so only these colours exist.
 | Dark band   | `carbon` + photography/video + gradient overlay (`carbon` 60–80%)         |
 | Glass panel | `rgb(255 255 255 / 8%)` + `border white/14` + `saturate(160%) blur(24px)` |
 | Glass light | `rgb(255 255 255 / 72%)` + `saturate(180%) blur(20px)`                    |
-| Glass dark  | `rgb(22 22 23 / 72%)` + `saturate(180%) blur(20px)` + `border white/10`   |
+| Glass dark  | `rgb(0 0 0 / 85%)` + `saturate(180%) blur(20px)` + `border white/10`      |
 
 Fallbacks: without `backdrop-filter` support, and with `prefers-reduced-transparency: reduce`,
-glass becomes the opaque surface (`pure-white` / `#161617`).
+glass becomes the opaque surface (`pure-white` / `carbon`).
 
 ## Components
 

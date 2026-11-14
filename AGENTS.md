@@ -102,7 +102,7 @@ Rules:
 - Reference: `docs/design/refero-apple/` (Refero "Apple (España)"). Tokens in `src/app/globals.css`
   (`@theme`) use its names: fog-white, pure-white, obsidian, carbon, pewter, slate, graphite,
   silver, pale-mist, ash-veil, iris-blue, sapphire, sky-signal, cornflower, ice-wash (+ danger,
-  night, iris-blue-hover).
+  iris-blue-hover).
 - Type: SF Pro on Apple devices (`-apple-system`), Inter variable elsewhere. Headlines 600 with
   slightly negative tracking; body 17/1.47.
 - Light canvas for information, full-bleed dark bands (video/photography + overlay) for atmosphere.

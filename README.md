@@ -104,10 +104,10 @@ In development the admin view is available at `/admin/leads` with three fictiona
 
 ### Environment variables
 
-| Variable               | Purpose                                                                       | Default                                             |
-| ---------------------- | ----------------------------------------------------------------------------- | --------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | Canonical origin for metadata, sitemap and JSON-LD                            | Vercel production URL, then `http://localhost:3000` |
-| `ENABLE_DEMO_ADMIN`    | Expose `/admin/leads` and `GET /api/leads` in production (demo only, no auth) | `false`                                             |
+| Variable               | Purpose                                                                       | Default                                                                |
+| ---------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical origin for metadata, sitemap and JSON-LD                            | `https://lguia.com` on Vercel production, then `http://localhost:3000` |
+| `ENABLE_DEMO_ADMIN`    | Expose `/admin/leads` and `GET /api/leads` in production (demo only, no auth) | `false`                                                                |
 
 ## Available scripts
 
@@ -232,9 +232,15 @@ Designed for **Vercel** (zero configuration for Next.js):
 1. The repository lives at [github.com/lgcoming/lguia](https://github.com/lgcoming/lguia)
    (private), with `main` and `develop`.
 2. Import it in Vercel. Production deploys from `main`; `develop` and pull requests get previews.
-3. Set `NEXT_PUBLIC_SITE_URL` to the production domain. Leave `ENABLE_DEMO_ADMIN` unset unless the
-   deployment is a demo that will never receive real leads (leads are kept in memory and the admin
-   view has no authentication).
+3. Project settings: Node.js 24.x (local and CI use 24.12.0 from `.nvmrc`; Node 24.22 breaks the
+   build). `NEXT_PUBLIC_SITE_URL=https://lguia.com` is optional: production already defaults to it.
+   Leave `ENABLE_DEMO_ADMIN` unset unless the deployment is a demo that will never receive real
+   leads (leads are kept in memory and the admin view has no authentication).
+4. Domain `lguia.com` (DNS at Cloudflare): add `lguia.com` and `www.lguia.com` in Vercel → Domains,
+   with `www` redirecting to the apex. In Cloudflare DNS create the records Vercel shows (today an
+   `A` record `@ → 76.76.21.21` and a `CNAME` `www → cname.vercel-dns.com`) with the proxy **off**
+   (grey cloud, "DNS only"), so Vercel issues the certificate and serves its edge cache. Keep any
+   existing `MX`/`TXT` records (email).
 
 CI (`.github/workflows/ci.yml`) runs lint, type checks, formatting, tests, a production build and
 the E2E flow on every push and pull request to `main` and `develop`.
