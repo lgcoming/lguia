@@ -8,17 +8,10 @@
       "port": 3000
     },
     {
-      "name": "lguia-prod",
+      "name": "lguia-workers",
       "runtimeExecutable": "npx",
-      "runtimeArgs": [
-        "-y",
-        "node@24.12.0",
-        "node_modules/next/dist/bin/next",
-        "start",
-        "--port",
-        "3100"
-      ],
-      "port": 3100
+      "runtimeArgs": ["wrangler", "dev", "--port", "8787"],
+      "port": 8787
     }
   ]
 }

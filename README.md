@@ -39,7 +39,7 @@ testing and a Spec-Driven Development workflow.
 | Validation | Zod 4 via `zod/mini` (shared client/server schemas)                 |
 | Testing    | Vitest + React Testing Library · Playwright                         |
 | Tooling    | ESLint · Prettier (+ Tailwind class sorting) · GitHub Actions       |
-| Hosting    | Vercel                                                              |
+| Hosting    | Cloudflare Workers via OpenNext (SPEC-010)                          |
 
 No database, auth system, CMS, state library or external AI API: the brief excludes them for v1,
 and the architecture keeps them pluggable.
@@ -104,10 +104,10 @@ In development the admin view is available at `/admin/leads` with three fictiona
 
 ### Environment variables
 
-| Variable               | Purpose                                                                       | Default                                                                |
-| ---------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | Canonical origin for metadata, sitemap and JSON-LD                            | `https://lguia.com` on Vercel production, then `http://localhost:3000` |
-| `ENABLE_DEMO_ADMIN`    | Expose `/admin/leads` and `GET /api/leads` in production (demo only, no auth) | `false`                                                                |
+| Variable               | Purpose                                                                       | Default                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical origin for metadata, sitemap and JSON-LD                            | `https://lguia.com` for production builds, then `http://localhost:3000` |
+| `ENABLE_DEMO_ADMIN`    | Expose `/admin/leads` and `GET /api/leads` in production (demo only, no auth) | `false`                                                                 |
 
 ## Available scripts
 
@@ -227,20 +227,22 @@ Desktop home with the pinned, scrubbed hero: 100 / 100 / 100 / 100 (LCP 0.7 s, T
 
 ## Deployment
 
-Designed for **Vercel** (zero configuration for Next.js):
+Hosted on **Cloudflare Workers** with the OpenNext adapter (SPEC-010), next to the `lguia.com`
+domain and its Email Routing mailbox.
 
 1. The repository lives at [github.com/lgcoming/lguia](https://github.com/lgcoming/lguia)
    (private), with `main` and `develop`.
-2. Import it in Vercel. Production deploys from `main`; `develop` and pull requests get previews.
-3. Project settings: Node.js 24.x (local and CI use 24.12.0 from `.nvmrc`; Node 24.22 breaks the
-   build). `NEXT_PUBLIC_SITE_URL=https://lguia.com` is optional: production already defaults to it.
-   Leave `ENABLE_DEMO_ADMIN` unset unless the deployment is a demo that will never receive real
-   leads (leads are kept in memory and the admin view has no authentication).
-4. Domain `lguia.com` (DNS at Cloudflare): add `lguia.com` and `www.lguia.com` in Vercel → Domains,
-   with `www` redirecting to the apex. In Cloudflare DNS create the records Vercel shows (today an
-   `A` record `@ → 76.76.21.21` and a `CNAME` `www → cname.vercel-dns.com`) with the proxy **off**
-   (grey cloud, "DNS only"), so Vercel issues the certificate and serves its edge cache. Keep any
-   existing `MX`/`TXT` records (email).
+2. Once: `npx wrangler login`, then `npx wrangler secret put LEADS_TO` with the inbox that must
+   receive leads (it must be a verified destination address in Email Routing).
+3. `npm run deploy` builds with OpenNext and deploys the `lguia` Worker. `wrangler.jsonc` attaches
+   `lguia.com` and `www.lguia.com` as Custom Domains (Cloudflare creates the DNS records and the
+   certificate; remove any old `A`/`CNAME` record on those names first, keep `MX`/`TXT`).
+4. `npm run preview` runs the same Worker locally; `.dev.vars` (not committed) can set
+   `LEADS_TO=leads@example.test`, and emails are printed instead of sent.
+
+Leave `ENABLE_DEMO_ADMIN` unset in production (leads are kept in memory and the admin view has no
+authentication). Work from the folder's real casing (`Agencia lguia`): see the tooling note in
+`MEMORY.md`.
 
 CI (`.github/workflows/ci.yml`) runs lint, type checks, formatting, tests, a production build and
 the E2E flow on every push and pull request to `main` and `develop`.

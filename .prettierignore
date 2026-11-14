@@ -8,3 +8,5 @@ package-lock.json
 .agents/skills
 skills-lock.json
 docs/design/refero-apple
+.open-next
+.wrangler

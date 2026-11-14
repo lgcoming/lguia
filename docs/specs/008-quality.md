@@ -55,7 +55,7 @@ On push and pull request to `main` and `develop`:
 
 ## Delivery
 
-- Vercel project connected to GitHub: `main` → production, `develop` and PRs → preview.
+- Cloudflare Workers deployment from `main` (`npm run deploy`, SPEC-010).
 - Environment variables: `NEXT_PUBLIC_SITE_URL` (production domain); `ENABLE_DEMO_ADMIN` only on a
   demo deployment.
 

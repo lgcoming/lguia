@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { ImageResponse } from "next/og";
 
 import type { Locale } from "@/i18n/config";
@@ -9,7 +10,21 @@ import { brandColors } from "@/lib/brand";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
-const publicDir = join(process.cwd(), "public");
+/**
+ * Reads a file from public/ as base64. The build (Node) has a file system; the Cloudflare Worker
+ * does not, and serves public/ through its ASSETS binding instead.
+ */
+async function readPublicFile(path: string): Promise<string> {
+  try {
+    return await readFile(join(process.cwd(), "public", path), "base64");
+  } catch (error) {
+    const assets = getCloudflareContext().env.ASSETS;
+    if (!assets) throw error;
+    const response = await assets.fetch(`https://assets.local/${path}`);
+    if (!response.ok) throw new Error(`Missing public file: ${path}`);
+    return Buffer.from(await response.arrayBuffer()).toString("base64");
+  }
+}
 
 /**
  * Social image of one language: the hero footage, the logo and the promise. The renderer's
@@ -19,8 +34,8 @@ const publicDir = join(process.cwd(), "public");
 export async function renderOgImage(locale: Locale): Promise<ImageResponse> {
   const { meta } = getDictionary(locale);
   const [logo, poster] = await Promise.all([
-    readFile(join(publicDir, "brand/lguia-logo-light.png"), "base64"),
-    readFile(join(publicDir, "media/video/hero-connections-poster.jpg"), "base64"),
+    readPublicFile("brand/lguia-logo-light.png"),
+    readPublicFile("media/video/hero-connections-poster.jpg"),
   ]);
 
   return new ImageResponse(

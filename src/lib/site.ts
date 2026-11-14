@@ -15,19 +15,14 @@ export const siteConfig = {
 } as const;
 
 /**
- * Canonical origin for metadata, sitemap and structured data.
- * Order: explicit env → Vercel production (always lguia.com, never the *.vercel.app alias) →
- * Vercel preview deployment → local development.
+ * Canonical origin for metadata, sitemap and structured data. Pages are prerendered at build
+ * time, so this is resolved while building: explicit env → any production build (the one
+ * deployed to Cloudflare Workers) → local development.
  */
 export function getSiteUrl(): URL {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
   if (explicit) return new URL(explicit);
-
-  if (process.env.VERCEL_ENV === "production") return new URL(PRODUCTION_ORIGIN);
-
-  const vercelPreview = process.env.VERCEL_URL;
-  if (vercelPreview) return new URL(`https://${vercelPreview}`);
-
+  if (process.env.NODE_ENV === "production") return new URL(PRODUCTION_ORIGIN);
   return new URL("http://localhost:3000");
 }
 

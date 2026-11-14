@@ -1,5 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
+import { formatLeadEmail } from "@/features/leads/lead-notifier";
 import { createInMemoryLeadRepository } from "@/features/leads/lead-repository";
 import { submitLead } from "@/features/leads/lead-service";
 import { getLeadSchemas } from "@/features/leads/content";
@@ -107,5 +108,35 @@ describe("leadInputSchema", () => {
     });
     expect(result.success).toBe(false);
     expect(result.error?.issues[0].path).toEqual(["answers", "mainGoal"]);
+  });
+});
+
+describe("lead notifications", () => {
+  it("notifies each stored lead and stays silent for honeypot submissions", async () => {
+    const notify = vi.fn(async () => {});
+    await submitLead(contact, { ...deps(), notifier: { notify } });
+    await submitLead({ ...contact, website: "spam" }, { ...deps(), notifier: { notify } });
+
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notify).toHaveBeenCalledWith(expect.objectContaining({ email: "javier@talleres.test" }));
+  });
+
+  it("fails the submission when the team cannot be told", async () => {
+    const notifier = { notify: async () => Promise.reject(new Error("mail down")) };
+    await expect(submitLead(contact, { ...deps(), notifier })).rejects.toThrow("mail down");
+  });
+
+  it("formats an email with every field the team needs to reply", async () => {
+    const d = deps();
+    await submitLead(contact, { ...d, locale: "en" });
+    const [lead] = await d.repository.list();
+    const { subject, text } = formatLeadEmail(lead);
+
+    expect(subject).toBe("Nuevo lead: Javier Ruiz · Formulario de contacto");
+    expect(text).toContain("Email: javier@talleres.test");
+    expect(text).toContain("Idioma: inglés");
+    expect(text).toContain("Interés: automatizaciones");
+    expect(text).toContain("Mensaje:\nQueremos automatizar los presupuestos semanales.");
+    expect(text).not.toContain("Teléfono");
   });
 });

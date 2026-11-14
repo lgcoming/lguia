@@ -7,25 +7,19 @@ describe("getSiteUrl", () => {
 
   it("prefers an explicit NEXT_PUBLIC_SITE_URL", () => {
     vi.stubEnv("NEXT_PUBLIC_SITE_URL", "https://example.test");
-    vi.stubEnv("VERCEL_ENV", "production");
+    vi.stubEnv("NODE_ENV", "production");
     expect(getSiteUrl().origin).toBe("https://example.test");
   });
 
-  it("uses lguia.com on Vercel production, never the vercel.app alias", () => {
+  it("uses lguia.com for production builds", () => {
     vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
-    vi.stubEnv("VERCEL_ENV", "production");
-    vi.stubEnv("VERCEL_URL", "lguia-abc123.vercel.app");
+    vi.stubEnv("NODE_ENV", "production");
     expect(getSiteUrl().origin).toBe(PRODUCTION_ORIGIN);
   });
 
-  it("uses the deployment URL on previews and localhost elsewhere", () => {
+  it("uses localhost in development", () => {
     vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
-    vi.stubEnv("VERCEL_ENV", "preview");
-    vi.stubEnv("VERCEL_URL", "lguia-abc123.vercel.app");
-    expect(getSiteUrl().origin).toBe("https://lguia-abc123.vercel.app");
-
-    vi.stubEnv("VERCEL_ENV", "");
-    vi.stubEnv("VERCEL_URL", "");
+    vi.stubEnv("NODE_ENV", "development");
     expect(getSiteUrl().origin).toBe("http://localhost:3000");
   });
 });

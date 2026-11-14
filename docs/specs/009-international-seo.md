@@ -93,6 +93,6 @@ language switcher). `src/i18n/config.ts` defines the languages.
 
 - The 404 document is server-sent with status 404 and `noindex`, but its localized content is
   painted on the client (limitation of multiple root layouts without `globalNotFound`).
-- Production domain: `lguia.com` (generic TLD, no country geo-targeting). DNS at Cloudflare must
-  point to Vercel with the proxy off (DNS only); see README.
+- Production domain: `lguia.com` (generic TLD, no country geo-targeting), served by Cloudflare
+  Workers ([SPEC-010](./010-cloudflare-workers.md)).
 - English copy should be reviewed by a native speaker before launch.

@@ -3,6 +3,7 @@ import {
   summarizeDiagnosis,
   type LeadRepository,
 } from "@/features/leads/lead-repository";
+import { noopLeadNotifier, type LeadNotifier } from "@/features/leads/lead-notifier";
 import type { LeadInput } from "@/features/leads/schema";
 import type { Lead } from "@/features/leads/types";
 import { DEFAULT_LOCALE, type Locale } from "@/i18n/config";
@@ -16,6 +17,8 @@ export interface SubmitLeadDeps {
   /** Language of the form that sent the lead. */
   locale?: Locale;
   repository?: LeadRepository;
+  /** Tells the team; a failure fails the submission so the visitor can use email instead. */
+  notifier?: LeadNotifier;
   now?: () => Date;
   createId?: () => string;
 }
@@ -34,6 +37,7 @@ export async function submitLead(
   {
     locale = DEFAULT_LOCALE,
     repository = getLeadRepository(),
+    notifier = noopLeadNotifier,
     now = () => new Date(),
     createId = () => crypto.randomUUID(),
   }: SubmitLeadDeps = {},
@@ -59,5 +63,6 @@ export async function submitLead(
       : { ...base, source: "diagnosis", diagnosis: summarizeDiagnosis(input.answers) };
 
   await repository.create(lead);
+  await notifier.notify(lead);
   return { stored: true, receipt };
 }

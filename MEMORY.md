@@ -9,9 +9,11 @@ top of each section. Keep entries short; link to specs for detail.
 - **Prices in `src/data/plans.ts` are indicative placeholders** (Starter Local 690 €, Web Pro
   1900 €, IA Starter 1200 €, Automation Pack 950 €, Growth Web + IA 3900 €, Custom Enterprise "a
   medida"; VAT excluded). Validate with the business before launch.
-- **Domain is `lguia.com`** (owner's, DNS at Cloudflare; decided 2026-11-14). `getSiteUrl()` uses
-  it on Vercel production even without `NEXT_PUBLIC_SITE_URL`, so canonicals never point to
-  `*.vercel.app`. The mailbox `hola@lguia.com` must be created before launch.
+- **Domain is `lguia.com`** (owner's, at Cloudflare; decided 2026-11-14). Production builds use it
+  as canonical origin. `hola@lguia.com` forwards to the owner's inbox with Email Routing.
+- **Hosting is Cloudflare Workers via OpenNext** (owner decision 2026-11-14, SPEC-010): same
+  provider as domain and mail, free plan; Vercel Hobby excludes commercial use. Leads are emailed
+  through the `send_email` binding to the `LEADS_TO` secret (the personal inbox is never committed).
 - Response-time promise in forms ("2 días laborables") is a placeholder commitment to confirm.
 - No testimonials, logos or stats until real ones exist (credibility over decoration).
 - Legal pages (aviso legal, privacidad, cookies) are pending; forms carry an inline basic
@@ -78,8 +80,7 @@ top of each section. Keep entries short; link to specs for detail.
 - **English copy is not reviewed by a native speaker yet** (owner decision).
 - **Dark glass is AMOLED black** (`carbon` at 85%, opaque `carbon` fallback); the old `night`
   (#161617) token was removed at the owner's request (2026-11-14).
-- **Node is pinned to 24.12.0** (`.nvmrc`, CI): Node 24.22 breaks `next build` on Next 16.3.8
-  ("Expected workStore to be initialized"), and Next 16.4.6 fails there too (null `useContext`).
+- **Next.js 16.4.6** (from 16.3.8): required by `@opennextjs/cloudflare` (>= 16.4.5).
 
 ## Design decisions (SPEC-002)
 
@@ -158,6 +159,7 @@ top of each section. Keep entries short; link to specs for detail.
 | `@playwright/test`                                              | The single critical E2E flow.                                                                                    |
 | `prettier`, `prettier-plugin-tailwindcss`                       | Consistent formatting and class order.                                                                           |
 | `@types/node@24`                                                | Matches Node 24 LTS runtime; required by Vitest 5 peer range.                                                    |
+| `@opennextjs/cloudflare`, `wrangler` (dev)                      | Build and deploy the Next.js output as a Cloudflare Worker (SPEC-010); no runtime dependency added.              |
 
 ## Media pipeline
 
@@ -179,13 +181,14 @@ top of each section. Keep entries short; link to specs for detail.
 
 ## Tooling notes
 
-- **Node 24.22.0 breaks this toolchain** (2026-11-12): `next build`/`next start` fail with
-  "Expected workStore to be initialized", Playwright reports "did not expect test() to be called
-  here" and the jest-dom side-effect import stops extending `expect` (all are "two copies of a
-  module" symptoms). Node 24.12.0 and 24.21 (CI) work. Until Next ships a fix, build and run with
-  `npx -y node@24.12.0 node_modules/next/dist/bin/next build|start` (the `lguia-prod` preview
-  config does this) and run E2E with `npx -y node@24.12.0 node_modules/@playwright/test/cli.js
-test`. `tests/setup-dom.ts` registers the matchers explicitly so unit tests pass on any version.
+- **Work from the folder's real casing: `E:\Nueva carpeta\PROYECTOS\Agencia lguia\lguia`.** The
+  folder was renamed from `Agencia LGuia`; Windows still opens the old casing, but the bundler then
+  loads two copies of React and `next build` fails ("Expected workStore to be initialized",
+  "Cannot read properties of null (reading 'useContext')"), Playwright reports "did not expect
+  test() to be called here" and jest-dom stops extending `expect`. This was first blamed on Node
+  24.22 (2026-11-12); Node 24.22 works from the right path. `tests/setup-dom.ts` registers the
+  matchers explicitly anyway.
+- Playwright: if the bundled browser is missing, run with `PLAYWRIGHT_CHANNEL=chrome`.
 
 - Windows dev environment: repo uses `core.autocrlf=false` + `.gitattributes` (`eol=lf`).
 - **Regenerate `package-lock.json` with the npm version CI uses** (11.19.0 on Node 24.21 at the
@@ -211,6 +214,13 @@ test`. `tests/setup-dom.ts` registers the matchers explicitly so unit tests pass
   (after Prettier reformatting) briefly left the OG image without its font.
 
 ## Verification log
+
+### 2026-11-14 — Cloudflare Workers
+
+- Lint and types clean; 132 unit/integration/component tests; 10 E2E on desktop and mobile.
+- Worker build (2.2 MiB gzip) run locally in workerd: all pages, 404s, APIs, sitemap, robots,
+  llms.txt, social images and `next/image` answer correctly; canonical/hreflang on lguia.com; a
+  contact lead triggers one `send_email` call. Not deployed.
 
 ### 2026-11-12 — Bilingual site and international SEO
 

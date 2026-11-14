@@ -1,6 +1,7 @@
 import { getLeadSchemas } from "@/features/leads/content";
 import { getLeadRepository } from "@/features/leads/lead-repository";
 import { submitLead } from "@/features/leads/lead-service";
+import { getLeadNotifier } from "@/lib/cloudflare/lead-email-notifier";
 import { isAdminEnabled } from "@/lib/admin-access";
 import { apiErrors, jsonData, readJsonBody } from "@/lib/api/http";
 import { localeFromRequest } from "@/lib/api/locale";
@@ -19,7 +20,10 @@ export async function POST(request: Request) {
   if (!parsed.success) return apiErrors.validation(toApiIssues(parsed.error), locale);
 
   try {
-    const { receipt } = await submitLead(parsed.data, { locale });
+    const { receipt } = await submitLead(parsed.data, {
+      locale,
+      notifier: getLeadNotifier(),
+    });
     return jsonData(receipt, { status: 201 });
   } catch (error) {
     console.error("[POST /api/leads]", error);

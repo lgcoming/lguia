@@ -32,7 +32,7 @@ without a reason.
 ## Stack and dependency policy
 
 Next.js 16 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS v4 · Motion · Lucide React ·
-Zod · Vitest + React Testing Library · Playwright · Vercel.
+Zod · Vitest + React Testing Library · Playwright · Cloudflare Workers (OpenNext).
 
 - Runtime dependencies are limited to `next`, `react`, `react-dom`, `motion`, `lucide-react`, `zod`.
 - Do **not** add Redux, Zustand, Prisma, PostgreSQL, Redis, Supabase, Firebase, OpenAI/LangChain or
