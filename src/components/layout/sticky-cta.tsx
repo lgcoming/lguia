@@ -59,13 +59,14 @@ export function StickyCta({ href, text, button, hideOn }: StickyCtaProps) {
       // `inert` while hidden: the link must not be focusable off screen.
       inert={!visible}
       className={cn(
-        "glass-light fixed inset-x-3 bottom-3 z-30 flex items-center justify-between gap-3 rounded-full py-2 pr-2 pl-5 text-obsidian sm:hidden",
+        "glass-light fixed inset-x-3 bottom-3 z-30 flex items-center justify-between gap-3 rounded-full py-2 pr-2 pl-5 text-obsidian max-[359px]:justify-center max-[359px]:pl-2 sm:hidden",
         "border border-pale-mist/70 transition-[opacity,transform] duration-300 ease-out",
         "pb-[max(0.5rem,env(safe-area-inset-bottom))]",
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0",
       )}
     >
-      <p className="min-w-0 truncate text-footnote font-semibold">{text}</p>
+      {/* Below 360px the button alone fits; a truncated sentence reads worse than none. */}
+      <p className="min-w-0 truncate text-footnote font-semibold max-[359px]:hidden">{text}</p>
       <Link href={href} className={buttonStyles({ size: "sm" })}>
         {button}
       </Link>

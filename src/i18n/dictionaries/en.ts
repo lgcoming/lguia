@@ -50,8 +50,8 @@ export const en: Dictionary = {
     language: "Language",
   },
   stickyCta: {
-    text: "Free assessment in 3 minutes",
-    button: "Start",
+    text: "Free, in 3 minutes",
+    button: "Take the assessment",
   },
   diagnosisCta: {
     title: "Not sure where to start?",

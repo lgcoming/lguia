@@ -56,8 +56,8 @@ export const es = {
     language: "Idioma",
   },
   stickyCta: {
-    text: "Diagnóstico gratuito en 3 minutos",
-    button: "Empezar",
+    text: "Gratis y en 3 minutos",
+    button: "Hacer el diagnóstico",
   },
   diagnosisCta: {
     title: "¿No sabes por dónde empezar?",
