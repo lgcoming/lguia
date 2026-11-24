@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { CATALOG } from "@/data/catalog";
 import { getDiagnosisContent } from "@/features/diagnosis/content";
-import { getLeadContent } from "@/features/leads/content";
+import { getLeadContent, getPrototypeContent } from "@/features/leads/content";
 import { LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
@@ -68,10 +68,11 @@ describe("content parity between languages", () => {
     expect(shape(getDictionary("en"))).toEqual(shape(getDictionary("es")));
     expect(shape(getDiagnosisContent("en"))).toEqual(shape(getDiagnosisContent("es")));
     expect(shape(getLeadContent("en"))).toEqual(shape(getLeadContent("es")));
+    expect(shape(getPrototypeContent("en"))).toEqual(shape(getPrototypeContent("es")));
   });
 
   it("translations keep the same placeholders", () => {
-    const sources = [getDictionary, getDiagnosisContent, getLeadContent];
+    const sources = [getDictionary, getDiagnosisContent, getLeadContent, getPrototypeContent];
     for (const source of sources) {
       const es = strings(source("es"));
       const en = strings(source("en"));
@@ -85,6 +86,7 @@ describe("content parity between languages", () => {
       ...strings(getDictionary(locale)),
       ...strings(getDiagnosisContent(locale)),
       ...strings(getLeadContent(locale)),
+      ...strings(getPrototypeContent(locale)),
     ];
     for (const text of all) {
       expect(text.trim()).not.toBe("");
@@ -114,6 +116,7 @@ describe("content parity between languages", () => {
       ...strings(getDictionary("en")),
       ...strings(getDiagnosisContent("en")),
       ...strings(getLeadContent("en")),
+      ...strings(getPrototypeContent("en")),
     ];
     for (const text of english) expect(text, text).not.toMatch(/[áéíóúñ¿¡]/);
   });

@@ -45,6 +45,7 @@ export const en: Dictionary = {
     pricing: "Plans and pricing",
     diagnosis: "Digital assessment",
     contact: "Contact",
+    prototype: "Free website prototype",
     remote: "We work remotely, in English and Spanish.",
     rights: "All rights reserved.",
     language: "Language",
@@ -292,10 +293,42 @@ export const en: Dictionary = {
     plansIntro: "Indicative prices, VAT excluded. The final quote is agreed after the assessment.",
     faqTitle: "Frequently asked questions",
     othersTitle: "Other services",
+    prototype: {
+      title: "See how your website would look before you decide",
+      text: "We design your home page for free, with your brand and the style you like. You see the result before you invest.",
+      points: ["Free, no obligation", "Desktop and mobile", "In about 5 business days"],
+      cta: "Request a free prototype",
+    },
     midCta: {
       title: "Shall we talk about your case?",
       text: "Tell us what you need and we will send a proposal with scope, timeline and a fixed quote.",
     },
+  },
+  prototypePage: {
+    metaTitle: "Free website prototype: see how your new site would look",
+    metaDescription:
+      "Request a free design of your new website's home page, built around your brand, for desktop and mobile. No obligation.",
+    title: "See how your new website would look, for free",
+    intro:
+      "Tell us about your business and the style you like. We design your website's home page for desktop and mobile, at no cost and with no obligation.",
+    formTitle: "Request your prototype",
+    includesTitle: "What you get",
+    includes: [
+      {
+        title: "A design of your home page",
+        text: "Made for your business, for desktop and mobile.",
+      },
+      {
+        title: "With your brand",
+        text: "Your logo, your colours and the style you choose, or a proposal from us if you do not have them yet.",
+      },
+      {
+        title: "In about 5 business days",
+        text: "We show it to you on a short video call or by email, whichever you prefer.",
+      },
+    ],
+    noteTitle: "No obligation",
+    note: "The prototype is for you to assess calmly. If you like it, we send you a fixed quote for the full website; if not, that is fine.",
   },
   pricingPage: {
     metaTitle: "Pricing for web development, AI automation and AI agents",

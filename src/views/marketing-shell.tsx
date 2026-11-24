@@ -35,7 +35,11 @@ export async function MarketingShell({
         href={pageHref(locale, "diagnosis")}
         text={t.stickyCta.text}
         button={t.stickyCta.button}
-        hideOn={[pageHref(locale, "diagnosis"), pageHref(locale, "contact")]}
+        hideOn={[
+          pageHref(locale, "diagnosis"),
+          pageHref(locale, "contact"),
+          pageHref(locale, "prototype"),
+        ]}
       />
     </>
   );

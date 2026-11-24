@@ -7,6 +7,7 @@ import { ContactCTA } from "@/components/marketing/cta-section";
 import { FaqList } from "@/components/marketing/faq-list";
 import { PageHero } from "@/components/marketing/page-hero";
 import { PlanCard } from "@/components/marketing/plan-card";
+import { PrototypeOffer } from "@/components/marketing/prototype-offer";
 import { ProcessSteps } from "@/components/marketing/process-steps";
 import { ServiceTile } from "@/components/marketing/service-tile";
 import { RevealItem, RevealList } from "@/components/motion/reveal";
@@ -127,6 +128,8 @@ export async function ServiceCategoryView({ locale, slug }: { locale: Locale; sl
           ))}
         </dl>
       </Section>
+
+      {category.id === "desarrollo-web" ? <PrototypeOffer locale={locale} /> : null}
 
       <Section labelledBy="problemas-titulo">
         <SectionHeader id="problemas-titulo" title={page.problemsTitle} />

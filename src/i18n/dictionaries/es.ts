@@ -51,6 +51,7 @@ export const es = {
     pricing: "Planes y precios",
     diagnosis: "Diagnóstico digital",
     contact: "Contacto",
+    prototype: "Prototipo web gratis",
     remote: "Trabajamos en remoto, en español y en inglés.",
     rights: "Todos los derechos reservados.",
     language: "Idioma",
@@ -311,10 +312,42 @@ export const es = {
     plansIntro: "Precios orientativos sin IVA. El presupuesto final se cierra tras el diagnóstico.",
     faqTitle: "Preguntas frecuentes",
     othersTitle: "Otros servicios",
+    prototype: {
+      title: "Mira cómo quedaría tu web antes de decidir",
+      text: "Te diseñamos gratis la página de inicio con tu marca y el estilo que te guste. Así ves el resultado antes de invertir.",
+      points: ["Gratis y sin compromiso", "Escritorio y móvil", "En unos 5 días laborables"],
+      cta: "Pedir prototipo gratis",
+    },
     midCta: {
       title: "¿Hablamos de tu caso?",
       text: "Cuéntanos qué necesitas y te enviamos una propuesta con alcance, plazos y presupuesto cerrado.",
     },
+  },
+  prototypePage: {
+    metaTitle: "Prototipo web gratis: mira cómo quedaría tu nueva web",
+    metaDescription:
+      "Pide gratis el diseño de la página de inicio de tu nueva web, adaptado a tu marca y en versión escritorio y móvil. Sin compromiso.",
+    title: "Mira cómo quedaría tu nueva web, gratis",
+    intro:
+      "Cuéntanos cómo es tu negocio y qué estilo te gusta. Diseñamos la página de inicio de tu web para escritorio y móvil, sin coste y sin compromiso.",
+    formTitle: "Solicita tu prototipo",
+    includesTitle: "Qué recibes",
+    includes: [
+      {
+        title: "El diseño de tu página de inicio",
+        text: "Pensado para tu negocio, en versión escritorio y móvil.",
+      },
+      {
+        title: "Con tu marca",
+        text: "Tu logo, tus colores y el estilo que elijas, o una propuesta nuestra si aún no los tienes.",
+      },
+      {
+        title: "En unos 5 días laborables",
+        text: "Te lo enseñamos en una videollamada corta o por email, como prefieras.",
+      },
+    ],
+    noteTitle: "Sin compromiso",
+    note: "El prototipo es para que lo valores con calma. Si te gusta, te enviamos un presupuesto cerrado para hacer la web completa; si no, no pasa nada.",
   },
   pricingPage: {
     metaTitle: "Planes y precios de desarrollo web, automatización e IA",

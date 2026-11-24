@@ -4,6 +4,13 @@ import { Badge } from "@/components/ui/badge";
 import { MATURITY_LEVELS } from "@/features/diagnosis/model/diagnose";
 import type { Lead } from "@/features/leads/types";
 
+/** Internal admin view: Spanish only, like the rest of /admin. */
+const SOURCE_LABELS: Record<Lead["source"], string> = {
+  contact: "Contacto",
+  diagnosis: "Diagnóstico",
+  prototype: "Prototipo",
+};
+
 const dateFormat = new Intl.DateTimeFormat("es-ES", {
   dateStyle: "medium",
   timeStyle: "short",
@@ -98,7 +105,7 @@ export function LeadTable({ leads, planNames, interestLabels }: LeadTableProps) 
               </td>
               <td className="px-5 py-4">
                 <Badge tone={lead.source === "diagnosis" ? "strong" : "neutral"}>
-                  {lead.source === "diagnosis" ? "Diagnóstico" : "Contacto"}
+                  {SOURCE_LABELS[lead.source]}
                 </Badge>
                 <p className="mt-2 text-caption text-pewter">
                   Idioma: {lead.locale === "en" ? "inglés" : "español"}

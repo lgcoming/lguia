@@ -32,6 +32,7 @@ implementation changes its behaviour or contracts.
 | 009 | [Bilingual site, international SEO and GEO](./009-international-seo.md)             | Implemented  | International |
 | 010 | [Hosting on Cloudflare Workers and lead notifications](./010-cloudflare-workers.md) | Implemented  | Launch        |
 | 011 | [Legal notice, privacy and cookie policies](./011-legal-pages.md)                   | Implemented  | Launch        |
+| 012 | [Free website prototype request](./012-free-prototype.md)                           | Implemented  | Growth        |
 
 ¹ AC3 (Rich Results Test) needs the deployed URL.
 

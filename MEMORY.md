@@ -12,6 +12,9 @@ top of each section. Keep entries short; link to specs for detail.
   quote. The owner works alone: no promises of a dedicated team or SLAs.
 - **Domain is `lguia.com`** (owner's, at Cloudflare; decided 2026-11-14). Production builds use it
   as canonical origin. `hola@lguia.com` forwards to the owner's inbox with Email Routing.
+- **Free prototype (SPEC-012)**: home page design (desktop + mobile) in "about 5 business days",
+  free and without obligation; the 5-day promise is a placeholder for the owner to confirm. The logo
+  travels base64 in the JSON lead and is only emailed as an attachment, never stored.
 - **Legal pages (SPEC-011)**: owner "Luis Gómez" trading as lguia. The owner does not publish their
   NIF or home address (2026-11-14); LSSI-CE art. 10 requires them, so this is a known gap until
   there is a business address or a company. No cookie banner while no cookies are set.
