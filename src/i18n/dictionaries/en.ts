@@ -296,7 +296,7 @@ export const en: Dictionary = {
     prototype: {
       title: "See how your website would look before you decide",
       text: "We design your home page for free, with your brand and the style you like. You see the result before you invest.",
-      points: ["Free, no obligation", "Desktop and mobile", "In about 5 business days"],
+      points: ["Free, no obligation", "Desktop and mobile", "In about 4 business days"],
       cta: "Request a free prototype",
     },
     midCta: {
@@ -307,7 +307,7 @@ export const en: Dictionary = {
   prototypePage: {
     metaTitle: "Free website design prototype, no obligation",
     metaDescription:
-      "Get a free prototype of your new website: we design your home page around your brand, for desktop and mobile, in about 5 days and with no obligation.",
+      "Get a free prototype of your new website: we design your home page around your brand, for desktop and mobile, in about 4 days and with no obligation.",
     title: "Free website prototype for your business",
     intro:
       "See how your new website would look before you invest. Tell us about your business and the style you like, and we design your home page for desktop and mobile, at no cost and with no obligation.",
@@ -323,7 +323,7 @@ export const en: Dictionary = {
         text: "Your logo, your colours and the style you choose, or a proposal from us if you do not have them yet.",
       },
       {
-        title: "In about 5 business days",
+        title: "In about 4 business days",
         text: "We show it to you on a short video call or by email, whichever you prefer.",
       },
     ],

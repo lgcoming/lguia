@@ -315,7 +315,7 @@ export const es = {
     prototype: {
       title: "Mira cómo quedaría tu web antes de decidir",
       text: "Te diseñamos gratis la página de inicio con tu marca y el estilo que te guste. Así ves el resultado antes de invertir.",
-      points: ["Gratis y sin compromiso", "Escritorio y móvil", "En unos 5 días laborables"],
+      points: ["Gratis y sin compromiso", "Escritorio y móvil", "En unos 4 días laborables"],
       cta: "Pedir prototipo gratis",
     },
     midCta: {
@@ -326,7 +326,7 @@ export const es = {
   prototypePage: {
     metaTitle: "Prototipo de página web gratis y sin compromiso",
     metaDescription:
-      "Pide gratis un prototipo de tu nueva página web: diseñamos tu página de inicio con tu marca, en escritorio y móvil, en unos 5 días y sin compromiso.",
+      "Pide gratis un prototipo de tu nueva página web: diseñamos tu página de inicio con tu marca, en escritorio y móvil, en unos 4 días y sin compromiso.",
     title: "Prototipo de página web gratis para tu empresa",
     intro:
       "Mira cómo quedaría tu nueva web antes de invertir. Cuéntanos cómo es tu negocio y qué estilo te gusta, y diseñamos tu página de inicio para escritorio y móvil, sin coste y sin compromiso.",
@@ -342,7 +342,7 @@ export const es = {
         text: "Tu logo, tus colores y el estilo que elijas, o una propuesta nuestra si aún no los tienes.",
       },
       {
-        title: "En unos 5 días laborables",
+        title: "En unos 4 días laborables",
         text: "Te lo enseñamos en una videollamada corta o por email, como prefieras.",
       },
     ],

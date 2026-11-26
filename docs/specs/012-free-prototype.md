@@ -14,7 +14,7 @@ about style, colours, logo and current website to make the prototype close to wh
 ## Offer (copy in both languages)
 
 - What they get: a home page design for desktop and mobile, made for their business.
-- When: in about 5 business days after the request (owner to confirm).
+- When: in about 4 business days after the request (confirmed by the owner, 2026-11-26).
 - Free and without obligation; the request is answered within 2 business days like any lead.
 
 ## Pages and entry points
