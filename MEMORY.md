@@ -12,6 +12,16 @@ top of each section. Keep entries short; link to specs for detail.
   quote. The owner works alone: no promises of a dedicated team or SLAs.
 - **Domain is `lguia.com`** (owner's, at Cloudflare; decided 2026-11-14). Production builds use it
   as canonical origin. `hola@lguia.com` forwards to the owner's inbox with Email Routing.
+- **Keyword-led SEO (SPEC-013, 2026-11-26)**: H1s and titles open with the term buyers type
+  ("diseño web", "chatbots", "posicionamiento web"), benefits go to the intro. Spanish service slugs
+  changed to `diseno-web-a-medida`, `chatbots-agentes-ia`, `posicionamiento-seo-geo`; the old ones
+  308-redirect in `next.config.ts` (keep those redirects). `tests/unit/seo/snippets.test.ts` guards
+  title and description lengths.
+- **Free prototype (SPEC-012)**: home page design (desktop + mobile) in "about 4 business days"
+  (confirmed by the owner 2026-11-26), free and without obligation. The logo travels base64 in the
+  JSON lead and is only emailed as an attachment, never stored.
+- **Reach (2026-11-26)**: the owner wants the widest audience, so the site targets all of Spain
+  and English-speaking businesses abroad; no city landing pages (they would be near-duplicates).
 - **Legal pages (SPEC-011)**: owner "Luis Gómez" trading as lguia. The owner does not publish their
   NIF or home address (2026-11-14); LSSI-CE art. 10 requires them, so this is a known gap until
   there is a business address or a company. No cookie banner while no cookies are set.

@@ -11,9 +11,9 @@ const plan = (id: PlanId) => id;
  */
 export const es = {
   meta: {
-    homeTitle: "lguia: desarrollo web a medida, automatización e IA para empresas",
+    homeTitle: "Diseño web, automatización e IA para empresas | lguia",
     description:
-      "Agencia de desarrollo web a medida, automatización de procesos con IA y agentes de IA para empresas. Presupuesto cerrado y diagnóstico digital gratuito en 3 minutos.",
+      "Agencia de diseño web, automatización e IA para pymes: webs a medida desde 590 €, chatbots y procesos con IA, con presupuesto cerrado. Diagnóstico gratis.",
     ogAlt: "lguia: desarrollo web a medida, automatización e IA para empresas",
     ogHeadline: "Webs a medida, automatización e IA que resuelven problemas reales de tu empresa",
     ogTagline: "Agencia de desarrollo web, automatización e IA",
@@ -51,6 +51,7 @@ export const es = {
     pricing: "Planes y precios",
     diagnosis: "Diagnóstico digital",
     contact: "Contacto",
+    prototype: "Prototipo web gratis",
     remote: "Trabajamos en remoto, en español y en inglés.",
     rights: "Todos los derechos reservados.",
     language: "Idioma",
@@ -90,10 +91,10 @@ export const es = {
   },
   home: {
     hero: {
-      eyebrow: "Agencia de desarrollo web a medida, automatización e IA",
-      title: "Webs a medida, automatización e IA que resuelven problemas reales de tu empresa",
+      eyebrow: "Agencia de diseño web e inteligencia artificial para pymes",
+      title: "Diseño web, automatización e IA para empresas",
       subtitle:
-        "Diseñamos webs que captan clientes, automatizamos procesos con IA y desarrollamos agentes de IA para tu equipo. Con presupuesto cerrado, plazos claros y resultados que se pueden medir.",
+        "Diseñamos páginas web que captan clientes, automatizamos procesos con IA y creamos chatbots y agentes de IA para tu equipo. Con presupuesto cerrado, plazos claros y resultados que se pueden medir.",
       reassurances: [
         "Gratis y sin compromiso",
         "11 preguntas, unos 3 minutos",
@@ -103,7 +104,7 @@ export const es = {
       outroText: "Diseñamos cada pieza para que trabaje con las demás, sin herramientas sueltas.",
     },
     about: {
-      title: "Una agencia de desarrollo web e IA que empieza por tu negocio, no por la tecnología",
+      title: "Una agencia de diseño web e IA que empieza por tu negocio, no por la tecnología",
       paragraphs: [
         "lguia es una agencia digital que desarrolla webs a medida, automatiza procesos y aplica inteligencia artificial en empresas. Trabajamos en remoto desde España, en español y en inglés, con presupuesto cerrado y con el código, los datos y las cuentas siempre a nombre del cliente.",
         "Las tres áreas las lleva el mismo equipo para que todo encaje: tu web capta contactos, las automatizaciones los ordenan y la IA te ayuda a responder antes.",
@@ -121,7 +122,7 @@ export const es = {
       ],
     },
     services: {
-      title: "Servicios de desarrollo web, automatización e IA",
+      title: "Servicios de diseño web, automatización e IA",
       intro:
         "Cuatro áreas que se complementan. Puedes empezar por una y sumar las demás cuando tenga sentido.",
       link: "Ver todos los servicios",
@@ -175,7 +176,7 @@ export const es = {
       ],
     },
     plans: {
-      title: "Planes y precios para empezar con buen pie",
+      title: "Precios de diseño web e IA para empezar con buen pie",
       intro:
         "Precios orientativos para que sepas desde el principio de qué hablamos. El presupuesto final se cierra tras el diagnóstico.",
       link: "Ver todos los planes",
@@ -248,7 +249,7 @@ export const es = {
       ],
     },
     faq: {
-      title: "Preguntas frecuentes",
+      title: "Preguntas frecuentes sobre diseño web e IA",
       items: [
         {
           question: "¿Qué hace lguia?",
@@ -279,10 +280,10 @@ export const es = {
     },
   },
   servicesPage: {
-    metaTitle: "Servicios de desarrollo web, automatización e IA",
+    metaTitle: "Servicios de diseño web, automatización e IA",
     metaDescription:
-      "Desarrollo web a medida, automatización de procesos con IA, agentes de IA y SEO + GEO para empresas. Cuatro servicios que funcionan juntos, con presupuesto cerrado.",
-    title: "Servicios de desarrollo web a medida, automatización e IA para empresas",
+      "Diseño web a medida, automatización de procesos con IA, chatbots y posicionamiento SEO para empresas. Cuatro servicios conectados, con presupuesto cerrado.",
+    title: "Servicios de diseño web, automatización e IA para empresas",
     intro:
       "Una web que capta clientes, automatizaciones que ahorran tiempo, agentes de IA aplicados con criterio y visibilidad en buscadores. Puedes empezar por un servicio y sumar los demás cuando tenga sentido.",
     areasTitle: "Cuatro servicios, un mismo equipo",
@@ -301,26 +302,58 @@ export const es = {
       quoteValue: "Cerrado antes de empezar",
       customQuote: "A medida",
     },
-    problemsTitle: "Problemas que resuelve",
-    includesTitle: "Qué incluye",
+    problemsTitle: "Qué problemas resolvemos con {topic}",
+    includesTitle: "Qué incluye nuestro servicio de {topic}",
     outcomesTitle: "Qué consigue tu empresa",
     processTitle: "Cómo lo hacemos",
     processIntro:
       "El mismo proceso por fases en todos nuestros proyectos, para que siempre sepas qué viene después.",
-    plansTitle: "Planes y precios",
+    plansTitle: "Precios de {topic}",
     plansIntro: "Precios orientativos sin IVA. El presupuesto final se cierra tras el diagnóstico.",
-    faqTitle: "Preguntas frecuentes",
+    faqTitle: "Preguntas frecuentes sobre {topic}",
     othersTitle: "Otros servicios",
+    prototype: {
+      title: "Mira cómo quedaría tu web antes de decidir",
+      text: "Te diseñamos gratis la página de inicio con tu marca y el estilo que te guste. Así ves el resultado antes de invertir.",
+      points: ["Gratis y sin compromiso", "Escritorio y móvil", "En unos 4 días laborables"],
+      cta: "Pedir prototipo gratis",
+    },
     midCta: {
       title: "¿Hablamos de tu caso?",
       text: "Cuéntanos qué necesitas y te enviamos una propuesta con alcance, plazos y presupuesto cerrado.",
     },
   },
-  pricingPage: {
-    metaTitle: "Planes y precios de desarrollo web, automatización e IA",
+  prototypePage: {
+    metaTitle: "Prototipo de página web gratis y sin compromiso",
     metaDescription:
-      "Precios de desarrollo web a medida, automatización e IA para empresas: planes desde 590 €, con plazos orientativos y presupuesto cerrado tras un diagnóstico gratuito.",
-    title: "Planes y precios para cada etapa de tu empresa",
+      "Pide gratis un prototipo de tu nueva página web: diseñamos tu página de inicio con tu marca, en escritorio y móvil, en unos 4 días y sin compromiso.",
+    title: "Prototipo de página web gratis para tu empresa",
+    intro:
+      "Mira cómo quedaría tu nueva web antes de invertir. Cuéntanos cómo es tu negocio y qué estilo te gusta, y diseñamos tu página de inicio para escritorio y móvil, sin coste y sin compromiso.",
+    formTitle: "Solicita tu prototipo",
+    includesTitle: "Qué recibes",
+    includes: [
+      {
+        title: "El diseño de tu página de inicio",
+        text: "Pensado para tu negocio, en versión escritorio y móvil.",
+      },
+      {
+        title: "Con tu marca",
+        text: "Tu logo, tus colores y el estilo que elijas, o una propuesta nuestra si aún no los tienes.",
+      },
+      {
+        title: "En unos 4 días laborables",
+        text: "Te lo enseñamos en una videollamada corta o por email, como prefieras.",
+      },
+    ],
+    noteTitle: "Sin compromiso",
+    note: "El prototipo es para que lo valores con calma. Si te gusta, te enviamos un presupuesto cerrado para hacer la web completa; si no, no pasa nada.",
+  },
+  pricingPage: {
+    metaTitle: "Precios de páginas web, automatización e IA",
+    metaDescription:
+      "¿Cuánto cuesta una página web para tu empresa? Webs desde 590 €, chatbots desde 750 € y automatizaciones desde 890 €, con presupuesto cerrado antes de empezar.",
+    title: "Precios de diseño web, automatización e IA para empresas",
     intro:
       "Elige un punto de partida. Todos los proyectos empiezan con un diagnóstico y terminan con un presupuesto cerrado, sin sorpresas.",
     heroCta: "Descubre qué plan te encaja",
@@ -361,10 +394,10 @@ export const es = {
     faqTitle: "Preguntas frecuentes sobre los planes",
   },
   diagnosisPage: {
-    metaTitle: "Diagnóstico digital gratuito",
+    metaTitle: "Diagnóstico digital gratuito para empresas",
     metaDescription:
-      "Diagnóstico digital gratuito para empresas: responde 11 preguntas y descubre en 3 minutos tu nivel de madurez digital, el plan que mejor encaja y los próximos pasos.",
-    title: "Diagnóstico digital gratuito",
+      "Diagnóstico digital gratuito para empresas: responde 11 preguntas y descubre en 3 minutos tu nivel digital, el plan que mejor encaja y qué hacer primero.",
+    title: "Diagnóstico digital gratuito para empresas",
     intro:
       "En unos 3 minutos sabrás en qué punto está tu negocio, qué plan te encaja mejor y por dónde empezar. Sin registro y sin compromiso.",
     /** `{link}` is replaced by a link to the contact page with `noscriptLink` as its text. */
@@ -376,10 +409,10 @@ export const es = {
       "Once preguntas en cinco bloques. Al terminar verás una puntuación de 0 a 100 por áreas, el plan recomendado con sus motivos y los próximos pasos.",
   },
   contactPage: {
-    metaTitle: "Contacto: pide una propuesta",
+    metaTitle: "Pide presupuesto de página web, automatización o IA",
     metaDescription:
-      "Cuéntanos tu proyecto de desarrollo web, automatización o inteligencia artificial y recibe una primera valoración en un máximo de 2 días laborables, sin compromiso.",
-    title: "Hablemos de tu proyecto",
+      "Pide presupuesto para tu página web, automatización o proyecto de IA. Te respondemos en un máximo de 2 días laborables con una valoración sin compromiso.",
+    title: "Pide presupuesto para tu web o proyecto de IA",
     intro:
       "Cuéntanos qué necesitas y te responderemos con una primera valoración, sin compromiso. Cuanto más concreto seas, más útil será nuestra respuesta.",
     formTitle: "Escríbenos",

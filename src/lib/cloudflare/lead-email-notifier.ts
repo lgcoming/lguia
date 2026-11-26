@@ -16,6 +16,12 @@ interface EmailBinding {
     replyTo?: string;
     subject: string;
     text: string;
+    attachments?: {
+      content: string;
+      filename: string;
+      type: string;
+      disposition: "attachment";
+    }[];
   }): Promise<unknown>;
 }
 
@@ -46,14 +52,21 @@ export function getLeadNotifier(): LeadNotifier {
   }
 
   return {
-    async notify(lead) {
+    async notify(lead, files = []) {
       const { subject, text } = formatLeadEmail(lead);
+      const attachments = files.map((file) => ({
+        content: file.data,
+        filename: file.filename,
+        type: file.type,
+        disposition: "attachment" as const,
+      }));
+      const message = { from: SENDER, to, subject, text, attachments };
       try {
-        await binding.send({ from: SENDER, to, replyTo: lead.email, subject, text });
+        await binding.send({ ...message, replyTo: lead.email });
       } catch (error) {
         // Without the reply-to the team can still read the visitor's address in the body.
         console.error("[leads] send with Reply-To failed, retrying without it", error);
-        await binding.send({ from: SENDER, to, subject, text });
+        await binding.send(message);
       }
     },
   };

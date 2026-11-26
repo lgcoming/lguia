@@ -49,7 +49,12 @@ export function useLeadForm<V extends Record<string, unknown>>({
   }
 
   function setValue<K extends keyof V>(name: K, value: V[K]) {
-    const next = { ...values, [name]: value };
+    setFields({ [name]: value } as unknown as Partial<V>);
+  }
+
+  /** Several fields in one update, so one change cannot overwrite another. */
+  function setFields(patch: Partial<V>) {
+    const next = { ...values, ...patch };
     setValues(next);
     if (attempted.current) {
       const result = validate(next);
@@ -86,5 +91,5 @@ export function useLeadForm<V extends Record<string, unknown>>({
     }
   }
 
-  return { values, errors, status, formError, fieldId, setValue, handleSubmit };
+  return { values, errors, status, formError, fieldId, setValue, setFields, handleSubmit };
 }

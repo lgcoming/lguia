@@ -13,6 +13,7 @@ export const PAGE_IDS = [
   "pricing",
   "diagnosis",
   "contact",
+  "prototype",
   "legal",
   "privacy",
   "cookies",
@@ -27,6 +28,7 @@ const PAGE_SEGMENTS: Record<Locale, Record<PageId, string>> = {
     pricing: "planes",
     diagnosis: "diagnostico-digital",
     contact: "contacto",
+    prototype: "prototipo-web-gratis",
     legal: "aviso-legal",
     privacy: "privacidad",
     cookies: "cookies",
@@ -37,6 +39,7 @@ const PAGE_SEGMENTS: Record<Locale, Record<PageId, string>> = {
     pricing: "pricing",
     diagnosis: "digital-assessment",
     contact: "contact",
+    prototype: "free-website-prototype",
     legal: "legal-notice",
     privacy: "privacy",
     cookies: "cookies",
@@ -46,10 +49,10 @@ const PAGE_SEGMENTS: Record<Locale, Record<PageId, string>> = {
 /** Slugs carry the head search term of each language; ids stay stable for the business logic. */
 const SERVICE_SLUGS: Record<Locale, Record<ServiceCategoryId, string>> = {
   es: {
-    "desarrollo-web": "desarrollo-web-a-medida",
+    "desarrollo-web": "diseno-web-a-medida",
     automatizaciones: "automatizacion-de-procesos",
-    "chatbots-ia": "agentes-ia-chatbots",
-    "seo-geo": "seo-geo",
+    "chatbots-ia": "chatbots-agentes-ia",
+    "seo-geo": "posicionamiento-seo-geo",
   },
   en: {
     "desarrollo-web": "custom-web-development",
@@ -111,6 +114,7 @@ export function allRoutes(): RouteRef[] {
     { page: "diagnosis" },
     { page: "services" },
     ...SERVICE_CATEGORY_IDS.map((service) => ({ service })),
+    { page: "prototype" },
     { page: "pricing" },
     { page: "contact" },
     { page: "legal" },

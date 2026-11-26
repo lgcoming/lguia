@@ -48,8 +48,10 @@ export interface ServiceCategory {
   seoTitle: string;
   /** Meta description: the search snippet, written around the buyer's query. */
   seoDescription: string;
-  /** The page's H1: the service plus the business outcome. */
+  /** The page's H1: the head search term for the service and who it is for. */
   headline: string;
+  /** Search term the page targets, used inside its H2s ("Precios de {topic}"). */
+  topic: string;
   /** One line for tiles and cards. */
   summary: string;
   /** Hero paragraph. */

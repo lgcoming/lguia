@@ -1,3 +1,4 @@
+import { formatEuro } from "@/features/catalog/format";
 import { LOCALE_INFO, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { pageHref, planHref, routeHref, serviceHref, type RouteRef } from "@/i18n/routes";
@@ -23,7 +24,9 @@ const LANGUAGE_NAMES: Record<Locale, string> = { es: "Spanish", en: "English" };
  * type for an agency; it inherits from LocalBusiness, whose `address` is given at country
  * level only because there is no public office.
  */
-export function siteGraph(locale: Locale, categories: ServiceCategory[]) {
+export function siteGraph(locale: Locale, categories: ServiceCategory[], plans: Plan[] = []) {
+  const low = lowestPrice(plans);
+  const high = highestPrice(plans);
   const { meta } = getDictionary(locale);
   const logo = absoluteUrl("/brand/lguia-mark.png");
   return {
@@ -43,7 +46,11 @@ export function siteGraph(locale: Locale, categories: ServiceCategory[]) {
         address: { "@type": "PostalAddress", addressCountry: siteConfig.country },
         areaServed: AREA_SERVED,
         knowsLanguage: LOCALES.map((code) => LOCALE_INFO[code].lang),
-        knowsAbout: categories.map((category) => category.name),
+        // Service names plus the search terms each page targets.
+        knowsAbout: [...new Set(categories.flatMap((category) => [category.name, category.topic]))],
+        ...(low && high
+          ? { priceRange: `${formatEuro(low, locale)} – ${formatEuro(high, locale)}` }
+          : {}),
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "sales",

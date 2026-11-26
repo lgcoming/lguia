@@ -3,7 +3,11 @@ import {
   summarizeDiagnosis,
   type LeadRepository,
 } from "@/features/leads/lead-repository";
-import { noopLeadNotifier, type LeadNotifier } from "@/features/leads/lead-notifier";
+import {
+  noopLeadNotifier,
+  type LeadAttachment,
+  type LeadNotifier,
+} from "@/features/leads/lead-notifier";
 import type { LeadInput } from "@/features/leads/schema";
 import type { Lead } from "@/features/leads/types";
 import { DEFAULT_LOCALE, type Locale } from "@/i18n/config";
@@ -57,12 +61,35 @@ export async function submitLead(
     message: input.message,
   };
 
-  const lead: Lead =
-    input.source === "contact"
-      ? { ...base, source: "contact", interest: input.interest }
-      : { ...base, source: "diagnosis", diagnosis: summarizeDiagnosis(input.answers) };
+  const attachments: LeadAttachment[] = [];
+  let lead: Lead;
+  if (input.source === "contact") {
+    lead = { ...base, source: "contact", interest: input.interest };
+  } else if (input.source === "diagnosis") {
+    lead = { ...base, source: "diagnosis", diagnosis: summarizeDiagnosis(input.answers) };
+  } else {
+    const { logo } = input;
+    if (logo) attachments.push({ filename: logo.name, type: logo.type, data: logo.data });
+    lead = {
+      ...base,
+      source: "prototype",
+      prototype: {
+        projectType: input.projectType,
+        currentSite: input.currentSite,
+        business: input.business,
+        goal: input.goal,
+        styles: input.styles,
+        palette: input.palette,
+        colors: input.palette === "custom" ? input.colors : [],
+        tone: input.tone,
+        sections: input.sections,
+        references: input.references,
+        logoName: logo?.name,
+      },
+    };
+  }
 
   await repository.create(lead);
-  await notifier.notify(lead);
+  await notifier.notify(lead, attachments);
   return { stored: true, receipt };
 }

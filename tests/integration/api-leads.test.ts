@@ -112,6 +112,48 @@ describe("POST /api/leads", () => {
     expect(invalidJson.json.error.code).toBe("INVALID_JSON");
   });
 
+  it("stores a free prototype request with its brief", async () => {
+    const { status, json } = await postLead({
+      source: "prototype",
+      name: "Pablo Gil",
+      email: "pablo@integracion-prototipo.test",
+      projectType: "new",
+      business: "Academia de inglés para niños y adultos en Valencia.",
+      goal: "leads",
+      styles: ["modern"],
+      palette: "suggest",
+      tone: "any",
+      consent: true,
+    });
+
+    expect(status).toBe(201);
+    const stored = (await listLeads()).find((lead) => lead.id === json.data.id);
+    expect(stored).toMatchObject({
+      source: "prototype",
+      prototype: { projectType: "new", goal: "leads", styles: ["modern"], sections: [] },
+    });
+  });
+
+  it("returns field errors for an incomplete prototype request", async () => {
+    const { status, json } = await postLead({
+      source: "prototype",
+      name: "Pablo Gil",
+      email: "pablo@integracion-prototipo.test",
+      projectType: "redesign",
+      business: "Academia",
+      styles: [],
+      palette: "custom",
+      tone: "any",
+      consent: true,
+    });
+
+    expect(status).toBe(400);
+    const paths = json.error.issues.map((issue: { path: string }) => issue.path);
+    expect(paths).toEqual(
+      expect.arrayContaining(["business", "goal", "styles", "currentSite", "colors"]),
+    );
+  });
+
   it("answers bots that fill the honeypot like anyone else, without storing them", async () => {
     const { status, json } = await postLead({
       ...contactLead,
