@@ -12,6 +12,11 @@ top of each section. Keep entries short; link to specs for detail.
   quote. The owner works alone: no promises of a dedicated team or SLAs.
 - **Domain is `lguia.com`** (owner's, at Cloudflare; decided 2026-11-14). Production builds use it
   as canonical origin. `hola@lguia.com` forwards to the owner's inbox with Email Routing.
+- **Off-site profiles (2026-11-26)**: LinkedIn page `linkedin.com/company/lguia-agencia` (the
+  `lguia` handle belongs to "LGuia", a Tétouan tourism magazine that used lguia.com before; its
+  page still links here). Google Business Profile created (service area: Spain, no public
+  address), pending the owner's postal verification. Add every new profile to
+  `siteConfig.profiles` (footer + schema.org `sameAs`). Cloudflare Crawler Hints is on.
 - **Keyword-led SEO (SPEC-013, 2026-11-26)**: H1s and titles open with the term buyers type
   ("diseño web", "chatbots", "posicionamiento web"), benefits go to the intro. Spanish service slugs
   changed to `diseno-web-a-medida`, `chatbots-agentes-ia`, `posicionamiento-seo-geo`; the old ones
