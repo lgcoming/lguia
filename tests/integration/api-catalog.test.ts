@@ -18,7 +18,7 @@ describe("catalog endpoints", () => {
       "seo-geo",
     ]);
     expect(data[0].services.length).toBeGreaterThan(0);
-    expect(data[0].name).toBe("Desarrollo web a medida");
+    expect(data[0].name).toBe("Diseño web a medida");
   });
 
   it("GET /api/plans returns the six plans with structured pricing", async () => {
@@ -35,7 +35,7 @@ describe("catalog endpoints", () => {
 
   it("serves the catalog in English with ?locale=en and falls back to Spanish otherwise", async () => {
     const english = await (await getServices(request("/api/services?locale=en"))).json();
-    expect(english.data[0].name).toBe("Custom web development");
+    expect(english.data[0].name).toBe("Custom web design");
 
     const plans = await (await getPlans(request("/api/plans?locale=en"))).json();
     expect(
@@ -43,6 +43,6 @@ describe("catalog endpoints", () => {
     ).toBe("Custom quote");
 
     const unknown = await (await getServices(request("/api/services?locale=fr"))).json();
-    expect(unknown.data[0].name).toBe("Desarrollo web a medida");
+    expect(unknown.data[0].name).toBe("Diseño web a medida");
   });
 });

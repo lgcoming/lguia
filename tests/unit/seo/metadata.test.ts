@@ -22,12 +22,12 @@ describe("international metadata", () => {
       description: "d",
     });
 
-    expect(es.alternates?.canonical).toBe("/servicios/agentes-ia-chatbots");
+    expect(es.alternates?.canonical).toBe("/servicios/chatbots-agentes-ia");
     expect(en.alternates?.canonical).toBe("/en/services/ai-agents-chatbots");
     // Reciprocal: both versions list the same alternates, themselves included.
     expect(es.alternates?.languages).toEqual(en.alternates?.languages);
     expect(es.alternates?.languages).toEqual({
-      es: "/servicios/agentes-ia-chatbots",
+      es: "/servicios/chatbots-agentes-ia",
       en: "/en/services/ai-agents-chatbots",
       "x-default": "/en/services/ai-agents-chatbots",
     });

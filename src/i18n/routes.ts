@@ -49,10 +49,10 @@ const PAGE_SEGMENTS: Record<Locale, Record<PageId, string>> = {
 /** Slugs carry the head search term of each language; ids stay stable for the business logic. */
 const SERVICE_SLUGS: Record<Locale, Record<ServiceCategoryId, string>> = {
   es: {
-    "desarrollo-web": "desarrollo-web-a-medida",
+    "desarrollo-web": "diseno-web-a-medida",
     automatizaciones: "automatizacion-de-procesos",
-    "chatbots-ia": "agentes-ia-chatbots",
-    "seo-geo": "seo-geo",
+    "chatbots-ia": "chatbots-agentes-ia",
+    "seo-geo": "posicionamiento-seo-geo",
   },
   en: {
     "desarrollo-web": "custom-web-development",

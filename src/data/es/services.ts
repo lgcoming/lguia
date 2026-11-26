@@ -9,18 +9,19 @@ import type { ServiceCategory } from "@/types/catalog";
 export const serviceCategories: ServiceCategory[] = [
   {
     id: "desarrollo-web",
-    name: "Desarrollo web a medida",
+    name: "Diseño web a medida",
     icon: "web",
-    seoTitle: "Desarrollo web a medida para empresas",
+    seoTitle: "Diseño web a medida para empresas, desde 590 €",
     seoDescription:
-      "Desarrollo web a medida para empresas: webs corporativas, landing pages y tiendas online rápidas y pensadas para captar clientes. Presupuesto cerrado desde 590 €.",
-    headline: "Desarrollo web a medida que convierte visitas en clientes",
+      "Diseño de páginas web a medida para empresas: webs corporativas, landing pages y tiendas online rápidas que captan clientes. Presupuesto cerrado desde 590 €.",
+    headline: "Diseño y desarrollo web a medida para empresas",
+    topic: "diseño web a medida",
     summary:
       "Webs corporativas, landing pages y tiendas online a medida: rápidas, claras y preparadas para captar clientes.",
     description:
       "Diseñamos y programamos tu web desde cero, sin plantillas recargadas: carga rápido, se entiende a la primera y lleva cada visita hacia el contacto o la compra. Con presupuesto cerrado y con el código, el dominio y las cuentas a tu nombre.",
     answer:
-      "lguia desarrolla webs a medida para empresas: webs corporativas, landing pages y tiendas online programadas sin plantillas, optimizadas para velocidad (Core Web Vitals), SEO técnico y conversión. Un proyecto parte de 590 € para una web de hasta cinco secciones y de 1.950 € para una web corporativa completa, se entrega en 2 a 6 semanas y se cierra con un presupuesto fijo antes de empezar.",
+      "lguia diseña y desarrolla páginas web a medida para empresas: webs corporativas, landing pages y tiendas online programadas sin plantillas, optimizadas para velocidad (Core Web Vitals), SEO técnico y conversión. Un proyecto parte de 590 € para una web de hasta cinco secciones y de 1.950 € para una web corporativa completa, se entrega en 2 a 6 semanas y se cierra con un presupuesto fijo antes de empezar.",
     problems: [
       {
         pain: "Tu web recibe visitas, pero casi nadie contacta",
@@ -132,8 +133,9 @@ export const serviceCategories: ServiceCategory[] = [
     icon: "automation",
     seoTitle: "Automatización de procesos con IA para empresas",
     seoDescription:
-      "Automatización de procesos con IA para empresas: conectamos formularios, email y CRM para eliminar el trabajo manual y responder antes. Desde 890 €, en 2 a 4 semanas.",
-    headline: "Automatización de procesos con IA que elimina el trabajo manual",
+      "Automatización de procesos con IA para empresas: conectamos formularios, email y CRM para quitar trabajo manual y responder antes. Desde 890 € y en 2-4 semanas.",
+    headline: "Automatización de procesos con IA para empresas",
+    topic: "automatización de procesos",
     summary:
       "Conectamos formularios, email y CRM y añadimos IA donde ahorra tiempo, para que los datos fluyan solos y tu equipo deje de copiar y pegar.",
     description:
@@ -225,12 +227,13 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "chatbots-ia",
-    name: "Agentes de IA y chatbots",
+    name: "Chatbots y agentes de IA",
     icon: "ai",
-    seoTitle: "Agentes de IA y chatbots para empresas",
+    seoTitle: "Chatbots y agentes de IA para empresas, desde 750 €",
     seoDescription:
-      "Agentes de IA y chatbots para empresas, entrenados con tu información y con supervisión humana: atención al cliente, asistentes internos y tareas. Desde 750 €.",
-    headline: "Agentes de IA y chatbots entrenados con los datos de tu empresa",
+      "Chatbots y agentes de IA para empresas, entrenados con tu información y supervisados por personas: atención al cliente 24/7 y asistentes internos. Desde 750 €.",
+    headline: "Chatbots y agentes de IA para empresas",
+    topic: "chatbots y agentes de IA",
     summary:
       "Chatbots, asistentes internos y agentes de IA que responden con la información de tu empresa y pasan la conversación a una persona cuando hace falta.",
     description:
@@ -327,12 +330,13 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "seo-geo",
-    name: "SEO + GEO",
+    name: "Posicionamiento SEO y GEO",
     icon: "search",
-    seoTitle: "SEO y GEO: posicionamiento en Google y en IA",
+    seoTitle: "Posicionamiento web SEO y GEO para empresas",
     seoDescription:
-      "SEO técnico y GEO para empresas: una web que Google rastrea sin errores y que ChatGPT, Perplexity y Gemini pueden entender y citar. Trabajo medible, sin promesas vacías.",
-    headline: "SEO y GEO para que te encuentren en Google y en los asistentes de IA",
+      "Posicionamiento web para empresas: SEO técnico y GEO para que Google rastree tu web sin errores y ChatGPT, Perplexity y Gemini entiendan y citen tu negocio.",
+    headline: "Posicionamiento web SEO y GEO para empresas",
+    topic: "posicionamiento SEO y GEO",
     summary:
       "SEO técnico, contenidos bien estructurados y datos estructurados para aparecer en Google y en las respuestas de ChatGPT, Perplexity o Gemini.",
     description:

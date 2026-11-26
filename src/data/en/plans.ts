@@ -116,6 +116,11 @@ export const plans: Plan[] = [
 
 export const planFaqs: Faq[] = [
   {
+    question: "How much does a website cost for a business?",
+    answer:
+      "It depends on what you need. A professional website of up to five sections starts at €590, a custom corporate website of up to twelve pages at €1,950 and a project combining web, SEO, AI and automation at €3,250, VAT excluded. The final price is agreed in writing before we start.",
+  },
+  {
     question: "Are the prices final?",
     answer:
       "They are indicative starting prices, VAT excluded. After the assessment and a call we send a fixed quote with the exact scope.",

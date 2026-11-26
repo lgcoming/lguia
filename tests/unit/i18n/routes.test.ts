@@ -28,7 +28,7 @@ describe("localized routes", () => {
     expect(pageHref("en", "pricing")).toBe("/en/pricing");
     expect(pageHref("es", "diagnosis")).toBe("/diagnostico-digital");
     expect(pageHref("en", "diagnosis")).toBe("/en/digital-assessment");
-    expect(serviceHref("es", "desarrollo-web")).toBe("/servicios/desarrollo-web-a-medida");
+    expect(serviceHref("es", "desarrollo-web")).toBe("/servicios/diseno-web-a-medida");
     expect(serviceHref("en", "desarrollo-web")).toBe("/en/services/custom-web-development");
     expect(planHref("en", "web-pro")).toBe("/en/pricing#web-pro");
   });
@@ -47,16 +47,16 @@ describe("localized routes", () => {
         ...SERVICE_CATEGORY_IDS,
       ]);
     }
-    expect(serviceIdFromSlug("en", "desarrollo-web-a-medida")).toBeUndefined();
+    expect(serviceIdFromSlug("en", "diseno-web-a-medida")).toBeUndefined();
     expect(serviceIdFromSlug("es", "custom-web-development")).toBeUndefined();
   });
 
   it("switches language keeping the page, and falls back to home for unknown paths", () => {
-    expect(localizedPath("/servicios/agentes-ia-chatbots", "en")).toBe(
+    expect(localizedPath("/servicios/chatbots-agentes-ia", "en")).toBe(
       "/en/services/ai-agents-chatbots",
     );
     expect(localizedPath("/en/services/ai-agents-chatbots", "es")).toBe(
-      "/servicios/agentes-ia-chatbots",
+      "/servicios/chatbots-agentes-ia",
     );
     expect(localizedPath("/planes/", "en")).toBe("/en/pricing");
     expect(localizedPath("/en", "es")).toBe("/");
