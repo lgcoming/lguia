@@ -7,6 +7,8 @@ export const siteConfig = {
   owner: "Luis Gómez",
   // Email Routing forwards it to the owner's inbox; leads use LEADS_TO instead (SPEC-010).
   email: "hola@lguia.com",
+  /** Official profiles of the brand: footer links and schema.org `sameAs` (one entity everywhere). */
+  profiles: [{ name: "LinkedIn", url: "https://www.linkedin.com/company/lguia-agencia/" }],
   /** ISO 3166-1 code of the country lguia operates from (it works remotely, no public address). */
   country: "ES",
   /**

@@ -81,6 +81,15 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
               {siteConfig.email}
             </a>
             <p className="mt-1 text-footnote">{t.footer.remote}</p>
+            <ul className="mt-3 flex gap-4">
+              {siteConfig.profiles.map((profile) => (
+                <li key={profile.url}>
+                  <a href={profile.url} rel="me" className={linkClasses}>
+                    {profile.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </FooterColumn>
         </div>
         <div className="mt-12 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-pale-mist pt-5 text-caption">
