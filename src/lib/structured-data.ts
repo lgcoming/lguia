@@ -41,6 +41,7 @@ export function siteGraph(locale: Locale, categories: ServiceCategory[], plans: 
         logo: { "@type": "ImageObject", url: logo, width: 512, height: 512 },
         image: logo,
         email: siteConfig.email,
+        sameAs: siteConfig.profiles.map((profile) => profile.url),
         founder: { "@type": "Person", name: siteConfig.owner },
         description: meta.description,
         address: { "@type": "PostalAddress", addressCountry: siteConfig.country },
