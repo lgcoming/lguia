@@ -8,12 +8,13 @@ import type { ServiceCategory } from "@/types/catalog";
 export const serviceCategories: ServiceCategory[] = [
   {
     id: "desarrollo-web",
-    name: "Custom web development",
+    name: "Custom web design",
     icon: "web",
-    seoTitle: "Custom web development for businesses",
+    seoTitle: "Custom web design and development, from €590",
     seoDescription:
-      "Custom web development for businesses: corporate websites, landing pages and online stores built to load fast and win customers. Fixed quotes from €590.",
-    headline: "Custom web development that turns visitors into customers",
+      "Custom web design for businesses: corporate sites, landing pages and online stores that load fast and win customers. Fixed quotes from €590.",
+    headline: "Custom web design and development for businesses",
+    topic: "custom web design",
     summary:
       "Corporate websites, landing pages and online stores built from scratch: fast, clear and designed to generate leads.",
     description:
@@ -128,10 +129,11 @@ export const serviceCategories: ServiceCategory[] = [
     id: "automatizaciones",
     name: "AI automation",
     icon: "automation",
-    seoTitle: "AI automation and business process automation",
+    seoTitle: "AI automation services for businesses",
     seoDescription:
       "AI automation for businesses: we connect forms, email and your CRM to remove manual work and answer leads faster. From €890, live in 2 to 4 weeks.",
-    headline: "AI automation that removes manual work from your operations",
+    headline: "AI automation services for businesses",
+    topic: "AI automation",
     summary:
       "We connect forms, email and your CRM, and add AI where it saves time, so data moves on its own and your team stops copying and pasting.",
     description:
@@ -220,12 +222,13 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "chatbots-ia",
-    name: "AI agents and chatbots",
+    name: "AI chatbots and agents",
     icon: "ai",
-    seoTitle: "AI agents and chatbots for business",
+    seoTitle: "AI chatbots and AI agents for business, from €750",
     seoDescription:
-      "AI agents and chatbots for business, trained on your own information and supervised by people: customer service, internal assistants and task automation. From €750.",
-    headline: "AI agents and chatbots trained on your company's data",
+      "AI chatbots and AI agents for business, trained on your own information and supervised by people: 24/7 customer service and internal assistants. From €750.",
+    headline: "AI chatbots and AI agents for businesses",
+    topic: "AI chatbots and agents",
     summary:
       "Chatbots, internal assistants and AI agents that answer with your company's information and hand the conversation to a person when needed.",
     description:
@@ -321,10 +324,11 @@ export const serviceCategories: ServiceCategory[] = [
     id: "seo-geo",
     name: "SEO + GEO",
     icon: "search",
-    seoTitle: "SEO and GEO services: rank on Google and in AI answers",
+    seoTitle: "SEO and GEO services for businesses",
     seoDescription:
-      "Technical SEO and generative engine optimization (GEO): a site Google crawls cleanly and that ChatGPT, Perplexity and Gemini can understand and cite. Measurable work, no empty promises.",
-    headline: "SEO and GEO so buyers find you on Google and in AI assistants",
+      "SEO and GEO services: a website Google crawls cleanly and that ChatGPT, Perplexity and Gemini can understand and cite. Measurable work, no empty promises.",
+    headline: "SEO and GEO services for businesses",
+    topic: "SEO and GEO",
     summary:
       "Technical SEO, well-structured content and structured data to show up on Google and in answers from ChatGPT, Perplexity or Gemini.",
     description:

@@ -20,11 +20,15 @@ export async function MarketingShell({
   children: ReactNode;
 }) {
   const t = getDictionary(locale);
-  const categories = await getCatalogRepository(locale).listServiceCategories();
+  const catalog = getCatalogRepository(locale);
+  const [categories, plans] = await Promise.all([
+    catalog.listServiceCategories(),
+    catalog.listPlans(),
+  ]);
 
   return (
     <>
-      <JsonLd data={siteGraph(locale, categories)} />
+      <JsonLd data={siteGraph(locale, categories, plans)} />
       <SkipLink label={t.common.skipLink} />
       <SiteHeader locale={locale} />
       <main id="contenido" tabIndex={-1} className="outline-none">
@@ -35,7 +39,11 @@ export async function MarketingShell({
         href={pageHref(locale, "diagnosis")}
         text={t.stickyCta.text}
         button={t.stickyCta.button}
-        hideOn={[pageHref(locale, "diagnosis"), pageHref(locale, "contact")]}
+        hideOn={[
+          pageHref(locale, "diagnosis"),
+          pageHref(locale, "contact"),
+          pageHref(locale, "prototype"),
+        ]}
       />
     </>
   );

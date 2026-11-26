@@ -1,4 +1,4 @@
-import type { LeadFormContent } from "@/features/leads/content/types";
+import type { LeadFormContent, PrototypeFormContent } from "@/features/leads/content/types";
 
 export const leadContentEs: LeadFormContent = {
   validation: {
@@ -13,6 +13,16 @@ export const leadContentEs: LeadFormContent = {
     consent: "Necesitamos tu consentimiento para poder responderte.",
     answers: "Selecciona una opción para continuar.",
     source: "Origen del contacto no válido.",
+    projectType: "Indica si quieres una web nueva o rediseñar la actual.",
+    currentSite: "Escribe la dirección de tu web actual, por ejemplo miempresa.com.",
+    business: "Cuéntanos a qué se dedica tu negocio (entre 10 y 600 caracteres).",
+    goal: "Elige el objetivo principal de la web.",
+    styles: "Elige entre 1 y 3 estilos.",
+    palette: "Elige cómo quieres los colores.",
+    colors: "Añade al menos un color en formato #rrggbb (máximo 3).",
+    tone: "Elige si prefieres un diseño claro, oscuro o sin preferencia.",
+    logo: "Sube el logo en PNG, JPG, WebP, SVG o PDF.",
+    logoSize: "El logo no puede pesar más de 3 MB.",
   },
   fields: {
     name: "Nombre",
@@ -47,5 +57,82 @@ export const leadContentEs: LeadFormContent = {
     text: "Te responderemos a {email} en un máximo de 2 días laborables con una primera valoración.",
     next: "Mientras tanto, puedes {link} para adelantar trabajo.",
     nextLink: "hacer el diagnóstico digital",
+  },
+};
+
+export const prototypeContentEs: PrototypeFormContent = {
+  groups: {
+    contact: "Tus datos",
+    project: "Tu proyecto",
+    style: "Estilo y colores",
+    content: "Contenido",
+    extra: "Para terminar",
+  },
+  fields: {
+    projectType: "¿Qué necesitas?",
+    currentSite: "Dirección de tu web actual",
+    currentSiteHint: "La revisamos para mantener lo que funciona y mejorar el resto.",
+    business: "¿A qué se dedica tu negocio?",
+    businessHint: "Qué ofreces, a quién y qué te diferencia. Con dos o tres frases basta.",
+    goal: "¿Qué es lo más importante que debe conseguir la web?",
+    styles: "¿Qué estilo te gusta?",
+    stylesHint: "Elige hasta 3.",
+    palette: "Colores",
+    colors: "Tus colores",
+    colorsHint: "Hasta 3. Si no sabes el código exacto, elige el más parecido.",
+    color: "Color {n}",
+    addColor: "Añadir color",
+    removeColor: "Quitar el color {n}",
+    tone: "¿Prefieres un diseño claro u oscuro?",
+    sections: "¿Qué secciones debería tener?",
+    sectionsHint: "Orientativo: lo afinamos juntos.",
+    references: "Webs que te gustan",
+    referencesHint: "Direcciones de webs de referencia y qué te gusta de cada una.",
+    logo: "Tu logo",
+    logoHint:
+      "PNG, JPG, WebP, SVG o PDF, hasta 3 MB. Si no tienes, te proponemos un logotipo de texto.",
+    logoSelected: "Archivo seleccionado: {name}",
+    logoRemove: "Quitar el logo",
+    message: "¿Algo más que debamos saber?",
+    messageHint: "Textos que quieres incluir, cosas que no te gustan, plazos…",
+  },
+  options: {
+    projectType: { new: "Una web nueva", redesign: "Rediseñar mi web actual" },
+    goal: {
+      leads: "Conseguir contactos y presupuestos",
+      sales: "Vender online",
+      bookings: "Recibir reservas o citas",
+      brand: "Dar a conocer la marca",
+      portfolio: "Mostrar mis trabajos",
+    },
+    styles: {
+      minimal: { label: "Minimalista", hint: "Mucho espacio, pocos elementos" },
+      corporate: { label: "Corporativo", hint: "Sobrio y que transmita confianza" },
+      modern: { label: "Moderno", hint: "Tecnológico, con detalles actuales" },
+      warm: { label: "Cercano", hint: "Cálido, humano y amable" },
+      bold: { label: "Atrevido", hint: "Con color y mucha personalidad" },
+      premium: { label: "Premium", hint: "Elegante y exclusivo" },
+    },
+    palette: {
+      brand: "Los de mi logo o mi marca",
+      custom: "Quiero elegirlos",
+      suggest: "Proponedme una paleta",
+    },
+    tone: { light: "Claro", dark: "Oscuro", any: "Sin preferencia" },
+    sections: {
+      home: "Inicio",
+      services: "Servicios",
+      about: "Sobre nosotros",
+      portfolio: "Trabajos o galería",
+      blog: "Blog",
+      shop: "Tienda online",
+      bookings: "Reservas",
+      contact: "Contacto",
+    },
+  },
+  submit: "Pedir mi prototipo gratis",
+  success: {
+    title: "Gracias, {name}. Ya tenemos tu solicitud.",
+    text: "Te escribiremos a {email} en un máximo de 2 días laborables para confirmar los detalles y empezar tu prototipo.",
   },
 };

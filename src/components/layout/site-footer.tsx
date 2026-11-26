@@ -68,6 +68,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
               links={[
                 { href: pageHref(locale, "pricing"), label: t.footer.pricing },
                 { href: pageHref(locale, "diagnosis"), label: t.footer.diagnosis },
+                { href: pageHref(locale, "prototype"), label: t.footer.prototype },
                 { href: pageHref(locale, "contact"), label: t.footer.contact },
               ]}
             />

@@ -1,4 +1,4 @@
-import type { LeadFormContent } from "@/features/leads/content/types";
+import type { LeadFormContent, PrototypeFormContent } from "@/features/leads/content/types";
 
 export const leadContentEn: LeadFormContent = {
   validation: {
@@ -13,6 +13,16 @@ export const leadContentEn: LeadFormContent = {
     consent: "We need your consent to be able to reply.",
     answers: "Select an option to continue.",
     source: "Invalid contact source.",
+    projectType: "Tell us whether you want a new website or a redesign.",
+    currentSite: "Enter the address of your current website, for example mycompany.com.",
+    business: "Tell us what your business does (between 10 and 600 characters).",
+    goal: "Choose the main goal of the website.",
+    styles: "Choose between 1 and 3 styles.",
+    palette: "Choose how you want the colours.",
+    colors: "Add at least one colour in #rrggbb format (3 at most).",
+    tone: "Choose a light design, a dark one or no preference.",
+    logo: "Upload the logo as PNG, JPG, WebP, SVG or PDF.",
+    logoSize: "The logo cannot be larger than 3 MB.",
   },
   fields: {
     name: "Name",
@@ -46,5 +56,82 @@ export const leadContentEn: LeadFormContent = {
     text: "We will reply to {email} within 2 working days with an initial assessment.",
     next: "In the meantime, you can {link} to get a head start.",
     nextLink: "take the digital assessment",
+  },
+};
+
+export const prototypeContentEn: PrototypeFormContent = {
+  groups: {
+    contact: "Your details",
+    project: "Your project",
+    style: "Style and colours",
+    content: "Content",
+    extra: "To finish",
+  },
+  fields: {
+    projectType: "What do you need?",
+    currentSite: "Address of your current website",
+    currentSiteHint: "We review it to keep what works and improve the rest.",
+    business: "What does your business do?",
+    businessHint:
+      "What you offer, to whom and what sets you apart. Two or three sentences are enough.",
+    goal: "What is the most important thing the website should achieve?",
+    styles: "Which style do you like?",
+    stylesHint: "Choose up to 3.",
+    palette: "Colours",
+    colors: "Your colours",
+    colorsHint: "Up to 3. If you do not know the exact code, pick the closest one.",
+    color: "Colour {n}",
+    addColor: "Add a colour",
+    removeColor: "Remove colour {n}",
+    tone: "Do you prefer a light or a dark design?",
+    sections: "Which sections should it have?",
+    sectionsHint: "A starting point: we refine it together.",
+    references: "Websites you like",
+    referencesHint: "Addresses of reference websites and what you like about each one.",
+    logo: "Your logo",
+    logoHint: "PNG, JPG, WebP, SVG or PDF, up to 3 MB. If you have none, we suggest a text logo.",
+    logoSelected: "Selected file: {name}",
+    logoRemove: "Remove the logo",
+    message: "Anything else we should know?",
+    messageHint: "Text you want to include, things you dislike, deadlines…",
+  },
+  options: {
+    projectType: { new: "A new website", redesign: "Redesign my current website" },
+    goal: {
+      leads: "Get enquiries and quote requests",
+      sales: "Sell online",
+      bookings: "Take bookings or appointments",
+      brand: "Make the brand known",
+      portfolio: "Show my work",
+    },
+    styles: {
+      minimal: { label: "Minimal", hint: "Lots of space, few elements" },
+      corporate: { label: "Corporate", hint: "Sober and trustworthy" },
+      modern: { label: "Modern", hint: "Tech feel with current details" },
+      warm: { label: "Friendly", hint: "Warm, human and approachable" },
+      bold: { label: "Bold", hint: "Colourful, with lots of personality" },
+      premium: { label: "Premium", hint: "Elegant and exclusive" },
+    },
+    palette: {
+      brand: "The ones in my logo or brand",
+      custom: "I want to choose them",
+      suggest: "Suggest a palette for me",
+    },
+    tone: { light: "Light", dark: "Dark", any: "No preference" },
+    sections: {
+      home: "Home",
+      services: "Services",
+      about: "About us",
+      portfolio: "Work or gallery",
+      blog: "Blog",
+      shop: "Online shop",
+      bookings: "Bookings",
+      contact: "Contact",
+    },
+  },
+  submit: "Request my free prototype",
+  success: {
+    title: "Thank you, {name}. We have your request.",
+    text: "We will write to {email} within 2 business days to confirm the details and start your prototype.",
   },
 };

@@ -13,7 +13,7 @@ export const siteConfig = {
    * Date of the last meaningful content change, for the sitemap's <lastmod>. Bump it when copy,
    * prices or pages change: a date that moves on every build teaches crawlers to ignore it.
    */
-  contentUpdated: "2026-11-14",
+  contentUpdated: "2026-11-26",
 } as const;
 
 /**

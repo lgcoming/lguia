@@ -116,6 +116,11 @@ export const plans: Plan[] = [
 
 export const planFaqs: Faq[] = [
   {
+    question: "¿Cuánto cuesta una página web para una empresa?",
+    answer:
+      "Depende de lo que necesites. Una web profesional de hasta cinco secciones parte de 590 €, una web corporativa a medida de hasta doce páginas de 1.950 € y un proyecto que combina web, SEO, IA y automatización de 3.250 €, sin IVA. El precio final se cierra por escrito antes de empezar.",
+  },
+  {
     question: "¿Los precios son definitivos?",
     answer:
       "Son precios orientativos de partida, sin IVA. Tras el diagnóstico y una llamada te enviamos un presupuesto cerrado con el alcance exacto.",

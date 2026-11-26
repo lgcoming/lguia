@@ -118,7 +118,10 @@ describe("lead notifications", () => {
     await submitLead({ ...contact, website: "spam" }, { ...deps(), notifier: { notify } });
 
     expect(notify).toHaveBeenCalledTimes(1);
-    expect(notify).toHaveBeenCalledWith(expect.objectContaining({ email: "javier@talleres.test" }));
+    expect(notify).toHaveBeenCalledWith(
+      expect.objectContaining({ email: "javier@talleres.test" }),
+      [],
+    );
   });
 
   it("fails the submission when the team cannot be told", async () => {

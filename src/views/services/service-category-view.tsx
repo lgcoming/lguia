@@ -7,6 +7,7 @@ import { ContactCTA } from "@/components/marketing/cta-section";
 import { FaqList } from "@/components/marketing/faq-list";
 import { PageHero } from "@/components/marketing/page-hero";
 import { PlanCard } from "@/components/marketing/plan-card";
+import { PrototypeOffer } from "@/components/marketing/prototype-offer";
 import { ProcessSteps } from "@/components/marketing/process-steps";
 import { ServiceTile } from "@/components/marketing/service-tile";
 import { RevealItem, RevealList } from "@/components/motion/reveal";
@@ -15,7 +16,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Section, SectionHeader } from "@/components/ui/layout-primitives";
 import { getCatalogRepository } from "@/features/catalog/catalog-repository";
 import { formatEuro } from "@/features/catalog/format";
-import type { Locale } from "@/i18n/config";
+import { format, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { pageHref, serviceHref, serviceIdFromSlug } from "@/i18n/routes";
 import { createPageMetadata } from "@/lib/metadata";
@@ -80,6 +81,9 @@ export async function ServiceCategoryView({ locale, slug }: { locale: Locale; sl
     { label: page.facts.quote, value: page.facts.quoteValue },
   ];
 
+  // H2s name the page's search term ("Precios de diseño web a medida"), not a generic label.
+  const topic = { topic: category.topic };
+
   return (
     <>
       <JsonLd data={serviceSchema(category, locale, relatedPlans)} />
@@ -128,8 +132,10 @@ export async function ServiceCategoryView({ locale, slug }: { locale: Locale; sl
         </dl>
       </Section>
 
+      {category.id === "desarrollo-web" ? <PrototypeOffer locale={locale} /> : null}
+
       <Section labelledBy="problemas-titulo">
-        <SectionHeader id="problemas-titulo" title={page.problemsTitle} />
+        <SectionHeader id="problemas-titulo" title={format(page.problemsTitle, topic)} />
         <RevealList className="grid gap-4 lg:grid-cols-3">
           {category.problems.map((problem) => (
             <RevealItem key={problem.pain} className="rounded-tile bg-pure-white p-7 md:p-8">
@@ -141,7 +147,7 @@ export async function ServiceCategoryView({ locale, slug }: { locale: Locale; sl
       </Section>
 
       <Section tone="white" labelledBy="incluye-titulo">
-        <SectionHeader id="incluye-titulo" title={page.includesTitle} />
+        <SectionHeader id="incluye-titulo" title={format(page.includesTitle, topic)} />
         <RevealList className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {category.services.map((service) => (
             <RevealItem key={service.id} className="rounded-tile bg-fog-white p-7 md:p-8">
@@ -177,7 +183,11 @@ export async function ServiceCategoryView({ locale, slug }: { locale: Locale; sl
       </Section>
 
       <Section tone="white" labelledBy="planes-titulo">
-        <SectionHeader id="planes-titulo" title={page.plansTitle} intro={page.plansIntro} />
+        <SectionHeader
+          id="planes-titulo"
+          title={format(page.plansTitle, topic)}
+          intro={page.plansIntro}
+        />
         <div className="grid gap-4 lg:grid-cols-3">
           {relatedPlans.map((plan) => (
             <PlanCard key={plan.id} plan={plan} locale={locale} tone="canvas" />
@@ -191,7 +201,7 @@ export async function ServiceCategoryView({ locale, slug }: { locale: Locale; sl
       </Section>
 
       <Section tone="white" width="text" labelledBy="faq-titulo">
-        <SectionHeader id="faq-titulo" title={page.faqTitle} />
+        <SectionHeader id="faq-titulo" title={format(page.faqTitle, topic)} />
         <FaqList faqs={category.faqs} tone="canvas" />
       </Section>
 

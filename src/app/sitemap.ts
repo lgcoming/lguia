@@ -13,6 +13,7 @@ function priority(route: RouteRef): number {
     services: 0.9,
     pricing: 0.8,
     contact: 0.7,
+    prototype: 0.8,
     legal: 0.2,
     privacy: 0.2,
     cookies: 0.2,

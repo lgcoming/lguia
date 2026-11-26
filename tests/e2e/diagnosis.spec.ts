@@ -55,7 +55,9 @@ async function answerStep(page: Page, step: (typeof STEPS)[number], isLast: bool
 test("a business completes the diagnosis and requests a proposal", async ({ page }) => {
   await page.goto("/diagnostico-digital");
   await expect(page).toHaveTitle(/Diagnóstico digital gratuito/);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Diagnóstico digital gratuito");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Diagnóstico digital gratuito para empresas",
+  );
 
   await page.getByRole("button", { name: "Empezar diagnóstico" }).click();
 

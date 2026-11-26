@@ -5,7 +5,7 @@ import { expect, test } from "@playwright/test";
 test("the English site is a full, linked language version", async ({ page }) => {
   await page.goto("/en");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page).toHaveTitle(/custom web development/i);
+  await expect(page).toHaveTitle(/web design/i);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("AI automation");
 
   // hreflang is reciprocal and x-default points at English.
@@ -30,16 +30,16 @@ test("the English site is a full, linked language version", async ({ page }) => 
 });
 
 test("the language switcher keeps the page", async ({ page }) => {
-  await page.goto("/servicios/desarrollo-web-a-medida");
+  await page.goto("/servicios/diseno-web-a-medida");
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
 
   await page.locator("footer a[hreflang='en']").click();
   await expect(page).toHaveURL(/\/en\/services\/custom-web-development$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Custom web development");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Custom web design");
 
   await page.locator("footer a[hreflang='es']").click();
-  await expect(page).toHaveURL(/\/servicios\/desarrollo-web-a-medida$/);
+  await expect(page).toHaveURL(/\/servicios\/diseno-web-a-medida$/);
 });
 
 test("the assessment works in English end to end", async ({ page }) => {

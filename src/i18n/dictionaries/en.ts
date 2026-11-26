@@ -6,9 +6,9 @@ import type { Dictionary } from "@/i18n/dictionaries/es";
  */
 export const en: Dictionary = {
   meta: {
-    homeTitle: "lguia: custom web development, AI automation and AI agents",
+    homeTitle: "Web design, AI automation and AI agents for business | lguia",
     description:
-      "Custom web development, AI automation and AI agents for businesses. Fixed quotes, clear timelines and a free 3-minute digital assessment.",
+      "Web design, AI automation and AI chatbots for businesses: custom websites from €590, fixed quotes, clear timelines and a free 3-minute assessment.",
     ogAlt: "lguia: custom web development, AI automation and AI agents for business",
     ogHeadline: "Custom websites, AI automation and AI agents that solve real business problems",
     ogTagline: "Web development, AI automation and AI agents agency",
@@ -45,6 +45,7 @@ export const en: Dictionary = {
     pricing: "Plans and pricing",
     diagnosis: "Digital assessment",
     contact: "Contact",
+    prototype: "Free website prototype",
     remote: "We work remotely, in English and Spanish.",
     rights: "All rights reserved.",
     language: "Language",
@@ -83,8 +84,8 @@ export const en: Dictionary = {
   },
   home: {
     hero: {
-      eyebrow: "Custom web development, AI automation and AI agents agency",
-      title: "Custom websites, AI automation and AI agents that solve real business problems",
+      eyebrow: "Web design and AI agency for small and mid-sized businesses",
+      title: "Web design, AI automation and AI agents for businesses",
       subtitle:
         "We build websites that win customers, automate processes with AI and develop AI agents for your team. Fixed quotes, clear timelines and results you can measure.",
       reassurances: ["Free, no obligation", "11 questions, about 3 minutes", "Instant result"],
@@ -92,7 +93,7 @@ export const en: Dictionary = {
       outroText: "We design every piece to work with the others, with no stand-alone tools.",
     },
     about: {
-      title: "A web development and AI agency that starts with your business, not the technology",
+      title: "A web design and AI agency that starts with your business, not the technology",
       paragraphs: [
         "lguia is a digital agency that builds custom websites, automates processes and applies artificial intelligence in companies. We work remotely from Spain, in English and Spanish, with fixed quotes and with the code, the data and the accounts always in the client's name.",
         "One team handles all three areas so everything fits together: your website captures leads, automations organise them and AI helps you answer sooner.",
@@ -107,7 +108,7 @@ export const en: Dictionary = {
       ],
     },
     services: {
-      title: "Web development, automation and AI services",
+      title: "Web design, automation and AI services",
       intro:
         "Four areas that complement each other. You can start with one and add the others when it makes sense.",
       link: "View all services",
@@ -161,7 +162,7 @@ export const en: Dictionary = {
       ],
     },
     plans: {
-      title: "Plans and pricing to start on the right foot",
+      title: "Web design and AI pricing to start on the right foot",
       intro:
         "Indicative prices, so you know what we are talking about from the start. The final quote is agreed after the assessment.",
       link: "View all plans",
@@ -232,7 +233,7 @@ export const en: Dictionary = {
       ],
     },
     faq: {
-      title: "Frequently asked questions",
+      title: "Frequently asked questions about web design and AI",
       items: [
         {
           question: "What does lguia do?",
@@ -262,10 +263,10 @@ export const en: Dictionary = {
     },
   },
   servicesPage: {
-    metaTitle: "Web development, AI automation and AI agent services",
+    metaTitle: "Web design, AI automation and AI agent services",
     metaDescription:
-      "Custom web development, AI automation, AI agents and SEO + GEO for businesses. Four services that work together, with fixed quotes.",
-    title: "Custom web development, AI automation and AI agent services for business",
+      "Custom web design, AI automation, AI chatbots and SEO + GEO for businesses. Four services that work together, with fixed quotes agreed upfront.",
+    title: "Web design, AI automation and AI agent services for businesses",
     intro:
       "A website that wins customers, automations that save time, AI agents applied with judgement and visibility in search. You can start with one service and add the others when it makes sense.",
     areasTitle: "Four services, one team",
@@ -282,26 +283,58 @@ export const en: Dictionary = {
       quoteValue: "Fixed before we start",
       customQuote: "Custom",
     },
-    problemsTitle: "Problems it solves",
-    includesTitle: "What is included",
+    problemsTitle: "Problems we solve with {topic}",
+    includesTitle: "What our {topic} service includes",
     outcomesTitle: "What your company gets",
     processTitle: "How we do it",
     processIntro:
       "The same phased process in all our projects, so you always know what comes next.",
-    plansTitle: "Plans and pricing",
+    plansTitle: "Pricing for {topic}",
     plansIntro: "Indicative prices, VAT excluded. The final quote is agreed after the assessment.",
-    faqTitle: "Frequently asked questions",
+    faqTitle: "Frequently asked questions about {topic}",
     othersTitle: "Other services",
+    prototype: {
+      title: "See how your website would look before you decide",
+      text: "We design your home page for free, with your brand and the style you like. You see the result before you invest.",
+      points: ["Free, no obligation", "Desktop and mobile", "In about 4 business days"],
+      cta: "Request a free prototype",
+    },
     midCta: {
       title: "Shall we talk about your case?",
       text: "Tell us what you need and we will send a proposal with scope, timeline and a fixed quote.",
     },
   },
-  pricingPage: {
-    metaTitle: "Pricing for web development, AI automation and AI agents",
+  prototypePage: {
+    metaTitle: "Free website design prototype, no obligation",
     metaDescription:
-      "Pricing for custom web development, AI automation and AI agents: plans from €590, with estimated timelines and a fixed quote after a free assessment.",
-    title: "Plans and pricing for every stage of your company",
+      "Get a free prototype of your new website: we design your home page around your brand, for desktop and mobile, in about 4 days and with no obligation.",
+    title: "Free website prototype for your business",
+    intro:
+      "See how your new website would look before you invest. Tell us about your business and the style you like, and we design your home page for desktop and mobile, at no cost and with no obligation.",
+    formTitle: "Request your prototype",
+    includesTitle: "What you get",
+    includes: [
+      {
+        title: "A design of your home page",
+        text: "Made for your business, for desktop and mobile.",
+      },
+      {
+        title: "With your brand",
+        text: "Your logo, your colours and the style you choose, or a proposal from us if you do not have them yet.",
+      },
+      {
+        title: "In about 4 business days",
+        text: "We show it to you on a short video call or by email, whichever you prefer.",
+      },
+    ],
+    noteTitle: "No obligation",
+    note: "The prototype is for you to assess calmly. If you like it, we send you a fixed quote for the full website; if not, that is fine.",
+  },
+  pricingPage: {
+    metaTitle: "Web design, AI automation and AI agent pricing",
+    metaDescription:
+      "How much does a business website cost? Websites from €590, AI chatbots from €750 and automations from €890, with a fixed quote agreed before we start.",
+    title: "Web design, automation and AI pricing for businesses",
     intro:
       "Choose a starting point. Every project begins with an assessment and ends with a fixed quote, with no surprises.",
     heroCta: "Find out which plan fits you",
@@ -340,10 +373,10 @@ export const en: Dictionary = {
     faqTitle: "Frequently asked questions about the plans",
   },
   diagnosisPage: {
-    metaTitle: "Free digital maturity assessment",
+    metaTitle: "Free digital assessment for businesses",
     metaDescription:
       "Free digital maturity assessment for businesses: answer 11 questions and in 3 minutes get your score, the plan that fits best and your next steps. No sign-up.",
-    title: "Free digital maturity assessment",
+    title: "Free digital maturity assessment for businesses",
     intro:
       "In about 3 minutes you will know where your business stands, which plan fits best and where to start. No sign-up, no obligation.",
     noscript:
@@ -354,10 +387,10 @@ export const en: Dictionary = {
       "Eleven questions in five blocks. At the end you get a score from 0 to 100 by area, the recommended plan with its reasons and your next steps.",
   },
   contactPage: {
-    metaTitle: "Contact: request a proposal",
+    metaTitle: "Get a quote for a website, automation or AI project",
     metaDescription:
-      "Tell us about your web development, automation or AI project and get an initial assessment within 2 working days, with no obligation.",
-    title: "Let's talk about your project",
+      "Get a quote for your website, automation or AI project. We reply within 2 business days with an initial assessment and no obligation.",
+    title: "Get a quote for your website or AI project",
     intro:
       "Tell us what you need and we will reply with an initial assessment, with no obligation. The more specific you are, the more useful our answer will be.",
     formTitle: "Write to us",
